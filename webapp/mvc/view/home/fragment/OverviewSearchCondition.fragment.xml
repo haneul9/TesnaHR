@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:core="sap.ui.core">
+    <VBox class="hCardBox search-box">
+        <HBox justifyContent="SpaceBetween" class="title">
+            <Title text="{i18n>LABEL_00202}" level="H2" />
+            <Button type="Transparent" class="icon-button search" press=".onPressSearch" />
+        </HBox>
+        <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridGap="8px">
+            <Label text="{i18n>LABEL_00202}" design="Bold" />
+            <DatePicker class="sapIcon_Date" value="{/search/year}" displayFormat="yyyy" valueFormat="yyyy" />
+        </grid:CSSGrid>
+    </VBox>
+</core:FragmentDefinition>

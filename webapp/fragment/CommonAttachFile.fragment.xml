@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:table="sap.ui.table"
+  xmlns:core="sap.ui.core"
+  xmlns:u="sap.ui.unified">
+  <VBox id="ATTACHBOX" class="vCardBox" visible="{/Settings/Visible}">
+    <HBox class="table-toolbar">
+      <HBox class="title">
+        <Title level="H2" text="{i18n>LABEL_00248}" />
+        <Text text="{/Settings/Message}" visible="{= ${/Settings/Editable} &amp;&amp; !!${/Settings/Message}}" class="desc-txt" />
+        <Link text="{/Settings/LinkText}" visible="{= ${/Settings/Editable} &amp;&amp; !!${/Settings/LinkUrl}}" href="{/Settings/LinkUrl}"/>
+      </HBox>
+      <HBox class="table-actions">
+        <u:FileUploader id="ATTACHFILE_BTN" visible="{/Settings/Editable}" maximumFileSize="{/Settings/maximumFileSize}" fileType="{/Settings/FileTypes}" change=".AttachFileAction.onFileChange" uploadComplete= ".uploadComplete" typeMissmatch=".AttachFileAction.typeMissmatch" icon="sap-icon://add" buttonText="{i18n>LABEL_00107}" buttonOnly="true">
+          <u:layoutData>
+            <FlexItemData maxHeight="40px" styleClass="attachfile-button" />
+          </u:layoutData>
+        </u:FileUploader>
+        <!-- <Button icon="sap-icon://add" text="추가" /> -->
+        <Button icon="sap-icon://less" visible="{/Settings/Editable}" text="{i18n>LABEL_00110}" press=".AttachFileAction.onDeleteAttachFile" />
+      </HBox>
+    </HBox>
+    <table:Table id="attachTable" width="100%" selectionMode="{/Settings/ListMode}" columnHeaderHeight="45" rowHeight="44" visibleRowCount="1" rows="{/Data}" noData="{i18n>MSG_00001}">
+      <table:columns>
+        <table:Column width="4%">
+          <Label text="No"/>
+          <table:template>
+            <Text text="{Seqnr}" width="100%" textAlign="Center" />
+          </table:template>
+        </table:Column>
+        <table:Column width="8%" visible="{/Settings/Gubun}">
+          <Label text="{i18n>LABEL_00143}"/>
+          <table:template>
+            <Select selectedKey="{Gubun}" editable="{/Settings/EditGubun}">
+              <!-- <core:Item key="00" text="선택" />
+                            <core:Item key="10" text="5대암" />
+                            <core:Item key="20" text="난임" /> -->
+            </Select>
+          </table:template>
+        </table:Column>
+        <table:Column>
+          <Label text="{i18n>LABEL_00248}" width="100%" />
+          <table:template>
+            <Link press=".AttachFileAction.onFileLink" text="{Zfilename}" width="100%" textAlign="Begin" />
+          </table:template>
+        </table:Column>
+      </table:columns>
+    </table:Table>
+  </VBox>
+</core:FragmentDefinition>

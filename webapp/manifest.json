@@ -1,0 +1,104 @@
+{
+	"_version": "1.17.0",
+
+  "sap.app": {
+    "id": "sap.ui.tesna",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "ach": "set-ach",
+    "resources": "resources.json"
+  },
+
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://detail-view",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+
+  "sap.ui5": {
+    "rootView": {
+      "id": "app",
+      "viewName": "sap.ui.tesna.mvc.view.app.App",
+      "type": "XML",
+      "async": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.71.28",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.ui.unified": {},
+        "sap.ui.table": {},
+        "sap.m": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sap.ui.tesna.i18n.i18n",
+          "supportedLocales": ["ko", "en"],
+          "fallbackLocale": ""
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        { "uri": "asset/css/pretendard-subset.css" },
+        { "uri": "asset/css/style.css" },
+        { "uri": "asset/css/placeholder.css" },
+        { "uri": "asset/css/util/font.css" },
+        { "uri": "asset/css/util/margin.css" },
+        { "uri": "asset/css/util/padding.css" },
+        { "uri": "asset/css/util/border.css" },
+        { "uri": "asset/css/util/size.css" },
+        { "uri": "asset/css/util/align.css" }
+      ]
+    },
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "sap.ui.tesna.mvc.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": "notFound"
+				},
+				"async": true
+			},
+			"routes": [
+        { "pattern": "", "name": "tesnaHome", "target": "home" }
+			],
+			"targets": {
+        "home": { "viewId": "home", "viewPath": "sap.ui.tesna.mvc.view.home", "viewName": "App" },
+				"notFound": { "viewId": "notFound", "viewName": "NotFound", "transition": "show" }
+			}
+		}
+	}
+}

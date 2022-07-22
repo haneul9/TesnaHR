@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <HBox justifyContent="SpaceBetween" class="vCardBox info-area" visible="{= !!${/InfoMessage} }">
+        <Panel width="auto" expandable="true" expanded="true">
+            <layoutData>
+                <FlexItemData growFactor="1"/>
+            </layoutData>
+            <headerToolbar>
+                <OverflowToolbar height="3rem" style="Clear">
+                    <Title text="HELP"/>
+                    <ToolbarSpacer/>
+                    <Button press=".toggleHelpBox" type="Transparent" class="icon-button close expanded"/>
+                </OverflowToolbar>
+            </headerToolbar>
+            <content>
+                <FormattedText htmlText="{/InfoMessage}"/>
+            </content>
+        </Panel>
+    </HBox>
+</core:FragmentDefinition>

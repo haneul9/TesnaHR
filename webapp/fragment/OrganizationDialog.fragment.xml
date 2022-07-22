@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:table="sap.ui.table"
+  xmlns:custom="sap.ui.tesna.control">
+  <Dialog title="{i18n>LABEL_00207}" contentWidth="800px" contentHeight="440px" busyIndicatorDelay="0" busy="{/busy}">
+    <beginButton>
+      <Button text="{i18n>LABEL_00112}" press=".onPressSelectOrg" type="Emphasized" />
+    </beginButton>
+    <endButton>
+      <Button text="{i18n>LABEL_00115}" press=".onPressCloseOrg" class="cancel" />
+    </endButton>
+    <content>
+      <VBox class="hCardBox sapUiSmallMarginBottom">
+        <HBox class="form-bar" alignItems="Center">
+          <Label text="{i18n>LABEL_00259}" />
+          <custom:DatePicker dateValue="{ path: '/Datum', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="200px" change=".onPressSearchOrg" />
+          <Label text="{i18n>LABEL_00201}" />
+          <Input value="{/Stext}" width="200px" submit=".onPressSearchOrg" />
+          <Button icon="/sap/public/bc/ui2/zui5_tesnahr/images/icon_search03.png" iconDensityAware="false" text="{i18n>LABEL_00101}" press=".onPressSearchOrg" class="icon-button" />
+        </HBox>
+      </VBox>
+      <VBox class="hCardBox">
+        <table:Table class="radio-selection-table" enableSelectAll="false" selectionBehavior="Row" rows="{/orglist}" visibleRowCount="{/rowcount}" rowHeight="44" columnHeaderHeight="45" rowSelectionChange=".onOrganizationRowSelection">
+          <table:columns>
+            <table:Column width="auto" sortProperty="Stext" filterProperty="Stext">
+              <Label text="{i18n>LABEL_00227}"/>
+              <table:template>
+                <Text text="{Stext}" width="100%" wrapping="false" class="tableRow_Text"/>
+              </table:template>
+            </table:Column>
+            <table:Column width="200px" sortProperty="EnameM" filterProperty="EnameM">
+              <Label text="{i18n>LABEL_00230}"/>
+              <table:template>
+                <Text text="{EnameM}" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text"/>
+              </table:template>
+            </table:Column>
+          </table:columns>
+        </table:Table>
+      </VBox>
+    </content>
+  </Dialog>
+</core:FragmentDefinition>

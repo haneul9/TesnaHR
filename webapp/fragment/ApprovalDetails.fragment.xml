@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:grid="sap.ui.layout.cssgrid">
+  <VBox class="vCardBox" visible="{= !!${/ApprovalDetails/ZappStatAl} }" id="approvalDetails">
+    <HBox class="table-toolbar">
+      <HBox class="title">
+        <Title text="{i18n>LABEL_00139}" level="H2" />
+      </HBox>
+    </HBox>
+    <grid:CSSGrid gridTemplateColumns="repeat(2, 1fr 3fr)" gridGap="1px 0" class="form-grid">
+      <Label text="{i18n>LABEL_00138}" />
+      <VBox>
+        <Text visible="{= !${/ApprovalDetails/ZappUrl} }" text="{ path: '/ApprovalDetails/Docno', type: 'sap.ui.tesna.mvc.model.type.Docno' }" />
+        <Link visible="{= !!${/ApprovalDetails/ZappUrl} }" target="_blank" href="{/ApprovalDetails/ZappUrl}" text="{ path: '/ApprovalDetails/Docno', type: 'sap.ui.tesna.mvc.model.type.Docno' }"/>
+      </VBox>
+      <Label text="{i18n>LABEL_00140}" />
+      <VBox>
+        <Text text="{/ApprovalDetails/ZappStxtAl}" />
+      </VBox>
+      <Label text="{i18n>LABEL_00141}" />
+      <VBox>
+        <Text text="{/ApprovalDetails/Sgndt}" />
+      </VBox>
+      <Label text="{= ${/ApprovalDetails/ZappStatAl} === '45' || ${/ApprovalDetails/ZappStatAl} === '65' || !!${/ApprovalDetails/ZappResn} ? ${i18n>LABEL_00142} : ''}" />
+      <VBox>
+        <Text text="{= ${/ApprovalDetails/ZappStatAl} === '45' || ${/ApprovalDetails/ZappStatAl} === '65' || !!${/ApprovalDetails/ZappResn} ? ${/ApprovalDetails/ZappResn} : '' }" />
+      </VBox>
+    </grid:CSSGrid>
+  </VBox>
+</core:FragmentDefinition>

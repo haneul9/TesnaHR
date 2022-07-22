@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:table="sap.ui.table"
+  xmlns:core="sap.ui.core"
+  xmlns:u="sap.ui.unified">
+  <VBox id="fileAttachmentBox" class="vCardBox" visible="{/settings/visible}" busy="true" busyIndicatorDelay="0">
+    <HBox class="table-toolbar">
+      <HBox class="title">
+        <Title level="H2" text="{i18n>LABEL_00248}" />
+        <Text text="{/settings/message}" visible="{= ${/settings/editable} &amp;&amp; !!${/settings/message} }" class="desc-txt" />
+      </HBox>
+      <HBox class="table-actions">
+        <u:FileUploader id="fileUploader" visible="{/settings/editable}" maximumFileSize="{/settings/maxFileSize}" fileType="{/settings/fileTypes}" change=".onAttachmentChange" uploadComplete= ".onAttachmentUploadComplete" typeMissmatch=".onTypeMissMatch" icon="sap-icon://add" buttonText="{i18n>LABEL_00107}" buttonOnly="true">
+          <u:layoutData>
+            <FlexItemData maxHeight="40px" styleClass="attachfile-button" />
+          </u:layoutData>
+        </u:FileUploader>
+        <!-- <Button icon="sap-icon://add" text="추가" /> -->
+        <Button icon="sap-icon://less" visible="{/settings/editable}" text="{i18n>LABEL_00110}" press=".onAttachmentRemove" />
+        <Button icon="sap-icon://reset" visible="{/settings/editable}" text="{i18n>LABEL_00176}" press=".onAttachmentRemoveCancel" />
+      </HBox>
+    </HBox>
+    <table:Table id="filesTable" width="100%" selectionMode="{/fileSelectionMode}" columnHeaderHeight="45" rowHeight="44" visibleRowCount="{/fileCount}" rows="{/files}" noData="{i18n>MSG_00001}">
+      <table:columns>
+        <table:Column width="4%">
+          <Label text="No"/>
+          <table:template>
+            <Text text="{Seqnr}" width="100%" textAlign="Center" />
+          </table:template>
+        </table:Column>
+        <table:Column width="8%" visible="{/settings/gubun}">
+          <Label text="{i18n>LABEL_00143}"/>
+          <table:template>
+            <Select selectedKey="{Gubun}" editable="{/settings/gubun}">
+              <!-- <core:Item key="00" text="선택" />
+                   <core:Item key="10" text="5대암" />
+                   <core:Item key="20" text="난임" /> -->
+            </Select>
+          </table:template>
+        </table:Column>
+        <table:Column>
+          <Label text="{i18n>LABEL_00248}" width="100%" />
+          <table:template>
+            <HBox width="100%">
+              <Link text="{Zfilename}" href="{Fileuri}" target="_blank" width="100%" textAlign="Begin" subtle="{New}">
+                <customData>
+                  <core:CustomData key="deteled-attachment" value="{= !${New} &amp;&amp; ${Deleted} ? 'O' : 'X' }" writeToDom="true" />
+                  <core:CustomData key="new-attachment" value="{= ${New} ? 'O' : 'X' }" writeToDom="true" />
+                </customData>
+              </Link>
+            </HBox>
+          </table:template>
+        </table:Column>
+      </table:columns>
+    </table:Table>
+  </VBox>
+</core:FragmentDefinition>

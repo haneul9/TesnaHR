@@ -1,0 +1,10 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:custom="sap.ui.tesna.control">
+  <Dialog showHeader="false" contentWidth="540px" class="dialog-post">
+    <buttons>
+      <Button text="{i18n>LABEL_00115}" press=".onPostcodeDialogClose" class="cancel" />
+    </buttons>
+    <custom:Postcode completed=".callbackPostcode" />
+  </Dialog>
+</core:FragmentDefinition>

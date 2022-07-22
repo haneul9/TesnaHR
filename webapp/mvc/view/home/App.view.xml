@@ -1,0 +1,28 @@
+<mvc:View controllerName="sap.ui.tesna.mvc.controller.home.App"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:custom="sap.ui.tesna.control">
+    <Page title="HOME" showHeader="false">
+        <VBox class="contents-header">
+            <HBox justifyContent="SpaceBetween" class="breadcrumbs">
+                <custom:Breadcrumbs />
+                <HBox class="button-group">
+                    <Button text="{i18n>LABEL_00131}" icon="sap-icon://print" press=".onPagePrint" />
+                    <Button text="{i18n>LABEL_00132}" icon="sap-icon://sys-help" press=".onPressHelp" visible="{= !!${menuModel>/current/showHelp} }" />
+                </HBox>
+            </HBox>
+        </VBox>
+        <VBox class="contents">
+            <HBox justifyContent="SpaceAround">
+                <core:Fragment fragmentName="sap.ui.tesna.fragment.AppointeeBox" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.home.fragment.Summary" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.home.fragment.OverviewSearchCondition" type="XML" />
+            </HBox>
+            <VBox class="vCardBox">
+                <core:Fragment fragmentName="sap.ui.tesna.fragment.OverviewTableHeader" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.home.fragment.OverviewTable" type="XML" />
+            </VBox>
+        </VBox>
+    </Page>
+</mvc:View>

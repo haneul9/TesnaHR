@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <HBox justifyContent="SpaceBetween" class="header-wrap">
+    <HBox class="header">
+      <Title level="H3" text="{= !!${/listInfo/Title} ? ${/listInfo/Title} : ${i18n>LABEL_00129} }" class="sapUiSmallMarginEnd" />
+      <Text text="total {/listInfo/totalCount}" />
+      <Text text="{/listInfo/infoMessage}" visible="{= !!${/listInfo/infoMessage} }" class="desc-txt" />
+    </HBox>
+    <HBox>
+      <HBox class="status-wrap" visible="{= ${/listInfo/visibleStatus} !== 'X'}">
+        <ObjectStatus text="{= !${/listInfo/ObjTxt1} ? ${i18n>LABEL_00130} : ${/listInfo/ObjTxt1} } {/listInfo/progressCount}" visible="{/listInfo/isShowProgress}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="None" />
+        <ObjectStatus text="{= !${/listInfo/ObjTxt2} ? ${i18n>LABEL_00121} : ${/listInfo/ObjTxt2} } {/listInfo/applyCount}" visible="{/listInfo/isShowApply}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication02" />
+        <ObjectStatus text="{= !${/listInfo/ObjTxt3} ? ${i18n>LABEL_00123} : ${/listInfo/ObjTxt3} } {/listInfo/approveCount}" visible="{/listInfo/isShowApprove}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication03" />
+        <ObjectStatus text="{= !${/listInfo/ObjTxt4} ? ${i18n>LABEL_00124} : ${/listInfo/ObjTxt4} } {/listInfo/rejectCount}" visible="{/listInfo/isShowReject}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication04" />
+        <ObjectStatus text="{= !${/listInfo/ObjTxt5} ? ${i18n>LABEL_00117} : ${/listInfo/ObjTxt5} } {/listInfo/completeCount}" visible="{/listInfo/isShowComplete}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication05" />
+      </HBox>
+      <Button icon="sap-icon://excel-attachment" text="Excel" press=".onPressExcelDownload" busyIndicatorDelay="0" busy="{/busy}" />
+    </HBox>
+  </HBox>
+</core:FragmentDefinition>

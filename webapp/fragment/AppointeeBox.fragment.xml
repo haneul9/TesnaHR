@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <VBox class="hCardBox appointee-box">
+    <HBox justifyContent="SpaceBetween" class="title">
+      <Title text="{i18n>LABEL_00128}" level="H2" />
+      <Button type="Transparent" press=".onEmployeeSearchOpen" icon="/sap/public/bc/ui2/zui5_tesnahr/images/icon_me.png" visible="{appointeeModel>/showChangeButton}" class="icon-button" />
+    </HBox>
+    <HBox height="146px">
+      <VBox width="146px">
+        <Image src="{appointeeModel>/Photo}" mode="Background" class="member-photo" width="146px" height="146px" />
+      </VBox>
+      <VBox justifyContent="Center" class="appointee-info">
+        <Text text="{appointeeModel>/Ename}" class="name" />
+        <Text text="{appointeeModel>/Zzjikgbt} / {appointeeModel>/Zzjikcht}" />
+        <Text text="{appointeeModel>/Pbtxt} {appointeeModel>/Btrtx}" />
+        <Text text="{appointeeModel>/Orgtx}" />
+      </VBox>
+    </HBox>
+  </VBox>
+</core:FragmentDefinition>

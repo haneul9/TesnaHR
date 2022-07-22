@@ -1,0 +1,21 @@
+{
+  "@sapui5/generator-sapui5-templates": {
+    "promptValues": {
+      "ApplicationTitle": "tesna",
+      "ApplicationDescription": "tesna",
+      "FLP": false,
+      "ServiceBaseUri": "",
+      "DatasourceUrl": "",
+      "ObjectCollection": "tesna",
+      "ObjectCollection_Key": "tesna",
+      "Object_Identifier": "tesna",
+      "Object_Number": "tesna",
+      "Object_UnitOfMeasure": "tesna",
+      "LineItemCollection": "",
+      "LineItemCollection_Key": "",
+      "LineItem_Identifier": "",
+      "LineItem_Number": "",
+      "LineItem_UnitOfMeasure": ""
+    }
+  }
+}

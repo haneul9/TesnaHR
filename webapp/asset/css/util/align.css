@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+.align-top    {vertical-align:top !important}
+.align-middle {vertical-align:middle !important}
+.align-bottom {vertical-align:bottom !important}
+.align-left   {text-align:left !important}
+.align-center {text-align:center !important}
+.align-right  {text-align:right !important}
+
+.v-visible {visibility:visible !important}
+.v-hidden {visibility:hidden !important}
+.v-collapse {visibility:collapse !important}
+.v-inherit {visibility:inherit !important}
+.v-initial {visibility:initial !important}
+
+.d-block {display:block !important}
+.d-flex {display:flex !important}
+.d-inline {display:inline !important}
+.d-inline-block {display:inline-block !important}
+.d-none {display:none !important}
+.d-inherit {display:inherit !important}
+.d-initial {display:initial !important}
+
+.overflow-auto {overflow:auto !important}
+.overflow-hidden {overflow:hidden !important}
+.overflow-scroll {overflow:scroll !important}
+.overflow-visible {overflow:visible !important}
+.overflow-inherit {overflow:inherit !important}
+.overflow-initial {overflow:initial !important}
+
+.overflow-x-auto {overflow-x:auto !important}
+.overflow-x-hidden {overflow-x:hidden !important}
+.overflow-x-scroll {overflow-x:scroll !important}
+.overflow-x-visible {overflow-x:visible !important}
+.overflow-x-inherit {overflow-x:inherit !important}
+.overflow-x-initial {overflow-x:initial !important}
+
+.overflow-y-auto {overflow-y:auto !important}
+.overflow-y-hidden {overflow-y:hidden !important}
+.overflow-y-scroll {overflow-y:scroll !important}
+.overflow-y-visible {overflow-y:visible !important}
+.overflow-y-inherit {overflow-y:inherit !important}
+.overflow-y-initial {overflow-y:initial !important}

@@ -1,0 +1,6 @@
+<mvc:View controllerName="sap.ui.tesna.mvc.controller.NotFound"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+  <MessagePage title="{i18n>notFoundTitle}" text="{i18n>notFoundText}" description="{i18n>notFoundDescription}" icon="sap-icon://document" showNavButton="true" navButtonPress=".onNavBack">
+  </MessagePage>
+</mvc:View>

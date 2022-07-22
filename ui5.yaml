@@ -1,0 +1,29 @@
+specVersion: '2.6'
+type: application
+metadata:
+  name: zui5_tesnahr
+# https://sap.github.io/ui5-tooling/pages/extensibility/CustomServerMiddleware/
+server:
+  customMiddleware:
+    - name: ui5-middleware-simpleproxy
+      afterMiddleware: compression
+      mountPath: /resources
+      configuration:
+        baseUri: 'https://sapui5.hana.ondemand.com/1.71.28/resources'
+    - name: ui5-middleware-simpleproxy
+      afterMiddleware: compression
+      mountPath: /proxy
+      configuration:
+        baseUri: 'http://dsghrerpd01.corp.doosan.com:8000/'
+        username: UI5_MIDDLEWARE_SIMPLE_PROXY_USERNAME
+        password: UI5_MIDDLEWARE_SIMPLE_PROXY_PASSWORD
+        query:
+          sap-client: '300'
+    - name: ui5-middleware-simpleproxy
+      afterMiddleware: compression
+      mountPath: /sap/public/bc/ui2/zui5_tesnahr
+      configuration:
+        baseUri: 'http://dsghrerpd01.corp.doosan.com:8000/sap/public/bc/ui2/zui5_tesnahr'
+resources:
+  configuration:
+    propertiesFileSourceEncoding: UTF-8

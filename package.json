@@ -1,0 +1,32 @@
+{
+  "name": "zui5_tesnahr",
+  "description": "",
+  "scripts": {
+    "build": "ui5 build --clean-dest",
+    "start": "ui5 serve -o index.html",
+    "deploy": "ui5 build --clean-dest && npx nwabap upload"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^2.14.9",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsdoc": "^36.1.1",
+    "eslint-plugin-ui5": "^0.1.0",
+    "nwabap-ui5uploader": "^1.2.0",
+    "prettier": "^2.6.2",
+    "ui5-middleware-simpleproxy": "^0.7.6"
+  },
+  "ui5": {
+    "dependencies": [
+      "ui5-middleware-simpleproxy"
+    ],
+    "ui5linter": {
+      "usage": {
+        "TagAttributeLinter": true,
+        "PublicMemberLinter": false,
+        "UnusedMemberLinter": false,
+        "WrongParametersLinter": false
+      }
+    }
+  }
+}

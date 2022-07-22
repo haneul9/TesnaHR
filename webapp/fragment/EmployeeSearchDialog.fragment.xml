@@ -1,0 +1,114 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:grid="sap.ui.layout.cssgrid"
+  xmlns:table="sap.ui.table">
+  <Dialog title="{i18n>LABEL_00205}" contentWidth="1600px" contentHeight="665px" busyIndicatorDelay="0" busy="{/busy}">
+    <beginButton>
+      <Button text="{i18n>LABEL_00112}" press=".onConfirm" type="Emphasized" enabled="{= ${/results/list}.length > 0 }" />
+    </beginButton>
+    <endButton>
+      <Button text="{i18n>LABEL_00115}" press=".onClose" class="cancel" />
+    </endButton>
+    <content>
+      <HBox width="100%" class="dialog-content">
+        <VBox width="20%" class="hCardBox sapUiSmallMarginEnd">
+          <HBox justifyContent="SpaceBetween" alignItems="Center" class="search-head pb-10-px">
+            <Label text="{i18n>LABEL_00203}" />
+            <Button press=".onSearch" class="icon-button search" />
+          </HBox>
+          <grid:CSSGrid gridTemplateRows="1fr 2fr" gridGap="6px 0px" class="form-grid type-d form-search">
+            <Label text="{i18n>LABEL_00237}" />
+            <VBox>
+              <ComboBox items="{/entry/persArea}" selectedKey="{/settings/searchConditions/Persa}" enabled="{/settings/fieldEnabled/Persa}" width="100%" class="conspicuous-disabled">
+                <core:Item text="{Pbtxt}" key="{Werks}" />
+              </ComboBox>
+            </VBox>
+            <Label text="{i18n>LABEL_00211}" />
+            <VBox>
+              <Input value="{/settings/searchConditions/Ename}" enabled="{/settings/fieldEnabled/Ename}" submit=".onSearch" class="conspicuous-disabled" />
+            </VBox>
+            <Label text="{i18n>LABEL_00226}" />
+            <VBox>
+              <Input value="{/settings/searchConditions/Orgtx}" enabled="{/settings/fieldEnabled/Orgeh}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onGroupOpen" class="conspicuous-disabled" />
+            </VBox>
+            <Label text="{i18n>LABEL_00240}" />
+            <VBox>
+              <ComboBox items="{/entry/workType}" selectedKey="{/settings/searchConditions/Stat2}" width="100%" enabled="{/settings/fieldEnabled/Stat2}" class="conspicuous-disabled">
+                <core:Item text="{Ztext}" key="{Zcode}" />
+              </ComboBox>
+            </VBox>
+            <Label text="{i18n>LABEL_00238}" />
+            <VBox>
+              <ComboBox items="{/entry/empGroup}" selectedKey="{/settings/searchConditions/Persg}" enabled="{/settings/fieldEnabled/Persg}" change=".onChangeEmpGroup" width="100%" class="conspicuous-disabled">
+                <core:Item text="{Ztext}" key="{Zcode}" />
+              </ComboBox>
+            </VBox>
+            <Label text="{i18n>LABEL_00327}" />
+            <VBox>
+              <ComboBox items="{/entry/subEmpGroup}" selectedKey="{/settings/searchConditions/Persk}" enabled="{= ${/settings/fieldEnabled/Persk} &amp;&amp; ${/settings/searchConditions/Persg} !== 'ALL' }" busyIndicatorDelay="0" busy="{/settings/fieldBusy/Persk}" width="100%" class="conspicuous-disabled">
+                <core:Item text="{Ztext}" key="{Zcode}" />
+              </ComboBox>
+            </VBox>
+          </grid:CSSGrid>
+        </VBox>
+        <VBox width="80%" height="635px" class="hCardBox">
+          <HBox height="46px" justifyContent="SpaceBetween" class="table-toolbar">
+            <Title level="H3" text="{i18n>LABEL_00204}" class="title pb-15-px" />
+          </HBox>
+          <table:Table class="radio-selection-table" enableSelectAll="false" rows="{/results/list}" rowSelectionChange=".onRowSelection" visibleRowCount="{/results/rowCount}" rowHeight="34" columnHeaderHeight="35">
+            <table:columns>
+              <table:Column width="auto" sortProperty="Pernr" filterProperty="Pernr" visible="{/settings/fieldVisible/Pernr}">
+                <Label text="{i18n>LABEL_00209}" />
+                <table:template>
+                  <Text text="{Pernr}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                </table:template>
+              </table:Column>
+              <table:Column width="auto" sortProperty="Ename" filterProperty="Ename" visible="{/settings/fieldVisible/Ename}">
+                <Label text="{i18n>LABEL_00210}" />
+                <table:template>
+                  <Text text="{Ename}" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
+                </table:template>
+              </table:Column>
+              <table:Column width="25%" sortProperty="Fulln" filterProperty="Fulln" visible="{/settings/fieldVisible/Fulln}">
+                <Label text="{i18n>LABEL_00227}" />
+                <table:template>
+                  <Text text="{Fulln}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text" />
+                </table:template>
+              </table:Column>
+              <table:Column width="auto" sortProperty="Zzjikgbt" filterProperty="Zzjikgbt" visible="{/settings/fieldVisible/Zzjikgbt}">
+                <Label text="{i18n>LABEL_00215}" />
+                <table:template>
+                  <Text text="{Zzjikgbt}" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
+                </table:template>
+              </table:Column>
+              <table:Column width="auto" sortProperty="Zzjikcht" filterProperty="Zzjikcht" visible="{/settings/fieldVisible/Zzjikcht}">
+                <Label text="{i18n>LABEL_00217}" />
+                <table:template>
+                  <Text text="{Zzjikcht}" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
+                </table:template>
+              </table:Column>
+              <table:Column width="auto" sortProperty="Stat2tx" filterProperty="Stat2tx" visible="{/settings/fieldVisible/Stat2tx}">
+                <Label text="{i18n>LABEL_00240}" />
+                <table:template>
+                  <Text text="{Stat2tx}" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
+                </table:template>
+              </table:Column>
+              <table:Column width="auto" sortProperty="Entda" filterProperty="Entda" visible="{/settings/fieldVisible/Entda}">
+                <Label text="{i18n>LABEL_00235}" />
+                <table:template>
+                  <Text text="{ path: 'Entda', type: 'sap.ui.tesna.mvc.model.type.Date', formatOptions: { pattern: 'yyyy.MM.dd' } }" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
+                </table:template>
+              </table:Column>
+              <table:Column width="auto" sortProperty="Retdt" filterProperty="Retdt" visible="{/settings/fieldVisible/Retdt}">
+                <Label text="{i18n>LABEL_00236}" />
+                <table:template>
+                  <Text text="{ path: 'Retdt', type: 'sap.ui.tesna.mvc.model.type.Date', formatOptions: { pattern: 'yyyy.MM.dd' } }" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
+                </table:template>
+              </table:Column>
+            </table:columns>
+          </table:Table>
+        </VBox>
+      </HBox>
+    </content>
+  </Dialog>
+</core:FragmentDefinition>

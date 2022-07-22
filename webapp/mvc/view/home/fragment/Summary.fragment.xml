@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:core="sap.ui.core">
+    <VBox class="hCardBox summary-box">
+        <HBox justifyContent="SpaceBetween" class="title">
+            <Title level="H2" text="요약" />
+        </HBox>
+        <grid:CSSGrid gridTemplateColumns="2fr 1fr 1fr" gridGap="0px" class="pay-summary">
+            <FlexBox width="100%" height="100%">
+                <layoutData>
+                    <grid:GridItemLayoutData gridRow="1 / 5" />
+                </layoutData>
+                <core:HTML content="&lt;div id='chart-paystub-container'&gt;&lt;/div&gt;" />
+            </FlexBox>
+            <Label text="지급" />
+            <Text text="{ path: '/summary/Bet05', type: 'sap.ui.tesna.mvc.model.type.Currency' }" />
+            <Label text="지급" />
+            <Text text="{ path: '/summary/Bet06', type: 'sap.ui.tesna.mvc.model.type.Currency' }" />
+            <Label text="지급" />
+            <Text text="{ path: '/summary/Bet07', type: 'sap.ui.tesna.mvc.model.type.Currency' }" />
+        </grid:CSSGrid>
+    </VBox>
+</core:FragmentDefinition>

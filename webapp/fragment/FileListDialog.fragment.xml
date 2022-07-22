@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns:m="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns="sap.ui.table">
+  <m:Dialog busy="{/busy}" busyIndicatorDelay="0" title="{i18n>LABEL_00248}" contentWidth="500px" contentHeight="45px" class="file-list-dialog">
+    <m:content>
+      <Table class="row-link" width="100%" columnHeaderHeight="45" rowHeight="44" selectionMode="None" rows="{/files}" visibleRowCount="{/fileCount}" columnHeaderVisible="false" noData="{i18n>MSG_00001}">
+        <columns>
+          <Column width="5%">
+            <template>
+              <m:Text text="{Seqnr}" width="100%" textAlign="Center" />
+            </template>
+          </Column>
+          <Column width="10%" visible="{= !!${Gubun} }">
+            <template>
+              <m:Text text="{Gubun}" wrapping="false" />
+            </template>
+          </Column>
+          <Column width="auto">
+            <template>
+              <m:Link text="{Zfilename}" href="{= ${Fileuri} ? ${Fileuri} : 'javascript:;' }" target="_blank" width="100%" textAlign="Begin" />
+            </template>
+          </Column>
+        </columns>
+      </Table>
+    </m:content>
+    <m:endButton>
+      <m:Button text="{i18n>LABEL_00115}" press=".onPressFileListDialogClose" class="cancel" />
+    </m:endButton>
+  </m:Dialog>
+</core:FragmentDefinition>

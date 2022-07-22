@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:table="sap.ui.table">
+  <Dialog id="listFileDialog" busyIndicatorDelay="0" busy="{/Data/busy}" title= "{i18n>LABEL_00248}" contentWidth= "500px" contentHeight= "120px">
+    <beginButton>
+      <Button text="{i18n>LABEL_00115}" press=".onDialogClose" class="cancel" />
+    </beginButton>
+    <content>
+      <table:Table id= "listFileTable" width="100%" rows="{/Data}" visibleRowCount="1" selectionMode="None" columnHeaderVisible= "false">
+        <table:columns>
+          <table:Column width="5%">
+            <table:template>
+              <Text text="{Seqnr}" width="100%" textAlign="Center" />
+            </table:template>
+          </table:Column>
+          <table:Column width="10%" visible="{= !!${Gubun} }">
+            <table:template>
+              <Text text="{Gubun}" wrapping="false" />
+            </table:template>
+          </table:Column>
+          <table:Column width="auto">
+            <table:template>
+              <Link press=".AttachFileAction.onFileLink" text="{Zfilename}" width="100%" textAlign="Begin" />
+            </table:template>
+          </table:Column>
+        </table:columns>
+      </table:Table>
+    </content>
+  </Dialog>
+</core:FragmentDefinition>

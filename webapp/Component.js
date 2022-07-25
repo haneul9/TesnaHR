@@ -336,7 +336,7 @@ sap.ui.define(
 
         return Promise.all([
           this._saveBreadcrumbsData({ mRouteArguments, mConfig, sRouteNameMain, sRouteNameSub, oController }), //
-          this._checkRouteName(sRouteNameMain),
+          // this._checkRouteName(sRouteNameMain),
         ]);
       },
 

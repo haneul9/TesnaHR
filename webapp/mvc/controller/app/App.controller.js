@@ -134,43 +134,6 @@ sap.ui.define(
       },
 
       /**
-       * Portlet 개인화 설정
-       */
-      onPressPortletsP13nDialogOpen() {
-        this.getOwnerComponent().byId('home').getController().onPressPortletsP13nDialogOpen();
-      },
-
-      /**
-       * My Page : 모바일 하단 5버튼
-       */
-      onPressMobileMyPagePopoverToggle() {
-        InstanceManager.closeAllPopovers();
-        this.oAppMenu.closeMenuLayer();
-
-        this.oMobileMyPagePopoverHandler.onPopoverToggle();
-      },
-
-      /**
-       * 검색 : 모바일 하단 5버튼
-       */
-      onPressMobileSearchPopoverToggle(oEvent) {
-        InstanceManager.closeAllPopovers();
-        this.oAppMenu.closeMenuLayer();
-
-        this.oMobilePhoneNumberListPopoverHandler.togglePopover(oEvent);
-      },
-
-      /**
-       * 메뉴 : 모바일 하단 5버튼
-       * @param {sap.ui.base.Event} oEvent
-       */
-      onPressMobileMenuPopoverToggle(oEvent) {
-        InstanceManager.closeAllPopovers();
-
-        this.oAppMenu.toggleMenuLayer(oEvent);
-      },
-
-      /**
        * 로그아웃
        */
       onPressLogout() {

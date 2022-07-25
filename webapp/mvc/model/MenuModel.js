@@ -2,15 +2,11 @@ sap.ui.define(
   [
     // prettier 방지용 주석
     'sap/ui/tesna/common/AppUtils',
-    'sap/ui/tesna/common/odata/Client',
-    'sap/ui/tesna/common/odata/ServiceNames',
     'sap/ui/tesna/mvc/model/base/UIComponentBaseModel',
   ],
   (
     // prettier 방지용 주석
     AppUtils,
-    Client,
-    ServiceNames,
     UIComponentBaseModel
   ) => {
     'use strict';
@@ -21,18 +17,6 @@ sap.ui.define(
         this.sRecentMenuLocalStorgaeKey = `ehr.recent.menus.${sPernr}`;
 
         try {
-          // const oModel = this.getUIComponent().getModel(ServiceNames.COMMON);
-          // const mPayload = {
-          //   Device: this.bMobile ? 'M' : '',
-          //   GetMenuLv1Nav: [],
-          //   GetMenuLv2Nav: [],
-          //   GetMenuLv3Nav: [],
-          //   GetMenuLv4Nav: [],
-          // };
-
-          // const oData = Client.deep(oModel, 'GetMenuLv', mPayload); // 메뉴 정보 조회
-
-          // this.setData(this.curryData(await oData));
           this.setData(this.curryData({ GetMenuLv1Nav: {}, GetMenuLv2Nav: {}, GetMenuLv3Nav: {}, GetMenuLv4Nav: {} }));
 
           return Promise.resolve();

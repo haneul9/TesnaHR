@@ -87,19 +87,19 @@ sap.ui.define(
        * @public
        */
       isDEV() {
-        return /^(yeshrsapdev|devhrportal)/.test(location.hostname) && /sap-client=100/i.test(document.cookie);
+        return /^(dsghrerpd01)/.test(location.hostname) && /sap-client=300/i.test(document.cookie);
       },
       /**
        * @public
        */
       isQAS() {
-        return /^(yeshrsapdev|devhrportal)/.test(location.hostname) && /sap-client=300/i.test(document.cookie);
+        return /^(dsghrerpq01)/.test(location.hostname) && /sap-client=510/i.test(document.cookie);
       },
       /**
        * @public
        */
       isPRD() {
-        return /^(yeshrsapprdv|yeshrsapprd|yeshrsapap|hrportal)/.test(location.hostname);
+        return /^(hrwdp)/.test(location.hostname);
       },
 
       isMobile() {

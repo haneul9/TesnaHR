@@ -209,17 +209,6 @@ sap.ui.define(
         return _.chain(this.getOwnerComponent().getMetadataModel().getData()).get([sServiceName, sEntityType, sProperty, 'maxLength']).toInteger().value();
       },
 
-      onMobileSearchList(oEvent) {
-        const oEventSource = oEvent.getSource();
-        const oMobileSearchBox = oEventSource.getParent();
-        if (oMobileSearchBox && oMobileSearchBox.hasStyleClass('search-box')) {
-          oMobileSearchBox.toggleStyleClass('search-box-expanded', oEventSource.getSelectedKey() === '0');
-        }
-        if (typeof this.onSearchList === 'function') {
-          this.onSearchList(oEvent);
-        }
-      },
-
       /**
        * Event handler for navigating back.
        * It there is a history entry we go one step back in the browser history
@@ -375,27 +364,6 @@ sap.ui.define(
 
       onDialogClose(oEvent) {
         oEvent.getSource().getParent().close();
-      },
-
-      /**
-       * Mobile Common
-       */
-      async openMobileCommonListStatusPop(oEvent) {
-        const oButton = oEvent.getSource();
-
-        if (!this._pPopover) {
-          const oView = this.getView();
-
-          this._pPopover = await Fragment.load({
-            id: oView.getId(),
-            name: 'sap.ui.tesna.fragment.mobile.ListStatusPopover',
-            controller: this,
-          });
-
-          oView.addDependent(this._pPopover);
-        }
-
-        this._pPopover.openBy(oButton);
       },
 
       /**

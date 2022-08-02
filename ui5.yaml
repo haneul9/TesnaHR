@@ -27,3 +27,13 @@ server:
 resources:
   configuration:
     propertiesFileSourceEncoding: UTF-8
+builder:
+  resources:
+    excludes:
+      - 'asset/libs/**'
+  componentPreload:
+    excludes:
+      - 'asset/libs/**'
+  minification:
+    excludes:
+      - 'asset/libs/**'

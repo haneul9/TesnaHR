@@ -1,0 +1,39 @@
+<mvc:View controllerName="sap.ui.tesna.mvc.controller.shift.List"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:custom="sap.ui.tesna.control">
+    <Page showHeader="false">
+        <VBox class="contents-header">
+            <HBox justifyContent="SpaceBetween" class="breadcrumbs">
+                <custom:Breadcrumbs />
+                <HBox class="button-group">
+                    <Button type="Emphasized" text="{i18n>LABEL_00121}" press=".onPressNewApprovalBtn" busyIndicatorDelay="0" busy="{/contentsBusy/buttonApproval}" visible="{/isPossibleApproval}" />
+                    <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" press=".onPagePrint" />
+                    <Button icon="sap-icon://sys-help" text="{i18n>LABEL_00132}" press=".onPressHelp" />
+                </HBox>
+            </HBox>
+        </VBox>
+        <VBox class="contents">
+            <HBox class="vCardBox" justifyContent="SpaceBetween" height="80px">
+                <HBox class="form-bar" alignItems="Center">
+                    <Label text="{i18n>LABEL_00220}" />
+                    <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" enabled="{= ${/auth} === 'H' }" busyIndicatorDelay="0" busy="{/contentsBusy/search}" change=".onChangeWerks">
+                        <core:Item key="{Persa}" text="{Pbtxt}" />
+                    </ComboBox>
+                    <Label text="{i18n>LABEL_00224}" />
+                    <ComboBox items="{/entry/Orgeh}" selectedKey="{/searchConditions/Orgeh}" busyIndicatorDelay="0" busy="{/contentsBusy/search}" change=".onChangeOrgeh">
+                        <core:Item key="{Orgeh}" text="{Fulln}" />
+                    </ComboBox>
+                    <Label text="{i18n>LABEL_00266}" />
+                    <custom:DateRangeSelection class="sapIcon_Date" dateValue="{ path: '/searchConditions/Apbeg', type: 'sap.ui.yesco.mvc.model.type.Date' }" secondDateValue="{ path: '/searchConditions/Apend', type: 'sap.ui.yesco.mvc.model.type.Date' }" />
+                    <Button text="{i18n>LABEL_00100}" icon="/sap/public/bc/ui2/zui5_yescohr/images/icon_search03.png" iconDensityAware="false" enabled="{/isActiveSearch}" press=".onPressSearch" busyIndicatorDelay="0" busy="{/contentsBusy/search}" />
+                </HBox>
+            </HBox>
+            <VBox class="vCardBox">
+                <core:Fragment fragmentName="sap.ui.tesna.fragment.OverviewTableHeader" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.shift.fragment.OverviewTable" type="XML" />
+            </VBox>
+        </VBox>
+    </Page>
+</mvc:View>

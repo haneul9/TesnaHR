@@ -1,0 +1,110 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <table:Table id="shiftListTable" class="row-link" selectionMode="None" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table}" noData="{i18n>MSG_00001}" cellClick=".onSelectRow">
+        <table:rowSettingsTemplate>
+            <table:RowSettings highlight="{ path: 'Appst', formatter: '.TableUtils.rowHighlight' }" />
+        </table:rowSettingsTemplate>
+        <table:columns>
+            <table:Column width="5%">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00144}" />
+                    <Label text="{i18n>LABEL_00144}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Appsttx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00352}" />
+                    <Label text="{i18n>LABEL_00352}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00353}" />
+                    <Label text="{i18n>LABEL_00353}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto" headerSpan="2">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00354}" />
+                    <Label text="{i18n>LABEL_01003}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Rtext2}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00354}" />
+                    <Label text="{i18n>LABEL_01004}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Ltext2}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto" headerSpan="2">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00355}" />
+                    <Label text="{i18n>LABEL_01003}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Rtext}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00355}" />
+                    <Label text="{i18n>LABEL_01004}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8%">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00148}" />
+                    <Label text="{i18n>LABEL_00148}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8%">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00135}" />
+                    <Label text="{i18n>LABEL_00135}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8%">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00356}" />
+                    <Label text="{i18n>LABEL_00356}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8%">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00269}" />
+                    <Label text="{i18n>LABEL_00269}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Sgndt', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

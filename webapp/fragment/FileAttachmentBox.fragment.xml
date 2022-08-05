@@ -24,7 +24,7 @@
         <table:Column width="4%">
           <Label text="No"/>
           <table:template>
-            <Text text="{Seqnr}" width="100%" textAlign="Center" />
+            <Text text="{Numbr}" width="100%" textAlign="Center" />
           </table:template>
         </table:Column>
         <table:Column width="8%" visible="{/settings/gubun}">
@@ -41,7 +41,7 @@
           <Label text="{i18n>LABEL_00248}" width="100%" />
           <table:template>
             <HBox width="100%">
-              <Link text="{Zfilename}" href="{Fileuri}" target="_blank" width="100%" textAlign="Begin" subtle="{New}">
+              <Link text="{Fname}" href="{Uri}" target="_blank" width="100%" textAlign="Begin" subtle="{New}">
                 <customData>
                   <core:CustomData key="deteled-attachment" value="{= !${New} &amp;&amp; ${Deleted} ? 'O' : 'X' }" writeToDom="true" />
                   <core:CustomData key="new-attachment" value="{= ${New} ? 'O' : 'X' }" writeToDom="true" />

@@ -276,34 +276,12 @@ sap.ui.define(
        * @param {string} menuId
        * @param {string} currentLocationText
        */
-      setCurrentMenuData({ routeName, viewId, menuId, currentLocationText = '', isSubRoute = false, hasPrevious = false }) {
+      setCurrentMenuData({ routeName, viewId, menuId, currentLocationText = '', hasPrevious = false, aLinks = [] }) {
         this.setProperty('/breadcrumbs', {
-          currentLocationText: '',
-          links: null,
+          currentLocationText,
+          links: aLinks,
         });
-
-        const mCurrentMenuProperties = this.getProperties(menuId);
-        const iLevel = isSubRoute ? 4 : mCurrentMenuProperties.Level;
-        const aLinks = [];
-        let mMenuProperties;
-
-        switch (iLevel) {
-          case 4:
-            mMenuProperties = this.getProperties(mCurrentMenuProperties.Mnid3);
-            aLinks.unshift({ name: mMenuProperties.Mname });
-          case 3:
-            mMenuProperties = this.getProperties(mCurrentMenuProperties.Mnid2);
-            aLinks.unshift({ name: mMenuProperties.Mname });
-          case 2:
-            mMenuProperties = this.getProperties(mCurrentMenuProperties.Mnid1);
-            aLinks.unshift({ name: mMenuProperties.Mname });
-          case 1:
-          default:
-        }
-
-        this.setProperty('/breadcrumbs/currentLocationText', currentLocationText || mCurrentMenuProperties.Mname);
-        this.setProperty('/breadcrumbs/links', aLinks);
-        this.setProperty('/current', { routeName, viewId, menuId, currentLocationText: currentLocationText || mCurrentMenuProperties.Mname, showHelp: true, hasPrevious });
+        this.setProperty('/current', { routeName, viewId, menuId, currentLocationText: currentLocationText, showHelp: true, hasPrevious });
       },
 
       getCurrentMenuRouteName() {

@@ -92,6 +92,8 @@ sap.ui.define(
        */
       getCurrentLocationText: null,
 
+      getBreadcrumbsLinks: null,
+
       /**
        * Convenience method for accessing the router in every controller of the application.
        * @public

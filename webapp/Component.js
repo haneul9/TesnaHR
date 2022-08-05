@@ -332,10 +332,10 @@ sap.ui.define(
         await this.getMenuModel().getPromise();
 
         const sRouteName = mConfig.name;
-        const [sRouteNameMain, sRouteNameSub] = sRouteName.split(/-/);
+        const [sRouteNameMain] = sRouteName.split(/-/);
 
         return Promise.all([
-          this._saveBreadcrumbsData({ mRouteArguments, mConfig, sRouteNameMain, sRouteNameSub, oController }), //
+          this._saveBreadcrumbsData({ mRouteArguments, mConfig, sRouteNameMain, oController }), //
           // this._checkRouteName(sRouteNameMain),
         ]);
       },
@@ -349,7 +349,7 @@ sap.ui.define(
        * @param {object} oController
        * @private
        */
-      async _saveBreadcrumbsData({ mRouteArguments, mConfig, sRouteNameMain, sRouteNameSub, oController }) {
+      async _saveBreadcrumbsData({ mRouteArguments, mConfig, sRouteNameMain, oController }) {
         const oMenuModel = this.getMenuModel();
 
         if (sRouteNameMain === 'tesnaHome') {
@@ -368,12 +368,17 @@ sap.ui.define(
           sCurrentLocationText = oController.getCurrentLocationText(mRouteArguments, mConfig.name);
         }
 
+        let aLinks;
+        if (oController && typeof oController.getBreadcrumbsLinks === 'function') {
+          aLinks = oController.getBreadcrumbsLinks();
+        }
+
         oMenuModel.setCurrentMenuData({
           routeName: sRouteNameMain,
           viewId: mConfig.target,
           menuId: sMenid,
+          aLinks,
           currentLocationText: sCurrentLocationText || '',
-          isSubRoute: !!sRouteNameSub,
           hasPrevious: !_.isEmpty(History.getInstance().getPreviousHash()),
         });
       },

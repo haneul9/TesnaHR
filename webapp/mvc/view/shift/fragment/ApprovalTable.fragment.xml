@@ -1,0 +1,146 @@
+<core:FragmentDefinition xmlns="sap.ui.table"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:custom="sap.ui.tesna.control">
+    <Table id="shiftApprovalTable" selectionMode="{/form/listMode}" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/form/list}" visibleRowCount="{/form/rowCount}" noData="{i18n>MSG_00001}">
+        <columns>
+            <Column width="10%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00148}"/>
+                    <m:Label text="{i18n>LABEL_00148}"/>
+                </multiLabels>
+                <template>
+                    <custom:DatePicker class="required" dateValue="{ path: 'Begda', type: 'sap.ui.yesco.mvc.model.type.Date' }" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin' }" editable="{= !${/form/Appst} }" change=".onChangeBeginDate" />
+                </template>
+            </Column>
+            <Column width="10%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00149}"/>
+                    <m:Label text="{i18n>LABEL_00149}"/>
+                </multiLabels>
+                <template>
+                    <custom:DatePicker class="required" dateValue="{ path: 'Endda', type: 'sap.ui.yesco.mvc.model.type.Date' }" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin' }" minDate="{Apbeg}" editable="{= !${/form/Appst} }" />
+                </template>
+            </Column>
+            <Column width="6%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00209}"/>
+                    <m:Label text="{i18n>LABEL_00209}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                </template>
+            </Column>
+            <Column width="8%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00210}"/>
+                    <m:Label text="{i18n>LABEL_00210}"/>
+                </multiLabels>
+                <template>
+                    <m:Input value="{Ename}" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" width="100%" maxSuggestionWidth="400px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'employees', templateShareable: false }" class="required tableRow_Text" editable="{= !${/form/Appst} }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
+                        <m:suggestionColumns>
+                            <m:Column width="40%" popinDisplay="Inline" demandPopin="true">
+                                <m:Label text="{i18n>LABEL_00210}"/>
+                            </m:Column>
+                            <m:Column popinDisplay="Inline" demandPopin="true">
+                                <m:Label text="{i18n>LABEL_00209}"/>
+                            </m:Column>
+                            <m:Column width="15%" popinDisplay="Inline">
+                                <m:Label text="{i18n>LABEL_00214}"/>
+                            </m:Column>
+                            <m:Column popinDisplay="Inline" minScreenWidth="Tablet">
+                                <m:Label text="{i18n>LABEL_00226}"/>
+                            </m:Column>
+                        </m:suggestionColumns>
+                        <m:suggestionRows>
+                            <m:ColumnListItem>
+                                <m:cells>
+                                    <m:Label text="{Ename}"/>
+                                    <m:Label text="{Pernr}"/>
+                                    <m:Label text="{Zzcaltltx}"/>
+                                    <m:Label text="{Orgtx}"/>
+                                </m:cells>
+                            </m:ColumnListItem>
+                        </m:suggestionRows>
+                    </m:Input>
+                </template>
+            </Column>
+            <Column width="auto">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00214}"/>
+                    <m:Label text="{i18n>LABEL_00214}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{Zzcaltltx}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                </template>
+            </Column>
+            <Column width="12%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00224}"/>
+                    <m:Label text="{i18n>LABEL_00224}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                </template>
+            </Column>
+            <Column width="12%" headerSpan="2">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00354}"/>
+                    <m:Label text="{i18n>LABEL_01003}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{Rtext2}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                </template>
+            </Column>
+            <Column width="10%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00354}"/>
+                    <m:Label text="{i18n>LABEL_01004}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{Ltext2}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                </template>
+            </Column>
+            <Column width="13%" headerSpan="2" visible="{= !${/form/Appst} }">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00355}"/>
+                    <m:Label text="{i18n>LABEL_01003}"/>
+                </multiLabels>
+                <template>
+                    <m:ComboBox class="required" width="100%" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" selectedKey="{Schkz}" items="{schkzs}">
+                        <core:Item key="{Schkz}" text="{Rtext}" />
+                    </m:ComboBox>
+                </template>
+            </Column>
+            <Column width="11%" visible="{= !${/form/Appst} }">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00355}"/>
+                    <m:Label text="{i18n>LABEL_01004}"/>
+                </multiLabels>
+                <template>
+                    <m:ComboBox class="required" width="100%" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" selectedKey="{Kostl}" items="{kostls}" editable="{= !${/form/Appst} }">
+                        <core:Item key="{Kostl}" text="{Ltext}" />
+                    </m:ComboBox>
+                </template>
+            </Column>
+            <Column width="13%" headerSpan="2" visible="{= !!${/form/Appst} }">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00355}"/>
+                    <m:Label text="{i18n>LABEL_01003}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{Rtext}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                </template>
+            </Column>
+            <Column width="11%" visible="{= !!${/form/Appst} }">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00355}"/>
+                    <m:Label text="{i18n>LABEL_01004}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                </template>
+            </Column>
+        </columns>
+    </Table>
+</core:FragmentDefinition>

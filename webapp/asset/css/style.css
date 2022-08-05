@@ -83,7 +83,7 @@ html[lang="en"] .sapMLabel.app-menu-level1 bdi {padding:0 .75rem}
 .menu-70000 bdi {color:#2972c8}
 .menu-80000 bdi {color:#27c83f}
 
-.app-body:not(.popup-body) {position:relative !important; height:calc(100% - 61px) !important; background-color:#f9fafa}
+.app-body:not(.popup-body) {position:relative !important; background-color:#f9fafa}
 .app-body .sapUiBlockLayer.sapUiLocalBusyIndicator {z-index:15}
 
 .sapMPage.popup-view .contents {min-width:1100px; max-width:1300px; margin-top:16px}
@@ -1020,6 +1020,9 @@ span.sapMBtnInner.sapMBtnEmphasized {text-shadow:none}
 .sapMInput>div {height:100% !important}
 .sapMInput>div>input {font-size:14px; padding:11px 10px 11px 11px !important}
 .sapUiSizeCompact .sapMInputBase.sapMInputWithDescription>div input {text-align:right}
+
+/*Datepicker*/
+.sapMInputBase.sapIcon_Date .sapMInputBaseReadonlyWrapper input { padding:11px 0 11px 11px !important; font-size:14px; font-weight:500; color:#222 }
 
 /*search*/
 .sapMSF {height:40px !important; padding:0 !important}

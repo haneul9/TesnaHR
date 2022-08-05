@@ -48,12 +48,8 @@
       "libs": {
         "sap.ui.core": {},
         "sap.m": {},
-        "sap.ui.table": {
-          "lazy": true
-        },
-        "sap.ui.unified": {
-          "lazy": true
-        }
+        "sap.ui.table": {},
+        "sap.ui.unified": {}
       }
     },
     "contentDensities": {
@@ -96,11 +92,18 @@
 				"async": true
 			},
 			"routes": [
-        { "pattern": "", "name": "tesnaHome", "target": "home" }
+        { "pattern": "", "name": "tesnaHome", "target": "home" },
+        
+        { "pattern": "shift", "name": "shift", "target": "shift" },
+        { "pattern": "shift/{appno}/{werks}/{orgeh}", "name": "shift-detail", "target": "shiftDetail" }
 			],
 			"targets": {
         "home": { "viewId": "home", "viewPath": "sap.ui.tesna.mvc.view.home", "viewName": "App" },
-				"notFound": { "viewId": "notFound", "viewName": "NotFound", "transition": "show" }
+        
+        "shift": { "viewId": "shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "List" },
+        "shiftDetail": { "viewId": "shiftDetail", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "Detail" },
+				
+        "notFound": { "viewId": "notFound", "viewName": "NotFound", "transition": "show" }
 			}
 		}
 	}

@@ -1,0 +1,78 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <VBox id="commonApprovalStatusBox" class="vCardBox" visible="{/settings/visible}" busy="true" busyIndicatorDelay="0">
+        <HBox class="table-toolbar">
+            <HBox class="title">
+                <Title level="H2" text="{i18n>LABEL_00357}" />
+            </HBox>
+        </HBox>
+        <table:Table id="commonApprovalStatusTable" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" visibleRowCount="{/rowCount}" rows="{/list}" noData="{i18n>MSG_00001}">
+            <table:columns>
+                <table:Column width="4%">
+                    <Label text="No"/>
+                    <table:template>
+                        <Text text="{ path: 'Seqnr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="4%">
+                    <Label text="{i18n>LABEL_00147}"/>
+                    <table:template>
+                        <Text text="{Lintytx}" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10%">
+                    <Label text="{i18n>LABEL_00210}"/>
+                    <table:template>
+                        <HBox justifyContent="Center" alignItems="Center">
+                            <Image src="{Perpic}" class="member-photo mt-4-px" mode="Background" width="34px" height="34px" />
+                            <Text text="{Ename}" width="100%" textAlign="Center" class="ml-4-px" />
+                        </HBox>
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto">
+                    <Label text="{i18n>LABEL_00214}"/>
+                    <table:template>
+                        <Text text="{Zzcaltltx}" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto">
+                    <Label text="{i18n>LABEL_00217}"/>
+                    <table:template>
+                        <Text text="{Zzpsgrptx}" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="14%">
+                    <Label text="{i18n>LABEL_00224}"/>
+                    <table:template>
+                        <Text text="{Orgtx}" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto">
+                    <Label text="{i18n>LABEL_00261}"/>
+                    <table:template>
+                        <Text text="{Appsttx}" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto">
+                    <Label text="{i18n>LABEL_00170}"/>
+                    <table:template>
+                        <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto">
+                    <Label text="{i18n>LABEL_00330}"/>
+                    <table:template>
+                        <Text text="{Sgntm}" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="25%">
+                    <Label text="Comments"/>
+                    <table:template>
+                        <Input value="{Comnt}" width="100%" editable="{enabledComments}" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </VBox>
+</core:FragmentDefinition>

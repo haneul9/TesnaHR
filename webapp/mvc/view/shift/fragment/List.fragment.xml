@@ -1,6 +1,4 @@
-<mvc:View controllerName="sap.ui.tesna.mvc.controller.shift.List"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns:core="sap.ui.core"
+<core:FragmentDefinition xmlns:core="sap.ui.core"
     xmlns="sap.m"
     xmlns:custom="sap.ui.tesna.control">
     <Page showHeader="false">
@@ -36,4 +34,4 @@
             </VBox>
         </VBox>
     </Page>
-</mvc:View>
+</core:FragmentDefinition>

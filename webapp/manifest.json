@@ -95,12 +95,18 @@
         { "pattern": "", "name": "tesnaHome", "target": "home" },
         
         { "pattern": "shift", "name": "shift", "target": "shift" },
-        { "pattern": "shift/{appno}/{werks}/{orgeh}", "name": "shift-detail", "target": "shiftDetail" }
+        { "pattern": "m/shift", "name": "m/shift", "target": "m/shift" },
+        { "pattern": "h/shift", "name": "h/shift", "target": "h/shift" },
+        { "pattern": "shift/{appno}/{werks}/{orgeh}/:flag:", "name": "shift-detail", "target": "shiftDetail" },
+        { "pattern": "m/shift/{appno}/{werks}/{orgeh}/:flag:", "name": "m/shift-detail", "target": "shiftDetail" },
+        { "pattern": "h/shift/{appno}/{werks}/{orgeh}/:flag:", "name": "h/shift-detail", "target": "shiftDetail" }
 			],
 			"targets": {
         "home": { "viewId": "home", "viewPath": "sap.ui.tesna.mvc.view.home", "viewName": "App" },
         
-        "shift": { "viewId": "shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "List" },
+        "shift": { "viewId": "shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListE" },
+        "m/shift": { "viewId": "m_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListM" },
+        "h/shift": { "viewId": "h_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListH" },
         "shiftDetail": { "viewId": "shiftDetail", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "Detail" },
 				
         "notFound": { "viewId": "notFound", "viewName": "NotFound", "transition": "show" }

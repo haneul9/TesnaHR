@@ -22,6 +22,7 @@ sap.ui.define(
     'use strict';
 
     return BaseController.extend('sap.ui.tesna.mvc.controller.shift.Detail', {
+      DISPLAY_MODE: '',
       LIST_TABLE_ID: 'shiftApprovalTable',
 
       ApprovalStatusHandler: null,
@@ -32,7 +33,14 @@ sap.ui.define(
       },
 
       getCurrentLocationText(oArguments) {
-        return `${this.getBundleText('LABEL_01002')} ${oArguments.appno === 'N' ? this.getBundleText('LABEL_00121') : this.getBundleText('LABEL_00100')}`; // 근무일정변경신청 신청|조회
+        const sRouteText =
+          oArguments.appno === 'N'
+            ? '' //
+            : oArguments.flag === 'WE' || oArguments.flag === 'WD'
+            ? this.getBundleText('LABEL_00360') // 결재
+            : this.getBundleText('LABEL_00100'); // 조회
+
+        return `${this.getBundleText('LABEL_01002')} ${sRouteText}`;
       },
 
       getBreadcrumbsLinks() {
@@ -46,18 +54,21 @@ sap.ui.define(
       initializeModel() {
         return {
           auth: '',
+          displayMode: '',
           previousName: '',
           contentsBusy: {
             all: false,
             button: false,
             table: false,
           },
+          fieldLimit: {},
           form: {
             rowCount: 1,
             listMode: 'None',
             list: [],
             Appno: '',
             Appst: '',
+            Aprsn: '',
             Werks: '',
             Orgeh: '',
             Orgtx: '',
@@ -81,6 +92,10 @@ sap.ui.define(
         oViewModel.setSizeLimit(10000);
         oViewModel.setData(this.initializeModel());
 
+        // 신청,조회 - B, Work to do - WE, Not Work to do - WD
+        this.DISPLAY_MODE = oParameter.flag || 'B';
+        oViewModel.setProperty('/displayMode', this.DISPLAY_MODE);
+        oViewModel.setProperty('/auth', this.isMss() ? 'M' : this.isHass() ? 'H' : 'E');
         oViewModel.setProperty('/form/Appno', oParameter.appno === 'N' ? '' : oParameter.appno);
         oViewModel.setProperty('/form/Werks', oParameter.werks);
         oViewModel.setProperty('/form/Orgeh', oParameter.orgeh);
@@ -123,6 +138,7 @@ sap.ui.define(
 
             _.chain(mFormData)
               .set('Appst', _.get(aDetailRow, [0, 'Appst']))
+              .set('Aprsn', _.get(aDetailRow, [0, 'Aprsn']))
               .set('Orgtx', _.get(aDetailRow, [0, 'Orgtx']))
               .commit();
             oViewModel.setProperty('/form/rowCount', aDetailRow.length);
@@ -132,6 +148,7 @@ sap.ui.define(
             );
             oViewModel.refresh(true);
           } else {
+            oViewModel.setProperty('/fieldLimit', this.getEntityLimit(ServiceNames.WORKTIME, 'ShiftChangeApply'));
             oViewModel.setProperty('/form/listMode', 'MultiToggle');
           }
 
@@ -201,11 +218,14 @@ sap.ui.define(
       settingsApprovalStatus() {
         const oViewModel = this.getViewModel();
         const mFormData = oViewModel.getProperty('/form');
+        const sAuth = oViewModel.getProperty('/auth');
         const sPernr = this.getAppointeeProperty('Pernr');
 
         this.ApprovalStatusHandler = new ApprovalStatusHandler(this, {
           Pernr: sPernr,
           Mode: mFormData.Appno ? 'D' : 'N',
+          EndPoint: this.DISPLAY_MODE,
+          Austy: sAuth,
           Appty: this.getApprovalType(),
           ..._.pick(mFormData, ['Appno', 'Orgeh']),
         });
@@ -221,7 +241,7 @@ sap.ui.define(
           const { Appno } = await Client.create(oModel, 'ShiftChangeApply', {
             Prcty: sPrcty,
             Pernr: this.getAppointeeProperty('Pernr'),
-            ..._.pick(mFormData, ['Appno', 'Werks', 'Orgeh']),
+            ..._.pick(mFormData, ['Appno', 'Werks', 'Orgeh', 'Aprsn']),
             ShiftChangeNav: mFormData.list,
           });
 
@@ -230,10 +250,7 @@ sap.ui.define(
           if (oFileError && oFileError.code === 'E') throw oFileError;
 
           // 결재선 저장
-          this.ApprovalStatusHandler.save(Appno);
-
-          // 메일발송
-          this.ApprovalStatusHandler.sendMail(Appno, '20', this.getApprovalType());
+          await this.ApprovalStatusHandler.save(Appno);
 
           // {신청}되었습니다.
           MessageBox.success(this.getBundleText('MSG_00007', this.getBundleText('LABEL_00121')), {
@@ -323,7 +340,7 @@ sap.ui.define(
 
         // 신청을 취소하시겠습니까?
         MessageBox.confirm(this.getBundleText('MSG_00062'), {
-          actions: [this.getBundleText('LABEL_00118'), MessageBox.Action.CANCEL],
+          actions: [this.getBundleText('LABEL_00114'), MessageBox.Action.CANCEL],
           onClose: (sAction) => {
             if (!sAction || sAction === MessageBox.Action.CANCEL) {
               this.setContentsBusy(false, 'all');
@@ -335,9 +352,61 @@ sap.ui.define(
         });
       },
 
-      onPressApprove() {},
+      onPressApprove() {
+        this.setContentsBusy(true, 'all');
 
-      onPressReject() {},
+        // {승인}하시겠습니까?
+        MessageBox.confirm(this.getBundleText('MSG_00006', 'LABEL_00123'), {
+          actions: [this.getBundleText('LABEL_00121'), MessageBox.Action.CANCEL],
+          onClose: async (sAction) => {
+            if (!sAction || sAction === MessageBox.Action.CANCEL) {
+              this.setContentsBusy(false, 'all');
+              return;
+            }
+
+            try {
+              const sAppno = this.getViewModel().getProperty('/form/Appno');
+
+              // 승인
+              await this.ApprovalStatusHandler.approve(sAppno);
+            } catch (oError) {
+              this.debug('Controller > shift Detail > onPressApprove Error', oError);
+
+              AppUtils.handleError(oError);
+            } finally {
+              this.setContentsBusy(false, 'all');
+            }
+          },
+        });
+      },
+
+      onPressReject() {
+        this.setContentsBusy(true, 'all');
+
+        // {반려}하시겠습니까?
+        MessageBox.confirm(this.getBundleText('MSG_00006', 'LABEL_00124'), {
+          actions: [this.getBundleText('LABEL_00121'), MessageBox.Action.CANCEL],
+          onClose: async (sAction) => {
+            if (!sAction || sAction === MessageBox.Action.CANCEL) {
+              this.setContentsBusy(false, 'all');
+              return;
+            }
+
+            try {
+              const sAppno = this.getViewModel().getProperty('/form/Appno');
+
+              // 반려
+              await this.ApprovalStatusHandler.reject(sAppno);
+            } catch (oError) {
+              this.debug('Controller > shift Detail > onPressReject Error', oError);
+
+              AppUtils.handleError(oError);
+            } finally {
+              this.setContentsBusy(false, 'all');
+            }
+          },
+        });
+      },
 
       async onPressAddBtn() {
         const oViewModel = this.getViewModel();
@@ -495,6 +564,10 @@ sap.ui.define(
           oViewModel.setProperty(`${sRowPath}/Kostl2`, '');
           oViewModel.setProperty(`${sRowPath}/Ltext2`, '');
         }
+      },
+
+      onHistoryBack() {
+        history.back();
       },
     });
   }

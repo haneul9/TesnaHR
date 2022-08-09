@@ -1,5 +1,4 @@
 <mvc:View controllerName="sap.ui.tesna.mvc.controller.home.App"
-    xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:custom="sap.ui.tesna.control">
@@ -7,21 +6,16 @@
         <VBox class="contents-header">
             <HBox justifyContent="SpaceBetween" class="breadcrumbs">
                 <custom:Breadcrumbs />
-                <HBox class="button-group">
-                    <Button text="{i18n>LABEL_00131}" icon="sap-icon://print" press=".onPagePrint" />
-                    <Button text="{i18n>LABEL_00132}" icon="sap-icon://sys-help" press=".onPressHelp" visible="{= !!${menuModel>/current/showHelp} }" />
-                </HBox>
             </HBox>
         </VBox>
         <VBox class="contents">
-            <HBox justifyContent="SpaceAround">
-                <core:Fragment fragmentName="sap.ui.tesna.fragment.AppointeeBox" type="XML" />
-                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.home.fragment.Summary" type="XML" />
-                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.home.fragment.OverviewSearchCondition" type="XML" />
-            </HBox>
             <VBox class="vCardBox">
-                <core:Fragment fragmentName="sap.ui.tesna.fragment.OverviewTableHeader" type="XML" />
-                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.home.fragment.OverviewTable" type="XML" />
+                <HBox justifyContent="Center" alignItems="Center" class="title">
+                    <layoutData>
+                        <FlexItemData minHeight="400px" />
+                    </layoutData>
+                    <Title text="{appointeeModel>/Ename}님 안녕하세요." level="H2" />
+                </HBox>
             </VBox>
         </VBox>
     </Page>

@@ -237,9 +237,9 @@ sap.ui.define(
             resolve();
           }
 
-          const sServiceUrl = ServiceManager.getServiceUrl('ZHRXX_HRNOTICE_SRV');
+          const sServiceUrl = ServiceManager.getServiceUrl('ZHRXX_COMMON_SRV');
           const oUploadModel = new ODataModel(sServiceUrl, { json: true, loadMetadataAsync: true, refreshAfterChange: false });
-          const sUploadUrl = `${sServiceUrl}/Notice_File_UploadSet/`;
+          const sUploadUrl = `${sServiceUrl}/FileSet/`;
           const sAppty = oBoxModel.getProperty('/settings/appty');
 
           // 파일 업로드
@@ -293,7 +293,7 @@ sap.ui.define(
         return new Promise((resolve, reject) => {
           const mHeaders = {
             'x-csrf-token': this.getCsrfToken(oUploadModel),
-            slug: [sAppno, mFile.Fnumr, encodeURI(mFile.Fname), sAppty].join('|'),
+            slug: [sAppno, sAppty, encodeURI(mFile.Fname)].join('|'),
           };
 
           $.ajax({

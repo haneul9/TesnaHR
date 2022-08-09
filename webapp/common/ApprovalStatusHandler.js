@@ -4,6 +4,7 @@ sap.ui.define(
     'sap/ui/base/Object',
     'sap/ui/model/json/JSONModel',
     'sap/ui/tesna/common/AppUtils',
+    'sap/ui/tesna/common/exceptions/UI5Error',
     'sap/ui/tesna/common/odata/Client',
     'sap/ui/tesna/common/odata/ServiceNames',
   ],
@@ -12,6 +13,7 @@ sap.ui.define(
     BaseObject,
     JSONModel,
     AppUtils,
+    UI5Error,
     Client,
     ServiceNames
   ) {
@@ -21,9 +23,18 @@ sap.ui.define(
       oController: null,
       oApprovalStatusBox: null,
 
+      APPROVAL_STATUS: {
+        APPROVAL: '20',
+        APPROVE: '30',
+        REJECT: '40',
+        CANCEL: '90',
+      },
+
       constructor: function (oController, mOptions) {
         const options = {
-          Mode: 'N',
+          Mode: 'D',
+          EndPoint: 'B',
+          Austy: 'E',
           Pernr: null,
           Appno: null,
           Appty: null,
@@ -55,14 +66,59 @@ sap.ui.define(
           const oModel = this.oController.getModel(ServiceNames.APPROVAL);
           const oBoxModel = this.oApprovalStatusBox.getModel();
           const aRowData = oBoxModel.getProperty('/list') || [];
+          const sAppty = oBoxModel.getProperty('/settings/Appty');
 
-          await Client.create(oModel, 'ApproverHeader', {
+          await Client.deep(oModel, 'ApproverHeader2', {
             Appno: sAppno,
-            ApproverListNav: [..._.map(aRowData, (o) => ({ ...o, Appno: sAppno }))],
+            ApproverList2Nav: [..._.map(aRowData, (o) => ({ ...o, Appno: sAppno }))],
           });
+
+          await this.sendMail(sAppno, this.APPROVAL_STATUS.APPROVAL, sAppty);
         } catch (oError) {
           throw oError;
         }
+      },
+
+      async approve(sAppno) {
+        try {
+          await this.callApprovalProcess(this.APPROVAL_STATUS.APPROVE, sAppno);
+
+          await this.sendMail(sAppno, this.APPROVAL_STATUS.APPROVE);
+        } catch (oError) {
+          throw oError;
+        }
+      },
+
+      async reject(sAppno) {
+        try {
+          const oBoxModel = this.oApprovalStatusBox.getModel();
+          const aRowData = oBoxModel.getProperty('/list') || [];
+          const sComment = _.chain(aRowData).find({ enabledComments: true }).get('Comnt').value();
+
+          if (!sComment) {
+            throw new UI5Error({ code: 'A', message: this.oController.getBundleText('MSG_00063') }); // 반려사유를 입력하여 주십시오.
+          }
+
+          await this.callApprovalProcess(this.APPROVAL_STATUS.REJECT, sAppno, sComment);
+
+          await this.sendMail(sAppno, this.APPROVAL_STATUS.REJECT);
+        } catch (oError) {
+          throw oError;
+        }
+      },
+
+      callApprovalProcess(sAppst, sAppno, sComment) {
+        const oModel = this.oController.getModel(ServiceNames.APPROVAL);
+        const oBoxModel = this.oApprovalStatusBox.getModel();
+        const mSettings = oBoxModel.getProperty('/settings');
+
+        return Client.create(oModel, 'ApprovalProcess', {
+          Appno: sAppno,
+          Appst: sAppst,
+          Appty: mSettings.Appty,
+          Austy: mSettings.Austy,
+          Comnt: sAppst === '40' ? sComment : '',
+        });
       },
 
       async sendMail(sAppno, sAppst, sAppty) {
@@ -88,20 +144,30 @@ sap.ui.define(
 
           const oModel = this.oController.getModel(ServiceNames.APPROVAL);
           const aRowData = await Client.getEntitySet(oModel, 'ApproverList2', {
-            Prcty: mSettings.Mode === 'N' ? 'N' : 'D',
+            Prcty: mSettings.Mode,
             ..._.pick(mSettings, ['Pernr', 'Appno', 'Appty', 'Orgeh']),
           });
 
           oBoxModel.setProperty('/rowCount', aRowData.length || 1);
           oBoxModel.setProperty(
             '/list',
-            _.map(aRowData, (o) =>
-              _.chain(o)
+            _.map(aRowData, (o) => {
+              let bEnableComments = false;
+              let bLeadLine = true;
+
+              if (mSettings.Mode === 'N' && o.Linty === '10') {
+                bEnableComments = true;
+              } else if (mSettings.EndPoint === 'WE' && o.Linty === '20' && o.Appst === '' && bLeadLine) {
+                bLeadLine = false;
+                bEnableComments = true;
+              }
+
+              return _.chain(o)
                 .omit('__metadata')
                 .set('Perpic', o.Perpic || this.oController.getUnknownAvatarImageURL())
-                .set('enabledComments', mSettings.Mode === 'N' && o.Linty === '10')
-                .value()
-            )
+                .set('enabledComments', bEnableComments)
+                .value();
+            })
           );
         } catch (oError) {
           AppUtils.handleError(oError);

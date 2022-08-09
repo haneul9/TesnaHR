@@ -6,7 +6,7 @@
             <table:RowSettings highlight="{ path: 'Appst', formatter: '.TableUtils.rowHighlight' }" />
         </table:rowSettingsTemplate>
         <table:columns>
-            <table:Column width="5%">
+            <table:Column width="4%">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00144}" />
                     <Label text="{i18n>LABEL_00144}" />
@@ -24,7 +24,7 @@
                     <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="auto">
+            <table:Column width="7%">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00353}" />
                     <Label text="{i18n>LABEL_00353}" />
@@ -69,7 +69,7 @@
                     <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="8%">
+            <table:Column width="7%">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00148}" />
                     <Label text="{i18n>LABEL_00148}" />
@@ -78,7 +78,16 @@
                     <Text text="{ path: 'Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
-            <table:Column width="8%">
+            <table:Column width="7%">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00149}" />
+                    <Label text="{i18n>LABEL_00149}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                </table:template>
+            </table:Column>
+            <table:Column width="7%">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00135}" />
                     <Label text="{i18n>LABEL_00135}" />
@@ -87,7 +96,7 @@
                     <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="8%">
+            <table:Column width="7%">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00356}" />
                     <Label text="{i18n>LABEL_00356}" />
@@ -96,7 +105,7 @@
                     <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="8%">
+            <table:Column width="7%">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00269}" />
                     <Label text="{i18n>LABEL_00269}" />

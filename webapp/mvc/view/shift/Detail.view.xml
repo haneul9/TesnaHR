@@ -8,11 +8,12 @@
             <HBox justifyContent="SpaceBetween" class="breadcrumbs">
                 <custom:Breadcrumbs />
                 <HBox class="button-group">
-                    <Button type="Emphasized" text="{i18n>LABEL_00121}" press=".onPressApproval" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= !${/form/Appst} }" enabled="{= !!${/form/list}.length }" />
-                    <Button type="Emphasized" text="{i18n>LABEL_00118}" press=".onPressCancel" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/form/Appst} === '20' }" />
-                    <Button type="Emphasized" text="{i18n>LABEL_00123}" press=".onPressApprove" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="false" />
-                    <Button type="Reject" text="{i18n>LABEL_00124}" press=".onPressReject" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="false" />
-                    <Button text="{i18n>LABEL_00146}" press=".onNavBack" />
+                    <Button type="Emphasized" text="{i18n>LABEL_00121}" press=".onPressApproval" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'B' &amp;&amp; !${/form/Appst} }" enabled="{= !!${/form/list}.length }" />
+                    <Button type="Emphasized" text="{i18n>LABEL_00118}" press=".onPressCancel" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'B' &amp;&amp; ${/form/Appst} === '20' }" />
+                    <Button type="Emphasized" text="{i18n>LABEL_00123}" press=".onPressApprove" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'WE' }" />
+                    <Button type="Reject" text="{i18n>LABEL_00124}" press=".onPressReject" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'WE' }" />
+                    <Button text="{i18n>LABEL_00146}" press=".onNavBack" visible="{= ${/displayMode} === 'B' }" />
+                    <Button text="{i18n>LABEL_00146}" press=".onHistoryBack" visible="{= ${/displayMode} !== 'B' }" />
                     <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" press=".onPagePrint" />
                     <Button icon="sap-icon://sys-help" text="{i18n>LABEL_00132}" press=".onPressHelp" />
                 </HBox>
@@ -34,12 +35,12 @@
                     <core:Fragment fragmentName="sap.ui.tesna.mvc.view.shift.fragment.ApprovalTable" type="XML" />
                 </HBox>
             </VBox>
-            <!-- <VBox class="vCardBox">
+            <VBox class="vCardBox">
                 <HBox alignItems="Center" class="table-toolbar">
                     <Title text="{i18n>LABEL_00358}" level="H2" />
                 </HBox>
-                <TextArea width="100%" class="required" rows="5" growing="true" value="{/form/Chgrsn}" />
-            </VBox> -->
+                <TextArea width="100%" rows="5" growing="true" value="{/form/Aprsn}" maxLength="{/fieldLimit/Aprsn}" editable="{= !${/form/Appst} }" />
+            </VBox>
             <core:Fragment fragmentName="sap.ui.tesna.fragment.FileAttachmentBox" type="XML" />
             <core:Fragment fragmentName="sap.ui.tesna.fragment.ApprovalStatus" type="XML" />
         </VBox>

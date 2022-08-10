@@ -369,6 +369,11 @@ sap.ui.define(
 
               // 승인
               await this.ApprovalStatusHandler.approve(sAppno);
+
+              // 승인되었습니다.
+              MessageBox.success(this.getBundleText('MSG_00007', this.getBundleText('LABEL_00123')), {
+                onClose: () => this.onHistoryBack(),
+              });
             } catch (oError) {
               this.debug('Controller > shift Detail > onPressApprove Error', oError);
 
@@ -397,6 +402,11 @@ sap.ui.define(
 
               // 반려
               await this.ApprovalStatusHandler.reject(sAppno);
+
+              // 반려되었습니다.
+              MessageBox.success(this.getBundleText('MSG_00007', this.getBundleText('LABEL_00124')), {
+                onClose: () => this.onHistoryBack(),
+              });
             } catch (oError) {
               this.debug('Controller > shift Detail > onPressReject Error', oError);
 
@@ -567,6 +577,7 @@ sap.ui.define(
       },
 
       onHistoryBack() {
+        this.setContentsBusy(true);
         history.back();
       },
     });

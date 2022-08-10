@@ -40,6 +40,7 @@ sap.ui.define(
           Appty: null,
           Orgeh: null,
           visible: true,
+          activeInput: false,
           ...mOptions,
         };
 
@@ -53,6 +54,7 @@ sap.ui.define(
           mailUrl: {
             20: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Approvalbox?sap-config-mode=true%26gAppty=',
             30: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Requestbox?sap-config-mode=true',
+            40: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Requestbox?sap-config-mode=true',
           },
         });
 
@@ -118,6 +120,7 @@ sap.ui.define(
           Appty: mSettings.Appty,
           Austy: mSettings.Austy,
           Comnt: sAppst === '40' ? sComment : '',
+          Rjrsn: sAppst === '40' ? sComment : '',
         });
       },
 
@@ -148,6 +151,8 @@ sap.ui.define(
             ..._.pick(mSettings, ['Pernr', 'Appno', 'Appty', 'Orgeh']),
           });
 
+          let bActiveInput = false;
+
           oBoxModel.setProperty('/rowCount', aRowData.length || 1);
           oBoxModel.setProperty(
             '/list',
@@ -156,8 +161,10 @@ sap.ui.define(
               let bLeadLine = true;
 
               if (mSettings.Mode === 'N' && o.Linty === '10') {
+                bActiveInput = true;
                 bEnableComments = true;
               } else if (mSettings.EndPoint === 'WE' && o.Linty === '20' && o.Appst === '' && bLeadLine) {
+                bActiveInput = true;
                 bLeadLine = false;
                 bEnableComments = true;
               }
@@ -169,6 +176,9 @@ sap.ui.define(
                 .value();
             })
           );
+
+          oBoxModel.setProperty('/settings/activeInput', bActiveInput);
+          oBoxModel.refresh(true);
         } catch (oError) {
           AppUtils.handleError(oError);
         } finally {

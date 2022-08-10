@@ -63,13 +63,19 @@
                 <table:Column width="auto">
                     <Label text="{i18n>LABEL_00330}"/>
                     <table:template>
-                        <Text text="{Sgntm}" width="100%" textAlign="Center" />
+                        <Text text="{ path: 'Sgntm', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" />
                     </table:template>
                 </table:Column>
-                <table:Column width="25%">
-                    <Label text="Comments"/>
+                <table:Column width="25%" visible="{/settings/activeInput}">
+                    <Label text="Comments" />
                     <table:template>
                         <Input value="{Comnt}" width="100%" editable="{enabledComments}" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="25%" visible="{= !${/settings/activeInput} }">
+                    <Label text="Comments" />
+                    <table:template>
+                        <Text width="100%" text="{Rjrsn}" />
                     </table:template>
                 </table:Column>
             </table:columns>

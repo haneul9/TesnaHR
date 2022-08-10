@@ -107,7 +107,7 @@
                     <m:Label text="{i18n>LABEL_01003}"/>
                 </multiLabels>
                 <template>
-                    <m:ComboBox class="required" width="100%" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" selectedKey="{Schkz}" items="{schkzs}">
+                    <m:ComboBox class="required" width="100%" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" selectedKey="{Schkz}" items="{ path: 'schkzs', templateShareable: false }">
                         <core:Item key="{Schkz}" text="{Rtext}" />
                     </m:ComboBox>
                 </template>
@@ -118,7 +118,7 @@
                     <m:Label text="{i18n>LABEL_01004}"/>
                 </multiLabels>
                 <template>
-                    <m:ComboBox class="required" width="100%" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" selectedKey="{Kostl}" items="{kostls}" editable="{= !${/form/Appst} }">
+                    <m:ComboBox class="required" width="100%" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" selectedKey="{Kostl}" items="{ path: 'kostls', templateShareable: false }" editable="{= !${/form/Appst} }">
                         <core:Item key="{Kostl}" text="{Ltext}" />
                     </m:ComboBox>
                 </template>

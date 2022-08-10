@@ -172,7 +172,7 @@ sap.ui.define(
 
           oViewModel.setProperty('/listInfo', {
             ...oViewModel.getProperty('/listInfo'),
-            ...this.TableUtils.count({ oTable, aRowData, sStatCode: 'Appst' }),
+            ...this.TableUtils.count({ oTable, aRowData }),
           });
           oViewModel.setProperty(
             '/list',

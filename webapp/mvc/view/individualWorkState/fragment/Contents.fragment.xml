@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:custom="sap.ui.tesna.control">
+    <Page showHeader="false">
+        <VBox class="contents-header">
+            <HBox justifyContent="SpaceBetween" class="breadcrumbs">
+                <custom:Breadcrumbs />
+                <HBox>
+                    <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" class="sapUiTinyMarginEnd" press=".onPagePrint" />
+                </HBox>
+            </HBox>
+        </VBox>
+        <VBox class="contents">
+            <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.AppointeeBar" type="XML" />
+            <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.YearPlan" type="XML" />
+            <HBox>
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.HolidayDays" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.HolidayType" type="XML" />
+            </HBox>
+            <HBox>
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.WorkDays" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.WeekWorkTime" type="XML" />
+            </HBox>
+            <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.UseHoliday" type="XML" />
+            <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.DailyWork" type="XML" />
+        </VBox>
+    </Page>
+</core:FragmentDefinition>

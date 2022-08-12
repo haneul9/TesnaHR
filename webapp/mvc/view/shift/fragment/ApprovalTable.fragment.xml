@@ -10,7 +10,7 @@
                     <m:Label text="{i18n>LABEL_00148}"/>
                 </multiLabels>
                 <template>
-                    <custom:DatePicker class="required" dateValue="{ path: 'Begda', type: 'sap.ui.yesco.mvc.model.type.Date' }" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin' }" editable="{= !${/form/Appst} }" change=".onChangeBeginDate" />
+                    <custom:DatePicker class="required" dateValue="{ path: 'Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin' }" editable="{= !${/form/Appst} }" change=".onChangeBeginDate" />
                 </template>
             </Column>
             <Column width="10%">
@@ -19,7 +19,7 @@
                     <m:Label text="{i18n>LABEL_00149}"/>
                 </multiLabels>
                 <template>
-                    <custom:DatePicker class="required" dateValue="{ path: 'Endda', type: 'sap.ui.yesco.mvc.model.type.Date' }" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin' }" minDate="{Apbeg}" editable="{= !${/form/Appst} }" />
+                    <custom:DatePicker class="required" dateValue="{ path: 'Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin' }" minDate="{Apbeg}" editable="{= !${/form/Appst} }" />
                 </template>
             </Column>
             <Column width="6%">

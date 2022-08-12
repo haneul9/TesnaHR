@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:core="sap.ui.core">
+    <Popover title="{/YearPlan/title}" contentMinWidth="300px" class="year-popover">
+        <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="py-6-px">
+            <Label text="{i18n>LABEL_02022}:" />
+            <Text text="{/YearPlan/detail/Awrsntx1}" />
+            <Label text="{i18n>LABEL_00261}:" visible="{= ${/YearPlan/detail/Awrsntx1} !== 'Public Holiday'}" />
+            <Text text="{/YearPlan/detail/Appsttx1}" visible="{= ${/YearPlan/detail/Awrsntx1} !== 'Public Holiday'}" />
+            <Label text="{i18n>LABEL_00154}:" visible="{= ${/YearPlan/detail/Awrsntx1} === 'Public Holiday'}" />
+            <Text text="{/YearPlan/detail/Atrsn1}" visible="{= ${/YearPlan/detail/Awrsntx1} === 'Public Holiday'}" />
+            <Label text="{i18n>LABEL_00150}:" />
+            <Text text="{/YearPlan/detail/Duration1}" />
+        </grid:CSSGrid>
+        <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="border-top py-6-px" visible="{= !!${/YearPlan/detail/Awrsntx2} }">
+            <Label text="{i18n>LABEL_02022}:" />
+            <Text text="{/YearPlan/detail/Awrsntx2}" />
+            <Label text="{i18n>LABEL_00261}:" visible="{= ${/YearPlan/detail/Awrsntx2} !== 'Public Holiday'}" />
+            <Text text="{/YearPlan/detail/Appsttx2}" visible="{= ${/YearPlan/detail/Awrsntx2} !== 'Public Holiday'}" />
+            <Label text="{i18n>LABEL_00154}:" visible="{= ${/YearPlan/detail/Awrsntx2} === 'Public Holiday'}" />
+            <Text text="{/YearPlan/detail/Atrsn2}" visible="{= ${/YearPlan/detail/Awrsntx2} === 'Public Holiday'}" />
+            <Label text="{i18n>LABEL_00150}:" />
+            <Text text="{/YearPlan/detail/Duration2}" />
+        </grid:CSSGrid>
+    </Popover>
+</core:FragmentDefinition>

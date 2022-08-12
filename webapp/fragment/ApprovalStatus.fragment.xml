@@ -25,7 +25,7 @@
                     <Label text="{i18n>LABEL_00210}"/>
                     <table:template>
                         <HBox justifyContent="Center" alignItems="Center">
-                            <Image src="{Perpic}" class="member-photo mt-4-px" mode="Background" width="34px" height="34px" />
+                            <Image src="{Perpic}" class="member-photo mt-4-px" mode="Background" width="34px" height="34px" error=".loadErrorAvatarImage" />
                             <Text text="{Ename}" width="100%" textAlign="Center" class="ml-4-px" />
                         </HBox>
                     </table:template>

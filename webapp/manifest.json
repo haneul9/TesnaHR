@@ -93,6 +93,8 @@
 			},
 			"routes": [
         { "pattern": "", "name": "tesnaHome", "target": "home" },
+
+        { "pattern": "individualWorkState/:pernr:/:year:/:month:", "name": "individualWorkState", "target": "individualWorkState" },
         
         { "pattern": "shift", "name": "shift", "target": "shift" },
         { "pattern": "m/shift", "name": "m/shift", "target": "m/shift" },
@@ -103,6 +105,8 @@
 			],
 			"targets": {
         "home": { "viewId": "home", "viewPath": "sap.ui.tesna.mvc.view.home", "viewName": "App" },
+
+        "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "Main" },
         
         "shift": { "viewId": "shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListE" },
         "m/shift": { "viewId": "m_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListM" },

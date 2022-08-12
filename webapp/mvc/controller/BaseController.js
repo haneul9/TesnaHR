@@ -353,6 +353,10 @@ sap.ui.define(
         return AppUtils.getUnknownAvatarImageURL();
       },
 
+      loadErrorAvatarImage(oEvent) {
+        oEvent.getSource().setSrc(this.getUnknownAvatarImageURL());
+      },
+
       /**
        * HELP Message Box handler
        */

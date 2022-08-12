@@ -1,0 +1,10 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <HBox class="vCardBox appointee-bar" alignItems="Center">
+        <Image src="{/appointee/Photo}" class="member-photo" mode="Background" width="63px" height="63px" error=".loadErrorAvatarImage" />
+        <Text text="{/appointee/Ename}" class="name"/>
+        <Text text="{/appointee/Zzcaltltx} / {/appointee/Zzpsgrptx}"/>
+        <Text text="{/appointee/Pbtxt} {/appointee/Btrtx}"/>
+        <Text text="{/appointee/Stext}"/>
+    </HBox>
+</core:FragmentDefinition>

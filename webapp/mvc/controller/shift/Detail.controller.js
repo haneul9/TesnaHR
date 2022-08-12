@@ -180,7 +180,7 @@ sap.ui.define(
         return Promise.all([
           Client.getEntitySet(oModel, 'TimePernrList', mPayload), //
           Client.getEntitySet(oModel, 'TimeSchkzList', _.omit(mPayload, 'Orgeh')),
-          Client.getEntitySet(oModel, 'TimeKostlList', _.omit(mPayload, 'Begda')),
+          Client.getEntitySet(oModel, 'KostlList', mPayload),
         ]);
       },
 
@@ -518,10 +518,11 @@ sap.ui.define(
           oViewModel.setProperty(`${sRowPath}/Pernr`, oContext.getProperty('Pernr'));
           oViewModel.setProperty(`${sRowPath}/Orgeh`, oContext.getProperty('Orgeh'));
           oViewModel.setProperty(`${sRowPath}/Orgtx`, oContext.getProperty('Orgtx'));
+          oViewModel.setProperty(`${sRowPath}/Zzcaltl`, oContext.getProperty('Zzcaltl'));
           oViewModel.setProperty(`${sRowPath}/Zzcaltltx`, oContext.getProperty('Zzcaltltx'));
           oViewModel.setProperty(`${sRowPath}/Schkz2`, oContext.getProperty('Schkz2'));
           oViewModel.setProperty(`${sRowPath}/Rtext2`, oContext.getProperty('Rtext2'));
-          oViewModel.setProperty(`${sRowPath}/Kostl2`, oContext.getProperty('Ltext2'));
+          oViewModel.setProperty(`${sRowPath}/Kostl2`, oContext.getProperty('Kostl2'));
           oViewModel.setProperty(`${sRowPath}/Ltext2`, oContext.getProperty('Ltext2'));
 
           oViewModel.refresh(true);
@@ -542,6 +543,7 @@ sap.ui.define(
           oViewModel.setProperty(`${sRowPath}/Pernr`, '');
           oViewModel.setProperty(`${sRowPath}/Orgeh`, '');
           oViewModel.setProperty(`${sRowPath}/Orgtx`, '');
+          oViewModel.setProperty(`${sRowPath}/Zzcaltl`, '');
           oViewModel.setProperty(`${sRowPath}/Zzcaltltx`, '');
           oViewModel.setProperty(`${sRowPath}/Schkz2`, '');
           oViewModel.setProperty(`${sRowPath}/Rtext2`, '');
@@ -551,13 +553,14 @@ sap.ui.define(
         }
 
         const aEmployees = oViewModel.getProperty(`${sRowPath}/employees`);
-        const [mEmployee] = _.filter(aEmployees, (o) => _.startsWith(o.Pernr, sInputValue));
+        const [mEmployee] = _.filter(aEmployees, (o) => _.startsWith(o.Ename, sInputValue));
 
         if (sRowPath && !_.isEmpty(mEmployee)) {
           oViewModel.setProperty(`${sRowPath}/Ename`, mEmployee.Ename);
           oViewModel.setProperty(`${sRowPath}/Pernr`, mEmployee.Pernr);
           oViewModel.setProperty(`${sRowPath}/Orgeh`, mEmployee.Orgeh);
           oViewModel.setProperty(`${sRowPath}/Orgtx`, mEmployee.Orgtx);
+          oViewModel.setProperty(`${sRowPath}/Zzcaltl`, mEmployee.Zzcaltl);
           oViewModel.setProperty(`${sRowPath}/Zzcaltltx`, mEmployee.Zzcaltltx);
           oViewModel.setProperty(`${sRowPath}/Schkz2`, mEmployee.Schkz2);
           oViewModel.setProperty(`${sRowPath}/Rtext2`, mEmployee.Rtext2);
@@ -568,6 +571,7 @@ sap.ui.define(
           oViewModel.setProperty(`${sRowPath}/Pernr`, '');
           oViewModel.setProperty(`${sRowPath}/Orgeh`, '');
           oViewModel.setProperty(`${sRowPath}/Orgtx`, '');
+          oViewModel.setProperty(`${sRowPath}/Zzcaltl`, '');
           oViewModel.setProperty(`${sRowPath}/Zzcaltltx`, '');
           oViewModel.setProperty(`${sRowPath}/Schkz2`, '');
           oViewModel.setProperty(`${sRowPath}/Rtext2`, '');

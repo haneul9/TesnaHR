@@ -1,0 +1,66 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <VBox width="50%" class="vCardBox small" busyIndicatorDelay="0" busy="{/busy/quarter}">
+        <HBox class="table-toolbar">
+            <HBox class="title">
+                <Title level="H2" text="{i18n>LABEL_02006}" />
+                <Text text="{/FullYear}" class="desc-txt" />
+            </HBox>
+        </HBox>
+        <HBox justifyContent="SpaceBetween">
+            <table:Table class="pr-20-px" rows="{/VacaTypeList1}" visibleRowCount="3" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" noData="{i18n>MSG_00001}">
+                <table:Column width="auto" sortProperty="Kotxt" filterProperty="Kotxt">
+                    <Label text="{i18n>LABEL_02007}"/>
+                    <table:template>
+                        <Text text="{Kotxt}" textAlign="Left" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Crecnt" filterProperty="Crecnt">
+                    <Label text="{i18n>LABEL_02008}"/>
+                    <table:template>
+                        <Text text="{Crecnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Usecnt" filterProperty="Usecnt">
+                    <Label text="{i18n>LABEL_02009}"/>
+                    <table:template>
+                        <Text text="{Usecnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Balcnt" filterProperty="Balcnt">
+                    <Label text="{i18n>LABEL_02010}"/>
+                    <table:template>
+                        <Text text="{Balcnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+            </table:Table>
+            <table:Table rows="{/VacaTypeList2}" visibleRowCount="3" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" noData="{i18n>MSG_00001}">
+                <table:Column width="auto" sortProperty="Kotxt" filterProperty="Kotxt">
+                    <Label text="{i18n>LABEL_02007}"/>
+                    <table:template>
+                        <Text text="{Kotxt}" textAlign="Left" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Crecnt" filterProperty="Crecnt">
+                    <Label text="{i18n>LABEL_02008}"/>
+                    <table:template>
+                        <Text text="{Crecnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Usecnt" filterProperty="Usecnt">
+                    <Label text="{i18n>LABEL_02009}"/>
+                    <table:template>
+                        <Text text="{Usecnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Balcnt" filterProperty="Balcnt">
+                    <Label text="{i18n>LABEL_02010}"/>
+                    <table:template>
+                        <Text text="{Balcnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+            </table:Table>
+        </HBox>
+    </VBox>
+</core:FragmentDefinition>

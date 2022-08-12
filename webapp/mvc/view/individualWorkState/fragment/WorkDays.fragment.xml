@@ -1,0 +1,63 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <VBox width="50%" class="vCardBox small sapUiMediumMarginEnd" busyIndicatorDelay="0" busy="{/busy/work}">
+        <HBox justifyContent="SpaceBetween" class="table-toolbar">
+            <HBox class="title">
+                <Title level="H2" text="{i18n>LABEL_02011}" />
+                <Text text="{/FullYear}" class="desc-txt" />
+            </HBox>
+            <ComboBox width="80px" items="{/WorkMonths}" selectedKey="{/WorkMonth}" change=".onChangeWorkMonth">
+                <core:Item text="{Ztext}" key="{Zcode}" />
+            </ComboBox>
+        </HBox>
+        <HBox justifyContent="SpaceBetween">
+            <table:Table class="pr-20-px" rows="{/MonthWorkList}" visibleRowCount="6" width="100%" selectionMode="None" columnHeaderHeight="38" rowHeight="37" noData="{i18n>MSG_00001}">
+                <table:Column width="auto" sortProperty="Wktxt" filterProperty="Wktxt">
+                    <Label text="{i18n>LABEL_02012}"/>
+                    <table:template>
+                        <Text text="{Wktxt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Val01" filterProperty="Val01">
+                    <Label text="{i18n>LABEL_00198}"/>
+                    <table:template>
+                        <Text text="{ path: 'Val01', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Val02" filterProperty="Val02">
+                    <Label text="{i18n>LABEL_00365}"/>
+                    <table:template>
+                        <Text text="{ path: 'Val02', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+            </table:Table>
+            <table:Table rows="{/OTWorkList}" visibleRowCount="6" width="100%" selectionMode="None" columnHeaderHeight="38" rowHeight="37" noData="{i18n>MSG_00001}">
+                <table:Column width="auto" sortProperty="Ottxt" filterProperty="Ottxt">
+                    <Label text="{i18n>LABEL_02013}"/>
+                    <table:template>
+                        <Text text="{Ottxt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Val01" filterProperty="Val01">
+                    <Label text="{i18n>LABEL_02014}"/>
+                    <table:template>
+                        <Text text="{ path: 'Val01', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Val02" filterProperty="Val02">
+                    <Label text="{i18n>LABEL_00367}"/>
+                    <table:template>
+                        <Text text="{ path: 'Val02', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="60px" sortProperty="Val03" filterProperty="Val03">
+                    <Label text="{i18n>LABEL_00366}"/>
+                    <table:template>
+                        <Text text="{ path: 'Val03', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                    </table:template>
+                </table:Column>
+            </table:Table>
+        </HBox>
+    </VBox>
+</core:FragmentDefinition>

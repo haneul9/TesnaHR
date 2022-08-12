@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:custom="sap.ui.tesna.control">
+    <VBox width="50%" class="vCardBox small" busyIndicatorDelay="0" busy="{/busy/week}">
+        <HBox justifyContent="SpaceBetween" class="table-toolbar">
+            <Title level="H2" text="{i18n>LABEL_02015}" />
+            <custom:DatePicker dateValue="{ path: '/WeekWorkDate', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="200px" change=".onChangeWeekWorkTime" />
+        </HBox>
+        <HBox alignItems="Center" class="week-work-time">
+            <core:HTML content='&lt;div id="chart-weekWork-app-dial-container"&gt;&lt;/div&gt;' />
+            <VBox alignItems="End" width="100%" class="workTime-summary-box">
+                <Label text="today"/>
+                <ObjectStatus text="{/WeekWork/Timtx}" state="Indication05" />
+                <Text text="{/WeekWork/Wktim}" />
+                <!-- <Label text="this week"> -->
+                <Label text="{/WeekWork/Wktext}">
+                    <layoutData>
+                        <FlexItemData styleClass="mt-25-px" />
+                    </layoutData>
+                </Label>
+                <ObjectStatus text="{/WeekWork/Reltm} {/WeekWork/Reltx}" state="Indication05" class="font-22-px" />
+                <Text text="{/WeekWork/Wkrul}" />
+            </VBox>
+        </HBox>
+    </VBox>
+</core:FragmentDefinition>

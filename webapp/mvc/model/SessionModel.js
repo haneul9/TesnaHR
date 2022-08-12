@@ -37,10 +37,10 @@ sap.ui.define(
 
       async read(sPernr) {
         try {
-          const oModel = this.getUIComponent().getModel(ServiceNames.COMMON);
+          const oModel = this.getUIComponent().getModel(ServiceNames.TMCOMMON);
           const mFilters = sPernr ? { Pernr: sPernr } : {}; // AppointeeModel용
 
-          const aResults = Client.getEntitySet(oModel, 'EmpLoginInfo', mFilters);
+          const aResults = Client.getEntitySet(oModel, 'TMEmpLoginInfo', mFilters);
 
           this.setData(this.curryData(await aResults), true);
 

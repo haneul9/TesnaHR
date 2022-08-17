@@ -19,19 +19,19 @@
                 <table:Column width="60px" sortProperty="Crecnt" filterProperty="Crecnt">
                     <Label text="{i18n>LABEL_02008}"/>
                     <table:template>
-                        <Text text="{Crecnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                        <Text text="{ path: 'Crecnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="60px" sortProperty="Usecnt" filterProperty="Usecnt">
                     <Label text="{i18n>LABEL_02009}"/>
                     <table:template>
-                        <Text text="{Usecnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                        <Text text="{ path: 'Usecnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="60px" sortProperty="Balcnt" filterProperty="Balcnt">
                     <Label text="{i18n>LABEL_02010}"/>
                     <table:template>
-                        <Text text="{Balcnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                        <Text text="{ path: 'Balcnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
             </table:Table>
@@ -45,19 +45,19 @@
                 <table:Column width="60px" sortProperty="Crecnt" filterProperty="Crecnt">
                     <Label text="{i18n>LABEL_02008}"/>
                     <table:template>
-                        <Text text="{Crecnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                        <Text text="{ path: 'Crecnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="60px" sortProperty="Usecnt" filterProperty="Usecnt">
                     <Label text="{i18n>LABEL_02009}"/>
                     <table:template>
-                        <Text text="{Usecnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                        <Text text="{ path: 'Usecnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="60px" sortProperty="Balcnt" filterProperty="Balcnt">
                     <Label text="{i18n>LABEL_02010}"/>
                     <table:template>
-                        <Text text="{Balcnt}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
+                        <Text text="{ path: 'Balcnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
             </table:Table>

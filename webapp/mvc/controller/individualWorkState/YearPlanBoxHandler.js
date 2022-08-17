@@ -126,22 +126,58 @@ sap.ui.define(
         if (!_.isEmpty(oScheduleData)) {
           const mDateObject = _.find(oScheduleData, { FullDate: sFormatDate });
 
-          if (!_.isEmpty(mDateObject.Cssty) && _.size(mDateObject.Cssty) === 3) {
-            const [sColor, sDuration, sStyle] = _.words(mDateObject.Colty);
-
-            sClassNames = `type${sColor}${sDuration === '1' ? '' : sDuration}`;
-            if (sStyle === 'P') sStripes = 'Stripes';
-          }
-
           if (mDateObject.Holyn === 'X') {
             sHoliday = 'Holiday';
-            sClassNames = 'Type15';
+            sClassNames = 'type15';
+          }
+
+          if (!_.isEmpty(mDateObject.Cssty) && _.size(mDateObject.Cssty) === 3) {
+            const [sColor, sDuration, sStyle] = _.words(mDateObject.Cssty);
+
+            sClassNames = `type${sColor}${sDuration}`;
+            if (sStyle === 'P') sStripes = 'Stripes';
           }
 
           sDayOrNight = mDateObject.Dayngt;
         }
 
         return this.getBoxObject({ day: sFormatDate, label: String(iDay), dayOrNight: sDayOrNight, holiday: sHoliday, classNames: sClassNames, borderNames: sBorderNames, stripes: sStripes });
+      },
+
+      downloadExcel() {
+        const oController = this.oController;
+        const oViewModel = oController.getViewModel();
+        const aCustomColumns = _.map(this.getWeekHeader(), (o, i) => ({ type: 'String', label: o.label, property: `column${i}` }));
+        const sFileName = `${oController.getBundleText('LABEL_02001')}-${oController.getAppointeeProperty('Ename')}-${oViewModel.getProperty('/year')}`;
+        let aPlansData = _.drop(oViewModel.getProperty('/plans'), 38);
+        let aTableData = [];
+
+        const mWorkType = {
+          '': '',
+          T: oController.getBundleText('LABEL_00370'), // 통상
+          F: 'OFF',
+          D: oController.getBundleText('LABEL_00298'), // 주간
+          N: oController.getBundleText('LABEL_00299'), // 야간
+        };
+
+        while (aPlansData.length > 0) {
+          aTableData = [
+            ...aTableData,
+            _.chain(aPlansData)
+              .take(38)
+              .map((o, i) => ({ [`column${i}`]: i === 0 ? o.label : `${o.label}-${mWorkType[o.dayOrNight]}` }))
+              .reduce((acc, cur) => ({ ...acc, ...cur }), {})
+              .value(),
+          ];
+
+          aPlansData = _.drop(aPlansData, 38);
+        }
+
+        this.oController.TableUtils.export({
+          sFileName,
+          aCustomColumns,
+          aTableData,
+        });
       },
 
       async onPressPrevYear() {

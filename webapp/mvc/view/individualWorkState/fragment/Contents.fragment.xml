@@ -6,13 +6,14 @@
             <HBox justifyContent="SpaceBetween" class="breadcrumbs">
                 <custom:Breadcrumbs />
                 <HBox>
+                    <Button text="{i18n>LABEL_00146}" press=".onNavBack" visible="{= !!${/previousHash} }" />
                     <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" class="sapUiTinyMarginEnd" press=".onPagePrint" />
                 </HBox>
             </HBox>
         </VBox>
         <VBox class="contents">
             <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.AppointeeBar" type="XML" />
-            <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.YearPlan" type="XML" />
+            <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.PlanBoxes" type="XML" />
             <HBox>
                 <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.HolidayDays" type="XML" />
                 <core:Fragment fragmentName="sap.ui.tesna.mvc.view.individualWorkState.fragment.HolidayType" type="XML" />

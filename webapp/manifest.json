@@ -44,7 +44,7 @@
       "async": true
     },
     "dependencies": {
-      "minUI5Version": "1.71.28",
+      "minUI5Version": "1.71.33",
       "libs": {
         "sap.ui.core": {},
         "sap.m": {},
@@ -101,7 +101,11 @@
         { "pattern": "h/shift", "name": "h/shift", "target": "h/shift" },
         { "pattern": "shift/{appno}/{werks}/{orgeh}/:flag:", "name": "shift-detail", "target": "shiftDetail" },
         { "pattern": "m/shift/{appno}/{werks}/{orgeh}/:flag:", "name": "m/shift-detail", "target": "shiftDetail" },
-        { "pattern": "h/shift/{appno}/{werks}/{orgeh}/:flag:", "name": "h/shift-detail", "target": "shiftDetail" }
+        { "pattern": "h/shift/{appno}/{werks}/{orgeh}/:flag:", "name": "h/shift-detail", "target": "shiftDetail" },
+
+        { "pattern": "teamCalendar", "name": "teamCalendar", "target": "teamCalendar" },
+        { "pattern": "m/teamCalendar", "name": "m/teamCalendar", "target": "m/teamCalendar" },
+        { "pattern": "h/teamCalendar", "name": "h/teamCalendar", "target": "h/teamCalendar" }
 			],
 			"targets": {
         "home": { "viewId": "home", "viewPath": "sap.ui.tesna.mvc.view.home", "viewName": "App" },
@@ -112,6 +116,10 @@
         "m/shift": { "viewId": "m_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListM" },
         "h/shift": { "viewId": "h_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListH" },
         "shiftDetail": { "viewId": "shiftDetail", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "Detail" },
+
+        "teamCalendar": { "viewId": "teamCalendar", "viewPath": "sap.ui.tesna.mvc.view.teamCalendar", "viewName": "MainE" },
+        "m/teamCalendar": { "viewId": "m_teamCalendar", "viewPath": "sap.ui.tesna.mvc.view.teamCalendar", "viewName": "MainM" },
+        "h/teamCalendar": { "viewId": "h_teamCalendar", "viewPath": "sap.ui.tesna.mvc.view.teamCalendar", "viewName": "MainH" },
 				
         "notFound": { "viewId": "notFound", "viewName": "NotFound", "transition": "show" }
 			}

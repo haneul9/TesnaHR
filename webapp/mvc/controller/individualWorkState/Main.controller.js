@@ -2,6 +2,7 @@
 sap.ui.define(
   [
     // prettier 방지용 주석
+    'sap/ui/core/routing/History',
     'sap/ui/tesna/common/AppUtils',
     'sap/ui/tesna/common/odata/Client',
     'sap/ui/tesna/common/odata/ServiceNames',
@@ -10,6 +11,7 @@ sap.ui.define(
   ],
   (
     // prettier 방지용 주석
+    History,
     AppUtils,
     Client,
     ServiceNames,
@@ -32,10 +34,15 @@ sap.ui.define(
         return [{ name: this.getBundleText('LABEL_01001') }]; // 기술직근태
       },
 
+      getPreviousRouteName() {
+        return this.getViewModel().getProperty('/previousHash');
+      },
+
       initializeModel() {
         return {
           FullYear: '',
           pernr: '',
+          previousHash: '',
           year: moment().get('year'),
           month: moment().get('month'),
           menid: this.getCurrentMenuId(),
@@ -104,6 +111,10 @@ sap.ui.define(
         this.setContentsBusy(true);
 
         try {
+          const sPreviousHash = History.getInstance().getPreviousHash();
+
+          if (!_.isEmpty(sPreviousHash)) oViewModel.setProperty('/previousHash', sPreviousHash);
+
           const sPernr = oParameter.pernr ?? this.getAppointeeProperty('Pernr');
           const sYear = oParameter.year ?? moment().get('year');
           const sMonth = oParameter.month ?? moment().get('month');
@@ -404,6 +415,7 @@ sap.ui.define(
           oViewModel.setProperty('/appointee', AppUtils.getAppComponent().getAppointeeModel().getData());
         } else {
           const [mAppointee] = await Client.getEntitySet(this.getModel(ServiceNames.COMMON), 'EmpSearchResult', {
+            Actda: moment().hours(9).toDate(),
             Ename: sPernr,
           });
 
@@ -636,13 +648,15 @@ sap.ui.define(
 
         try {
           const oModel = this.getModel(ServiceNames.PERSONALTIME);
+          const sColty = oViewModel.getProperty('/WorkTypeUse') || 'A';
           const aYearWorks = await Client.getEntitySet(oModel, 'TimeUsageGraph', {
             Werks: this.getAppointeeProperty('Persa'),
             Pernr: oViewModel.getProperty('/pernr'),
             Tmyea: sYear,
-            Colty: oViewModel.getProperty('/WorkTypeUse'),
+            Colty: sColty,
           });
 
+          oViewModel.setProperty('/WorkTypeUse', sColty);
           this.buildCombiChart(aYearWorks);
 
           this.setContentsBusy(false, 'byYear');
@@ -739,6 +753,10 @@ sap.ui.define(
 
       onClickDay(oEvent) {
         this.YearPlanBoxHandler.onClickDay(oEvent);
+      },
+
+      onPressExcelDownload() {
+        this.YearPlanBoxHandler.downloadExcel();
       },
     });
   }

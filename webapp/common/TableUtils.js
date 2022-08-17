@@ -24,45 +24,25 @@ sap.ui.define(
      */
     const STATE_IN_PLAN = 3;
     /**
-     * @constant {number} 미신청
+     * @constant {number} 작성중
      */
-    const STATE_IN_PROGRESS0 = 15;
+    const STATE_IN_PROGRESS0 = 10;
     /**
-     * @constant {number} 임시저장
-     */
-    const STATE_IN_PROGRESS1 = 10;
-    /**
-     * @constant {number} 결재취소
-     */
-    const STATE_IN_PROGRESS2 = 90;
-    /**
-     * @constant {number} 신청완료
+     * @constant {number} 기안
      */
     const STATE_APPLY1 = 20;
     /**
-     * @constant {number} 담당자 접수
+     * @constant {number} 승인
      */
-    const STATE_APPLY2 = 30;
+    const STATE_APPROVE = 30;
     /**
-     * @constant {number} 결재 기안
+     * @constant {number} 반려
      */
-    const STATE_APPLY3 = 50;
+    const STATE_REJECT1 = 40;
     /**
-     * @constant {number} 담당자 승인
+     * @constant {number} 완료
      */
-    const STATE_APPROVE = 40;
-    /**
-     * @constant {number} 담당자 반려
-     */
-    const STATE_REJECT1 = 45;
-    /**
-     * @constant {number} 결재 반려
-     */
-    const STATE_REJECT2 = 65;
-    /**
-     * @constant {number} 결재 승인
-     */
-    const STATE_COMPLETE = 60;
+    const STATE_COMPLETE = 50;
     /**
      * @constant {string}} 의료비 상세내역 승인
      */
@@ -96,14 +76,9 @@ sap.ui.define(
           .defaults({
             ['']: 0,
             [STATE_IN_PROGRESS0]: 0,
-            [STATE_IN_PROGRESS1]: 0,
-            [STATE_IN_PROGRESS2]: 0,
             [STATE_APPLY1]: 0,
-            [STATE_APPLY2]: 0,
-            [STATE_APPLY3]: 0,
             [STATE_APPROVE]: 0,
             [STATE_REJECT1]: 0,
-            [STATE_REJECT2]: 0,
             [STATE_COMPLETE]: 0,
           })
           .value();
@@ -111,10 +86,10 @@ sap.ui.define(
         return {
           rowCount: Math.min(iVisibleRowCountLimit, iDataLength),
           totalCount: aRowData.length,
-          progressCount: oOccurCount[''] + oOccurCount[STATE_IN_PROGRESS0] + oOccurCount[STATE_IN_PROGRESS1] + oOccurCount[STATE_IN_PROGRESS2],
-          applyCount: oOccurCount[STATE_APPLY1] + oOccurCount[STATE_APPLY2] + oOccurCount[STATE_APPLY3],
+          progressCount: oOccurCount[''] + oOccurCount[STATE_IN_PROGRESS0],
+          applyCount: oOccurCount[STATE_APPLY1],
           approveCount: oOccurCount[STATE_APPROVE],
-          rejectCount: oOccurCount[STATE_REJECT1] + oOccurCount[STATE_REJECT2],
+          rejectCount: oOccurCount[STATE_REJECT1],
           completeCount: oOccurCount[STATE_COMPLETE],
         };
       },
@@ -136,7 +111,7 @@ sap.ui.define(
       },
 
       export({ oTable, sFileName, aTableData = [], aCustomColumns = [], sStatCode = 'ZappStatAl', sStatTxt = 'ZappStxtAl' }) {
-        if (!oTable) return;
+        if (!oTable && !aCustomColumns) return;
 
         const aExportTableRowData = _.isEmpty(aTableData) ? this._getTableRowData(oTable) : aTableData;
 
@@ -317,28 +292,18 @@ sap.ui.define(
 
         switch (vValue) {
           case STATE_IN_PROGRESS0:
-          case STATE_IN_PROGRESS1:
-          case STATE_IN_PROGRESS2:
             // 작성중
             return sap.ui.core.IndicationColor.None;
           case STATE_APPLY1:
-          case STATE_APPLY2:
-          case STATE_APPLY3:
-          case STATE_IN_PROGRESS3:
             // 신청
             return sap.ui.core.IndicationColor.Indication03;
           case STATE_APPROVE:
-          case MED_STATE_COMPLETE:
-          case STATE_IN_PLAN:
             // 승인
             return sap.ui.core.IndicationColor.Indication04;
           case STATE_REJECT1:
-          case STATE_REJECT2:
-          case MED_STATE_REJECT:
             // 반려
             return sap.ui.core.IndicationColor.Indication02;
           case STATE_COMPLETE:
-          case STATE_COMPLETE2:
             // 완료
             return sap.ui.core.IndicationColor.Indication05;
           default:

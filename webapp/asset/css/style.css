@@ -797,12 +797,18 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .table-actions.sapMHBox .sapMFlexItem + .sapMFlexItem {margin-left:5px}
 .table-actions.sapMVBox .sapMFlexItem + .sapMFlexItem {margin-top:5px}
 
-.sapUiTableRowHighlight.sapUiTableRowHighlightNone {background-color:var(--BorderColorReadonly) !important}
+/* .sapUiTableRowHighlight.sapUiTableRowHighlightNone {background-color:var(--BorderColorReadonly) !important}
 .sapUiTableRowHighlight.sapUiTableRowHighlightIndication01 {background-color:var(--BorderColorReadonly) !important}
 .sapUiTableRowHighlight.sapUiTableRowHighlightIndication02 {background-color:var(--BorderColorError) !important}
 .sapUiTableRowHighlight.sapUiTableRowHighlightIndication03 {background-color:var(--BorderColorWarning) !important}
 .sapUiTableRowHighlight.sapUiTableRowHighlightIndication04 {background-color:var(--BorderColorSuccess) !important}
-.sapUiTableRowHighlight.sapUiTableRowHighlightIndication05 {background-color:var(--BorderColorFocus) !important}
+.sapUiTableRowHighlight.sapUiTableRowHighlightIndication05 {background-color:var(--BorderColorFocus) !important} */
+.sapUiTableRowHighlight.sapUiTableRowHighlightNone {background-color:var(--BorderColorReadonly) !important}
+.sapUiTableRowHighlight.sapUiTableRowHighlightIndication01 {background-color:var(--BorderColorReadonly) !important}
+.sapUiTableRowHighlight.sapUiTableRowHighlightIndication02 {background-color: #fd5f58 !important}
+.sapUiTableRowHighlight.sapUiTableRowHighlightIndication03 {background-color: #ffc02e !important}
+.sapUiTableRowHighlight.sapUiTableRowHighlightIndication04 {background-color: #27c840 !important}
+.sapUiTableRowHighlight.sapUiTableRowHighlightIndication05 {background-color: #007bff !important}
 
 .sapMObjStatusIcon {padding-right:0.3rem}
 .sapMObjStatusIndication01 .sapMObjStatusText, .sapMObjStatusIndication01 .sapMObjStatusIcon {color:#999 !important}
@@ -854,52 +860,63 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .sapUiLayoutCSSGrid .sapMFlexBox[data-style="Disable"] {background-color:#eaf2ff}
 .sapUiLayoutCSSGrid .sapMFlexBox[data-style="Weekend"] {background-color:#979696}
 
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="A"]::before, .year-plan-grid .sapMFlexBox[data-style="typeA"] { background-color: #7bb4eb !important; }
+.year-plan-grid .sapMFlexBox[data-style^="type"] .sapMText { cursor: pointer; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="A"]::before, .year-plan-grid .sapMFlexBox[data-style="typeA1"] { background-color: #7bb4eb !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeA2"] { background: linear-gradient(-90deg, #fff 50%, #7bb4eb 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeA3"] { background: linear-gradient(-90deg, #7bb4eb 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeA4"] { background: linear-gradient(-90deg, #FFF 25%, #7bb4eb 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="B"]::before, .year-plan-grid .sapMFlexBox[data-style="typeB"] { background-color: #81daea !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="B"]::before, .year-plan-grid .sapMFlexBox[data-style="typeB1"] { background-color: #81daea !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeB2"] { background: linear-gradient(-90deg, #fff 50%, #81daea 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeB3"] { background: linear-gradient(-90deg, #81daea 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeB4"] { background: linear-gradient(-90deg, #FFF 25%, #81daea 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="C"]::before, .year-plan-grid .sapMFlexBox[data-style="typeC"] { background-color: #a9f482 !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="C"]::before, .year-plan-grid .sapMFlexBox[data-style="typeC1"] { background-color: #a9f482 !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeC2"] { background: linear-gradient(-90deg, #fff 50%, #a9f482 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeC3"] { background: linear-gradient(-90deg, #a9f482 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeC4"] { background: linear-gradient(-90deg, #FFF 25%, #a9f482 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="D"]::before, .year-plan-grid .sapMFlexBox[data-style="typeD"] { background-color: #ffe479 !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="D"]::before, .year-plan-grid .sapMFlexBox[data-style="typeD1"] { background-color: #ffe479 !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeD2"] { background: linear-gradient(-90deg, #fff 50%, #ffe479 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeD3"] { background: linear-gradient(-90deg, #ffe479 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeD4"] { background: linear-gradient(-90deg, #FFF 25%, #ffe479 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="E"]::before, .year-plan-grid .sapMFlexBox[data-style="typeE"] { background-color: #ffb7af !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="E"]::before, .year-plan-grid .sapMFlexBox[data-style="typeE1"] { background-color: #ffb7af !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeE2"] { background: linear-gradient(-90deg, #fff 50%, #ffb7af 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeE3"] { background: linear-gradient(-90deg, #ffb7af 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeE4"] { background: linear-gradient(-90deg, #FFF 25%, #ffb7af 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="F"]::before, .year-plan-grid .sapMFlexBox[data-style="typeF"] { background-color: #ffac4b !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="F"]::before, .year-plan-grid .sapMFlexBox[data-style="typeF1"] { background-color: #ffac4b !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeF2"] { background: linear-gradient(-90deg, #fff 50%, #ffac4b 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeF3"] { background: linear-gradient(-90deg, #ffac4b 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeF4"] { background: linear-gradient(-90deg, #FFF 25%, #ffac4b 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="G"]::before, .year-plan-grid .sapMFlexBox[data-style="typeG"] { background-color: #d484f2 !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="G"]::before, .year-plan-grid .sapMFlexBox[data-style="typeG1"] { background-color: #d484f2 !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeG2"] { background: linear-gradient(-90deg, #fff 50%, #d484f2 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeG3"] { background: linear-gradient(-90deg, #d484f2 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeG4"] { background: linear-gradient(-90deg, #FFF 25%, #d484f2 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="H"]::before, .year-plan-grid .sapMFlexBox[data-style="typeH"] { background-color: #a684f2 !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="H"]::before, .year-plan-grid .sapMFlexBox[data-style="typeH1"] { background-color: #a684f2 !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeH2"] { background: linear-gradient(-90deg, #fff 50%, #a684f2 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeH3"] { background: linear-gradient(-90deg, #a684f2 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeH4"] { background: linear-gradient(-90deg, #FFF 25%, #a684f2 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="I"]::before, .year-plan-grid .sapMFlexBox[data-style="typeI"] { background-color: #9090ff !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="I"]::before, .year-plan-grid .sapMFlexBox[data-style="typeI1"] { background-color: #9090ff !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeI2"] { background: linear-gradient(-90deg, #fff 50%, #9090ff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeI3"] { background: linear-gradient(-90deg, #9090ff 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeI4"] { background: linear-gradient(-90deg, #FFF 25%, #9090ff 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="J"]::before, .year-plan-grid .sapMFlexBox[data-style="typeJ"] { background-color: #acb3ff !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="J"]::before, .year-plan-grid .sapMFlexBox[data-style="typeJ1"] { background-color: #acb3ff !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeJ2"] { background: linear-gradient(-90deg, #fff 50%, #acb3ff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeJ3"] { background: linear-gradient(-90deg, #acb3ff 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeJ4"] { background: linear-gradient(-90deg, #FFF 25%, #acb3ff 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="O"]::before, .year-plan-grid .sapMFlexBox[data-style="typeO"] { background-color: #FFF68F !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="O"]::before, .year-plan-grid .sapMFlexBox[data-style="typeO1"] { background-color: #FFF68F !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO2"] { background: linear-gradient(-90deg, #fff 50%, #FFF68F 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO3"] { background: linear-gradient(-90deg, #FFF68F 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO4"] { background: linear-gradient(-90deg, #FFF 25%, #FFF68F 25% 75%, #fff 75%) !important; }
-.year-plan-grid .sapMFlexBox[data-shift="주"] > .sapMFlexItem::after { content: 'D'; color: #fff; text-shadow: -1px 0px #EF810E, 0px 1px #EF810E, 1px 0px #EF810E, 0px -1px #EF810E; position: absolute; top: 4px; right: 4px; font-size: 8px; }
-.year-plan-grid .sapMFlexBox[data-shift="야"] > .sapMFlexItem::after { content: 'N'; color: #fff; text-shadow: -1px 0px #053752, 0px 1px #053752, 1px 0px #053752, 0px -1px #053752; position: absolute; top: 4px; right: 4px; font-size: 8px; }
+.year-plan-grid .sapMFlexBox[data-gubun="D"] .sapMText { color: #053752; }
+.year-plan-grid .sapMFlexBox[data-gubun="N"] .sapMText { color: #0e9718; }
+.year-plan-grid .sapMFlexBox[data-gubun="T"] .sapMText { color: #053752; }
+.year-plan-grid .sapMFlexBox[data-gubun="F"] .sapMText { color: #fc564f; }
+.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem::after { content: '주간'; color: #053752; position: absolute; width: 100%; bottom: 8px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem::after { content: '야간'; color: #0e9718; position: absolute; width: 100%; bottom: 8px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem::after { content: '통상'; color: #053752; position: absolute; width: 100%; bottom: 8px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem::after { content: 'OFF'; color: #fc564f ; position: absolute; width: 100%; bottom: 8px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem,
+.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem,
+.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem,
+.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem { padding-bottom: 8px; }
 
 .sapUiLayoutCSSGrid .sapMFlexBox[data-style="Type01"], .year-plan.status-wrap .sapMFlexItem .sapMText[data-style="Type01"]::before, .year-plan.status-wrap .sapMFlexItem .sapMText.type01::before, .sapMFlexBox.type01, .sapMFlexBox[data-style="Type01"], [class*=plan-grid] .type01 * {background-color:#0e60c7 !important; color:#fff !important}/* 연차 */
 [data-style="Type01"] .sapMText, [data-style="Type01"] .sapMLabel {background-color:transparent !important; color:#fff !important}/* 연차 */
@@ -1713,6 +1730,7 @@ div[data-sap-ui=container-ehr---employee--sideBody].sapUiSmallMarginEnd {margin-
 .year-plan-head .icon-button .sapMBtnInner, .year-plan-head .icon-button:hover .sapMBtnInner, .year-plan-head .icon-button:active .sapMBtnInner.sapMBtnActive {padding:0 10px; border:0; background:transparent !important; border-color:transparent !important; align-self:center}
 .year-plan-head .sapMBtnIcon {margin-left:0; margin-right:0px}
 .year-plan-head h2.sapMTitle {justify-content:center}
+.year-plan-head-button.button-group {position: absolute; right: 1%;}
 .year-plan-grid {background-color:#e5e5e5; border:1px solid #e5e5e5}
 .year-plan-grid .sapMFlexBox, .year-plan-grid .sapMText {height:40px; display:flex; justify-content:center; align-items:center; font-size:14px; font-weight:700; cursor:default}
 .year-plan-grid .sapMFlexBox[data-align="start"] {justify-content: flex-start; padding-left: 8px;}

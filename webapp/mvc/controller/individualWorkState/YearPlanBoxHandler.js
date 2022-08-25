@@ -128,7 +128,7 @@ sap.ui.define(
 
           if (mDateObject.Holyn === 'X') {
             sHoliday = 'Holiday';
-            sClassNames = 'type15';
+            sClassNames = 'Holiday';
           }
 
           if (!_.isEmpty(mDateObject.Cssty) && _.size(mDateObject.Cssty) === 3) {

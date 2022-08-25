@@ -211,7 +211,6 @@ sap.ui.define(
           appno: sAppno,
           appty: this.getApprovalType(),
           maxFileCount: 10,
-          fileTypes: ['ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpeg', 'txt', 'bmp', 'gif', 'png', 'pdf'],
         });
       },
 

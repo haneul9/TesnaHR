@@ -1,0 +1,69 @@
+<mvc:View controllerName="sap.ui.tesna.mvc.controller.shiftChange.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:custom="sap.ui.tesna.control">
+    <Page showHeader="false">
+        <VBox class="contents-header">
+            <HBox justifyContent="SpaceBetween" class="breadcrumbs">
+                <custom:Breadcrumbs />
+                <HBox class="button-group">
+                    <Button type="Emphasized" text="{i18n>LABEL_00121}" press=".onPressApproval" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'B' &amp;&amp; (!${/form/Appst} || ${/form/Appst} === '10') }" enabled="{= !!${/form/list}.length }" />
+                    <Button type="Emphasized" text="{i18n>LABEL_00118}" press=".onPressCancel" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'B' &amp;&amp; (${/form/Appst} === '10' || ${/form/Appst} === '20') }" />
+                    <Button type="Emphasized" text="{i18n>LABEL_00123}" press=".onPressApprove" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'WE' }" />
+                    <Button type="Reject" text="{i18n>LABEL_00124}" press=".onPressReject" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'WE' }" />
+                    <Button text="{i18n>LABEL_00146}" press=".onNavBack" visible="{= ${/displayMode} === 'B' }" />
+                    <Button text="{i18n>LABEL_00146}" press=".onHistoryBack" visible="{= ${/displayMode} !== 'B' }" />
+                    <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" press=".onPagePrint" />
+                    <!-- <Button icon="sap-icon://sys-help" text="{i18n>LABEL_00132}" press=".onPressHelp" /> -->
+                </HBox>
+            </HBox>
+        </VBox>
+        <VBox class="contents" busyIndicatorDelay="0" busy="{/contentsBusy/all}">
+            <VBox class="vCardBox" busyIndicatorDelay="0" busy="{/contentsBusy/table}">
+                <HBox alignItems="Center" class="table-toolbar">
+                    <HBox class="title">
+                        <Title level="H2" text="{i18n>LABEL_00373}" />
+                    </HBox>
+                </HBox>
+                <grid:CSSGrid gridTemplateColumns="1fr 7fr" gridGap="1px 0" class="form-grid">
+                    <Label text="{i18n>LABEL_00224}" />
+                    <VBox>
+                        <Text text="{/form/Orgtx}" />
+                    </VBox>
+                    <Label text="{i18n>LABEL_00374}" />
+                    <VBox>
+                        <DatePicker width="250px" displayFormat="yyyy.MM" valueFormat="yyyyMM" value="{/form/Tyymm}" editable="{= !${/form/Appst} || ${/form/Appst} === '10' }" change=".onChangeTyymm" />
+                    </VBox>
+                    <Label text="{i18n>LABEL_00375}"/>
+                    <VBox>
+                        <Text text="{/form/TmDateTxt}" visible="{= !!${/form/TmDateTxt} }" />
+                    </VBox>
+                </grid:CSSGrid>
+            </VBox>
+            <VBox class="vCardBox" busyIndicatorDelay="0" busy="{/contentsBusy/table}">
+                <HBox justifyContent="SpaceBetween" class="table-toolbar">
+                    <HBox alignItems="Center" class="title">
+                        <Title level="H2" text="{i18n>LABEL_00129}" />
+                    </HBox>
+                    <HBox class="table-actions">
+                        <Button icon="sap-icon://add" text="{i18n>LABEL_00107}" press=".onPressAddBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') &amp;&amp; !!${/form/Tmdat} }" />
+                        <Button icon="sap-icon://less" text="{i18n>LABEL_00110}" press=".onPressDelBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') &amp;&amp; !!${/form/Tmdat} }" />
+                    </HBox>
+                </HBox>
+                <VBox>
+                    <core:Fragment fragmentName="sap.ui.tesna.mvc.view.shiftChange.fragment.ApprovalTable" type="XML" />
+                </VBox>
+            </VBox>
+            <VBox class="vCardBox">
+                <HBox alignItems="Center" class="table-toolbar">
+                    <Title text="{i18n>LABEL_00358}" level="H2" />
+                </HBox>
+                <TextArea width="100%" rows="5" growing="true" value="{/form/Aprsn}" maxLength="{/fieldLimit/Aprsn}" editable="{= !${/form/Appst} || ${/form/Appst} === '10' }" />
+            </VBox>
+            <core:Fragment fragmentName="sap.ui.tesna.fragment.FileAttachmentBox" type="XML" />
+            <core:Fragment fragmentName="sap.ui.tesna.fragment.ApprovalStatus" type="XML" />
+        </VBox>
+    </Page>
+</mvc:View>

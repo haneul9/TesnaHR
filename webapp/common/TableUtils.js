@@ -183,9 +183,9 @@ sap.ui.define(
       },
 
       _getPropertyPath(oColumn, sStatCode, sStatTxt) {
-        if (!oColumn || !oColumn.getTemplate()) return '';
+        if (!oColumn || !oColumn.getTemplate() || !oColumn.getVisible()) return '';
 
-        const sPropertyPath = _.chain(oColumn.getTemplate().mBindingInfos).values().head().get(['parts', 0, 'path'], '').value();
+        const sPropertyPath = _.chain(oColumn.getTemplate().mBindingInfos).omit('items').values().head().get(['parts', 0, 'path'], '').value();
 
         return _.isEqual(sPropertyPath, sStatCode) ? sStatTxt : sPropertyPath;
       },

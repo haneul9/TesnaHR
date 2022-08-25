@@ -1,0 +1,433 @@
+<core:FragmentDefinition xmlns="sap.ui.table"
+    xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core">
+    <m:Dialog id="registDialog" showHeader="false" contentWidth="1600px" contentHeight="560px" draggable="true">
+        <m:content>
+            <m:VBox class="dialog-content-table" visible="{= !${/contentsBusy/dialog} }">
+                <Table id="registDialogTable" class="calendar-table" width="100%" fixedColumnCount="4" columnHeaderHeight="35" rowHeight="34" rows="{/dialog/list}" visibleRowCount="{/dialog/rowCount}" noData="{i18n>MSG_00001}">
+                    <extension>
+                        <m:HBox class="header-wrap" justifyContent="SpaceBetween">
+                            <m:HBox class="header" alignItems="Center">
+                                <m:Title level="H3" text="{i18n>LABEL_00376}" class="sapUiSmallMarginEnd" />
+                                <m:Text class="desc-txt" text="{i18n>MSG_04002}" />
+                            </m:HBox>
+                            <m:HBox>
+                                <m:Button class="sapUiTinyMarginEnd" icon="sap-icon://download" text="Download" press=".onPressDialogExcelDownload" />
+                                <u:FileUploader icon="sap-icon://upload" buttonText="Upload" buttonOnly="true" change=".onPressDialogExcelUpload" />
+                            </m:HBox>
+                        </m:HBox>
+                    </extension>
+                    <columns>
+                        <Column width="100px">
+                            <m:Label text="{i18n>LABEL_00209}"/>
+                            <template>
+                                <m:Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
+                            </template>
+                        </Column>
+                        <Column width="100px">
+                            <m:Label text="{i18n>LABEL_00210}" />
+                            <template>
+                                <m:Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                            </template>
+                        </Column>
+                        <Column width="100px">
+                            <m:Label text="{i18n>LABEL_00371}" />
+                            <template>
+                                <m:Text text="{Zzcaltltx}" width="100%" textAlign="Center" wrapping="false" />
+                            </template>
+                        </Column>
+                        <Column width="160px">
+                            <m:Label text="{i18n>LABEL_01004}" />
+                            <template>
+                                <m:Text text="{Ltext}" width="100%" wrapping="false" />
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt1}">
+                            <m:Label text="1" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt01}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day1}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt01}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt2}">
+                            <m:Label text="2" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt02}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day2}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt02}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt3}">
+                            <m:Label text="3" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt03}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day3}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt03}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt4}">
+                            <m:Label text="4" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt04}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day4}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt04}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt5}">
+                            <m:Label text="5" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt05}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day5}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt05}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt6}">
+                            <m:Label text="6" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt06}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day6}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt06}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt7}">
+                            <m:Label text="7" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt07}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day7}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt07}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt8}">
+                            <m:Label text="8" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt08}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day8}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt08}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt9}">
+                            <m:Label text="9" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt09}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day9}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt09}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt10}">
+                            <m:Label text="10" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt10}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day10}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt10}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt11}">
+                            <m:Label text="11" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt11}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day11}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt11}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt12}">
+                            <m:Label text="12" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt12}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day12}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt12}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt13}">
+                            <m:Label text="13" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt13}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day13}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt13}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt14}">
+                            <m:Label text="14" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt14}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day14}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt14}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt15}">
+                            <m:Label text="15" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt15}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day15}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt15}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt16}">
+                            <m:Label text="16" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt16}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day16}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt16}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt17}">
+                            <m:Label text="17" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt17}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day17}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt17}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt18}">
+                            <m:Label text="18" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt18}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day18}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt18}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt19}">
+                            <m:Label text="19" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt19}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day19}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt19}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt20}">
+                            <m:Label text="20" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt20}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day20}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt20}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt21}">
+                            <m:Label text="21" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt21}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day21}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt21}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt22}">
+                            <m:Label text="22" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt22}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day22}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt22}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt23}">
+                            <m:Label text="23" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt23}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day23}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt23}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt24}">
+                            <m:Label text="24" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt24}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day24}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt24}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt25}">
+                            <m:Label text="25" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt25}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day25}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt25}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt26}">
+                            <m:Label text="26" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt26}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day26}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt26}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt27}">
+                            <customData>
+                                <core:CustomData key="week" value="X" writeToDom="true" />
+                            </customData>
+                            <m:Label text="27" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt27}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day27}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt27}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt28}">
+                            <customData>
+                                <core:CustomData key="week" value="X" writeToDom="true" />
+                            </customData>
+                            <m:Label text="28" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt28}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day28}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt28}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt29}">
+                            <m:Label text="29" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt29}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day29}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt29}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt30}">
+                            <m:Label text="30" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt30}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day30}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt30}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                        <Column width="80px" visible="{/form/visibleColumns/Dayngt31}">
+                            <m:Label text="31" />
+                            <template>
+                                <m:ComboBox class="small-table-input" items="{ path: '/entry/Wtype', templateShareable: false }" selectedKey="{Dayngt31}" width="100%" change=".onChangeDayngt">
+                                    <m:customData>
+                                        <core:CustomData key="week" value="{/form/weekends/Day31}" writeToDom="true" />
+                                        <core:CustomData key="work" value="{Dayngt31}" writeToDom="true" />
+                                    </m:customData>
+                                    <core:Item key="{Zcode}" text="{Ztext}" />
+                                </m:ComboBox>
+                            </template>
+                        </Column>
+                    </columns>
+                </Table>
+            </m:VBox>
+        </m:content>
+        <m:buttons>
+            <m:Button type="Emphasized" text="{i18n>LABEL_00103}" press=".onPressSaveDialog" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}" />
+            <m:Button text="{i18n>LABEL_00115}" press=".onDialogClose" class="cancel" />
+        </m:buttons>
+    </m:Dialog>
+</core:FragmentDefinition>

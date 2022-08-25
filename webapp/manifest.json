@@ -103,6 +103,13 @@
         { "pattern": "m/shift/{appno}/{werks}/{orgeh}/:flag:", "name": "m/shift-detail", "target": "shiftDetail" },
         { "pattern": "h/shift/{appno}/{werks}/{orgeh}/:flag:", "name": "h/shift-detail", "target": "shiftDetail" },
 
+        { "pattern": "shiftChange", "name": "shiftChange", "target": "shiftChange" },
+        { "pattern": "m/shiftChange", "name": "m/shiftChange", "target": "m/shiftChange" },
+        { "pattern": "h/shiftChange", "name": "h/shiftChange", "target": "h/shiftChange" },
+        { "pattern": "shiftChange/{appno}/{werks}/{orgeh}/:flag:", "name": "shiftChange-detail", "target": "shiftChangeDetail" },
+        { "pattern": "m/shiftChange/{appno}/{werks}/{orgeh}/:flag:", "name": "m/shiftChange-detail", "target": "shiftChangeDetail" },
+        { "pattern": "h/shiftChange/{appno}/{werks}/{orgeh}/:flag:", "name": "h/shiftChange-detail", "target": "shiftChangeDetail" },
+
         { "pattern": "teamCalendar", "name": "teamCalendar", "target": "teamCalendar" },
         { "pattern": "m/teamCalendar", "name": "m/teamCalendar", "target": "m/teamCalendar" },
         { "pattern": "h/teamCalendar", "name": "h/teamCalendar", "target": "h/teamCalendar" }
@@ -116,6 +123,11 @@
         "m/shift": { "viewId": "m_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListM" },
         "h/shift": { "viewId": "h_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListH" },
         "shiftDetail": { "viewId": "shiftDetail", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "Detail" },
+
+        "shiftChange": { "viewId": "shiftChange", "viewPath": "sap.ui.tesna.mvc.view.shiftChange", "viewName": "ListE" },
+        "m/shiftChange": { "viewId": "m_shiftChange", "viewPath": "sap.ui.tesna.mvc.view.shiftChange", "viewName": "ListM" },
+        "h/shiftChange": { "viewId": "h_shiftChange", "viewPath": "sap.ui.tesna.mvc.view.shiftChange", "viewName": "ListH" },
+        "shiftChangeDetail": { "viewId": "shiftChangeDetail", "viewPath": "sap.ui.tesna.mvc.view.shiftChange", "viewName": "Detail" },
 
         "teamCalendar": { "viewId": "teamCalendar", "viewPath": "sap.ui.tesna.mvc.view.teamCalendar", "viewName": "MainE" },
         "m/teamCalendar": { "viewId": "m_teamCalendar", "viewPath": "sap.ui.tesna.mvc.view.teamCalendar", "viewName": "MainM" },

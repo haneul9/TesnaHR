@@ -458,7 +458,7 @@ sap.ui.define(
             day: moment(o.Tmdat).format('YYYYMMDD'),
             holiday: _.isEqual(o.Holyn, 'X') ? 'Holiday' : 'None',
             classNames:
-              _.size(o.Cssty) === 3 ? `type${_.chain(o.Cssty).words().take(2).join('').value()}` : _.isEqual(o.Holyn, 'X') ? 'type15' : _.includes(['6', '7'], o.Wkday) ? 'Weekend' : 'Normal',
+              _.size(o.Cssty) === 3 ? `type${_.chain(o.Cssty).words().take(2).join('').value()}` : _.isEqual(o.Holyn, 'X') ? 'Holiday' : _.includes(['6', '7'], o.Wkday) ? 'Weekend' : 'Normal',
             stripes: _.endsWith(o.Cssty, 'P') ? 'Stripes' : 'None',
             borderNames: !_.isEmpty(o.Ottyp) ? o.Ottyp : 'Default',
           })),

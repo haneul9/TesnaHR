@@ -28,5 +28,8 @@
         "WrongParametersLinter": false
       }
     }
+  },
+  "dependencies": {
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.18.10/xlsx-0.18.10.tgz"
   }
 }

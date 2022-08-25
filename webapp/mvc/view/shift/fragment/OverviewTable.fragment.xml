@@ -6,16 +6,20 @@
             <table:RowSettings highlight="{ path: 'Appst', formatter: '.TableUtils.rowHighlight' }" />
         </table:rowSettingsTemplate>
         <table:columns>
-            <table:Column width="4%">
+            <table:Column width="4%" filterProperty="Appsttx" sortProperty="Appsttx">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00144}" />
                     <Label text="{i18n>LABEL_00144}" />
                 </table:multiLabels>
                 <table:template>
-                    <Text text="{Appsttx}" width="100%" textAlign="Center" wrapping="false" />
+                    <Text text="{Appsttx}" width="100%" textAlign="Center" wrapping="false">
+                        <customData>
+                            <core:CustomData key="status" value="Z{Appst}" writeToDom="true" />
+                        </customData>
+                    </Text>
                 </table:template>
             </table:Column>
-            <table:Column width="auto">
+            <table:Column width="auto" filterProperty="Orgtx" sortProperty="Orgtx">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00352}" />
                     <Label text="{i18n>LABEL_00352}" />
@@ -24,7 +28,7 @@
                     <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%">
+            <table:Column width="7%" filterProperty="Ename" sortProperty="Ename">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00353}" />
                     <Label text="{i18n>LABEL_00353}" />
@@ -33,7 +37,7 @@
                     <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="auto" headerSpan="2">
+            <table:Column width="auto" headerSpan="2" filterProperty="Rtext2" sortProperty="Rtext2">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00354}" />
                     <Label text="{i18n>LABEL_01003}" />
@@ -42,7 +46,7 @@
                     <Text text="{Rtext2}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="auto">
+            <table:Column width="auto" filterProperty="Ltext2" sortProperty="Ltext2">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00354}" />
                     <Label text="{i18n>LABEL_01004}" />
@@ -51,7 +55,7 @@
                     <Text text="{Ltext2}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="auto" headerSpan="2">
+            <table:Column width="auto" headerSpan="2" filterProperty="Rtext" sortProperty="Rtext">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00355}" />
                     <Label text="{i18n>LABEL_01003}" />
@@ -60,7 +64,7 @@
                     <Text text="{Rtext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="auto">
+            <table:Column width="auto" filterProperty="Ltext" sortProperty="Ltext">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00355}" />
                     <Label text="{i18n>LABEL_01004}" />
@@ -69,7 +73,7 @@
                     <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%">
+            <table:Column width="7%" filterProperty="Begda" sortProperty="Begda">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00148}" />
                     <Label text="{i18n>LABEL_00148}" />
@@ -78,7 +82,7 @@
                     <Text text="{ path: 'Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%">
+            <table:Column width="7%" filterProperty="Endda" sortProperty="Endda">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00149}" />
                     <Label text="{i18n>LABEL_00149}" />
@@ -87,7 +91,7 @@
                     <Text text="{ path: 'Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%">
+            <table:Column width="7%" filterProperty="Apppnm" sortProperty="Apppnm">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00135}" />
                     <Label text="{i18n>LABEL_00135}" />
@@ -96,7 +100,7 @@
                     <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%">
+            <table:Column width="7%" filterProperty="Sgnpnm" sortProperty="Sgnpnm">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00356}" />
                     <Label text="{i18n>LABEL_00356}" />
@@ -105,7 +109,7 @@
                     <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%">
+            <table:Column width="7%" filterProperty="Sgndt" sortProperty="Sgndt">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00269}" />
                     <Label text="{i18n>LABEL_00269}" />

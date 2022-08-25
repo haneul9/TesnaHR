@@ -322,8 +322,8 @@ sap.ui.define(
               id: this.sDialChartId,
               type: 'angulargauge',
               renderAt: this.sDialChartDiv,
-              width: 480,
-              height: 300,
+              width: 400,
+              height: 250,
               dataFormat: 'json',
               dataSource: {
                 chart: this.getDialChartOption(iGaugeOriginY),
@@ -431,15 +431,11 @@ sap.ui.define(
         _.chain(aWorkTypeList)
           .set(
             'Current',
-            _.map(aWorkTypeList, (e) => {
-              return { value: e.Cumuse };
-            })
+            _.map(aWorkTypeList, (e) => ({ value: e.Cumuse }))
           )
           .set(
             'Monuse',
-            _.map(aWorkTypeList, (e) => {
-              return { value: e.Monuse };
-            })
+            _.map(aWorkTypeList, (e) => ({ value: e.Monuse }))
           )
           .value();
 

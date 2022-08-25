@@ -15,7 +15,7 @@
                     <Button text="{i18n>LABEL_00146}" press=".onNavBack" visible="{= ${/displayMode} === 'B' }" />
                     <Button text="{i18n>LABEL_00146}" press=".onHistoryBack" visible="{= ${/displayMode} !== 'B' }" />
                     <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" press=".onPagePrint" />
-                    <Button icon="sap-icon://sys-help" text="{i18n>LABEL_00132}" press=".onPressHelp" />
+                    <!-- <Button icon="sap-icon://sys-help" text="{i18n>LABEL_00132}" press=".onPressHelp" /> -->
                 </HBox>
             </HBox>
         </VBox>

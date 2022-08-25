@@ -860,63 +860,68 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .sapUiLayoutCSSGrid .sapMFlexBox[data-style="Disable"] {background-color:#eaf2ff}
 .sapUiLayoutCSSGrid .sapMFlexBox[data-style="Weekend"] {background-color:#979696}
 
-.year-plan-grid .sapMFlexBox[data-style^="type"] .sapMText { cursor: pointer; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="A"]::before, .year-plan-grid .sapMFlexBox[data-style="typeA1"] { background-color: #7bb4eb !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeA2"] { background: linear-gradient(-90deg, #fff 50%, #7bb4eb 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeA3"] { background: linear-gradient(-90deg, #7bb4eb 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeA4"] { background: linear-gradient(-90deg, #FFF 25%, #7bb4eb 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="B"]::before, .year-plan-grid .sapMFlexBox[data-style="typeB1"] { background-color: #81daea !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeB2"] { background: linear-gradient(-90deg, #fff 50%, #81daea 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeB3"] { background: linear-gradient(-90deg, #81daea 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeB4"] { background: linear-gradient(-90deg, #FFF 25%, #81daea 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="C"]::before, .year-plan-grid .sapMFlexBox[data-style="typeC1"] { background-color: #a9f482 !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeC2"] { background: linear-gradient(-90deg, #fff 50%, #a9f482 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeC3"] { background: linear-gradient(-90deg, #a9f482 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeC4"] { background: linear-gradient(-90deg, #FFF 25%, #a9f482 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="D"]::before, .year-plan-grid .sapMFlexBox[data-style="typeD1"] { background-color: #ffe479 !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeD2"] { background: linear-gradient(-90deg, #fff 50%, #ffe479 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeD3"] { background: linear-gradient(-90deg, #ffe479 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeD4"] { background: linear-gradient(-90deg, #FFF 25%, #ffe479 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="E"]::before, .year-plan-grid .sapMFlexBox[data-style="typeE1"] { background-color: #ffb7af !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeE2"] { background: linear-gradient(-90deg, #fff 50%, #ffb7af 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeE3"] { background: linear-gradient(-90deg, #ffb7af 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeE4"] { background: linear-gradient(-90deg, #FFF 25%, #ffb7af 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="F"]::before, .year-plan-grid .sapMFlexBox[data-style="typeF1"] { background-color: #ffac4b !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeF2"] { background: linear-gradient(-90deg, #fff 50%, #ffac4b 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeF3"] { background: linear-gradient(-90deg, #ffac4b 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeF4"] { background: linear-gradient(-90deg, #FFF 25%, #ffac4b 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="G"]::before, .year-plan-grid .sapMFlexBox[data-style="typeG1"] { background-color: #d484f2 !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeG2"] { background: linear-gradient(-90deg, #fff 50%, #d484f2 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeG3"] { background: linear-gradient(-90deg, #d484f2 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeG4"] { background: linear-gradient(-90deg, #FFF 25%, #d484f2 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="H"]::before, .year-plan-grid .sapMFlexBox[data-style="typeH1"] { background-color: #a684f2 !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeH2"] { background: linear-gradient(-90deg, #fff 50%, #a684f2 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeH3"] { background: linear-gradient(-90deg, #a684f2 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeH4"] { background: linear-gradient(-90deg, #FFF 25%, #a684f2 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="I"]::before, .year-plan-grid .sapMFlexBox[data-style="typeI1"] { background-color: #9090ff !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeI2"] { background: linear-gradient(-90deg, #fff 50%, #9090ff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeI3"] { background: linear-gradient(-90deg, #9090ff 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeI4"] { background: linear-gradient(-90deg, #FFF 25%, #9090ff 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="J"]::before, .year-plan-grid .sapMFlexBox[data-style="typeJ1"] { background-color: #acb3ff !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeJ2"] { background: linear-gradient(-90deg, #fff 50%, #acb3ff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeJ3"] { background: linear-gradient(-90deg, #acb3ff 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeJ4"] { background: linear-gradient(-90deg, #FFF 25%, #acb3ff 25% 75%, #fff 75%) !important; }
+.year-plan-grid .sapMFlexBox[data-style^="type"] .sapMText, .year-plan-grid .sapMFlexBox[data-style="Holiday"] .sapMText { cursor: pointer; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="A"]::before, .year-plan-grid .sapMFlexBox[data-style="typeA1"] { background-color: #D0F3FA !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeA2"] { background: linear-gradient(-90deg, #fff 50%, #D0F3FA 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeA3"] { background: linear-gradient(-90deg, #D0F3FA 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeA4"] { background: linear-gradient(-90deg, #FFF 25%, #D0F3FA 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="B"]::before, .year-plan-grid .sapMFlexBox[data-style="typeB1"] { background-color: #A8DAFF !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeB2"] { background: linear-gradient(-90deg, #fff 50%, #A8DAFF 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeB3"] { background: linear-gradient(-90deg, #A8DAFF 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeB4"] { background: linear-gradient(-90deg, #FFF 25%, #A8DAFF 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="C"]::before, .year-plan-grid .sapMFlexBox[data-style="typeC1"] { background-color: #CCEFC5 !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeC2"] { background: linear-gradient(-90deg, #fff 50%, #CCEFC5 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeC3"] { background: linear-gradient(-90deg, #CCEFC5 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeC4"] { background: linear-gradient(-90deg, #FFF 25%, #CCEFC5 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="D"]::before, .year-plan-grid .sapMFlexBox[data-style="typeD1"] { background-color: #FFD3A0 !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeD2"] { background: linear-gradient(-90deg, #fff 50%, #FFD3A0 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeD3"] { background: linear-gradient(-90deg, #FFD3A0 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeD4"] { background: linear-gradient(-90deg, #FFF 25%, #FFD3A0 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="E"]::before, .year-plan-grid .sapMFlexBox[data-style="typeE1"] { background-color: #FFCAC4 !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeE2"] { background: linear-gradient(-90deg, #fff 50%, #FFCAC4 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeE3"] { background: linear-gradient(-90deg, #FFCAC4 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeE4"] { background: linear-gradient(-90deg, #FFF 25%, #FFCAC4 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="F"]::before, .year-plan-grid .sapMFlexBox[data-style="typeF1"] { background-color: #FFE479 !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeF2"] { background: linear-gradient(-90deg, #fff 50%, #FFE479 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeF3"] { background: linear-gradient(-90deg, #FFE479 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeF4"] { background: linear-gradient(-90deg, #FFF 25%, #FFE479 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="G"]::before, .year-plan-grid .sapMFlexBox[data-style="typeG1"] { background-color: #EBE3FF !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeG2"] { background: linear-gradient(-90deg, #fff 50%, #EBE3FF 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeG3"] { background: linear-gradient(-90deg, #EBE3FF 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeG4"] { background: linear-gradient(-90deg, #FFF 25%, #EBE3FF 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="H"]::before, .year-plan-grid .sapMFlexBox[data-style="typeH1"] { background-color: #F3D5FF !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeH2"] { background: linear-gradient(-90deg, #fff 50%, #F3D5FF 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeH3"] { background: linear-gradient(-90deg, #F3D5FF 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeH4"] { background: linear-gradient(-90deg, #FFF 25%, #F3D5FF 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="I"]::before, .year-plan-grid .sapMFlexBox[data-style="typeI1"] { background-color: #D5D5FF !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeI2"] { background: linear-gradient(-90deg, #fff 50%, #D5D5FF 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeI3"] { background: linear-gradient(-90deg, #D5D5FF 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeI4"] { background: linear-gradient(-90deg, #FFF 25%, #D5D5FF 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="J"]::before, .year-plan-grid .sapMFlexBox[data-style="typeJ1"] { background-color: #EDDCBF !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeJ2"] { background: linear-gradient(-90deg, #fff 50%, #EDDCBF 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeJ3"] { background: linear-gradient(-90deg, #EDDCBF 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeJ4"] { background: linear-gradient(-90deg, #FFF 25%, #EDDCBF 25% 75%, #fff 75%) !important; }
 .year-plan.status-wrap .sapMFlexItem .sapMText[data-style="O"]::before, .year-plan-grid .sapMFlexBox[data-style="typeO1"] { background-color: #FFF68F !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO2"] { background: linear-gradient(-90deg, #fff 50%, #FFF68F 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO3"] { background: linear-gradient(-90deg, #FFF68F 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO4"] { background: linear-gradient(-90deg, #FFF 25%, #FFF68F 25% 75%, #fff 75%) !important; }
-.year-plan-grid .sapMFlexBox[data-gubun="D"] .sapMText { color: #053752; }
-.year-plan-grid .sapMFlexBox[data-gubun="N"] .sapMText { color: #0e9718; }
-.year-plan-grid .sapMFlexBox[data-gubun="T"] .sapMText { color: #053752; }
-.year-plan-grid .sapMFlexBox[data-gubun="F"] .sapMText { color: #fc564f; }
-.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem::after { content: '주간'; color: #053752; position: absolute; width: 100%; bottom: 8px; font-size: 8px; text-align: center; }
-.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem::after { content: '야간'; color: #0e9718; position: absolute; width: 100%; bottom: 8px; font-size: 8px; text-align: center; }
-.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem::after { content: '통상'; color: #053752; position: absolute; width: 100%; bottom: 8px; font-size: 8px; text-align: center; }
-.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem::after { content: 'OFF'; color: #fc564f ; position: absolute; width: 100%; bottom: 8px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox .sapMText { font-size: 11px; font-family: Pretendard Medium; letter-spacing: -1px; }
+.year-plan-grid .sapMFlexBox[data-gubun="D"] .sapMText { color: #1059AF; font-weight: 600;  }
+.year-plan-grid .sapMFlexBox[data-gubun="N"] .sapMText { color: #155D04; font-weight: 600;  }
+.year-plan-grid .sapMFlexBox[data-gubun="T"] .sapMText { color: #1059AF; font-weight: 600;  }
+.year-plan-grid .sapMFlexBox[data-gubun="F"] .sapMText { color: #fc564f; font-weight: 600;  }
+.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem::after { content: '주간'; color: #1059AF; position: absolute; width: 100%; bottom: 4px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem::after { content: '야간'; color: #155D04; position: absolute; width: 100%; bottom: 4px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem::after { content: '통상'; color: #1059AF; position: absolute; width: 100%; bottom: 4px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem::after { content: 'OFF'; color: #fc564f ; position: absolute; width: 100%; bottom: 4px; font-size: 8px; text-align: center; }
 .year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem,
 .year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem,
 .year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem,
-.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem { padding-bottom: 8px; }
+.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem { max-height: 100%; }
+.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem .sapMText,
+.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem .sapMText,
+.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem .sapMText,
+.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem .sapMText { padding-bottom: 12px; }
 
 .sapUiLayoutCSSGrid .sapMFlexBox[data-style="Type01"], .year-plan.status-wrap .sapMFlexItem .sapMText[data-style="Type01"]::before, .year-plan.status-wrap .sapMFlexItem .sapMText.type01::before, .sapMFlexBox.type01, .sapMFlexBox[data-style="Type01"], [class*=plan-grid] .type01 * {background-color:#0e60c7 !important; color:#fff !important}/* 연차 */
 [data-style="Type01"] .sapMText, [data-style="Type01"] .sapMLabel {background-color:transparent !important; color:#fff !important}/* 연차 */
@@ -965,13 +970,13 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .sapUiLayoutCSSGrid .sapMFlexBox[data-border="Type34"] {background-color:#fff; border:5px solid #f4d6ff !important; border-radius:0} /* 시차출퇴근(D유형) */
 .year-plan.status-wrap .sapMFlexItem .sapMText.type15::before {content:"31"; font-size:8px; border:1px solid #e5e5e5; color:#fc564f; border-radius:0; font-weight:400; text-align:center; border:0; background-color:#fff}
 .sapUiLayoutCSSGrid .sapMFlexBox .sapMText[data-stripes="OK"] {background:repeating-linear-gradient(135deg, rgb(124, 124, 124), rgb(124, 124, 124) 2px, #8880 0, #8880 6px)}
-.year-plan-grid .sapMText[data-stripes="Stripes"] {background:repeating-linear-gradient(45deg, #a6a6a6, #a6a6a6 1px, transparent  0px, transparent  5px) !important}/* 신청표시 */
+.year-plan-grid .sapMText[data-stripes="Stripes"] {background:repeating-linear-gradient(45deg, #fff, #fff 1px, transparent  0px, transparent  5px) !important}/* 신청표시 */
 .year-plan-grid .sapMText[data-holiday="Holiday"] {color:#fc564f !important}/* 공휴일 */
 .year-plan-grid .members-photo {width:30px; height:30px; margin-right: 5px; cursor: pointer; border-radius:50%; background-size:cover; background-position:center top; background-repeat:no-repeat}
 .month-plan-grid .sapMFlexBox[data-holiday="Holiday"] .sapMText {color:#fc564f !important}/* 공휴일 */
 .month-plan-grid .sapMFlexBox[data-holiday="Holiday"] .sapMLabel {color:#fc564f !important}/* 공휴일 */
 .month-plan-grid .sapMText[data-holiday="Holiday"] {color:#fc564f !important}/* 공휴일 */
-.month-plan-grid.sapUiLayoutCSSGrid .sapMFlexBox[data-stripes="Stripes"]::before {content:''; width:14%; height:70px; background:repeating-linear-gradient(45deg, #a6a6a6, #a6a6a6 0px, transparent 2px, transparent 5px); position:absolute; z-index:0} /* 신청 */
+.month-plan-grid.sapUiLayoutCSSGrid .sapMFlexBox[data-stripes="Stripes"]::before {content:''; width:14%; height:70px; background:repeating-linear-gradient(45deg, #fff, #fff 0px, transparent 2px, transparent 5px); position:absolute; z-index:0} /* 신청 */
 
 .sapMTitle[data-color="blue"] {color:blue}
 .sapMText[data-color="blue"] {color:blue}
@@ -1737,7 +1742,8 @@ div[data-sap-ui=container-ehr---employee--sideBody].sapUiSmallMarginEnd {margin-
 .year-plan-grid .sapMFlexBox[data-align="start"] .sapMText {justify-content: flex-start;}
 .year-plan-grid .sapMFlexBox[data-border="Default"] {border:0px solid black}
 .year-plan-grid .sapMFlexBox[data-style="Header"] {background-color:#f7f7f7;}
-.year-plan-grid .sapMFlexBox[data-style="Weekend"] {background-color:#d9dcdf}
+.year-plan-grid .sapMFlexBox[data-style="Weekend"] {background-color:#EAECEF}
+.year-plan-grid .sapMFlexBox[data-style="Holiday"] {background-color:#EAECEF}
 .year-plan-grid .sapMFlexBox[data-style="None"] {background-color:#cfd1d5}
 .year-plan-grid .sapMFlexBox[data-awart="2000"] {background-color:#65b8ff}
 .year-plan-grid .sapMFlexBox[data-awart="2001"]::before {content:''; width:50%; height:100%; position:relative; top:0; left:0; background-color:#ffe479}
@@ -2166,6 +2172,48 @@ div[data-sap-ui=container-ehr---employee--sideBody].sapUiSmallMarginEnd {margin-
 .microchart .sapSuiteIDCLegendSegment {margin-bottom:12px}
 .microchart .sapSuiteIDCLegendLabelValue {color:#222}
 .microchart .sapSuiteIDCChartSegment {stroke:#427cac; stroke-width:0px}
+
+.calendar-table tbody span[data-work="D"], .calendar-table tbody [data-work="D"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="D"] .sapMInputBaseIcon.sapUiIcon::before { color: #7bb4eb; }
+.calendar-table tbody span[data-work="N"], .calendar-table tbody [data-work="N"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="N"] .sapMInputBaseIcon.sapUiIcon::before { color: #0e9718; }
+.calendar-table tbody span[data-work="T"], .calendar-table tbody [data-work="T"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="T"] .sapMInputBaseIcon.sapUiIcon::before { color: #053752; }
+.calendar-table tbody span[data-work="F"], .calendar-table tbody [data-work="F"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="F"] .sapMInputBaseIcon.sapUiIcon::before { color: #fc564f; }
+.calendar-table tbody [data-week="X"] > .sapMInputBaseContentWrapper,
+.calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col4"], 
+.calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col10"], .calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col11"],
+.calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col17"], .calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col18"],
+.calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col24"], .calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col25"],
+.calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col31"], .calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col32"],
+.calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col38"], .calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col39"],
+.calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col9"], .calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col10"],
+.calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col16"], .calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col17"],
+.calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col23"], .calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col24"],
+.calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col30"], .calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col31"],
+.calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col37"], .calendar-table.weekend-1 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col38"],
+.calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col8"], .calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col9"],
+.calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col15"], .calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col16"],
+.calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col22"], .calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col23"],
+.calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col29"], .calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col30"],
+.calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col36"], .calendar-table.weekend-2 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col37"],
+.calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col7"], .calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col8"],
+.calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col14"], .calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col15"],
+.calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col21"], .calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col22"],
+.calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col28"], .calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col29"],
+.calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col35"], .calendar-table.weekend-3 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col36"],
+.calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col6"], .calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col7"],
+.calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col13"], .calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col14"],
+.calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col20"], .calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col21"],
+.calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col27"], .calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col28"],
+.calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col34"], .calendar-table.weekend-4 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col35"],
+.calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col5"], .calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col6"],
+.calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col12"], .calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col13"],
+.calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col19"], .calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col20"],
+.calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col26"], .calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col27"],
+.calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col33"], .calendar-table.weekend-5 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col34"],
+.calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col4"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col5"],
+.calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col11"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col12"],
+.calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col18"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col19"],
+.calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col25"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col26"],
+.calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col32"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col33"] { background-color: #e0e0e0; }
 
 /* input suggestion popover */
 .sapMSuggestionsPopover .sapMLabel {display:inline-block}

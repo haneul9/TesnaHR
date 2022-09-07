@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns="sap.ui.table"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core">
+    <Table id="attendanceApprovalTable" selectionMode="{/form/listMode}" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/form/list}" visibleRowCount="{/form/rowCount}" noData="{i18n>MSG_00001}">
+        <columns>
+            <Column width="4%">
+                <m:Label text="{i18n>LABEL_00147}"/>
+                <template>
+                    <m:ObjectStatus text="{Aptyptx}" state="{= ${Aptyp} === 'A' ? 'Indication05' : 'Error' }" class="table-object-status" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00209}"/>
+                <template>
+                    <m:Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00210}" />
+                <template>
+                    <m:Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00224}" />
+                <template>
+                    <m:Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00351}" />
+                <template>
+                    <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00381}" />
+                <template>
+                    <m:Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="14%">
+                <m:Label text="{i18n>LABEL_00382}" />
+                <template>
+                    <m:Text text="{Period}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="6%">
+                <m:Label text="{i18n>LABEL_05010}" />
+                <template>
+                    <m:Text text="{Daytm}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_05011}" />
+                <template>
+                    <m:Text text="{Taker}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_05012}" />
+                <template>
+                    <m:Text text="{Telno}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="10%">
+                <m:Label text="{i18n>LABEL_00154}" />
+                <template>
+                    <m:Text text="{Aprsn}" width="100%" wrapping="false" />
+                </template>
+            </Column>
+        </columns>
+    </Table>
+</core:FragmentDefinition>

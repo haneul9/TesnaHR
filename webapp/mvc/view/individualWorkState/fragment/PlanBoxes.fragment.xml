@@ -17,7 +17,7 @@
         <HBox class="year-plan-head-button button-group">
             <Button icon="sap-icon://excel-attachment" text="Excel" press=".onPressExcelDownload" />
         </HBox>
-        <grid:CSSGrid id="yearPlanGrid" class="year-plan-grid" gridTemplateColumns="70px repeat(37, 1fr)" gridGap="1px" items="{path: '/plans'}">
+        <grid:CSSGrid id="yearPlanGrid" class="year-plan-grid diagonal" gridTemplateColumns="70px repeat(37, 1fr)" gridGap="1px" items="{path: '/plans'}">
             <custom:DayBox width="100%" press=".onClickDay">
                 <custom:customData>
                     <core:CustomData key="day" value="{day}" />

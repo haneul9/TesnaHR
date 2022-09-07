@@ -37,12 +37,12 @@ sap.ui.define(
           };
         },
 
-        toString(mEdmTime) {
+        toString(mEdmTime, sTimeFormat = this.sEdmTimeFormat) {
           if (!mEdmTime || !_.isObject(mEdmTime) || !_.has(mEdmTime, 'ms')) {
             return null;
           }
 
-          return moment.utc(mEdmTime.ms).format(this.sEdmTimeFormat);
+          return moment.utc(mEdmTime.ms).format(sTimeFormat);
         },
 
         stepMinutes(sSourceMinutes, iStep = 30) {
@@ -59,6 +59,14 @@ sap.ui.define(
           });
 
           return mData;
+        },
+
+        convertEdmTimeToString(mData) {
+          _.forOwn(mData, (v, p) => {
+            if (_.isObject(v) && _.has(v, 'ms') && _.chain(v).get('ms').isEqual(86400000).value()) {
+              _.set(mData, p, 'P00DT24H00M00S');
+            }
+          });
         },
 
         format(vValue, sTimeFormat = 'HH:mm') {

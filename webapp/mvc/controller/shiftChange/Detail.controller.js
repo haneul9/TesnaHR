@@ -201,7 +201,13 @@ sap.ui.define(
           if (oError instanceof Error) oError = new UI5Error({ message: this.getBundleText('MSG_00043') }); // 잘못된 접근입니다.
 
           AppUtils.handleError(oError, {
-            onClose: () => this.getRouter().navTo(oViewModel.getProperty('/previousName')),
+            onClose: () => {
+              if (this.DISPLAY_MODE === 'B') {
+                this.getRouter().navTo(oViewModel.getProperty('/previousName'));
+              } else {
+                this.onHistoryBack();
+              }
+            },
           });
         } finally {
           this.setContentsBusy(false);
@@ -480,9 +486,17 @@ sap.ui.define(
 
       onPressDialogExcelDownload() {
         const oTable = this.byId(this.DIALOG_TABLE_ID);
+        const aSelectedIndices = oTable.getSelectedIndices();
+
+        if (!aSelectedIndices.length) {
+          MessageBox.alert(this.getBundleText('MSG_00020', 'Download')); // {Dowonload}할 행을 선택하세요.
+          return;
+        }
+
         const sFileName = this.getBundleText('LABEL_00282', 'LABEL_04001'); // {기술직계획근무변경신청}_목록
         const aTableData = _.chain(this.getViewModel().getProperty('/dialog/list'))
           .cloneDeep()
+          .filter((o, i) => _.includes(aSelectedIndices, i))
           .map((o) => {
             _.chain(o)
               .pickBy((v, p) => _.startsWith(p, 'Dayngt'))
@@ -509,6 +523,7 @@ sap.ui.define(
               workbook.SheetNames.forEach((sheet) => {
                 const aRowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
 
+                AppUtils.debug(aRowObject);
                 if (!_.isEmpty(aRowObject)) this.assignDialogTableWithExcel(aRowObject);
               });
             };
@@ -541,7 +556,7 @@ sap.ui.define(
               ..._.chain(aRowObject)
                 .get(i)
                 .pickBy((v, p) => _.isNumber(_.toNumber(p)))
-                .mapKeys((v, p) => `Dayngt${p}`)
+                .mapKeys((v, p) => `Dayngt${_.padStart(p, 2, '0')}`)
                 .mapValues((v, p) => _.findKey(this.DAY_WORK_TYPES, (s) => _.isEqual(s, v)) || mOriginalRowData[p])
                 .value(),
             });

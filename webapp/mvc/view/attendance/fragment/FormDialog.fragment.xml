@@ -1,0 +1,83 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:custom="sap.ui.tesna.control">
+    <Dialog id="formDialog" showHeader="false" contentWidth="1000px">
+        <buttons>
+            <Button type="Emphasized" text="{i18n>LABEL_00103}" enabled="{= ${/form/dialog/calcCompleted}}" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}" press=".onPressFormDialogSave"/>
+            <Button text="{i18n>LABEL_00115}" press=".onPressFormDialogClose" class="cancel" />
+        </buttons>
+        <VBox class="vCardBox">
+            <HBox class="header-wrap" justifyContent="SpaceBetween">
+                <HBox class="header" alignItems="Center">
+                    <Title level="H3" text="{i18n>LABEL_05013}" />
+                </HBox>
+            </HBox>
+            <grid:CSSGrid gridTemplateColumns="1fr 4fr" gridGap="8px" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}">
+                <Label text="{i18n>LABEL_00353}" />
+                <HBox>
+                    <Input value="{/form/dialog/data/Ename}" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" width="100%" maxSuggestionWidth="400px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/entry/Employees', templateShareable: false }" class="required tableRow_Text" editable="{= !${/form/Appst} }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
+                        <suggestionColumns>
+                            <Column width="40%" popinDisplay="Inline" demandPopin="true">
+                                <Label text="{i18n>LABEL_00210}"/>
+                            </Column>
+                            <Column popinDisplay="Inline" demandPopin="true">
+                                <Label text="{i18n>LABEL_00209}"/>
+                            </Column>
+                            <Column width="15%" popinDisplay="Inline">
+                                <Label text="{i18n>LABEL_00214}"/>
+                            </Column>
+                            <Column popinDisplay="Inline" minScreenWidth="Tablet">
+                                <Label text="{i18n>LABEL_00226}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <cells>
+                                    <Label text="{Ename}"/>
+                                    <Label text="{Pernr}"/>
+                                    <Label text="{Zzcaltltx}"/>
+                                    <Label text="{Orgtx}"/>
+                                </cells>
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
+                    <Input value="{/form/dialog/data/PernrInfoTxt}" editable="false" />
+                </HBox>
+                <Label text="{i18n>LABEL_05014}" />
+                <Input value="{/form/dialog/data/Blqtx}" editable="false" />
+                <Label text="{i18n>LABEL_05015}" />
+                <HBox>
+                    <ComboBox width="274px" class="required" selectedKey="{/form/dialog/data/Awart}" items="{ path: '/entry/TimeTypes', templateShareable: false }" enabled="{= !!${/form/dialog/data/Pernr} }" change=".onChangeAwartCombo">
+                        <core:Item key="{Awart}" text="{Atext}" />
+                    </ComboBox>
+                    <Button text="{i18n>LABEL_05017}" class="sapUiTinyMarginBegin" enabled="{= !!${/form/dialog/data/Pernr} }" press=".onPressAwartDialog" />
+                </HBox>
+                <Label text="{i18n>LABEL_00381}" />
+                <ComboBox width="274px" class="required" selectedKey="{/form/dialog/data/Awrsn}" items="{ path: '/entry/TimeReasons', templateShareable: false }" enabled="{= !!${/form/dialog/data/Pernr} }" change=".onChangeAwrsnCombo">
+                    <core:Item key="{Awrsn}" text="{Awrsntx}" />
+                </ComboBox>
+                <Label text="{i18n>LABEL_05016}" />
+                <RadioButtonGroup columns="2" selectedIndex="{/form/dialog/data/Gubun}" enabled="{= !!${/form/dialog/data/Pernr} }" select=".callValidWorkTime">
+                    <custom:RadioButton text="{i18n>LABEL_05018}" innerSize="35%" visible="{= ${/form/dialog/data/Datim} !== 'T' }" />
+                    <custom:RadioButton text="{i18n>LABEL_05019}" innerSize="35%" visible="{= ${/form/dialog/data/Datim} !== 'D' }" />
+                </RadioButtonGroup>
+                <Label text="{i18n>LABEL_00382}" />
+                <HBox>
+                    <custom:DatePicker dateValue="{ path: '/form/dialog/data/Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" class="required" enabled="{= !!${/form/dialog/data/Pernr} }" change=".onChangeWorkStartDate" />
+                    <TimePicker dateValue="{ path: '/form/dialog/data/Beguz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/form/dialog/initBeguz}" minutesStep="{/form/dialog/minutesStep}" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiTinyMarginBegin" enabled="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" change=".onChangeTimeFormat" />
+                    <Text text="~" class="sapUiTinyMarginBeginEnd lh-40-px" />
+                    <custom:DatePicker dateValue="{ path: '/form/dialog/data/Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" class="required" enabled="{= !!${/form/dialog/data/Pernr} }" change=".callValidWorkTime" />
+                    <TimePicker dateValue="{ path: '/form/dialog/data/Enduz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/form/dialog/initEnduz}" minutesStep="{/form/dialog/minutesStep}" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiTinyMarginBegin" enabled="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" change=".onChangeTimeFormat" />
+                    <Input value="{ path: '/form/dialog/data/Daytm', formatter: '.formatDaytm' }" editable="false" class="sapUiTinyMarginBegin color-09" />
+                </HBox>
+                <Label text="{i18n>LABEL_05011}" />
+                <Input width="274px" value="{/form/dialog/data/Taker}" enabled="{= !!${/form/dialog/data/Pernr} }" />
+                <Label text="{i18n>LABEL_05012}" />
+                <Input width="274px" value="{/form/dialog/data/Telno}" enabled="{= !!${/form/dialog/data/Pernr} }" liveChange=".onChangePhoneNumber" />
+                <Label text="{i18n>LABEL_00154}" />
+                <Input width="100%" value="{/form/dialog/data/Aprsn}" enabled="{= !!${/form/dialog/data/Pernr} }" />
+            </grid:CSSGrid>
+        </VBox>
+    </Dialog>
+</core:FragmentDefinition>

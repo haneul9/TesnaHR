@@ -161,7 +161,13 @@ sap.ui.define(
           if (oError instanceof Error) oError = new UI5Error({ message: this.getBundleText('MSG_00043') }); // 잘못된 접근입니다.
 
           AppUtils.handleError(oError, {
-            onClose: () => this.getRouter().navTo(oViewModel.getProperty('/previousName')),
+            onClose: () => {
+              if (this.DISPLAY_MODE === 'B') {
+                this.getRouter().navTo(oViewModel.getProperty('/previousName'));
+              } else {
+                this.onHistoryBack();
+              }
+            },
           });
         } finally {
           this.setContentsBusy(false);

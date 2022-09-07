@@ -820,21 +820,11 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .sapMObjStatusError .sapMObjStatusText, .sapMObjStatusError .sapMObjStatusIcon {color:#fe5f58 !important}
 .sapMObjStatusNone .sapMObjStatusText, .sapMObjStatusNone .sapMObjStatusIcon {color:#222}
 
-.sapMText[data-status="Z10"],
-.sapMText[data-status="Z15"],
-.sapMText[data-status="Z90"] {color:var(--BorderColorReadonly) !important}
-.sapMText[data-status="Z2"],
-.sapMText[data-status="Z20"],
-.sapMText[data-status="Z30"],
-.sapMText[data-status="Z50"] {color:var(--BorderColorWarning) !important}
-.sapMText[data-status="Z3"],
-.sapMText[data-status="Z40"],
-.sapMText[data-status="ZP"] {color:var(--BorderColorSuccess) !important}
-.sapMText[data-status="Z45"],
-.sapMText[data-status="ZF"],
-.sapMText[data-status="Z65"] {color:var(--BorderColorError) !important}
-.sapMText[data-status="Z1"],
-.sapMText[data-status="Z60"] {color:var(--BorderColorFocus) !important}
+.sapMText[data-status="Z10"] {color:var(--BorderColorReadonly) !important}
+.sapMText[data-status="Z20"] {color:var(--BorderColorWarning) !important}
+.sapMText[data-status="Z30"] {color:var(--BorderColorSuccess) !important}
+.sapMText[data-status="Z40"] {color:var(--BorderColorError) !important}
+.sapMText[data-status="Z50"] {color:var(--BorderColorFocus) !important}
 
 /* Mobile Icon */
 .sapUiIcon[data-status="Z10"],
@@ -881,10 +871,10 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .year-plan-grid .sapMFlexBox[data-style="typeE2"] { background: linear-gradient(-90deg, #fff 50%, #FFCAC4 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeE3"] { background: linear-gradient(-90deg, #FFCAC4 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeE4"] { background: linear-gradient(-90deg, #FFF 25%, #FFCAC4 25% 75%, #fff 75%) !important; }
-.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="F"]::before, .year-plan-grid .sapMFlexBox[data-style="typeF1"] { background-color: #FFE479 !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeF2"] { background: linear-gradient(-90deg, #fff 50%, #FFE479 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeF3"] { background: linear-gradient(-90deg, #FFE479 50%, #fff 50%) !important; }
-.year-plan-grid .sapMFlexBox[data-style="typeF4"] { background: linear-gradient(-90deg, #FFF 25%, #FFE479 25% 75%, #fff 75%) !important; }
+.year-plan.status-wrap .sapMFlexItem .sapMText[data-style="F"]::before, .year-plan-grid .sapMFlexBox[data-style="typeF1"] { background-color: #A8FFD4 !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeF2"] { background: linear-gradient(-90deg, #fff 50%, #A8FFD4 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeF3"] { background: linear-gradient(-90deg, #A8FFD4 50%, #fff 50%) !important; }
+.year-plan-grid .sapMFlexBox[data-style="typeF4"] { background: linear-gradient(-90deg, #FFF 25%, #A8FFD4 25% 75%, #fff 75%) !important; }
 .year-plan.status-wrap .sapMFlexItem .sapMText[data-style="G"]::before, .year-plan-grid .sapMFlexBox[data-style="typeG1"] { background-color: #EBE3FF !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeG2"] { background: linear-gradient(-90deg, #fff 50%, #EBE3FF 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeG3"] { background: linear-gradient(-90deg, #EBE3FF 50%, #fff 50%) !important; }
@@ -905,15 +895,15 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .year-plan-grid .sapMFlexBox[data-style="typeO2"] { background: linear-gradient(-90deg, #fff 50%, #FFF68F 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO3"] { background: linear-gradient(-90deg, #FFF68F 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO4"] { background: linear-gradient(-90deg, #FFF 25%, #FFF68F 25% 75%, #fff 75%) !important; }
-.year-plan-grid .sapMFlexBox .sapMText { font-size: 11px; font-family: Pretendard Medium; letter-spacing: -1px; }
-.year-plan-grid .sapMFlexBox[data-gubun="D"] .sapMText { color: #1059AF; font-weight: 600;  }
-.year-plan-grid .sapMFlexBox[data-gubun="N"] .sapMText { color: #155D04; font-weight: 600;  }
-.year-plan-grid .sapMFlexBox[data-gubun="T"] .sapMText { color: #1059AF; font-weight: 600;  }
-.year-plan-grid .sapMFlexBox[data-gubun="F"] .sapMText { color: #fc564f; font-weight: 600;  }
-.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem::after { content: '주간'; color: #1059AF; position: absolute; width: 100%; bottom: 4px; font-size: 8px; text-align: center; }
-.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem::after { content: '야간'; color: #155D04; position: absolute; width: 100%; bottom: 4px; font-size: 8px; text-align: center; }
-.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem::after { content: '통상'; color: #1059AF; position: absolute; width: 100%; bottom: 4px; font-size: 8px; text-align: center; }
-.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem::after { content: 'OFF'; color: #fc564f ; position: absolute; width: 100%; bottom: 4px; font-size: 8px; text-align: center; }
+.year-plan-grid .sapMFlexBox .sapMText { font-size: 11px; }
+.year-plan-grid .sapMFlexBox[data-gubun="D"] .sapMText { color: #1059AF;  }
+.year-plan-grid .sapMFlexBox[data-gubun="N"] .sapMText { color: #155D04;  }
+.year-plan-grid .sapMFlexBox[data-gubun="T"] .sapMText { color: #1059AF;  }
+.year-plan-grid .sapMFlexBox[data-gubun="F"] .sapMText { color: #fc564f;  }
+.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem::after { content: '주'; color: #1059AF; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 11px; font-weight: 700; text-align: right; }
+.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem::after { content: '야'; color: #155D04; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 11px; font-weight: 700; text-align: right; }
+.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem::after { content: '통'; color: #1059AF; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 11px; font-weight: 700; text-align: right; }
+.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem::after { content: '휴'; color: #fc564f ; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 11px; font-weight: 700; text-align: right; }
 .year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem,
 .year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem,
 .year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem,
@@ -962,7 +952,7 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .year-plan.status-wrap .sapMFlexItem .sapMText.type05::before {background-color:#ffac4b}
 
 .sapUiLayoutCSSGrid .sapMFlexBox[data-border="Default"] {border:1px solid black; --webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box}
-.sapUiLayoutCSSGrid .sapMFlexBox[data-border="Today"] .sapMText::after {content:""; display:inline-block; position:absolute; width:100%; height:100%; top:0; left:0; border:5px solid #dc3545; --webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box}
+.sapUiLayoutCSSGrid .sapMFlexBox[data-border="Today"] .sapMText::after {content:""; display:inline-block; position:absolute; width:100%; height:100%; top:0; left:0; border:3px solid #FF0000; --webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box}
 .sapUiLayoutCSSGrid.mobile-plan-grid .sapMFlexBox[data-border="Today"] {border:5px solid #dc3545;}
 .sapUiLayoutCSSGrid .sapMFlexBox[data-border="Type31"] {border:5px solid #9705cc !important; border-radius:0} /* 시간외 */
 .sapUiLayoutCSSGrid .sapMFlexBox[data-border="Type32"] {background-color:#fff; border:5px solid #c627ff !important; border-radius:0} /* 당직 */
@@ -1737,7 +1727,8 @@ div[data-sap-ui=container-ehr---employee--sideBody].sapUiSmallMarginEnd {margin-
 .year-plan-head h2.sapMTitle {justify-content:center}
 .year-plan-head-button.button-group {position: absolute; right: 1%;}
 .year-plan-grid {background-color:#e5e5e5; border:1px solid #e5e5e5}
-.year-plan-grid .sapMFlexBox, .year-plan-grid .sapMText {height:40px; display:flex; justify-content:center; align-items:center; font-size:14px; font-weight:700; cursor:default}
+.year-plan-grid .sapMFlexBox, .year-plan-grid .sapMText {height:40px; display:flex; justify-content:center; align-items:center; font-size:11px; font-weight:700; cursor:default}
+.year-plan-grid.diagonal .sapMFlexBox:not([data-style="Header"]) .sapMText {justify-content: flex-start; align-items: flex-start; font-size: 6px; padding-left: 2px; padding-top: 2px;}
 .year-plan-grid .sapMFlexBox[data-align="start"] {justify-content: flex-start; padding-left: 8px;}
 .year-plan-grid .sapMFlexBox[data-align="start"] .sapMText {justify-content: flex-start;}
 .year-plan-grid .sapMFlexBox[data-border="Default"] {border:0px solid black}
@@ -2173,9 +2164,9 @@ div[data-sap-ui=container-ehr---employee--sideBody].sapUiSmallMarginEnd {margin-
 .microchart .sapSuiteIDCLegendLabelValue {color:#222}
 .microchart .sapSuiteIDCChartSegment {stroke:#427cac; stroke-width:0px}
 
-.calendar-table tbody span[data-work="D"], .calendar-table tbody [data-work="D"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="D"] .sapMInputBaseIcon.sapUiIcon::before { color: #7bb4eb; }
-.calendar-table tbody span[data-work="N"], .calendar-table tbody [data-work="N"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="N"] .sapMInputBaseIcon.sapUiIcon::before { color: #0e9718; }
-.calendar-table tbody span[data-work="T"], .calendar-table tbody [data-work="T"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="T"] .sapMInputBaseIcon.sapUiIcon::before { color: #053752; }
+.calendar-table tbody span[data-work="D"], .calendar-table tbody [data-work="D"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="D"] .sapMInputBaseIcon.sapUiIcon::before { color: #1059AF; }
+.calendar-table tbody span[data-work="N"], .calendar-table tbody [data-work="N"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="N"] .sapMInputBaseIcon.sapUiIcon::before { color: #155D04; }
+.calendar-table tbody span[data-work="T"], .calendar-table tbody [data-work="T"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="T"] .sapMInputBaseIcon.sapUiIcon::before { color: #1059AF; }
 .calendar-table tbody span[data-work="F"], .calendar-table tbody [data-work="F"] > .sapMInputBaseContentWrapper > input, .calendar-table tbody [data-work="F"] .sapMInputBaseIcon.sapUiIcon::before { color: #fc564f; }
 .calendar-table tbody [data-week="X"] > .sapMInputBaseContentWrapper,
 .calendar-table.weekend-0 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col4"], 
@@ -2213,7 +2204,7 @@ div[data-sap-ui=container-ehr---employee--sideBody].sapUiSmallMarginEnd {margin-
 .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col11"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col12"],
 .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col18"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col19"],
 .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col25"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col26"],
-.calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col32"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col33"] { background-color: #e0e0e0; }
+.calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col32"], .calendar-table.weekend-6 .sapUiTableCtrlCnt .sapUiTableCtrl tbody > tr > td[id$="col33"] { background-color: #EAECEF; }
 
 /* input suggestion popover */
 .sapMSuggestionsPopover .sapMLabel {display:inline-block}
@@ -2302,7 +2293,7 @@ div[data-sap-ui=container-ehr---employee--sideBody].sapUiSmallMarginEnd {margin-
 .color-06 {color:#2f88ff}
 .color-07 {color:#0c1f6b}
 .color-08 {color:#ff5252 !important}
-.color-09 {color:#007bff}
+.color-09, .color-09 .sapMInputBaseInner {color:#007bff}
 .letter-spacing-xs {letter-spacing:-0.6px}
 .letter-spacing-sm {letter-spacing:-0.3px}
 .normal {font-weight:500}

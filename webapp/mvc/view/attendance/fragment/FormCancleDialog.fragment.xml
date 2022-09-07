@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns="sap.ui.table"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core">
+    <m:Dialog showHeader="false" contentWidth="1400px" draggable="true" horizontalScrolling="false" verticalScrolling="false">
+        <m:content>
+            <m:VBox class="hCardBox mb-16-px dialog-content-table">
+                <Table id="dialogCancelTable" width="100%" columnHeaderHeight="35" rowHeight="34" rows="{/form/dialog/list}" visibleRowCount="{/form/dialog/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}" noData="{i18n>MSG_00001}">
+                    <extension>
+                        <m:HBox class="header-wrap" justifyContent="SpaceBetween">
+                            <m:HBox class="header" alignItems="Center">
+                                <m:Title level="H3" text="{i18n>LABEL_00383} {i18n>LABEL_00112}" class="sapUiSmallMarginEnd" />
+                                <m:Text text="{i18n>MSG_05001} { path: '/form/dialog/list/0/Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" class="desc-txt" wrapping="false" />
+                            </m:HBox>
+                        </m:HBox>
+                    </extension>
+                    <columns>
+                        <Column width="auto">
+                            <m:Label text="{i18n>LABEL_00209}" />
+                            <template>
+                                <m:Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" />
+                            </template>
+                        </Column>
+                        <Column width="auto">
+                            <m:Label text="{i18n>LABEL_00210}" />
+                            <template>
+                                <m:Text text="{Ename}" width="100%" textAlign="Center" />
+                            </template>
+                        </Column>
+                        <Column width="auto">
+                            <m:Label text="{i18n>LABEL_00224}" />
+                            <template>
+                                <m:Text text="{Orgtx}" width="100%" textAlign="Center" />
+                            </template>
+                        </Column>
+                        <Column width="14%">
+                            <m:Label text="{i18n>LABEL_00351}" />
+                            <template>
+                                <m:Text text="{Ltext}" width="100%" textAlign="Center" />
+                            </template>
+                        </Column>
+                        <Column width="12%">
+                            <m:Label text="{i18n>LABEL_00381}" />
+                            <template>
+                                <m:Text text="{Awrsntx}" width="100%" textAlign="Center" />
+                            </template>
+                        </Column>
+                        <Column width="18%">
+                            <m:Label text="{i18n>LABEL_00382}" />
+                            <template>
+                                <m:Text text="{Period}" width="100%" textAlign="Center" />
+                            </template>
+                        </Column>
+                        <Column width="6%">
+                            <m:Label text="{i18n>LABEL_05010}" />
+                            <template>
+                                <m:Text text="{Daytm}" width="100%" textAlign="Center" />
+                            </template>
+                        </Column>
+                        <Column width="24%">
+                            <m:Label text="{i18n>LABEL_00384}" />
+                            <template>
+                                <m:Input width="100%" value="{Aprsn}" class="small-table-input" />
+                            </template>
+                        </Column>
+                    </columns>
+                </Table>
+            </m:VBox>
+        </m:content>
+        <m:buttons>
+            <m:Button type="Emphasized" text="{i18n>LABEL_00103}" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}" enabled="{= !!${/form/dialog/list}.length }" press=".onPressFormCancelDialogSave" />
+            <m:Button text="{i18n>LABEL_00115}" press=".onPressFormCancelDialogClose" class="cancel" />
+        </m:buttons>
+    </m:Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:custom="sap.ui.tesna.control">
+    <VBox class="hCardBox summary-box">
+        <HBox alignItems="End">
+            <Title level="H2" text="{i18n>LABEL_05008}" />
+            <Text text="{i18n>LABEL_05009}" class="sapUiSmallMarginBegin" />
+        </HBox>
+        <grid:CSSGrid gridTemplateColumns="repeat(3, 1fr)" gridRowGap="19px" gridColumnGap="8px" class="sapUiMediumMarginTop">
+            <VBox alignItems="Start">
+                <Label text="{/quota/10/Kotxt}" />
+                <custom:VacationIndicator width="8rem" total="{/quota/10/Crecnt}" used="{/quota/10/Usecnt}" class="sapUiSmallMarginTop" />
+            </VBox>
+            <VBox alignItems="Start">
+                <Label text="{/quota/15/Kotxt}" />
+                <custom:VacationIndicator width="8rem" total="{/quota/15/Crecnt}" used="{/quota/15/Usecnt}" class="sapUiSmallMarginTop" />
+            </VBox>
+            <VBox alignItems="Start">
+                <Label text="{/quota/20/Kotxt}" />
+                <custom:VacationIndicator width="8rem" total="{/quota/20/Crecnt}" used="{/quota/20/Usecnt}" class="sapUiSmallMarginTop" />
+            </VBox>
+            <VBox alignItems="Start" visible="{/quota/isSecondVisible}">
+                <Label text="{/quota/30/Kotxt}" />
+                <custom:VacationIndicator width="8rem" total="{/quota/30/Crecnt}" used="{/quota/30/Usecnt}" class="sapUiSmallMarginTop" />
+            </VBox>
+            <VBox alignItems="Start" visible="{/quota/isSecondVisible}">
+                <Label text="{/quota/40/Kotxt}" />
+                <custom:VacationIndicator width="8rem" total="{/quota/40/Crecnt}" used="{/quota/40/Usecnt}" class="sapUiSmallMarginTop" />
+            </VBox>
+            <VBox alignItems="Start" visible="{/quota/isSecondVisible}">
+                <Label text="{/quota/50/Kotxt}" />
+                <custom:VacationIndicator width="8rem" total="{/quota/50/Crecnt}" used="{/quota/50/Usecnt}" class="sapUiSmallMarginTop" />
+            </VBox>
+        </grid:CSSGrid>
+    </VBox>
+</core:FragmentDefinition>

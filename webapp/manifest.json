@@ -94,6 +94,13 @@
 			"routes": [
         { "pattern": "", "name": "tesnaHome", "target": "home" },
 
+        { "pattern": "attendance", "name": "attendance", "target": "attendance" },
+        { "pattern": "m/attendance", "name": "m/attendance", "target": "m/attendance" },
+        { "pattern": "h/attendance", "name": "h/attendance", "target": "h/attendance" },
+        { "pattern": "attendance/{appno}/{werks}/{orgeh}/{kostl}/:flag:", "name": "attendance-detail", "target": "attendanceDetail" },
+        { "pattern": "m/attendance/{appno}/{werks}/{orgeh}/{kostl}/:flag:", "name": "m/attendance-detail", "target": "attendanceDetail" },
+        { "pattern": "h/attendance/{appno}/{werks}/{orgeh}/{kostl}/:flag:", "name": "h/attendance-detail", "target": "attendanceDetail" },
+
         { "pattern": "individualWorkState/:pernr:/:year:/:month:", "name": "individualWorkState", "target": "individualWorkState" },
         
         { "pattern": "shift", "name": "shift", "target": "shift" },
@@ -116,6 +123,11 @@
 			],
 			"targets": {
         "home": { "viewId": "home", "viewPath": "sap.ui.tesna.mvc.view.home", "viewName": "App" },
+
+        "attendance": { "viewId": "attendanceList", "viewPath": "sap.ui.tesna.mvc.view.attendance", "viewName": "ListE" },
+        "m/attendance": { "viewId": "m_attendanceList", "viewPath": "sap.ui.tesna.mvc.view.attendance", "viewName": "ListM" },
+        "h/attendance": { "viewId": "h_attendanceList", "viewPath": "sap.ui.tesna.mvc.view.attendance", "viewName": "ListH" },
+        "attendanceDetail": { "viewId": "attendanceDetail", "viewPath": "sap.ui.tesna.mvc.view.attendance", "viewName": "Detail" },
 
         "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "Main" },
         

@@ -26,7 +26,7 @@ sap.ui.define(
     /**
      * @constant {number} 작성중
      */
-    const STATE_IN_PROGRESS0 = 10;
+    const STATE_IN_PROGRESS = 10;
     /**
      * @constant {number} 기안
      */
@@ -44,13 +44,9 @@ sap.ui.define(
      */
     const STATE_COMPLETE = 50;
     /**
-     * @constant {string}} 의료비 상세내역 승인
+     * @constant {number} 취소
      */
-    const MED_STATE_COMPLETE = 'P';
-    /**
-     * @constant {string}} 의료비 상세내역 반려
-     */
-    const MED_STATE_REJECT = 'F';
+    const STATE_CANCEL = 90;
 
     function rem2px(rem) {
       if (rem.endsWith('px')) {
@@ -75,7 +71,7 @@ sap.ui.define(
           .countBy()
           .defaults({
             ['']: 0,
-            [STATE_IN_PROGRESS0]: 0,
+            [STATE_IN_PROGRESS]: 0,
             [STATE_APPLY1]: 0,
             [STATE_APPROVE]: 0,
             [STATE_REJECT1]: 0,
@@ -86,7 +82,7 @@ sap.ui.define(
         return {
           rowCount: Math.min(iVisibleRowCountLimit, iDataLength),
           totalCount: aRowData.length,
-          progressCount: oOccurCount[''] + oOccurCount[STATE_IN_PROGRESS0],
+          progressCount: oOccurCount[''] + oOccurCount[STATE_IN_PROGRESS],
           applyCount: oOccurCount[STATE_APPLY1],
           approveCount: oOccurCount[STATE_APPROVE],
           rejectCount: oOccurCount[STATE_REJECT1],
@@ -291,7 +287,7 @@ sap.ui.define(
         const vValue = !parseInt(sValue, 10) ? sValue : parseInt(sValue, 10);
 
         switch (vValue) {
-          case STATE_IN_PROGRESS0:
+          case STATE_IN_PROGRESS:
             // 작성중
             return sap.ui.core.IndicationColor.None;
           case STATE_APPLY1:
@@ -325,7 +321,7 @@ sap.ui.define(
           case STATE_IN_PROGRESS3:
             // 진행중
             return '진행중';
-          case STATE_IN_PROGRESS0:
+          case STATE_IN_PROGRESS:
             // 미신청
             return '미신청';
           case STATE_IN_PROGRESS1:
@@ -360,7 +356,7 @@ sap.ui.define(
         const vValue = !parseInt(sValue, 10) ? sValue : parseInt(sValue, 10);
 
         switch (vValue) {
-          case STATE_IN_PROGRESS0:
+          case STATE_IN_PROGRESS:
             // 미신청
             return '미신청';
           case STATE_APPLY1:

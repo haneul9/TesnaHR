@@ -3,21 +3,25 @@
     xmlns:core="sap.ui.core"
     xmlns:custom="sap.ui.tesna.control">
     <VBox class="hCardBox search-box" busyIndicatorDelay="0" busy="{/busy}">
-        <HBox justifyContent="SpaceBetween" class="title mb-10-px">
+        <HBox justifyContent="SpaceBetween" class="title" visible="{= ${/auth} === 'E' }">
+            <Title text="{i18n>LABEL_00202}" level="H2" />
+            <Button type="Transparent" class="icon-button search" press=".onPressSearch" />
+        </HBox>
+        <HBox justifyContent="SpaceBetween" class="title mb-10-px" visible="{= ${/auth} !== 'E' }">
             <Title text="{i18n>LABEL_00202}" level="H2" />
             <Button type="Transparent" class="icon-button search" press=".onPressSearch" />
         </HBox>
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridGap="4px">
-            <Label text="{i18n>LABEL_00220}" design="Bold" />
-            <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" enabled="{= ${/auth} === 'H' }" change=".onChangeWerks">
+            <Label text="{i18n>LABEL_00220}" design="Bold" visible="{= ${/auth} !== 'E' }" />
+            <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" enabled="{= ${/auth} === 'H' }" visible="{= ${/auth} !== 'E' }" change=".onChangeWerks">
                 <core:Item key="{Persa}" text="{Pbtxt}" />
             </ComboBox>
-            <Label text="{i18n>LABEL_00224}" design="Bold" />
-            <ComboBox items="{/entry/Orgeh}" selectedKey="{/searchConditions/Orgeh}" change=".onChangeOrgeh">
+            <Label text="{i18n>LABEL_00224}" design="Bold" visible="{= ${/auth} !== 'E' }" />
+            <ComboBox items="{/entry/Orgeh}" selectedKey="{/searchConditions/Orgeh}" visible="{= ${/auth} !== 'E' }" change=".onChangeOrgeh">
                 <core:Item key="{Orgeh}" text="{Fulln}" />
             </ComboBox>
-            <Label text="{i18n>LABEL_00351}" design="Bold" />
-            <ComboBox items="{/entry/Kostl}" selectedKey="{/searchConditions/Kostl}" change=".onChangeKostl">
+            <Label text="{i18n>LABEL_00351}" design="Bold" visible="{= ${/auth} !== 'E' }" />
+            <ComboBox items="{/entry/Kostl}" selectedKey="{/searchConditions/Kostl}" visible="{= ${/auth} !== 'E' }" change=".onChangeKostl">
                 <core:Item key="{Kostl}" text="{Ltext}" />
             </ComboBox>
             <Label text="{i18n>LABEL_00266}" design="Bold" />

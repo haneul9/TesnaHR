@@ -38,7 +38,7 @@ sap.ui.define(
         },
 
         toString(mEdmTime, sTimeFormat = this.sEdmTimeFormat) {
-          if (!mEdmTime || !_.isObject(mEdmTime) || !_.has(mEdmTime, 'ms')) {
+          if (!mEdmTime || !_.isObject(mEdmTime) || !_.has(mEdmTime, 'ms') || _.isNaN(mEdmTime.ms)) {
             return null;
           }
 

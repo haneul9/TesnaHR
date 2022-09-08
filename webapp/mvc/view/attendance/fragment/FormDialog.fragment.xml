@@ -16,7 +16,7 @@
             <grid:CSSGrid gridTemplateColumns="1fr 4fr" gridGap="8px" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}">
                 <Label text="{i18n>LABEL_00353}" />
                 <HBox>
-                    <Input value="{/form/dialog/data/Ename}" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" width="100%" maxSuggestionWidth="400px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/entry/Employees', templateShareable: false }" class="required tableRow_Text" editable="{= !${/form/Appst} }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
+                    <Input value="{/form/dialog/data/Ename}" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" width="100%" maxSuggestionWidth="400px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/entry/Employees', templateShareable: false }" class="required tableRow_Text" enabled="{= ${/auth} !== 'E' }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
                         <suggestionColumns>
                             <Column width="40%" popinDisplay="Inline" demandPopin="true">
                                 <Label text="{i18n>LABEL_00210}"/>
@@ -58,17 +58,17 @@
                     <core:Item key="{Awrsn}" text="{Awrsntx}" />
                 </ComboBox>
                 <Label text="{i18n>LABEL_05016}" />
-                <RadioButtonGroup columns="2" selectedIndex="{/form/dialog/data/Gubun}" enabled="{= !!${/form/dialog/data/Pernr} }" select=".callValidWorkTime">
-                    <custom:RadioButton text="{i18n>LABEL_05018}" innerSize="35%" visible="{= ${/form/dialog/data/Datim} !== 'T' }" />
-                    <custom:RadioButton text="{i18n>LABEL_05019}" innerSize="35%" visible="{= ${/form/dialog/data/Datim} !== 'D' }" />
+                <RadioButtonGroup columns="2" selectedIndex="{/form/dialog/data/Gubun}" enabled="{= !!${/form/dialog/data/Pernr} }" select=".onSelectGubunRadion">
+                    <custom:RadioButton text="{i18n>LABEL_05018}" innerSize="35%" enabled="{= ${/form/dialog/RadioControl} !== 'T' }" />
+                    <custom:RadioButton text="{i18n>LABEL_05019}" innerSize="35%" enabled="{= ${/form/dialog/RadioControl} !== 'D' }" />
                 </RadioButtonGroup>
                 <Label text="{i18n>LABEL_00382}" />
-                <HBox>
+                <HBox busyIndicatorDelay="0" busy="{/contentsBusy/period}">
                     <custom:DatePicker dateValue="{ path: '/form/dialog/data/Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" class="required" enabled="{= !!${/form/dialog/data/Pernr} }" change=".onChangeWorkStartDate" />
-                    <TimePicker dateValue="{ path: '/form/dialog/data/Beguz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/form/dialog/initBeguz}" minutesStep="{/form/dialog/minutesStep}" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiTinyMarginBegin" enabled="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" change=".onChangeTimeFormat" />
+                    <TimePicker id="startTime" dateValue="{ path: '/form/dialog/data/Beguz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/form/dialog/initBeguz}" minutesStep="{/form/dialog/minutesStep}" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiTinyMarginBegin" enabled="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" change=".onChangeTimeFormat" />
                     <Text text="~" class="sapUiTinyMarginBeginEnd lh-40-px" />
                     <custom:DatePicker dateValue="{ path: '/form/dialog/data/Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" class="required" enabled="{= !!${/form/dialog/data/Pernr} }" change=".callValidWorkTime" />
-                    <TimePicker dateValue="{ path: '/form/dialog/data/Enduz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/form/dialog/initEnduz}" minutesStep="{/form/dialog/minutesStep}" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiTinyMarginBegin" enabled="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" change=".onChangeTimeFormat" />
+                    <TimePicker id="endTime" dateValue="{ path: '/form/dialog/data/Enduz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/form/dialog/initEnduz}" minutesStep="{/form/dialog/minutesStep}" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiTinyMarginBegin" enabled="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" change=".onChangeTimeFormat" />
                     <Input value="{ path: '/form/dialog/data/Daytm', formatter: '.formatDaytm' }" editable="false" class="sapUiTinyMarginBegin color-09" />
                 </HBox>
                 <Label text="{i18n>LABEL_05011}" />

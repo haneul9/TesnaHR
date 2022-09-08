@@ -18,7 +18,7 @@
                 </HBox>
             </HBox>
         </VBox>
-        <VBox class="contents">
+        <VBox class="contents" busyIndicatorDelay="0" busy="{/contentsBusy/all}">
             <VBox class="vCardBox">
                 <HBox class="table-toolbar" justifyContent="SpaceBetween">
                     <HBox alignItems="Center" class="title">

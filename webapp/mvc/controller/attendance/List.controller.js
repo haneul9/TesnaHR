@@ -56,18 +56,10 @@ sap.ui.define(
             Kostl: [],
           },
           listInfo: {
-            rowCount: 1,
             totalCount: 0,
+            rowCount: 1,
             isShowProgress: false,
-            progressCount: 0,
-            isShowApply: true,
-            applyCount: 0,
-            isShowApprove: true,
-            approveCount: 0,
-            isShowReject: true,
-            rejectCount: 0,
-            isShowComplete: true,
-            completeCount: 0,
+            ObjTxt2: this.getBundleText('LABEL_00359'), // 기안
           },
           list: [],
           parameter: {
@@ -108,9 +100,12 @@ sap.ui.define(
           oViewModel.setProperty('/routeName', sRouteName);
           oViewModel.setProperty('/auth', this.isHass() ? 'H' : this.isMss() ? 'M' : 'E');
 
-          await this.setPersaEntry();
-          await this.setOrgehEntry();
-          await this.setKostlEntry();
+          if (!oViewModel.getProperty('/entry/Persa')) {
+            await this.setPersaEntry();
+            await this.setOrgehEntry();
+            await this.setKostlEntry();
+          }
+
           this.toggleActiveSearch();
 
           await this.retrieveQuota();
@@ -190,7 +185,7 @@ sap.ui.define(
             Austy: sAuth,
             Werks: mSearchConditions.Werks,
             Orgeh: mSearchConditions.Orgeh,
-            Kostl: mSearchConditions.Kostl,
+            Kostl: mSearchConditions.Kostl === '00000000' ? null : mSearchConditions.Kostl,
             Apbeg: this.DateUtils.parse(mSearchConditions.Apbeg),
             Apend: this.DateUtils.parse(mSearchConditions.Apend),
           });
@@ -252,7 +247,9 @@ sap.ui.define(
             Austy: oViewModel.getProperty('/auth'),
           });
 
-          oViewModel.setProperty('/searchConditions/Orgeh', _.get(aEntries, [0, 'Orgeh']));
+          const sAuth = oViewModel.getProperty('/auth');
+
+          oViewModel.setProperty('/searchConditions/Orgeh', sAuth === 'E' ? this.getAppointeeProperty('Orgeh') : _.get(aEntries, [1, 'Orgeh']));
           oViewModel.setProperty(
             '/entry/Orgeh',
             _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
@@ -284,7 +281,9 @@ sap.ui.define(
             _.set(aEntries, [0, 'Kostl'], '00000000');
           }
 
-          oViewModel.setProperty('/searchConditions/Kostl', _.get(aEntries, [0, 'Kostl']));
+          const sAuth = oViewModel.getProperty('/auth');
+
+          oViewModel.setProperty('/searchConditions/Kostl', _.get(aEntries, [sAuth === 'E' ? 1 : 0, 'Kostl']));
           oViewModel.setProperty(
             '/entry/Kostl',
             _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
@@ -297,8 +296,9 @@ sap.ui.define(
       toggleActiveSearch() {
         const oViewModel = this.getViewModel();
         const mSearchConditions = oViewModel.getProperty('/searchConditions');
+        const sAuth = oViewModel.getProperty('/auth');
 
-        oViewModel.setProperty('/isActiveSearch', !_.isEmpty(mSearchConditions.Werks) && !_.isEmpty(mSearchConditions.Orgeh) && !_.isEqual(mSearchConditions.Orgeh, '00000000'));
+        oViewModel.setProperty('/isActiveSearch', sAuth === 'E' || (!_.isEmpty(mSearchConditions.Werks) && !_.isEmpty(mSearchConditions.Orgeh) && !_.isEqual(mSearchConditions.Orgeh, '00000000')));
       },
 
       /*****************************************************************
@@ -397,14 +397,28 @@ sap.ui.define(
       },
 
       onPressNewApprovalBtn() {
-        const mSearchConditions = this.getViewModel().getProperty('/searchConditions');
+        const oViewModel = this.getViewModel();
+        const sAuth = oViewModel.getProperty('/auth');
 
-        this.getRouter().navTo(`${this.ROUTE_NAME}-detail`, {
-          appno: 'N',
-          werks: mSearchConditions.Werks,
-          orgeh: mSearchConditions.Orgeh,
-          kostl: !mSearchConditions.Kostl || mSearchConditions.Kostl === '00000000' ? 'NA' : mSearchConditions.Kostl,
-        });
+        if (sAuth === 'E') {
+          const mSessionData = this.getAppointeeData();
+
+          this.getRouter().navTo(`${this.ROUTE_NAME}-detail`, {
+            appno: 'N',
+            werks: mSessionData.Persa,
+            orgeh: mSessionData.Orgeh,
+            kostl: !mSessionData.Kostl ? 'NA' : mSessionData.Kostl,
+          });
+        } else {
+          const mSearchConditions = oViewModel.getProperty('/searchConditions');
+
+          this.getRouter().navTo(`${this.ROUTE_NAME}-detail`, {
+            appno: 'N',
+            werks: mSearchConditions.Werks,
+            orgeh: mSearchConditions.Orgeh,
+            kostl: !mSearchConditions.Kostl || mSearchConditions.Kostl === '00000000' ? 'NA' : mSearchConditions.Kostl,
+          });
+        }
       },
 
       /*****************************************************************

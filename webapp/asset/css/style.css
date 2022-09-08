@@ -452,7 +452,7 @@ div.sapUiTableSelectAllCheckBox::after, div.sapUiTableRowSelectionCell::after {b
 
 /* 공통 Font, Border Color - Disabled, Readonly */
 .sapMInputBaseDisabled .sapMInputBaseContentWrapper {border-color:var(--BorderColorDisabled) !important; background:#fdfdfd}
-.sapMInputBaseDisabled:not(.view-box) .sapMInputBaseContentWrapper .sapMInputBaseInner {color:var(--FontColorDisabled) !important; background-color:#fdfdfd}
+.sapMInputBaseDisabled:not(.view-box) .sapMInputBaseContentWrapper .sapMInputBaseInner {color:#222 !important; background-color:#fdfdfd}
 .sapMInputBaseReadonly .sapMInputBaseContentWrapper {border-color:var(--BorderColorReadonly) !important; background:#f3f3f3}
 
 .sapMComboBox.sapMComboBoxDisabled > div {border-color:var(--BorderColorDisabled) !important; background:#fdfdfd}

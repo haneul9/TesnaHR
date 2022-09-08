@@ -67,6 +67,7 @@ sap.ui.define(
             button: false,
             table: false,
             dialog: false,
+            period: false,
           },
           entry: {
             Awart: [],
@@ -112,7 +113,7 @@ sap.ui.define(
         oViewModel.setProperty('/form/Appno', oParameter.appno === 'N' ? '' : oParameter.appno);
         oViewModel.setProperty('/form/Werks', oParameter.werks);
         oViewModel.setProperty('/form/Orgeh', oParameter.orgeh);
-        oViewModel.setProperty('/form/Kostl', !oParameter.kostl || oParameter.kostl === 'NA' ? null : oParameter.kostl);
+        oViewModel.setProperty('/form/Kostl', !oParameter.kostl || _.toUpper(oParameter.kostl) === 'NA' ? null : oParameter.kostl);
         oViewModel.setProperty('/previousName', _.chain(sRouteName).split('-', 1).head().value());
 
         this.loadPage();
@@ -183,6 +184,8 @@ sap.ui.define(
             ..._.pick(mFormData, ['Appno', 'Werks', 'Orgeh', 'Kostl']),
           });
 
+          mFormData.Appst = _.get(aResults, [0, 'Appst']);
+
           oViewModel.setProperty('/form', {
             ...mFormData,
             rowCount: Math.min(aResults.length, 10),
@@ -224,7 +227,7 @@ sap.ui.define(
         });
       },
 
-      async setWorkPeriod() {
+      setWorkPeriod() {
         const oViewModel = this.getViewModel();
 
         try {
@@ -237,83 +240,104 @@ sap.ui.define(
             oViewModel.setProperty('/form/dialog/data/Awrsntx', mAwrsnInfo.Awrsntx);
             oViewModel.setProperty('/form/dialog/data/Gubun', mAwrsnInfo.Datim === 'D' ? 0 : mAwrsnInfo.Datim === 'T' ? 1 : null);
             oViewModel.setProperty('/form/dialog/data/Datim', mAwrsnInfo.Datim);
+            oViewModel.setProperty('/form/dialog/RadioControl', mAwrsnInfo.Datim);
             oViewModel.setProperty('/form/dialog/minutesStep', sAwrsn === 'A6XXXX10' ? 5 : 10); // 보건휴가 5분단위 입력
+
+            // 시간근태일 경우 시작일과 종료일을 맞춰준다.
+            if (mAwrsnInfo.Datim === 'T') {
+              const dBegda = oViewModel.getProperty('/form/dialog/data/Begda');
+
+              if (dBegda) oViewModel.setProperty('/form/dialog/data/Endda', dBegda);
+            }
           } else {
             oViewModel.setProperty('/form/dialog/data/Gubun', null);
             oViewModel.setProperty('/form/dialog/data/Datim', 'X');
+            oViewModel.setProperty('/form/dialog/data/RadioControl', 'X');
           }
 
           oViewModel.setProperty('/form/dialog/data/Beguz', null);
           oViewModel.setProperty('/form/dialog/data/Enduz', null);
           oViewModel.setProperty('/form/dialog/data/Daytm', '');
-        } catch (oError) {
-          this.debug('Controller > Attendance Detail > setWorkPeriod Error', oError);
 
-          AppUtils.handleError(oError);
+          this.byId('startTime').setValue(null).setDateValue(null);
+          this.byId('endTime').setValue(null).setDateValue(null);
+        } catch (oError) {
+          throw oError;
+        } finally {
+          oViewModel.refresh();
         }
       },
 
-      async callValidWorkTime() {
-        const oViewModel = this.getViewModel();
+      callValidWorkTime() {
+        this.setContentsBusy(true, 'period');
 
-        try {
-          const mDialogFormData = _.cloneDeep(oViewModel.getProperty('/form/dialog/data'));
+        setTimeout(async () => {
+          const oViewModel = this.getViewModel();
 
-          if (mDialogFormData.Gubun === 0 && mDialogFormData.Pernr && mDialogFormData.Awart && mDialogFormData.Awrsn && mDialogFormData.Begda && mDialogFormData.Endda) {
-          } else if (
-            mDialogFormData.Gubun === 1 &&
-            mDialogFormData.Pernr &&
-            mDialogFormData.Awart &&
-            mDialogFormData.Awrsn &&
-            mDialogFormData.Begda &&
-            mDialogFormData.Endda &&
-            mDialogFormData.Beguz &&
-            mDialogFormData.Enduz
-          ) {
-          } else if (
-            mDialogFormData.Gubun === 1 &&
-            mDialogFormData.Pernr &&
-            mDialogFormData.Awart &&
-            mDialogFormData.Awrsn &&
-            mDialogFormData.Begda &&
-            mDialogFormData.Endda &&
-            _.includes(['A1KR0010', 'A1KR0020', 'A1KR0030', 'A1KR0040'], mDialogFormData.Awrsn)
-          ) {
-          } else {
-            return;
+          try {
+            const mDialogFormData = _.cloneDeep(oViewModel.getProperty('/form/dialog/data'));
+
+            if (mDialogFormData.Gubun === 0 && mDialogFormData.Pernr && mDialogFormData.Awart && mDialogFormData.Awrsn && mDialogFormData.Begda && mDialogFormData.Endda) {
+            } else if (
+              mDialogFormData.Gubun === 1 &&
+              mDialogFormData.Pernr &&
+              mDialogFormData.Awart &&
+              mDialogFormData.Awrsn &&
+              mDialogFormData.Begda &&
+              mDialogFormData.Endda &&
+              mDialogFormData.Beguz &&
+              !_.isNaN(mDialogFormData.Beguz.ms) &&
+              mDialogFormData.Enduz &&
+              !_.isNaN(mDialogFormData.Enduz.ms)
+            ) {
+            } else if (
+              mDialogFormData.Gubun === 1 &&
+              mDialogFormData.Pernr &&
+              mDialogFormData.Awart &&
+              mDialogFormData.Awrsn &&
+              mDialogFormData.Begda &&
+              mDialogFormData.Endda &&
+              _.includes(['A1KR0010', 'A1KR0020', 'A1KR0030', 'A1KR0040'], mDialogFormData.Awrsn)
+            ) {
+            } else {
+              return;
+            }
+
+            const [mResult] = await Client.getEntitySet(this.getModel(ServiceNames.WORKTIME), 'PersTimeAbsence2', {
+              Tmdat: this.DateUtils.parse(mDialogFormData.Begda),
+              Begda: this.DateUtils.parse(mDialogFormData.Begda),
+              Endda: this.DateUtils.parse(mDialogFormData.Endda),
+              Beguz: mDialogFormData.Beguz ? this.TimeUtils.toString(mDialogFormData.Beguz, 'HHmm') : null,
+              Enduz: mDialogFormData.Enduz ? this.TimeUtils.toString(mDialogFormData.Enduz, 'HHmm') : null,
+              ..._.pick(mDialogFormData, ['Pernr', 'Awart', 'Awrsn', 'Datim']),
+            });
+
+            oViewModel.setProperty('/form/dialog/calcCompleted', true);
+            oViewModel.setProperty('/form/dialog/data/Daytm', mResult.Daytm);
+            oViewModel.setProperty('/form/dialog/data/Beguz', this.TimeUtils.toEdm(mResult.Beguz));
+            oViewModel.setProperty('/form/dialog/data/Enduz', this.TimeUtils.toEdm(mResult.Enduz));
+            oViewModel.setProperty('/form/dialog/data/Stdaz', mResult.Stdaz);
+            oViewModel.setProperty('/form/dialog/data/Abrtg', mResult.Abrtg);
+            oViewModel.setProperty('/form/dialog/data/Abrst', mResult.Abrst);
+          } catch (oError) {
+            oViewModel.setProperty('/form/dialog/calcCompleted', false);
+            oViewModel.setProperty('/form/dialog/data/Daytm', null);
+            oViewModel.setProperty('/form/dialog/data/Beguz', null);
+            oViewModel.setProperty('/form/dialog/data/Enduz', null);
+            oViewModel.setProperty('/form/dialog/data/Stdaz', null);
+            oViewModel.setProperty('/form/dialog/data/Abrtg', null);
+            oViewModel.setProperty('/form/dialog/data/Abrst', null);
+
+            this.byId('startTime').setValue(null).setDateValue(null);
+            this.byId('endTime').setValue(null).setDateValue(null);
+
+            this.debug('Controller > Attendance Detail > callValidWorkTime Error', oError);
+
+            AppUtils.handleError(oError);
+          } finally {
+            this.setContentsBusy(false, 'period');
           }
-
-          const [mResult] = await Client.getEntitySet(this.getModel(ServiceNames.WORKTIME), 'PersTimeAbsence2', {
-            Tmdat: this.DateUtils.parse(mDialogFormData.Begda),
-            Begda: this.DateUtils.parse(mDialogFormData.Begda),
-            Endda: this.DateUtils.parse(mDialogFormData.Endda),
-            Beguz: mDialogFormData.Beguz ? this.TimeUtils.toString(mDialogFormData.Beguz, 'HHmm') : null,
-            Enduz: mDialogFormData.Enduz ? this.TimeUtils.toString(mDialogFormData.Enduz, 'HHmm') : null,
-            ..._.pick(mDialogFormData, ['Pernr', 'Awart', 'Awrsn', 'Datim']),
-          });
-
-          oViewModel.setProperty('/form/dialog/calcCompleted', true);
-          oViewModel.setProperty('/form/dialog/data/Daytm', mResult.Daytm);
-          oViewModel.setProperty('/form/dialog/data/Beguz', this.TimeUtils.toEdm(mResult.Beguz));
-          oViewModel.setProperty('/form/dialog/data/Enduz', this.TimeUtils.toEdm(mResult.Enduz));
-          oViewModel.setProperty('/form/dialog/data/Stdaz', mResult.Stdaz);
-          oViewModel.setProperty('/form/dialog/data/Abrtg', mResult.Abrtg);
-          oViewModel.setProperty('/form/dialog/data/Abrst', mResult.Abrst);
-        } catch (oError) {
-          oViewModel.setProperty('/form/dialog/calcCompleted', false);
-          oViewModel.setProperty('/form/dialog/data/Daytm', null);
-          oViewModel.setProperty('/form/dialog/data/Beguz', null);
-          oViewModel.setProperty('/form/dialog/data/Enduz', null);
-          oViewModel.setProperty('/form/dialog/data/Stdaz', null);
-          oViewModel.setProperty('/form/dialog/data/Abrtg', null);
-          oViewModel.setProperty('/form/dialog/data/Abrst', null);
-
-          this.debug('Controller > Attendance Detail > callValidWorkTime Error', oError);
-
-          AppUtils.handleError(oError);
-        } finally {
-          // this.setContentsBusy(false, 'dialog');
-        }
+        }, 0);
       },
 
       async createProcess() {
@@ -328,7 +352,7 @@ sap.ui.define(
             Prcty: 'A',
             Austy: oViewModel.getProperty('/auth'),
             Pernr: this.getAppointeeProperty('Pernr'),
-            ..._.pick(mFormData, ['Appno', 'Werks', 'Orgeh', 'Kostl']),
+            ..._.chain(mFormData).pick(['Appno', 'Werks', 'Orgeh', 'Kostl']).omitBy(_.isNil).omitBy(_.isEmpty).value(),
             LeaveApplNav: aTableData,
           });
 
@@ -506,18 +530,30 @@ sap.ui.define(
 
           this.pFormDialog.attachBeforeOpen(async () => {
             try {
-              const dToday = moment().hours(9).toDate();
-
-              this.getViewModel().setProperty('/form/dialog/data', {
-                Begda: dToday,
-                Endda: dToday,
-                Datim: 'X',
-              });
-
               await Promise.all([
                 this.retrieveTimePernrList(), //
                 this.retrieveTimeTypeaList(),
               ]);
+
+              this.getViewModel().setProperty('/form/dialog/data', { Datim: 'X' });
+
+              if (!this.isMss() && !this.isHass()) {
+                const oViewModel = this.getViewModel();
+                const aEmployees = oViewModel.getProperty('/entry/Employees');
+                const sPernr = this.getAppointeeProperty('Pernr');
+                const mEmployee = _.find(aEmployees, { Pernr: sPernr });
+
+                if (!!mEmployee) {
+                  oViewModel.setProperty('/form/dialog/data', {
+                    ..._.pick(mEmployee, ['Pernr', 'Ename', 'Orgeh', 'Orgtx', 'Zzcaltl', 'Zzcaltltx', 'Blqtx']),
+                    Schkz: mEmployee.Schkz2,
+                    Rtext: mEmployee.Rtext2,
+                    Kostl: mEmployee.Kostl2,
+                    Ltext: mEmployee.Ltext2,
+                    PernrInfoTxt: `(${mEmployee.Pernr}, ${mEmployee.Zzcaltltx}, ${mEmployee.Orgtx})`,
+                  });
+                }
+              }
             } catch (oError) {
               this.debug('Controller > Attendance Detail > onPressAddNewApprovalBtn Error', oError);
 
@@ -616,6 +652,34 @@ sap.ui.define(
         this.callValidWorkTime();
       },
 
+      onSelectGubunRadion(oEvent) {
+        const oViewModel = this.getViewModel();
+        const iGubun = oEvent.getParameter('selectedIndex');
+        const sDatim = oViewModel.getProperty('/form/dialog/data/Datim');
+
+        if (iGubun === 1) {
+          const dBegda = oViewModel.getProperty('/form/dialog/data/Begda');
+
+          if (dBegda) oViewModel.setProperty('/form/dialog/data/Endda', dBegda);
+        }
+
+        oViewModel.setProperty('/form/dialog/data/Gubun', iGubun);
+        oViewModel.setProperty('/form/dialog/data/Datim', iGubun === 0 ? 'D' : iGubun === 1 ? 'T' : sDatim);
+        oViewModel.setProperty('/form/dialog/calcCompleted', false);
+        oViewModel.setProperty('/form/dialog/data/Daytm', null);
+        oViewModel.setProperty('/form/dialog/data/Beguz', null);
+        oViewModel.setProperty('/form/dialog/data/Enduz', null);
+        oViewModel.setProperty('/form/dialog/data/Stdaz', null);
+        oViewModel.setProperty('/form/dialog/data/Abrtg', null);
+        oViewModel.setProperty('/form/dialog/data/Abrst', null);
+        oViewModel.refresh();
+
+        this.byId('startTime').setValue(null).setDateValue(null);
+        this.byId('endTime').setValue(null).setDateValue(null);
+
+        this.callValidWorkTime();
+      },
+
       onPressFormDialogSave() {
         const oViewModel = this.getViewModel();
         const aTableData = oViewModel.getProperty('/form/list');
@@ -631,8 +695,8 @@ sap.ui.define(
             Aptyptx: this.getBundleText('LABEL_00105'), // 신규
             Period: _.chain([sBegda, sEndda]).uniq().join(' ~ ').value(),
             ...mDialogFormData,
-            Beguz: this.TimeUtils.toString(mDialogFormData.Beguz, 'HHmm'),
-            Enduz: this.TimeUtils.toString(mDialogFormData.Enduz, 'HHmm'),
+            Beguz: mDialogFormData.Beguz ? this.TimeUtils.toString(mDialogFormData.Beguz, 'HHmm') : null,
+            Enduz: mDialogFormData.Enduz ? this.TimeUtils.toString(mDialogFormData.Enduz, 'HHmm') : null,
           },
         ]);
 
@@ -653,7 +717,8 @@ sap.ui.define(
           .filter((o, i) => _.includes(aSelectedIndices, i))
           .cloneDeep()
           .map((o) => ({
-            ..._.omit(o, '__metadata'),
+            ..._.chain(o).omit('__metadata').omitBy(_.isNil).value(),
+            Appno: '',
             Aptyp: 'C',
             Aptyptx: this.getBundleText('LABEL_00118'), // 취소
           }))
@@ -679,6 +744,7 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         oViewModel.setProperty('/form/dialog/data/Endda', oViewModel.getProperty('/form/dialog/data/Begda'));
+        oViewModel.refresh();
 
         this.callValidWorkTime();
       },
@@ -730,7 +796,7 @@ sap.ui.define(
             PernrInfoTxt: `(${mSuggestionData.Pernr}, ${mSuggestionData.Zzcaltltx}, ${mSuggestionData.Orgtx})`,
           });
 
-          oViewModel.refresh(true);
+          oViewModel.refresh();
         }
 
         oInput.getBinding('suggestionRows').filter([]);
@@ -751,6 +817,7 @@ sap.ui.define(
             Endda: moment().hours(9).toDate(),
             Datim: 'X',
           });
+          oViewModel.refresh();
 
           this.callValidWorkTime();
 
@@ -778,6 +845,8 @@ sap.ui.define(
           });
         }
 
+        oViewModel.refresh();
+
         this.callValidWorkTime();
       },
 
@@ -789,10 +858,14 @@ sap.ui.define(
           const oViewModel = this.getViewModel();
           const oModel = this.getModel(ServiceNames.WORKTIME);
           const mFormData = oViewModel.getProperty('/form');
+          const sAuth = oViewModel.getProperty('/auth');
           const aResults = await Client.getEntitySet(oModel, 'TimePernrList', {
+            Austy: sAuth,
+            Pernr: sAuth === 'E' ? this.getAppointeeProperty('Pernr') : null,
             Begda: moment().hours(9).toDate(),
+            Werks: mFormData.Werks,
+            Orgeh: sAuth === 'E' ? null : mFormData.Orgeh,
             Kostl2: mFormData.Kostl,
-            ..._.pick(mFormData, ['Werks', 'Orgeh']),
           });
 
           oViewModel.setProperty(

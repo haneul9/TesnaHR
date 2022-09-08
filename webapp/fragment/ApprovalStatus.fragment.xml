@@ -75,7 +75,7 @@
                 <table:Column width="25%" visible="{= !${/settings/activeInput} }">
                     <Label text="Comments" />
                     <table:template>
-                        <Text width="100%" text="{Rjrsn}" />
+                        <Text width="100%" text="{Comnt}" />
                     </table:template>
                 </table:Column>
             </table:columns>

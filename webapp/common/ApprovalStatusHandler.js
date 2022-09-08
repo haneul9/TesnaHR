@@ -171,6 +171,7 @@ sap.ui.define(
 
               return _.chain(o)
                 .omit('__metadata')
+                .set('Comnt', o.Rjrsn ? o.Rjrsn : o.Comnt)
                 .set('Perpic', o.Perpic || this.oController.getUnknownAvatarImageURL())
                 .set('enabledComments', bEnableComments)
                 .value();

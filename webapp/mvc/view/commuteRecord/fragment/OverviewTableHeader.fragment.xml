@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <HBox justifyContent="SpaceBetween" class="header-wrap">
+        <HBox class="header">
+            <Title level="H3" text="{i18n>LABEL_00168}" class="sapUiSmallMarginEnd" />
+            <Text text="total {/listInfo/totalCount}" />
+        </HBox>
+        <HBox>
+            <HBox class="status-wrap">
+                <ObjectStatus text="{i18n>LABEL_ERROR} {/listInfo/onlyProgressCount}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication04" />
+                <ObjectStatus text="{i18n>LABEL_CONFIRM} {/listInfo/applyCount}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication02" />
+                <ObjectStatus text="{i18n>LABEL_06017} {/listInfo/approveCount}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication03" />
+                <ObjectStatus text="{i18n>LABEL_06018} {/listInfo/completeCount}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication05" />
+            </HBox>
+            <Button icon="sap-icon://excel-attachment" text="Excel" press=".onPressExcelDownload" busyIndicatorDelay="0" busy="{/busy}" />
+        </HBox>
+    </HBox>
+</core:FragmentDefinition>

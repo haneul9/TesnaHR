@@ -101,6 +101,10 @@
         { "pattern": "m/attendance/{appno}/{werks}/{orgeh}/{kostl}/:flag:", "name": "m/attendance-detail", "target": "attendanceDetail" },
         { "pattern": "h/attendance/{appno}/{werks}/{orgeh}/{kostl}/:flag:", "name": "h/attendance-detail", "target": "attendanceDetail" },
 
+        { "pattern": "commuteRecord", "name": "commuteRecord", "target": "commuteRecord" },
+        { "pattern": "m/commuteRecord", "name": "m/commuteRecord", "target": "m/commuteRecord" },
+        { "pattern": "h/commuteRecord", "name": "h/commuteRecord", "target": "h/commuteRecord" },
+
         { "pattern": "individualWorkState/:pernr:/:year:/:month:", "name": "individualWorkState", "target": "individualWorkState" },
         
         { "pattern": "shift", "name": "shift", "target": "shift" },
@@ -128,6 +132,10 @@
         "m/attendance": { "viewId": "m_attendanceList", "viewPath": "sap.ui.tesna.mvc.view.attendance", "viewName": "ListM" },
         "h/attendance": { "viewId": "h_attendanceList", "viewPath": "sap.ui.tesna.mvc.view.attendance", "viewName": "ListH" },
         "attendanceDetail": { "viewId": "attendanceDetail", "viewPath": "sap.ui.tesna.mvc.view.attendance", "viewName": "Detail" },
+
+        "commuteRecord": { "viewId": "commuteRecordList", "viewPath": "sap.ui.tesna.mvc.view.commuteRecord", "viewName": "ListE" },
+        "m/commuteRecord": { "viewId": "m_commuteRecordList", "viewPath": "sap.ui.tesna.mvc.view.commuteRecord", "viewName": "ListM" },
+        "h/commuteRecord": { "viewId": "h_commuteRecordList", "viewPath": "sap.ui.tesna.mvc.view.commuteRecord", "viewName": "ListH" },
 
         "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "Main" },
         

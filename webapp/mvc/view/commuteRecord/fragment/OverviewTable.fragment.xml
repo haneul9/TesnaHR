@@ -1,0 +1,231 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <table:Table id="commuteRecordListTable" selectionMode="None" fixedColumnCount="8" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table}" noData="{i18n>MSG_00001}" cellClick=".onSelectRow">
+        <table:rowSettingsTemplate>
+            <table:RowSettings highlight="{ path: 'Tstat', formatter: '.rowHighlight' }" />
+        </table:rowSettingsTemplate>
+        <table:columns>
+            <table:Column width="60px" filterProperty="Tstattx" sortProperty="Tstattx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00144}" />
+                    <Label text="{i18n>LABEL_00144}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Tstattx}" width="100%" textAlign="Center" wrapping="false">
+                        <customData>
+                            <core:CustomData key="status" value="T{Tstat}" writeToDom="true" />
+                        </customData>
+                    </Text>
+                </table:template>
+            </table:Column>
+            <table:Column width="160px" filterProperty="Orgtx" sortProperty="Orgtx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00224}" />
+                    <Label text="{i18n>LABEL_00224}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="160px" filterProperty="Ltext" sortProperty="Ltext">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_01004}" />
+                    <Label text="{i18n>LABEL_01004}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px" filterProperty="Pernr" sortProperty="Pernr">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00209}" />
+                    <Label text="{i18n>LABEL_00209}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px" filterProperty="Ename" sortProperty="Ename">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00210}" />
+                    <Label text="{i18n>LABEL_00210}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px" filterProperty="Tmdat" sortProperty="Tmdat">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06016}" />
+                    <Label text="{i18n>LABEL_06016}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="50px" filterProperty="Daytx" sortProperty="Daytx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00350}" />
+                    <Label text="{i18n>LABEL_00350}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Daytx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="60px" filterProperty="Dayngttx" sortProperty="Dayngttx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00385}" />
+                    <Label text="{i18n>LABEL_00385}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px" headerSpan="4" filterProperty="Begdaf" sortProperty="Begdaf">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06003}" />
+                    <Label text="{i18n>LABEL_06004}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px" filterProperty="Beguzf" sortProperty="Beguzf">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06003}" />
+                    <Label text="{i18n>LABEL_06005}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px" filterProperty="Enddaf" sortProperty="Enddaf">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06003}" />
+                    <Label text="{i18n>LABEL_06006}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px" filterProperty="Enduzf" sortProperty="Enduzf">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06003}" />
+                    <Label text="{i18n>LABEL_06007}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="200px" filterProperty="Tagerrtx" sortProperty="Tagerrtx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06008}" />
+                    <Label text="{i18n>LABEL_06008}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Tagerrtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="60px" filterProperty="Notag" sortProperty="Notag">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06009}" wrapping="true" />
+                    <Label text="{i18n>LABEL_06009}" wrapping="true" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Notag}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="70px" filterProperty="Abserrtx" sortProperty="Abserrtx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06010}" />
+                    <Label text="{i18n>LABEL_06010}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Abserrtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="200px" filterProperty="Cortytx" sortProperty="Cortytx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06011}" />
+                    <Label text="{i18n>LABEL_06011}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Cortytx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="50px" filterProperty="Lateyn" sortProperty="Lateyn">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06012}" wrapping="true" />
+                    <Label text="{i18n>LABEL_06012}" wrapping="true" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Lateyn}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="50px" filterProperty="Awrsntx" sortProperty="Awrsntx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06013}" wrapping="true" />
+                    <Label text="{i18n>LABEL_06013}" wrapping="true" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px" headerSpan="4" filterProperty="Begda" sortProperty="Begda">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06014}" />
+                    <Label text="{i18n>LABEL_06004}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px" filterProperty="Beguz" sortProperty="Beguz">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06014}" />
+                    <Label text="{i18n>LABEL_06005}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Beguz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px" filterProperty="Endda" sortProperty="Endda">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06014}" />
+                    <Label text="{i18n>LABEL_06006}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px" filterProperty="Enduz" sortProperty="Enduz">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06014}" />
+                    <Label text="{i18n>LABEL_06007}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="140px" filterProperty="Appno" sortProperty="Appno">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_06015}" />
+                    <Label text="{i18n>LABEL_06015}" />
+                </table:multiLabels>
+                <table:template>
+                    <Link target="_blank" textAlign="Center" width="100%" text="{ path: 'Appno', type: 'sap.ui.tesna.mvc.model.type.Docno' }" press=".onPressRowApprovalDetail" />
+                </table:template>
+            </table:Column>
+            <table:Column width="140px" filterProperty="Apptytx" sortProperty="Apptytx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00386}" />
+                    <Label text="{i18n>LABEL_00386}" />
+                </table:multiLabels>
+                <table:template>
+                    <Link target="_blank" textAlign="Center" width="100%" text="{Apptytx}" press=".onPressRowApprovalDetail" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

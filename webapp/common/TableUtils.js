@@ -3,6 +3,7 @@ sap.ui.define(
     'sap/ui/export/library', //
     'sap/ui/export/Spreadsheet',
     'sap/ui/core/Fragment',
+    'sap/ui/tesna/common/TableUtils',
   ],
   (
     exportLibrary, //
@@ -83,6 +84,7 @@ sap.ui.define(
           rowCount: Math.min(iVisibleRowCountLimit, iDataLength),
           totalCount: aRowData.length,
           progressCount: oOccurCount[''] + oOccurCount[STATE_IN_PROGRESS],
+          onlyProgressCount: oOccurCount[STATE_IN_PROGRESS],
           applyCount: oOccurCount[STATE_APPLY1],
           approveCount: oOccurCount[STATE_APPROVE],
           rejectCount: oOccurCount[STATE_REJECT1],
@@ -118,7 +120,11 @@ sap.ui.define(
           worker: false,
           dataSource: _.map(aExportTableRowData, (o) => {
             return _.forOwn(o, (v, p) => {
-              if (_.isObject(v) && _.has(v, 'ms')) _.set(o, p, moment(v.ms - i9Hours).format('HH:mm'));
+              if (_.isObject(v) && _.has(v, 'ms')) {
+                _.set(o, p, moment(v.ms - i9Hours).format('HH:mm'));
+              } else if (_.isString(v) && _.size(v) === 4 && (_.startsWith(p, 'Beguz') || _.startsWith(p, 'Enduz'))) {
+                _.set(o, p, v.replace(/(\d{2})(\d)/g, '$1:$2'));
+              }
             });
           }),
           fileName: `${sFileName}_${moment().format('YYYYMMDD')}.xlsx`,
@@ -186,6 +192,34 @@ sap.ui.define(
         return _.isEqual(sPropertyPath, sStatCode) ? sStatTxt : sPropertyPath;
       },
 
+      _rederRowspan(oTable, aColumnIndexes, sTheadOrTbody, bFixed) {
+        aColumnIndexes.forEach((colIndex) => {
+          const sId = `#${oTable.getId()}-${sTheadOrTbody === 'thead' ? 'header' : 'table'}${bFixed ? '-fixed-fixrow' : ''} tbody>tr td:nth-child(${colIndex + 1}):visible`;
+          const aTDs = $(sId).get();
+          let oPrevTD = aTDs.shift();
+
+          aTDs.forEach((oTD) => {
+            const $p = $(oPrevTD);
+            const $c = $(oTD);
+
+            if ($c.text() === $p.text()) {
+              $p.attr('rowspan', Number($p.attr('rowspan') || 1) + 1);
+              $c.hide();
+            } else {
+              oPrevTD = oTD;
+            }
+          });
+
+          $(sId)
+            .get()
+            .forEach((oTD) => {
+              $(oTD)
+                .find('span')
+                .text(_.split($(oTD).text(), '--', 1));
+            });
+        });
+      },
+
       /**
        * @param {object} o = {
        *   table: sap.ui.table.Table instance
@@ -193,39 +227,18 @@ sap.ui.define(
        *   theadOrTbody: 'thead' or 'tbody'
        * }
        */
-      adjustRowSpan({ oTable, aColIndices, sTheadOrTbody, bMultiLabel = false }) {
+      adjustRowSpan({ oTable, aColIndices, sTheadOrTbody, bIncludeFixedColumns = false, aFixedColIndices }) {
         if (!aColIndices.length) return;
+
+        const oTableUtis = this;
 
         oTable.addEventDelegate({
           onAfterRendering() {
-            const sTarget = sTheadOrTbody === 'thead' ? 'header' : 'table';
-            const sTableId = bMultiLabel ? '-fixed-fixrow' : '';
+            oTableUtis._rederRowspan(oTable, aColIndices, sTheadOrTbody);
 
-            aColIndices.forEach((colIndex) => {
-              const sId = `#${oTable.getId()}-${sTarget}${sTableId} tbody>tr td:nth-child(${colIndex + 1}):visible`;
-              const aTDs = $(sId).get();
-              let oPrevTD = aTDs.shift();
-
-              aTDs.forEach((oTD) => {
-                const $p = $(oPrevTD);
-                const $c = $(oTD);
-
-                if ($c.text() === $p.text()) {
-                  $p.attr('rowspan', Number($p.attr('rowspan') || 1) + 1);
-                  $c.hide();
-                } else {
-                  oPrevTD = oTD;
-                }
-              });
-
-              $(sId)
-                .get()
-                .forEach((oTD) => {
-                  $(oTD)
-                    .find('span')
-                    .text(_.split($(oTD).text(), '--', 1));
-                });
-            });
+            if (bIncludeFixedColumns && aFixedColIndices) {
+              oTableUtis._rederRowspan(oTable, aFixedColIndices, sTheadOrTbody, true);
+            }
           },
         });
       },

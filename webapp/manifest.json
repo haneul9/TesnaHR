@@ -105,6 +105,13 @@
         { "pattern": "m/commuteRecord", "name": "m/commuteRecord", "target": "m/commuteRecord" },
         { "pattern": "h/commuteRecord", "name": "h/commuteRecord", "target": "h/commuteRecord" },
 
+        { "pattern": "commuteCheck", "name": "commuteCheck", "target": "commuteCheck" },
+        { "pattern": "m/commuteCheck", "name": "m/commuteCheck", "target": "m/commuteCheck" },
+        { "pattern": "h/commuteCheck", "name": "h/commuteCheck", "target": "h/commuteCheck" },
+        { "pattern": "commuteCheck/{appno}/:flag:", "name": "commuteCheck-detail", "target": "commuteCheckDetail" },
+        { "pattern": "m/commuteCheck/{appno}/:flag:", "name": "m/commuteCheck-detail", "target": "commuteCheckDetail" },
+        { "pattern": "h/commuteCheck/{appno}/:flag:", "name": "h/commuteCheck-detail", "target": "commuteCheckDetail" },
+
         { "pattern": "individualWorkState/:pernr:/:year:/:month:", "name": "individualWorkState", "target": "individualWorkState" },
         
         { "pattern": "shift", "name": "shift", "target": "shift" },
@@ -136,6 +143,11 @@
         "commuteRecord": { "viewId": "commuteRecordList", "viewPath": "sap.ui.tesna.mvc.view.commuteRecord", "viewName": "ListE" },
         "m/commuteRecord": { "viewId": "m_commuteRecordList", "viewPath": "sap.ui.tesna.mvc.view.commuteRecord", "viewName": "ListM" },
         "h/commuteRecord": { "viewId": "h_commuteRecordList", "viewPath": "sap.ui.tesna.mvc.view.commuteRecord", "viewName": "ListH" },
+        
+        "commuteCheck": { "viewId": "commuteCheck", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "MainE" },
+        "m/commuteCheck": { "viewId": "m_commuteCheck", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "MainM" },
+        "h/commuteCheck": { "viewId": "h_commuteCheck", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "MainH" },
+        "commuteCheckDetail": { "viewId": "commuteCheckDetail", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "Detail" },
 
         "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "Main" },
         

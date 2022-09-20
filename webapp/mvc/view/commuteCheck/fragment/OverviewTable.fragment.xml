@@ -1,0 +1,152 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:custom="sap.ui.tesna.control">
+    <table:Table id="commuteCheckListTable" fixedColumnCount="7" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table}" noData="{i18n>MSG_00001}" rowSelectionChange=".onSelectionTable" firstVisibleRowChanged=".onScrollTable">
+        <table:rowSettingsTemplate>
+            <table:RowSettings highlight="{ path: 'Appst', formatter: '.TableUtils.rowHighlight' }" />
+        </table:rowSettingsTemplate>
+        <table:columns>
+            <table:Column width="60px">
+                <Label text="{i18n>LABEL_00144}" />
+                <table:template>
+                    <Text text="{Appsttx}" width="100%" textAlign="Center" wrapping="false">
+                        <customData>
+                            <core:CustomData key="status" value="Z{Appst}" writeToDom="true" />
+                        </customData>
+                    </Text>
+                </table:template>
+            </table:Column>
+            <table:Column width="160px">
+                <Label text="{i18n>LABEL_01004}" />
+                <table:template>
+                    <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label text="{i18n>LABEL_00209}" />
+                <table:template>
+                    <Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label text="{i18n>LABEL_00210}" />
+                <table:template>
+                    <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label text="{i18n>LABEL_06016}" />
+                <table:template>
+                    <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="50px">
+                <Label text="{i18n>LABEL_00350}" />
+                <table:template>
+                    <Text text="{Daytx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="60px">
+                <Label text="{i18n>LABEL_00385}" />
+                <table:template>
+                    <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="150px">
+                <Label text="{i18n>LABEL_06004}" />
+                <table:template>
+                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= ${Apposyn} === 'X' }" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px">
+                <Label text="{i18n>LABEL_06005}" />
+                <table:template>
+                    <TimePicker dateValue="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initBeguz}" enabled="{= ${Apposyn} === 'X' }" minutesStep="10" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onChangeTimeFormat" />
+                </table:template>
+            </table:Column>
+            <table:Column width="150px">
+                <Label text="{i18n>LABEL_06006}" />
+                <table:template>
+                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= ${Apposyn} === 'X' }" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px">
+                <Label text="{i18n>LABEL_06007}" />
+                <table:template>
+                    <TimePicker dateValue="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initEnduz}" enabled="{= ${Apposyn} === 'X' }" minutesStep="10" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onChangeTimeFormat" />
+                </table:template>
+            </table:Column>
+            <table:Column width="200px">
+                <Label text="{i18n>LABEL_06008}" />
+                <table:template>
+                    <Text text="{Tagerrtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="70px">
+                <Label text="{i18n>LABEL_06010}" />
+                <table:template>
+                    <Text text="{Abserrtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="200px">
+                <Label text="{i18n>LABEL_06011}" />
+                <table:template>
+                    <ComboBox selectedKey="{Corty}" items="{ path: '/entry/Corty', templateShareable: false }" enabled="{= ${Apposyn} === 'X' }">
+                        <core:Item key="{Corty}" text="{Cortytx}" />
+                    </ComboBox>
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label text="{i18n>LABEL_06012}" />
+                <table:template>
+                    <VBox alignItems="Center">
+                        <CheckBox selected="{ path: 'Lateyn', type: 'sap.ui.tesna.mvc.model.type.Boolean' }" enabled="{= ${Apposyn} === 'X' }" />
+                    </VBox>
+                </table:template>
+            </table:Column>
+            <table:Column width="80px">
+                <Label text="{i18n>LABEL_06013}" />
+                <table:template>
+                    <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px">
+                <Label text="{i18n>LABEL_00135}" />
+                <table:template>
+                    <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px">
+                <Label text="{i18n>LABEL_00266}" />
+                <table:template>
+                    <Text text="{ path: 'Appda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px">
+                <Label text="{i18n>LABEL_00356}" />
+                <table:template>
+                    <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="120px">
+                <Label text="{i18n>LABEL_00269}" />
+                <table:template>
+                    <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                </table:template>
+            </table:Column>
+            <table:Column width="140px">
+                <Label text="{i18n>LABEL_00387}" />
+                <table:template>
+                    <Link target="_blank" textAlign="Center" width="100%" text="{ path: 'Appno', type: 'sap.ui.tesna.mvc.model.type.Docno' }" press=".onPressRowApprovalDetail" />
+                </table:template>
+            </table:Column>
+            <table:Column width="140px">
+                <Label text="{i18n>LABEL_00386}" />
+                <table:template>
+                    <Link target="_blank" textAlign="Center" width="100%" text="{Apptytx}" press=".onPressRowApprovalDetail" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

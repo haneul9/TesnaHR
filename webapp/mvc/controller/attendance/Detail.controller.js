@@ -75,6 +75,7 @@ sap.ui.define(
             Employees: [],
             TimeTypes: [],
             TimeReasons: [],
+            AllTimeReason: [],
           },
           form: {
             Appno: '',
@@ -84,6 +85,7 @@ sap.ui.define(
             Orgeh: '',
             Orgtx: '',
             Kostl: '',
+            TmdatTxt: '',
             rowCount: 0,
             listMode: 'None',
             list: [],
@@ -147,6 +149,8 @@ sap.ui.define(
           if (sAppno) {
             await this.retriveDocument();
           } else {
+            await this.retrieveTmdat();
+
             oViewModel.setProperty('/form/listMode', 'MultiToggle');
           }
 
@@ -192,6 +196,27 @@ sap.ui.define(
             listMode: !mFormData.Appst || mFormData.Appst === '10' ? 'MultiToggle' : 'None',
             list: _.map(aResults, (o) => _.omit(o, '__metadata')),
           });
+        } catch (oError) {
+          throw oError;
+        }
+      },
+
+      async retrieveTmdat() {
+        const oViewModel = this.getViewModel();
+
+        try {
+          const oModel = this.getModel(ServiceNames.WORKTIME);
+          const mFormData = oViewModel.getProperty('/form');
+
+          const [mResult] = await Client.getEntitySet(oModel, 'DailyTimeClose', {
+            Pernr: this.getAppointeeProperty('Pernr'),
+            ..._.pick(mFormData, ['Werks', 'Orgeh']),
+          });
+
+          oViewModel.setProperty(
+            '/form/TmdatTxt',
+            `${this.DateUtils.format(mResult.Tmdat)} ( ${this.getBundleText('LABEL_04002')}: ${this.DateUtils.format(mResult.Clsda)} ${this.TimeUtils.format(mResult.Clstm)} )`
+          );
         } catch (oError) {
           throw oError;
         }
@@ -297,7 +322,7 @@ sap.ui.define(
               mDialogFormData.Awrsn &&
               mDialogFormData.Begda &&
               mDialogFormData.Endda &&
-              _.includes(['A1KR0010', 'A1KR0020', 'A1KR0030', 'A1KR0040'], mDialogFormData.Awrsn)
+              _.includes(['A1KR0010', 'A1KR0020', 'A1KR0030', 'A1KR0040', 'A1KR0060', 'A1KR0070', 'A1KR0080', 'A1KR0090'], mDialogFormData.Awrsn)
             ) {
             } else {
               return;
@@ -348,7 +373,7 @@ sap.ui.define(
           const mFormData = _.cloneDeep(oViewModel.getProperty('/form'));
           const aTableData = _.cloneDeep(oViewModel.getProperty('/form/list'));
 
-          const { Appno } = await Client.create(oModel, 'LeaveApplList', {
+          const { Appno } = await Client.deep(oModel, 'LeaveApplList', {
             Prcty: 'A',
             Austy: oViewModel.getProperty('/auth'),
             Pernr: this.getAppointeeProperty('Pernr'),
@@ -632,6 +657,31 @@ sap.ui.define(
         });
       },
 
+      async onPressTimeReason(oEvent) {
+        const oViewModel = this.getViewModel();
+
+        try {
+          const oCustomData = oEvent.getSource().getCustomData();
+          const sAwart = oCustomData[0].getValue();
+          const sAwrsn = oCustomData[1].getValue();
+
+          oViewModel.setProperty('/form/dialog/data/Awart', sAwart);
+
+          await this.retrieveTimeReasonList();
+
+          oViewModel.setProperty('/form/dialog/data/Awrsn', sAwrsn);
+
+          this.setWorkPeriod();
+          this.callValidWorkTime();
+        } catch (oError) {
+          this.debug('Controller > Attendance Detail > onPressTimeReason Error', oError);
+
+          AppUtils.handleError(oError);
+        } finally {
+          this.pAwartReasong.close();
+        }
+      },
+
       async onChangeAwartCombo() {
         try {
           await this.retrieveTimeReasonList();
@@ -645,7 +695,37 @@ sap.ui.define(
         }
       },
 
-      onPressAwartDialog() {},
+      async onPressAwartDialog() {
+        const oView = this.getView();
+
+        this.setContentsBusy(true, 'dialog');
+
+        if (!this.pAwartReasonDialog) {
+          this.pAwartReasong = await Fragment.load({
+            id: oView.getId(),
+            name: 'sap.ui.tesna.mvc.view.attendance.fragment.AwartReasonDialog',
+            controller: this,
+          });
+
+          this.pAwartReasong.attachBeforeOpen(async () => {
+            try {
+              const aTypeReasons = this.getViewModel().getProperty('/entry/AllTimeReason');
+
+              if (!aTypeReasons.length) await this.retrieveTimeReasonList(true);
+            } catch (oError) {
+              this.debug('Controller > Attendance Detail > onPressAddCancleApprolvalBtn Error', oError);
+
+              AppUtils.handleError(oError);
+            } finally {
+              this.setContentsBusy(false, 'dialog');
+            }
+          });
+
+          oView.addDependent(this.pAwartReasong);
+        }
+
+        this.pAwartReasong.open();
+      },
 
       onChangeAwrsnCombo() {
         this.setWorkPeriod();
@@ -893,22 +973,40 @@ sap.ui.define(
         }
       },
 
-      async retrieveTimeReasonList() {
+      async retrieveTimeReasonList(bReadAll = false) {
         try {
           const oViewModel = this.getViewModel();
           const oModel = this.getModel(ServiceNames.HRCALENDAR);
           const mFormData = oViewModel.getProperty('/form');
+          const sAuth = oViewModel.getProperty('/auth');
           const aResults = await Client.getEntitySet(oModel, 'TimeReasonList', {
-            Prcty: 'L',
+            Austy: sAuth,
+            Prcty: bReadAll ? 'P' : 'L',
             Werks: mFormData.Werks,
-            Awart: mFormData.dialog.data.Awart,
+            Awart: bReadAll ? undefined : mFormData.dialog.data.Awart,
           });
 
-          oViewModel.setProperty('/form/dialog/data/Awrsn', null);
-          oViewModel.setProperty(
-            '/entry/TimeReasons',
-            _.map(aResults, (o) => _.omit(o, '__metadata'))
-          );
+          if (bReadAll) {
+            oViewModel.setProperty(
+              '/entry/AllTimeReason',
+              _.chain(aResults)
+                .uniqBy('Tmgrp')
+                .map((o) => ({
+                  ..._.pick(o, ['Tmgrp', 'Tmgrptx']),
+                  items: _.chain(aResults)
+                    .filter({ Tmgrp: o.Tmgrp })
+                    .map((t) => _.set(t, 'Awrsntx', _.replace(t.Awrsntx, '@', '')))
+                    .value(),
+                }))
+                .value()
+            );
+          } else {
+            oViewModel.setProperty('/form/dialog/data/Awrsn', null);
+            oViewModel.setProperty(
+              '/entry/TimeReasons',
+              _.map(aResults, (o) => _.omit(o, '__metadata'))
+            );
+          }
         } catch (oError) {
           throw oError;
         }

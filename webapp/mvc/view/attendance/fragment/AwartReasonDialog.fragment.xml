@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:grid="sap.ui.layout.cssgrid">
+    <Dialog title="{i18n>LABEL_05020}" contentWidth="1240px" class="awart-reason-dialog" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}">
+        <buttons>
+            <Button text="{i18n>LABEL_00115}" press=".onDialogClose" class="cancel" />
+        </buttons>
+        <grid:CSSGrid gridTemplateColumns="repeat(3, 1fr)" gridGap="20px" items="{/entry/AllTimeReason}">
+            <VBox class="vCardBox">
+                <HBox class="header-wrap" justifyContent="SpaceBetween">
+                    <HBox class="header" alignItems="Center">
+                        <Title level="H4" text="{Tmgrptx}" />
+                    </HBox>
+                </HBox>
+                <grid:CSSGrid gridTemplateColumns="repeat(2, 1fr)" items="{ path: 'items', templateShareable: false }" gridGap="10px">
+                    <Button text="{Awrsntx}" width="100%" class="bg-grey" press=".onPressTimeReason">
+                        <customData>
+                            <core:CustomData key="Awart" value="{Awart}" />
+                            <core:CustomData key="Awrsn" value="{Awrsn}" />
+                        </customData>
+                    </Button>
+                </grid:CSSGrid>
+            </VBox>
+        </grid:CSSGrid>
+    </Dialog>
+</core:FragmentDefinition>

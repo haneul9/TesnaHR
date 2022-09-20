@@ -1,0 +1,32 @@
+<mvc:View controllerName="sap.ui.tesna.mvc.controller.commuteCheck.Detail"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:custom="sap.ui.tesna.control">
+    <Page showHeader="false">
+        <VBox class="contents-header">
+            <HBox justifyContent="SpaceBetween" class="breadcrumbs">
+                <custom:Breadcrumbs />
+                <HBox class="button-group">
+                    <Button type="Emphasized" text="{i18n>LABEL_00123}" press=".onPressApprove" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'WE' }" />
+                    <Button type="Reject" text="{i18n>LABEL_00124}" press=".onPressReject" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'WE' }" />
+                    <Button text="{i18n>LABEL_00146}" press=".onHistoryBack" visible="{= ${/displayMode} !== 'B' }" />
+                    <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" press=".onPagePrint" />
+                </HBox>
+            </HBox>
+        </VBox>
+        <VBox class="contents" busyIndicatorDelay="0" busy="{/contentsBusy/all}">
+            <VBox class="vCardBox">
+                <HBox class="table-toolbar" justifyContent="SpaceBetween">
+                    <HBox alignItems="Center" class="title">
+                        <Title level="H2" text="{i18n>LABEL_00129}" />
+                    </HBox>
+                </HBox>
+                <VBox>
+                    <core:Fragment fragmentName="sap.ui.tesna.mvc.view.commuteCheck.fragment.ApproveTable" type="XML" />
+                </VBox>
+            </VBox>
+            <core:Fragment fragmentName="sap.ui.tesna.fragment.ApprovalStatus" type="XML" />
+        </VBox>
+    </Page>
+</mvc:View>

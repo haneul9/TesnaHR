@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:table="sap.ui.table"
     xmlns:core="sap.ui.core">
-    <table:Table id="commuteRecordListTable" selectionMode="None" fixedColumnCount="8" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table}" noData="{i18n>MSG_00001}" cellClick=".onSelectRow">
+    <table:Table id="commuteRecordListTable" selectionMode="None" fixedColumnCount="8" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table}" noData="{i18n>MSG_00001}">
         <table:rowSettingsTemplate>
             <table:RowSettings highlight="{ path: 'Tstat', formatter: '.rowHighlight' }" />
         </table:rowSettingsTemplate>

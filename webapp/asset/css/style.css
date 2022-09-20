@@ -612,6 +612,11 @@ html.sap-desktop .sapMSwtCont:focus>.sapMSwt {outline-style:none !important}
 .sapMBtn:active .sapMBtnDefault:not(.sapMPopup-CTX .sapMBtn:active .sapMBtnDefault,.sapMBtnDisabled .sapMBtnDefault) {color:#484c50 !important; border-color:#d6dbe2 !important; outline-style:none !important; background:#d6dbe2 !important}
 .sapMBtn .sapMBtnDefault.sapMFocusable:not(.sapMPopup-CTX .sapMBtn .sapMBtnDefault.sapMFocusable) {outline-style:none !important}
 
+.sapMBtn.bg-grey .sapMBtnDefault { padding-left: 0.4375rem !important; padding-right: 0.4375rem !important; color:var(--FontColorNormal) !important; border-color:#eeeeef !important; background-color:#f9fafa; font-size: 14px; letter-spacing: -0.35pt; }
+.sapMBtn.bg-grey:hover .sapMBtnDefault {color:#484c50 !important; border-color:#a3a3a3 !important; outline-style:none !important; background:#f9fafa}
+.sapMBtn.bg-grey:active .sapMBtnDefault {color:#484c50 !important; border-color:#d6dbe2 !important; outline-style:none !important; background:#d6dbe2 !important}
+.sapMBtn.bg-grey .sapMBtnDefault.sapMFocusable {outline-style:none !important}
+
 .sapMBtn.type-print .sapMBtnDefault.sapMBtnIconFirst {color:var(--FontColorNormal) !important; border-color:#87b4ea !important; background-color:#f4f9ff}
 .sapMBtn.type-print:hover .sapMBtnDefault.sapMBtnIconFirst:not(.sapMPopup-CTX .sapMBtn:hover .sapMBtnDefault,.sapMBtnDisabled .sapMBtnDefault) {color:#222 !important; border-color:#065bb5 !important; outline-style:none !important; background:#ddecfd}
 .sapMBtn.type-print:active .sapMBtnDefault.sapMBtnIconFirst:not(.sapMPopup-CTX .sapMBtn:active .sapMBtnDefault,.sapMBtnDisabled .sapMBtnDefault) {color:#fff !important; border-color:#065bb5 !important; outline-style:none !important; background:#248bff !important}
@@ -728,7 +733,8 @@ html.sap-desktop .sapContrast .sapMFooter-CTX .sapMBtnInner.sapMBtnReject, html.
 .sapUiTableHSb {position:relative; overflow-x:scroll; overflow-y:hidden; -webkit-overflow-scrolling:auto; background-color:#f7f7f7; border-bottom:1px solid #f5f5f5; border-right:1px solid #f5f5f5}
 .sapUiTableRowFirstFixedBottom td {background-color:#eff3f8}
 
-.disabled-table-selection { opacity: 0.4; pointer-events: none; }
+.disabled-table-selection { pointer-events: none; }
+.sapUiTableSelModeMultiToggle.sapUiTableRowSelectors .sapUiTableRowSelectionCell.disabled-table-selection::after { opacity: 0.2; }
 
 /* GNB */
 .sapUiSizeCompact .megadrop-menu-layer {box-sizing:border-box; position:absolute; z-index:7; top:59px; min-height:246px; border-radius:0; padding-bottom:20px; color:#222; background-color:#fff; box-shadow:0 3px 5px 0 rgb(0 0 0 / 10%), 0 0 0 1px rgb(0 0 0 / 5%)}
@@ -820,7 +826,7 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .sapMObjStatusError .sapMObjStatusText, .sapMObjStatusError .sapMObjStatusIcon {color:#fe5f58 !important}
 .sapMObjStatusNone .sapMObjStatusText, .sapMObjStatusNone .sapMObjStatusIcon {color:#222}
 
-.sapMText[data-status="Z10"] {color:var(--BorderColorReadonly) !important}
+.sapMText[data-status="Z"], .sapMText[data-status="Z10"] {color:var(--BorderColorReadonly) !important}
 .sapMText[data-status="Z20"] {color:var(--BorderColorWarning) !important}
 .sapMText[data-status="Z30"] {color:var(--BorderColorSuccess) !important}
 .sapMText[data-status="Z40"] {color:var(--BorderColorError) !important}
@@ -1019,6 +1025,8 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .org-chart-container[data-layout=top] .node-button-div > div > div {text-align:center; font-size:35px !important}
 
 .signature-pad {border:1px solid #b7b7b7}
+
+.sapUiSizeCompact .sapMDialog.awart-reason-dialog>.sapMDialogSection { min-height: 2rem; padding-bottom:10px; margin-top: 6px; }
 /* -- DEVELOPER Temporary style */
 
 /*추가 20211101------------------------------------------------------------*/

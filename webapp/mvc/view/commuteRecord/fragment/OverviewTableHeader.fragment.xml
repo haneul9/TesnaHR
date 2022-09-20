@@ -12,7 +12,7 @@
                 <ObjectStatus text="{i18n>LABEL_06017} {/listInfo/approveCount}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication03" />
                 <ObjectStatus text="{i18n>LABEL_06018} {/listInfo/completeCount}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication05" />
             </HBox>
-            <Button icon="sap-icon://excel-attachment" text="Excel" press=".onPressExcelDownload" busyIndicatorDelay="0" busy="{/busy}" />
+            <Button icon="sap-icon://excel-attachment" text="Excel" press=".onPressExcelDownload" busyIndicatorDelay="0" busy="{/contentsBusy/table}" />
         </HBox>
     </HBox>
 </core:FragmentDefinition>

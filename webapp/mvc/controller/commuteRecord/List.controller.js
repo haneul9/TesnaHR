@@ -262,22 +262,34 @@ sap.ui.define(
 
       onPressRowApprovalDetail(oEvent) {
         const mRowData = oEvent.getSource().getParent().getBindingContext().getObject();
+        const mApptyRoute = {
+          TH: 'shiftChange',
+          TI: 'attendance',
+          TJ: 'commuteCheck',
+          TG: 'shift',
+        };
 
-        if (!mRowData) return;
+        if (!mRowData || !_.has(mApptyRoute, mRowData.Appty)) return;
 
         const sHost = window.location.href.split('#')[0];
-        const mApptyRoute = {
-          TI: 'attendance',
-          TG: 'shift',
-          TH: 'shiftChange',
-        };
-        const mParams = [mRowData.Appno, mRowData.Werks, mRowData.Orgeh];
+        const sAuth = this.getViewModel().getProperty('/auth');
+        const sRouteName = _.chain(sAuth === 'E' ? null : _.lowerCase(sAuth))
+          .concat(mApptyRoute[mRowData.Appty])
+          .compact()
+          .join('/')
+          .value();
+        const mParams = [mRowData.Appno];
 
-        if (mRowData.Appty === 'TI') mParams.push(mRowData.Kostl ? mRowData.Kostl : 'NA');
+        if (mRowData.Appty === 'TI') {
+          mParams.push(mRowData.Werks);
+          mParams.push(mRowData.Orgeh);
+          mParams.push(mRowData.Kostl ? mRowData.Kostl : 'NA');
+        } else if (mRowData.Appty === 'TH' || mRowData.Appty === 'TG') {
+          mParams.push(mRowData.Werks);
+          mParams.push(mRowData.Orgeh);
+        }
 
-        window.open(`${sHost}#/${mApptyRoute[mRowData.Appty]}/${mParams.join('/')}`, '_blank', 'width=1400,height=800');
-
-        console.log(mRowData);
+        window.open(`${sHost}#/${sRouteName}/${mParams.join('/')}`, '_blank');
       },
 
       onPressSearch() {

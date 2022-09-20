@@ -23,6 +23,7 @@
                 <HBox class="table-toolbar" justifyContent="SpaceBetween">
                     <HBox alignItems="Center" class="title">
                         <Title level="H2" text="{i18n>LABEL_00129}" />
+                        <Text text="{/form/TmdatTxt}" class="desc-txt" visible="{= !!${/form/TmdatTxt} }" />
                     </HBox>
                     <HBox class="table-actions">
                         <Button text="{i18n>LABEL_00134}" press=".onPressAddNewApprovalBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') }" />

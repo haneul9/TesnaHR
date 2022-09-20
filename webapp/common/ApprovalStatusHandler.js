@@ -30,6 +30,12 @@ sap.ui.define(
         CANCEL: '90',
       },
 
+      MAIL_DESTINATION: {
+        20: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Approvalbox?sap-config-mode=true%26gAppty=',
+        30: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Requestbox?sap-config-mode=true',
+        40: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Requestbox?sap-config-mode=true',
+      },
+
       constructor: function (oController, mOptions) {
         const options = {
           Mode: 'D',
@@ -47,20 +53,40 @@ sap.ui.define(
         this.oController = oController;
         this.oApprovalStatusBox = oController.byId('commonApprovalStatusBox');
 
-        const oBoxModel = new JSONModel({
-          settings: options,
-          rowCount: 1,
-          list: [],
-          mailUrl: {
-            20: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Approvalbox?sap-config-mode=true%26gAppty=',
-            30: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Requestbox?sap-config-mode=true',
-            40: 'http://hrwdp.doosan.com/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fDoosanGHRIS!2fiViews!2fTA!2fFP_Requestbox?sap-config-mode=true',
-          },
-        });
+        if (this.oApprovalStatusBox) {
+          const oBoxModel = new JSONModel({
+            settings: options,
+            rowCount: 1,
+            list: [],
+          });
 
-        this.oApprovalStatusBox.setModel(oBoxModel);
+          this.oApprovalStatusBox.setModel(oBoxModel);
 
-        this.readApprovalData();
+          this.readApprovalData();
+        }
+      },
+
+      async saveWithNoDisplay(sAppno) {
+        try {
+          const oModel = this.oController.getModel(ServiceNames.APPROVAL);
+          const sAppty = this.oController.getApprovalType();
+          const aRowData = await Client.getEntitySet(oModel, 'ApproverList2', {
+            Prcty: 'N',
+            Pernr: this.oController.getAppointeeProperty('Pernr'),
+            Orgeh: this.oController.getAppointeeProperty('Orgeh'),
+            Appno: sAppno,
+            Appty: sAppty,
+          });
+
+          await Client.deep(oModel, 'ApproverHeader2', {
+            Appno: sAppno,
+            ApproverList2Nav: [..._.map(aRowData, (o) => ({ ...o, Appno: sAppno }))],
+          });
+
+          await this.sendMail(sAppno, this.APPROVAL_STATUS.APPROVAL, sAppty);
+        } catch (oError) {
+          throw oError;
+        }
       },
 
       async save(sAppno) {
@@ -127,8 +153,7 @@ sap.ui.define(
       async sendMail(sAppno, sAppst, sAppty) {
         try {
           const oModel = this.oController.getModel(ServiceNames.APPROVAL);
-          const oBoxModel = this.oApprovalStatusBox.getModel();
-          const sUri = oBoxModel.getProperty(`/mailUrl/${sAppst}`);
+          const sUri = this.MAIL_DESTINATION[sAppst];
 
           await Client.getEntitySet(oModel, 'SendApprovalMail', {
             Appno: sAppno,

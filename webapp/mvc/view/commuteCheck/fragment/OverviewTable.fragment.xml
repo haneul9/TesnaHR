@@ -62,7 +62,7 @@
             <table:Column width="120px">
                 <Label text="{i18n>LABEL_06005}" />
                 <table:template>
-                    <TimePicker dateValue="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initBeguz}" enabled="{= ${Apposyn} === 'X' }" minutesStep="10" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onChangeTimeFormat" />
+                    <TimePicker dateValue="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initBeguz}" enabled="{= ${Apposyn} === 'X' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" />
                 </table:template>
             </table:Column>
             <table:Column width="150px">
@@ -74,7 +74,7 @@
             <table:Column width="120px">
                 <Label text="{i18n>LABEL_06007}" />
                 <table:template>
-                    <TimePicker dateValue="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initEnduz}" enabled="{= ${Apposyn} === 'X' }" minutesStep="10" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onChangeTimeFormat" />
+                    <TimePicker dateValue="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initEnduz}" enabled="{= ${Apposyn} === 'X' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" />
                 </table:template>
             </table:Column>
             <table:Column width="200px">
@@ -109,6 +109,12 @@
                 <Label text="{i18n>LABEL_06013}" />
                 <table:template>
                     <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label text="{i18n>LABEL_06021}" />
+                <table:template>
+                    <Text text="{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
             <table:Column width="120px">

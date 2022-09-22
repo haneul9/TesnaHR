@@ -95,6 +95,12 @@
                     <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
+            <table:Column width="auto">
+                <Label text="{i18n>LABEL_06021}" />
+                <table:template>
+                    <Text text="{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
         </table:columns>
     </table:Table>
 </core:FragmentDefinition>

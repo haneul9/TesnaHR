@@ -72,6 +72,7 @@ sap.ui.define(
             Werks: '',
             Orgeh: '',
             Orgtx: '',
+            TmdatTxt: '',
           },
         };
       },
@@ -150,6 +151,8 @@ sap.ui.define(
           } else {
             oViewModel.setProperty('/fieldLimit', this.getEntityLimit(ServiceNames.WORKTIME, 'ShiftChangeApply'));
             oViewModel.setProperty('/form/listMode', 'MultiToggle');
+
+            await this.retrieveTmdat();
           }
 
           this.setOrgtx();
@@ -188,6 +191,27 @@ sap.ui.define(
           Client.getEntitySet(oModel, 'TimeSchkzList', _.omit(mPayload, 'Orgeh')),
           Client.getEntitySet(oModel, 'KostlList', mPayload),
         ]);
+      },
+
+      async retrieveTmdat() {
+        const oViewModel = this.getViewModel();
+
+        try {
+          const oModel = this.getModel(ServiceNames.WORKTIME);
+          const mFormData = oViewModel.getProperty('/form');
+
+          const [mResult] = await Client.getEntitySet(oModel, 'DailyTimeClose', {
+            Pernr: this.getAppointeeProperty('Pernr'),
+            ..._.pick(mFormData, ['Werks', 'Orgeh']),
+          });
+
+          oViewModel.setProperty(
+            '/form/TmdatTxt',
+            `${this.DateUtils.format(mResult.Tmdat)} ( ${this.getBundleText('LABEL_04002')}: ${this.DateUtils.format(mResult.Clsda)} ${this.TimeUtils.format(mResult.Clstm)} )`
+          );
+        } catch (oError) {
+          throw oError;
+        }
       },
 
       async setOrgtx() {

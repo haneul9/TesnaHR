@@ -114,6 +114,13 @@
 
         { "pattern": "individualWorkState/:pernr:/:year:/:month:", "name": "individualWorkState", "target": "individualWorkState" },
         
+        { "pattern": "overtime", "name": "overtime", "target": "overtime" },
+        { "pattern": "m/overtime", "name": "m/overtime", "target": "m/overtime" },
+        { "pattern": "h/overtime", "name": "h/overtime", "target": "h/overtime" },
+        { "pattern": "overtime/{appno}/{werks}/{orgeh}/:flag:", "name": "overtime-detail", "target": "overtimeDetail" },
+        { "pattern": "m/overtime/{appno}/{werks}/{orgeh}/:flag:", "name": "m/overtime-detail", "target": "overtimeDetail" },
+        { "pattern": "h/overtime/{appno}/{werks}/{orgeh}/:flag:", "name": "h/overtime-detail", "target": "overtimeDetail" },
+
         { "pattern": "shift", "name": "shift", "target": "shift" },
         { "pattern": "m/shift", "name": "m/shift", "target": "m/shift" },
         { "pattern": "h/shift", "name": "h/shift", "target": "h/shift" },
@@ -151,6 +158,11 @@
 
         "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "Main" },
         
+        "overtime": { "viewId": "overtime", "viewPath": "sap.ui.tesna.mvc.view.overtime", "viewName": "ListE" },
+        "m/overtime": { "viewId": "m_overtime", "viewPath": "sap.ui.tesna.mvc.view.overtime", "viewName": "ListM" },
+        "h/overtime": { "viewId": "h_overtime", "viewPath": "sap.ui.tesna.mvc.view.overtime", "viewName": "ListH" },
+        "overtimeDetail": { "viewId": "overtimeDetail", "viewPath": "sap.ui.tesna.mvc.view.overtime", "viewName": "Detail" },
+
         "shift": { "viewId": "shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListE" },
         "m/shift": { "viewId": "m_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListM" },
         "h/shift": { "viewId": "h_shift", "viewPath": "sap.ui.tesna.mvc.view.shift", "viewName": "ListH" },

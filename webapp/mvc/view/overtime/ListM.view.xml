@@ -1,0 +1,6 @@
+<mvc:View controllerName="sap.ui.tesna.mvc.controller.overtime.List"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc">
+    <core:Fragment fragmentName="sap.ui.tesna.mvc.view.overtime.fragment.Main" type="XML" />
+</mvc:View>

@@ -56,7 +56,7 @@ sap.ui.define(
 
         this.TableUtils.adjustRowSpan({
           oTable: this.byId(this.LIST_TABLE_ID),
-          aColIndices: [4, 5, 6, 7, 8, 9, 14, 15],
+          aColIndices: [4, 5, 6, 7, 8, 9, 10, 15, 16],
           sTheadOrTbody: 'thead',
           bIncludeFixedColumns: true,
           aFixedColIndices: [0, 1, 2, 3, 4, 5, 6, 7],

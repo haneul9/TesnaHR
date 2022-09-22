@@ -263,21 +263,21 @@ sap.ui.define(
         }
       },
 
-      onChangeTimeFormat(oEvent) {
-        const oSource = oEvent.getSource();
-        const aSourceValue = _.split(oSource.getValue(), ':');
+      // onChangeTimeFormat(oEvent) {
+      //   const oSource = oEvent.getSource();
+      //   const aSourceValue = _.split(oSource.getValue(), ':');
 
-        if (aSourceValue.length !== 2) return;
+      //   if (aSourceValue.length !== 2) return;
 
-        const sConvertedMinutesValue = this.TimeUtils.stepMinutes(_.get(aSourceValue, 1), 10);
+      //   const sConvertedMinutesValue = this.TimeUtils.stepMinutes(_.get(aSourceValue, 1), 1);
 
-        if (aSourceValue[1] === sConvertedMinutesValue) return;
+      //   if (aSourceValue[1] === sConvertedMinutesValue) return;
 
-        const aConvertTimes = [_.get(aSourceValue, 0), sConvertedMinutesValue];
+      //   const aConvertTimes = [_.get(aSourceValue, 0), sConvertedMinutesValue];
 
-        oSource.setValue(_.join(aConvertTimes, ':'));
-        oSource.setDateValue(moment(_.join(aConvertTimes, ''), 'hhmm').toDate());
-      },
+      //   oSource.setValue(_.join(aConvertTimes, ':'));
+      //   oSource.setDateValue(moment(_.join(aConvertTimes, ''), 'hhmm').toDate());
+      // },
 
       onScrollTable() {
         this.setDetailsTableStyle();
@@ -471,7 +471,12 @@ sap.ui.define(
           });
           oViewModel.setProperty(
             '/list',
-            _.map(aRowData, (o) => ({ ..._.omit(o, '__metadata'), Appsttx: o.Appst === '' ? sAppstateNullText : o.Appsttx }))
+            _.map(aRowData, (o) => ({
+              ..._.omit(o, '__metadata'),
+              Appsttx: o.Appst === '' ? sAppstateNullText : o.Appsttx,
+              Beguzf: this.TimeUtils.nvl(o.Beguzf),
+              Enduzf: this.TimeUtils.nvl(o.Enduzf),
+            }))
           );
 
           oTable.clearSelection();

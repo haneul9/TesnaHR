@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <VBox class="hCardBox summary-box" width="33%" busyIndicatorDelay="0" busy="{/busy}">
+        <VBox>
+            <HBox class="title" alignItems="End">
+                <Title level="H2" text="{i18n>LABEL_07005}" />
+                <Text text="{i18n>LABEL_07006}" class="sapUiSmallMarginBegin" />
+            </HBox>
+            <HBox alignItems="Start">
+                <core:HTML content='&lt;div id="chart-overtime-summary-app-dial-container"&gt;&lt;/div&gt;' />
+                <VBox alignItems="End" width="100%" class="workTime-summary-box">
+                    <Label text="today"/>
+                    <ObjectStatus text="{/summary/Timtx}" state="Indication05" />
+                    <Text text="{/summary/Wktim}" />
+                    <!-- <Label text="this week" class="mt-10-px"/> -->
+                    <Label text="{/summary/Text}" class="mt-10-px" />
+                    <ObjectStatus text="{/summary/Reltm} {/summary/Reltx}" state="Indication05" class="font-20-px" />
+                    <Text text="{/summary/Wkrul}" />
+                </VBox>
+            </HBox>
+        </VBox>
+    </VBox>
+</core:FragmentDefinition>

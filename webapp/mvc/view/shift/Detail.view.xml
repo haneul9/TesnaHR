@@ -25,6 +25,7 @@
                     <HBox alignItems="Center" class="title">
                         <Title level="H2" text="{i18n>LABEL_00129}" />
                         <Text class="desc-txt" text="{i18n>LABEL_00224} : {/form/Orgtx}" wrapping="false" visible="{= !!${/form/Orgtx} }" />
+                        <Text text="{/form/TmdatTxt}" class="desc-txt" visible="{= !!${/form/TmdatTxt} }" />
                     </HBox>
                     <HBox class="table-actions">
                         <Button icon="sap-icon://add" text="{i18n>LABEL_00107}" press=".onPressAddBtn" visible="{= !${/form/Appst} }" />

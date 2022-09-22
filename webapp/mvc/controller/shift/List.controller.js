@@ -1,6 +1,7 @@
 sap.ui.define(
   [
     //
+    'sap/ui/tesna/control/MessageBox',
     'sap/ui/tesna/common/AppUtils',
     'sap/ui/tesna/common/odata/Client',
     'sap/ui/tesna/common/odata/ServiceNames',
@@ -8,6 +9,7 @@ sap.ui.define(
   ],
   (
     //
+    MessageBox,
     AppUtils,
     Client,
     ServiceNames,
@@ -235,6 +237,11 @@ sap.ui.define(
 
       onPressNewApprovalBtn() {
         const mSearchConditions = this.getViewModel().getProperty('/searchConditions');
+
+        if (!mSearchConditions.Orgeh || mSearchConditions.Orgeh === '00000000') {
+          MessageBox.alert(this.getBundleText('MSG_01001')); // 근태마감 체크를 위하여 조회조건의 부서를 필수로 선택하여 주십시오.
+          return;
+        }
 
         this.getRouter().navTo(`${this.ROUTE_NAME}-detail`, { appno: 'N', werks: mSearchConditions.Werks, orgeh: mSearchConditions.Orgeh });
       },

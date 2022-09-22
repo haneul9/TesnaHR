@@ -1,0 +1,62 @@
+<core:FragmentDefinition xmlns="sap.ui.table"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core">
+    <Table id="overtimeApprovalTable" selectionMode="{/form/listMode}" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/form/list}" visibleRowCount="{/form/rowCount}" noData="{i18n>MSG_00001}">
+        <columns>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00209}"/>
+                <template>
+                    <m:Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00210}" />
+                <template>
+                    <m:Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00224}" />
+                <template>
+                    <m:Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_00351}" />
+                <template>
+                    <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_07002}"/>
+                <template>
+                    <m:Text text="{ path: 'Datum', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_07003}" />
+                <template>
+                    <m:Text text="{ path: 'Beguz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_07004}" />
+                <template>
+                    <m:Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <m:Label text="{i18n>LABEL_07007}" />
+                <template>
+                    <m:Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="20%">
+                <m:Label text="{i18n>LABEL_07008}" />
+                <template>
+                    <m:Text text="{Taker}" width="100%" wrapping="false" />
+                </template>
+            </Column>
+        </columns>
+    </Table>
+</core:FragmentDefinition>

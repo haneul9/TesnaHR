@@ -8,8 +8,8 @@
                     <extension>
                         <m:HBox class="header-wrap" justifyContent="SpaceBetween">
                             <m:HBox class="header" alignItems="Center">
-                                <m:Title level="H3" text="{i18n>LABEL_00383} {i18n>LABEL_00112}" class="sapUiSmallMarginEnd" />
-                                <m:Text text="{i18n>MSG_05001} { path: '/form/dialog/list/0/Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" class="desc-txt" wrapping="false" />
+                                <m:Title level="H3" text="{i18n>LABEL_00119} {i18n>LABEL_00112}" class="sapUiSmallMarginEnd" />
+                                <m:Text text="{i18n>MSG_05001} {/form/TmdatTxt}" class="desc-txt" wrapping="false" />
                             </m:HBox>
                         </m:HBox>
                     </extension>
@@ -27,25 +27,25 @@
                             </template>
                         </Column>
                         <Column width="auto">
-                            <m:Label text="{i18n>LABEL_00224}" />
+                            <m:Label text="{i18n>LABEL_00219}" />
                             <template>
                                 <m:Text text="{Orgtx}" width="100%" textAlign="Center" />
                             </template>
                         </Column>
                         <Column width="14%">
-                            <m:Label text="{i18n>LABEL_00351}" />
+                            <m:Label text="{i18n>LABEL_00177}" />
                             <template>
                                 <m:Text text="{Ltext}" width="100%" textAlign="Center" />
                             </template>
                         </Column>
                         <Column width="12%">
-                            <m:Label text="{i18n>LABEL_00381}" />
+                            <m:Label text="{i18n>LABEL_00122}" />
                             <template>
                                 <m:Text text="{Awrsntx}" width="100%" textAlign="Center" />
                             </template>
                         </Column>
                         <Column width="18%">
-                            <m:Label text="{i18n>LABEL_00382}" />
+                            <m:Label text="{i18n>LABEL_00120}" />
                             <template>
                                 <m:Text text="{Period}" width="100%" textAlign="Center" />
                             </template>
@@ -57,7 +57,7 @@
                             </template>
                         </Column>
                         <Column width="24%">
-                            <m:Label text="{i18n>LABEL_00384}" />
+                            <m:Label text="{i18n>LABEL_00116}" />
                             <template>
                                 <m:Input width="100%" value="{Aprsn}" class="small-table-input" />
                             </template>

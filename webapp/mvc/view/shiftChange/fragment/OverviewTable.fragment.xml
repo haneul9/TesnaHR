@@ -29,7 +29,7 @@
                 </table:template>
             </table:Column>
             <table:Column width="auto" filterProperty="Zzcaltltx" sortProperty="Zzcaltltx">
-                <Label text="{i18n>LABEL_00371}" />
+                <Label text="{i18n>LABEL_00157}" />
                 <table:template>
                     <Text text="{Zzcaltltx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
@@ -41,7 +41,7 @@
                 </table:template>
             </table:Column>
             <table:Column width="auto" filterProperty="Tyymm" sortProperty="Tyymm">
-                <Label text="{i18n>LABEL_00372}" />
+                <Label text="{i18n>LABEL_00156}" />
                 <table:template>
                     <Text text="{ path: 'Tyymm', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
@@ -65,19 +65,19 @@
                 </table:template>
             </table:Column>
             <table:Column width="auto" filterProperty="Appdt" sortProperty="Appdt">
-                <Label text="{i18n>LABEL_00266}" />
+                <Label text="{i18n>LABEL_00189}" />
                 <table:template>
                     <Text text="{ path: 'Appdt', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
             <table:Column width="auto" filterProperty="Sgnpnm" sortProperty="Sgnpnm">
-                <Label text="{i18n>LABEL_00356}" />
+                <Label text="{i18n>LABEL_00171}" />
                 <table:template>
                     <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
             <table:Column width="auto" filterProperty="Sgndt" sortProperty="Sgndt">
-                <Label text="{i18n>LABEL_00269}" />
+                <Label text="{i18n>LABEL_00186}" />
                 <table:template>
                     <Text text="{ path: 'Sgndt', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>

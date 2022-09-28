@@ -59,7 +59,7 @@ sap.ui.define(
             totalCount: 0,
             rowCount: 1,
             isShowProgress: false,
-            ObjTxt2: this.getBundleText('LABEL_00359'), // 기안
+            ObjTxt2: this.getBundleText('LABEL_00166'), // 기안
           },
           list: [],
           parameter: {
@@ -249,7 +249,15 @@ sap.ui.define(
 
           const sAuth = oViewModel.getProperty('/auth');
 
-          oViewModel.setProperty('/searchConditions/Orgeh', sAuth === 'E' ? this.getAppointeeProperty('Orgeh') : _.get(aEntries, [1, 'Orgeh']));
+          oViewModel.setProperty(
+            '/searchConditions/Orgeh',
+            sAuth === 'E'
+              ? this.getAppointeeProperty('Orgeh')
+              : _.chain(aEntries)
+                  .filter((o) => o.Orgeh !== '00000000')
+                  .get([0, 'Orgeh'])
+                  .value()
+          );
           oViewModel.setProperty(
             '/entry/Orgeh',
             _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
@@ -319,10 +327,10 @@ sap.ui.define(
               throw new UI5Error({ code: 'A', message: this.getBundleText('MSG_00005', 'LABEL_00220') }); // {회사}를 선택하세요.
             }
             if (_.isEmpty(mSearchConditions.Orgeh)) {
-              throw new UI5Error({ code: 'A', message: this.getBundleText('MSG_00005', 'LABEL_00224') }); // {부서}를 선택하세요.
+              throw new UI5Error({ code: 'A', message: this.getBundleText('MSG_00005', 'LABEL_00219') }); // {부서}를 선택하세요.
             }
             if (_.isEmpty(mSearchConditions.Kostl)) {
-              throw new UI5Error({ code: 'A', message: this.getBundleText('MSG_00004', 'LABEL_00351') }); // {공정}를 선택하세요.
+              throw new UI5Error({ code: 'A', message: this.getBundleText('MSG_00004', 'LABEL_00177') }); // {공정}를 선택하세요.
             }
           }
 
@@ -379,7 +387,7 @@ sap.ui.define(
 
       onPressExcelDownload() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const sFileName = this.getBundleText('LABEL_00282', 'LABEL_05001'); // {근태신청}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_05001'); // {근태신청}_목록
 
         this.TableUtils.export({ oTable, sFileName });
       },

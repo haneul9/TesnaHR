@@ -24,7 +24,7 @@
                 <HBox justifyContent="SpaceBetween" class="table-toolbar">
                     <HBox alignItems="Center" class="title">
                         <Title level="H2" text="{i18n>LABEL_00129}" />
-                        <Text class="desc-txt" text="{i18n>LABEL_00224} : {/form/Orgtx}" wrapping="false" visible="{= !!${/form/Orgtx} }" />
+                        <Text class="desc-txt" text="{i18n>LABEL_00219} : {/form/Orgtx}" wrapping="false" visible="{= !!${/form/Orgtx} }" />
                         <Text text="{/form/TmdatTxt}" class="desc-txt" visible="{= !!${/form/TmdatTxt} }" />
                     </HBox>
                     <HBox class="table-actions">
@@ -38,7 +38,7 @@
             </VBox>
             <VBox class="vCardBox">
                 <HBox alignItems="Center" class="table-toolbar">
-                    <Title text="{i18n>LABEL_00358}" level="H2" />
+                    <Title text="{i18n>LABEL_00167}" level="H2" />
                 </HBox>
                 <TextArea width="100%" rows="5" growing="true" value="{/form/Aprsn}" maxLength="{/fieldLimit/Aprsn}" editable="{= !${/form/Appst} }" />
             </VBox>

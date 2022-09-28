@@ -827,6 +827,7 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .sapMObjStatusNone .sapMObjStatusText, .sapMObjStatusNone .sapMObjStatusIcon {color:#222}
 
 .sapMText[data-status="Z"], .sapMText[data-status="Z10"] {color:var(--BorderColorReadonly) !important}
+.red-highlight.sapMText[data-status="Z"], .red-highlight.sapMText[data-status="Z10"] { font-weight: 900; color: #fe5f58 !important}
 .sapMText[data-status="Z20"] {color:var(--BorderColorWarning) !important}
 .sapMText[data-status="Z30"] {color:var(--BorderColorSuccess) !important}
 .sapMText[data-status="Z40"] {color:var(--BorderColorError) !important}
@@ -905,15 +906,15 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .year-plan-grid .sapMFlexBox[data-style="typeO2"] { background: linear-gradient(-90deg, #fff 50%, #FFF68F 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO3"] { background: linear-gradient(-90deg, #FFF68F 50%, #fff 50%) !important; }
 .year-plan-grid .sapMFlexBox[data-style="typeO4"] { background: linear-gradient(-90deg, #FFF 25%, #FFF68F 25% 75%, #fff 75%) !important; }
-.year-plan-grid .sapMFlexBox .sapMText { font-size: 11px; }
+.year-plan-grid .sapMFlexBox .sapMText { font-size: 12px; }
 .year-plan-grid .sapMFlexBox[data-gubun="D"] .sapMText { color: #1059AF;  }
 .year-plan-grid .sapMFlexBox[data-gubun="N"] .sapMText { color: #155D04;  }
 .year-plan-grid .sapMFlexBox[data-gubun="T"] .sapMText { color: #1059AF;  }
 .year-plan-grid .sapMFlexBox[data-gubun="F"] .sapMText { color: #fc564f;  }
-.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem::after { content: '주'; color: #1059AF; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 11px; font-weight: 700; text-align: right; }
-.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem::after { content: '야'; color: #155D04; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 11px; font-weight: 700; text-align: right; }
-.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem::after { content: '통'; color: #1059AF; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 11px; font-weight: 700; text-align: right; }
-.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem::after { content: '휴'; color: #fc564f ; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 11px; font-weight: 700; text-align: right; }
+.year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem::after { content: '주'; color: #1059AF; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 14px; font-weight: 700; text-align: right; }
+.year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem::after { content: '야'; color: #155D04; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 14px; font-weight: 700; text-align: right; }
+.year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem::after { content: '통'; color: #1059AF; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 14px; font-weight: 700; text-align: right; }
+.year-plan-grid .sapMFlexBox[data-shift="F"] > .sapMFlexItem::after { content: '휴'; color: #fc564f ; position: absolute; width: 100%; bottom: 2px; right: 2px; font-size: 14px; font-weight: 700; text-align: right; }
 .year-plan-grid .sapMFlexBox[data-shift="D"] > .sapMFlexItem,
 .year-plan-grid .sapMFlexBox[data-shift="N"] > .sapMFlexItem,
 .year-plan-grid .sapMFlexBox[data-shift="T"] > .sapMFlexItem,
@@ -980,6 +981,8 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 
 .sapMTitle[data-color="blue"] {color:blue}
 .sapMText[data-color="blue"] {color:blue}
+
+.sapMListUl .members-photo {width:30px; height:30px; margin-right: 5px; position: absolute; top: 0; left: 8px; cursor: pointer; border-radius:50%; background-size:cover; background-position:center top; background-repeat:no-repeat}
 
 .organization-info .desc-txt {font-size:16px; margin-left:0}
 .organization-legend {margin-top:0 !important}
@@ -1739,8 +1742,8 @@ div[data-sap-ui=container-ehr---employee--sideBody].sapUiSmallMarginEnd {margin-
 .year-plan-head h2.sapMTitle {justify-content:center}
 .year-plan-head-button.button-group {position: absolute; right: 1%;}
 .year-plan-grid {background-color:#e5e5e5; border:1px solid #e5e5e5}
-.year-plan-grid .sapMFlexBox, .year-plan-grid .sapMText {height:40px; display:flex; justify-content:center; align-items:center; font-size:11px; font-weight:700; cursor:default}
-.year-plan-grid.diagonal .sapMFlexBox:not([data-style="Header"]) .sapMText {justify-content: flex-start; align-items: flex-start; font-size: 6px; padding-left: 2px; padding-top: 2px;}
+.year-plan-grid .sapMFlexBox, .year-plan-grid .sapMText {height:40px; display:flex; justify-content:center; align-items:center; font-size:12px; font-weight:700; cursor:default}
+.year-plan-grid.diagonal .sapMFlexBox:not([data-style="Header"]) .sapMText {justify-content: flex-start; align-items: flex-start; padding-left: 2px; padding-top: 2px;}
 .year-plan-grid .sapMFlexBox[data-align="start"] {justify-content: flex-start; padding-left: 8px;}
 .year-plan-grid .sapMFlexBox[data-align="start"] .sapMText {justify-content: flex-start;}
 .year-plan-grid .sapMFlexBox[data-border="Default"] {border:0px solid black}

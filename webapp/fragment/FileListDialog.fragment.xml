@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns:m="sap.m"
   xmlns:core="sap.ui.core"
   xmlns="sap.ui.table">
-  <m:Dialog busy="{/busy}" busyIndicatorDelay="0" title="{i18n>LABEL_00248}" contentWidth="500px" contentHeight="45px" class="file-list-dialog">
+  <m:Dialog busy="{/busy}" busyIndicatorDelay="0" title="{i18n>LABEL_00195}" contentWidth="500px" contentHeight="45px" class="file-list-dialog">
     <m:content>
       <Table class="row-link" width="100%" columnHeaderHeight="45" rowHeight="44" selectionMode="None" rows="{/files}" visibleRowCount="{/fileCount}" columnHeaderVisible="false" noData="{i18n>MSG_00001}">
         <columns>

@@ -16,13 +16,13 @@
                 </template>
             </Column>
             <Column width="auto">
-                <m:Label text="{i18n>LABEL_00224}" />
+                <m:Label text="{i18n>LABEL_00219}" />
                 <template>
                     <m:Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
                 </template>
             </Column>
             <Column width="auto">
-                <m:Label text="{i18n>LABEL_00351}" />
+                <m:Label text="{i18n>LABEL_00177}" />
                 <template>
                     <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </template>
@@ -30,7 +30,7 @@
             <Column width="auto">
                 <m:Label text="{i18n>LABEL_07002}"/>
                 <template>
-                    <m:Text text="{ path: 'Datum', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                    <m:Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </template>
             </Column>
             <Column width="auto">
@@ -48,13 +48,13 @@
             <Column width="auto">
                 <m:Label text="{i18n>LABEL_07007}" />
                 <template>
-                    <m:Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                    <m:Text text="{ path: 'Abrst', type: 'sap.ui.tesna.mvc.model.type.Decimal' }{i18n>LABEL_00180}" width="100%" textAlign="Center" wrapping="false" />
                 </template>
             </Column>
             <Column width="20%">
                 <m:Label text="{i18n>LABEL_07008}" />
                 <template>
-                    <m:Text text="{Taker}" width="100%" wrapping="false" />
+                    <m:Text text="{Atrsn}" width="100%" wrapping="false" />
                 </template>
             </Column>
         </columns>

@@ -5,7 +5,7 @@
   <VBox id="ATTACHBOX" class="vCardBox" visible="{/Settings/Visible}">
     <HBox class="table-toolbar">
       <HBox class="title">
-        <Title level="H2" text="{i18n>LABEL_00248}" />
+        <Title level="H2" text="{i18n>LABEL_00195}" />
         <Text text="{/Settings/Message}" visible="{= ${/Settings/Editable} &amp;&amp; !!${/Settings/Message}}" class="desc-txt" />
         <Link text="{/Settings/LinkText}" visible="{= ${/Settings/Editable} &amp;&amp; !!${/Settings/LinkUrl}}" href="{/Settings/LinkUrl}"/>
       </HBox>
@@ -38,7 +38,7 @@
           </table:template>
         </table:Column>
         <table:Column>
-          <Label text="{i18n>LABEL_00248}" width="100%" />
+          <Label text="{i18n>LABEL_00195}" width="100%" />
           <table:template>
             <Link press=".AttachFileAction.onFileLink" text="{Zfilename}" width="100%" textAlign="Begin" />
           </table:template>

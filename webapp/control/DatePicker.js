@@ -69,7 +69,7 @@ sap.ui.define(
 
         this._oPopup.getBeginButton().setVisible(false);
 
-        const sTodayText = AppUtils.getBundleText('LABEL_00368'); // 오늘
+        const sTodayText = AppUtils.getBundleText('LABEL_00160'); // 오늘
         const oEndButton = this._oPopup.getEndButton();
         if (oEndButton) {
           oEndButton.setType(ButtonType.Emphasized).setText(sTodayText);

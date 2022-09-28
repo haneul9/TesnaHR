@@ -37,7 +37,7 @@ sap.ui.define(
           oArguments.appno === 'N'
             ? '' //
             : oArguments.flag === 'WE' || oArguments.flag === 'WD'
-            ? this.getBundleText('LABEL_00360') // 결재
+            ? this.getBundleText('LABEL_00165') // 결재
             : this.getBundleText('LABEL_00100'); // 조회
 
         return `${this.getBundleText('LABEL_06020')} ${sRouteText}`; // 근태확인
@@ -191,7 +191,7 @@ sap.ui.define(
 
         // {승인}하시겠습니까?
         MessageBox.confirm(this.getBundleText('MSG_00006', 'LABEL_00123'), {
-          actions: [this.getBundleText('LABEL_00121'), MessageBox.Action.CANCEL],
+          actions: [this.getBundleText('LABEL_00123'), MessageBox.Action.CANCEL],
           onClose: async (sAction) => {
             if (!sAction || sAction === MessageBox.Action.CANCEL) {
               this.setContentsBusy(false);

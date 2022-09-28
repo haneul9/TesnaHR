@@ -9,7 +9,7 @@
                     <extension>
                         <m:HBox class="header-wrap" justifyContent="SpaceBetween">
                             <m:HBox class="header" alignItems="Center">
-                                <m:Title level="H3" text="{i18n>LABEL_00376}" class="sapUiSmallMarginEnd" />
+                                <m:Title level="H3" text="{i18n>LABEL_00145}" class="sapUiSmallMarginEnd" />
                                 <m:Text class="desc-txt" text="{i18n>MSG_04002}" />
                             </m:HBox>
                             <m:HBox>
@@ -32,7 +32,7 @@
                             </template>
                         </Column>
                         <Column width="100px">
-                            <m:Label text="{i18n>LABEL_00371}" />
+                            <m:Label text="{i18n>LABEL_00157}" />
                             <template>
                                 <m:Text text="{Zzcaltltx}" width="100%" textAlign="Center" wrapping="false" />
                             </template>

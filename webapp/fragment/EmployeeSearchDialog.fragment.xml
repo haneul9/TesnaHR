@@ -17,7 +17,7 @@
             <Button press=".onSearch" class="icon-button search" />
           </HBox>
           <grid:CSSGrid gridTemplateRows="1fr 2fr" gridGap="6px 0px" class="form-grid type-d form-search">
-            <Label text="{i18n>LABEL_00237}" />
+            <Label text="{i18n>LABEL_00206}" />
             <VBox>
               <ComboBox items="{/entry/persArea}" selectedKey="{/settings/searchConditions/Persa}" enabled="{/settings/fieldEnabled/Persa}" width="100%" class="conspicuous-disabled">
                 <core:Item text="{Pbtxt}" key="{Werks}" />
@@ -27,23 +27,23 @@
             <VBox>
               <Input value="{/settings/searchConditions/Ename}" enabled="{/settings/fieldEnabled/Ename}" submit=".onSearch" class="conspicuous-disabled" />
             </VBox>
-            <Label text="{i18n>LABEL_00226}" />
+            <Label text="{i18n>LABEL_00218}" />
             <VBox>
               <Input value="{/settings/searchConditions/Orgtx}" enabled="{/settings/fieldEnabled/Orgeh}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onGroupOpen" class="conspicuous-disabled" />
             </VBox>
-            <Label text="{i18n>LABEL_00240}" />
+            <Label text="{i18n>LABEL_00197}" />
             <VBox>
               <ComboBox items="{/entry/workType}" selectedKey="{/settings/searchConditions/Stat2}" width="100%" enabled="{/settings/fieldEnabled/Stat2}" class="conspicuous-disabled">
                 <core:Item text="{Ztext}" key="{Zcode}" />
               </ComboBox>
             </VBox>
-            <Label text="{i18n>LABEL_00238}" />
+            <Label text="{i18n>LABEL_00199}" />
             <VBox>
               <ComboBox items="{/entry/empGroup}" selectedKey="{/settings/searchConditions/Persg}" enabled="{/settings/fieldEnabled/Persg}" change=".onChangeEmpGroup" width="100%" class="conspicuous-disabled">
                 <core:Item text="{Ztext}" key="{Zcode}" />
               </ComboBox>
             </VBox>
-            <Label text="{i18n>LABEL_00327}" />
+            <Label text="{i18n>LABEL_00182}" />
             <VBox>
               <ComboBox items="{/entry/subEmpGroup}" selectedKey="{/settings/searchConditions/Persk}" enabled="{= ${/settings/fieldEnabled/Persk} &amp;&amp; ${/settings/searchConditions/Persg} !== 'ALL' }" busyIndicatorDelay="0" busy="{/settings/fieldBusy/Persk}" width="100%" class="conspicuous-disabled">
                 <core:Item text="{Ztext}" key="{Zcode}" />
@@ -70,7 +70,7 @@
                 </table:template>
               </table:Column>
               <table:Column width="25%" sortProperty="Fulln" filterProperty="Fulln" visible="{/settings/fieldVisible/Fulln}">
-                <Label text="{i18n>LABEL_00227}" />
+                <Label text="{i18n>LABEL_00216}" />
                 <table:template>
                   <Text text="{Fulln}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text" />
                 </table:template>
@@ -88,19 +88,19 @@
                 </table:template>
               </table:Column>
               <table:Column width="auto" sortProperty="Stat2tx" filterProperty="Stat2tx" visible="{/settings/fieldVisible/Stat2tx}">
-                <Label text="{i18n>LABEL_00240}" />
+                <Label text="{i18n>LABEL_00197}" />
                 <table:template>
                   <Text text="{Stat2tx}" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
                 </table:template>
               </table:Column>
               <table:Column width="auto" sortProperty="Entda" filterProperty="Entda" visible="{/settings/fieldVisible/Entda}">
-                <Label text="{i18n>LABEL_00235}" />
+                <Label text="{i18n>LABEL_00212}" />
                 <table:template>
                   <Text text="{ path: 'Entda', type: 'sap.ui.tesna.mvc.model.type.Date', formatOptions: { pattern: 'yyyy.MM.dd' } }" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
                 </table:template>
               </table:Column>
               <table:Column width="auto" sortProperty="Retdt" filterProperty="Retdt" visible="{/settings/fieldVisible/Retdt}">
-                <Label text="{i18n>LABEL_00236}" />
+                <Label text="{i18n>LABEL_00208}" />
                 <table:template>
                   <Text text="{ path: 'Retdt', type: 'sap.ui.tesna.mvc.model.type.Date', formatOptions: { pattern: 'yyyy.MM.dd' } }" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text" />
                 </table:template>

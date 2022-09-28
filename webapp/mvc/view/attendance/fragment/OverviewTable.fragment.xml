@@ -18,31 +18,31 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="12%" filterProperty="Orgtx" sortProperty="Orgtx">
-                    <Label text="{i18n>LABEL_00224}" />
+                    <Label text="{i18n>LABEL_00219}" />
                     <table:template>
                         <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10%" filterProperty="Ltext" sortProperty="Ltext">
-                    <Label text="{i18n>LABEL_00351}" />
+                    <Label text="{i18n>LABEL_00177}" />
                     <table:template>
                         <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Ename" sortProperty="Ename">
-                    <Label text="{i18n>LABEL_00353}"/>
+                    <Label text="{i18n>LABEL_00174}"/>
                     <table:template>
                         <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10%" filterProperty="Awrsntx" sortProperty="Awrsntx">
-                    <Label text="{i18n>LABEL_00381}"/>
+                    <Label text="{i18n>LABEL_00122}"/>
                     <table:template>
                         <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
                     </table:template>
                 </table:Column>
                 <table:Column width="auto" filterProperty="Period" sortProperty="Period">
-                    <Label text="{i18n>LABEL_00382}"/>
+                    <Label text="{i18n>LABEL_00120}"/>
                     <table:template>
                         <Text text="{Period}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
                     </table:template>
@@ -60,19 +60,19 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Appda" sortProperty="Appda">
-                    <Label text="{i18n>LABEL_00266}" />
+                    <Label text="{i18n>LABEL_00189}" />
                     <table:template>
                         <Text text="{ path: 'Appda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Sgnpnm" sortProperty="Sgnpnm">
-                    <Label text="{i18n>LABEL_00356}" />
+                    <Label text="{i18n>LABEL_00171}" />
                     <table:template>
                         <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Sgnda" sortProperty="Sgnda">
-                    <Label text="{i18n>LABEL_00269}" />
+                    <Label text="{i18n>LABEL_00186}" />
                     <table:template>
                         <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                     </table:template>

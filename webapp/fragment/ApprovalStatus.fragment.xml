@@ -4,7 +4,7 @@
     <VBox id="commonApprovalStatusBox" class="vCardBox" visible="{/settings/visible}" busy="true" busyIndicatorDelay="0">
         <HBox class="table-toolbar">
             <HBox class="title">
-                <Title level="H2" text="{i18n>LABEL_00357}" />
+                <Title level="H2" text="{i18n>LABEL_00169}" />
             </HBox>
         </HBox>
         <table:Table id="commonApprovalStatusTable" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" visibleRowCount="{/rowCount}" rows="{/list}" noData="{i18n>MSG_00001}">
@@ -43,13 +43,13 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="14%">
-                    <Label text="{i18n>LABEL_00224}"/>
+                    <Label text="{i18n>LABEL_00219}"/>
                     <table:template>
                         <Text text="{Orgtx}" width="100%" textAlign="Center" />
                     </table:template>
                 </table:Column>
                 <table:Column width="auto">
-                    <Label text="{i18n>LABEL_00261}"/>
+                    <Label text="{i18n>LABEL_00190}"/>
                     <table:template>
                         <Text text="{Appsttx}" width="100%" textAlign="Center" />
                     </table:template>
@@ -61,7 +61,7 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="auto">
-                    <Label text="{i18n>LABEL_00330}"/>
+                    <Label text="{i18n>LABEL_00180}"/>
                     <table:template>
                         <Text text="{ path: 'Sgntm', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" />
                     </table:template>

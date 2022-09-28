@@ -26,7 +26,7 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="60px" sortProperty="Val02" filterProperty="Val02">
-                    <Label text="{i18n>LABEL_00365}"/>
+                    <Label text="{i18n>LABEL_00163}"/>
                     <table:template>
                         <Text text="{ path: 'Val02', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
@@ -46,13 +46,13 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="60px" sortProperty="Val02" filterProperty="Val02">
-                    <Label text="{i18n>LABEL_00367}"/>
+                    <Label text="{i18n>LABEL_00161}"/>
                     <table:template>
                         <Text text="{ path: 'Val02', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="60px" sortProperty="Val03" filterProperty="Val03">
-                    <Label text="{i18n>LABEL_00366}"/>
+                    <Label text="{i18n>LABEL_00162}"/>
                     <table:template>
                         <Text text="{ path: 'Val03', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>

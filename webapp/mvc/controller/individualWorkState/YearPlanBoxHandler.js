@@ -154,10 +154,10 @@ sap.ui.define(
 
         const mWorkType = {
           '': '',
-          T: oController.getBundleText('LABEL_00370'), // 통상
+          T: oController.getBundleText('LABEL_00158'), // 통상
           F: 'OFF',
-          D: oController.getBundleText('LABEL_00298'), // 주간
-          N: oController.getBundleText('LABEL_00299'), // 야간
+          D: oController.getBundleText('LABEL_00184'), // 주간
+          N: oController.getBundleText('LABEL_00183'), // 야간
         };
 
         while (aPlansData.length > 0) {

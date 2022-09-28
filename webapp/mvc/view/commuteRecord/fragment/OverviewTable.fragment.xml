@@ -21,8 +21,8 @@
             </table:Column>
             <table:Column width="160px" filterProperty="Orgtx" sortProperty="Orgtx">
                 <table:multiLabels>
-                    <Label text="{i18n>LABEL_00224}" />
-                    <Label text="{i18n>LABEL_00224}" />
+                    <Label text="{i18n>LABEL_00219}" />
+                    <Label text="{i18n>LABEL_00219}" />
                 </table:multiLabels>
                 <table:template>
                     <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
@@ -66,8 +66,8 @@
             </table:Column>
             <table:Column width="50px" filterProperty="Daytx" sortProperty="Daytx">
                 <table:multiLabels>
-                    <Label text="{i18n>LABEL_00350}" />
-                    <Label text="{i18n>LABEL_00350}" />
+                    <Label text="{i18n>LABEL_00178}" />
+                    <Label text="{i18n>LABEL_00178}" />
                 </table:multiLabels>
                 <table:template>
                     <Text text="{Daytx}" width="100%" textAlign="Center" wrapping="false" />
@@ -75,8 +75,8 @@
             </table:Column>
             <table:Column width="60px" filterProperty="Dayngttx" sortProperty="Dayngttx">
                 <table:multiLabels>
-                    <Label text="{i18n>LABEL_00385}" />
-                    <Label text="{i18n>LABEL_00385}" />
+                    <Label text="{i18n>LABEL_00113}" />
+                    <Label text="{i18n>LABEL_00113}" />
                 </table:multiLabels>
                 <table:template>
                     <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
@@ -178,7 +178,7 @@
                     <Label text="{i18n>LABEL_06021}" wrapping="true" />
                 </table:multiLabels>
                 <table:template>
-                    <Text text="{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                    <ObjectStatus class="table-object-status font-black" text="{= !!${Dedhr} ? '-' : ''}{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" state="Error" />
                 </table:template>
             </table:Column>
             <table:Column width="120px" headerSpan="4" filterProperty="Begda" sortProperty="Begda">
@@ -228,8 +228,8 @@
             </table:Column>
             <table:Column width="140px" filterProperty="Apptytx" sortProperty="Apptytx">
                 <table:multiLabels>
-                    <Label text="{i18n>LABEL_00386}" />
-                    <Label text="{i18n>LABEL_00386}" />
+                    <Label text="{i18n>LABEL_00111}" />
+                    <Label text="{i18n>LABEL_00111}" />
                 </table:multiLabels>
                 <table:template>
                     <Link target="_blank" textAlign="Center" width="100%" text="{Apptytx}" press=".onPressRowApprovalDetail" />

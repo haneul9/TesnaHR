@@ -67,7 +67,7 @@ sap.ui.define(
           listInfo: {
             totalCount: 0,
             rowCount: 0,
-            ObjTxt1: this.getBundleText('LABEL_00388'), // 미처리
+            ObjTxt1: this.getBundleText('LABEL_00102'), // 미처리
             infoMessage: this.getBundleText('MSG_06001'), // 근태, 특근, 근무일정, 근무계획 신청 승인 시 자동으로 완료 처리됩니다.
           },
           list: [],
@@ -413,6 +413,7 @@ sap.ui.define(
           TI: 'attendance',
           TJ: 'commuteCheck',
           TG: 'shift',
+          TK: 'overtime',
         };
 
         if (!mRowData || !_.has(mApptyRoute, mRowData.Appty)) return;
@@ -430,7 +431,7 @@ sap.ui.define(
           mParams.push(mRowData.Werks);
           mParams.push(mRowData.Orgeh);
           mParams.push(mRowData.Kostl ? mRowData.Kostl : 'NA');
-        } else if (mRowData.Appty === 'TH' || mRowData.Appty === 'TG') {
+        } else if (mRowData.Appty === 'TH' || mRowData.Appty === 'TG' || mRowData.Appty === 'TK') {
           mParams.push(mRowData.Werks);
           mParams.push(mRowData.Orgeh);
         }
@@ -440,7 +441,7 @@ sap.ui.define(
 
       onPressExcelDownload() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const sFileName = this.getBundleText('LABEL_00282', 'LABEL_06019'); // {이상근태확인신청결재}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_06019'); // {이상근태확인신청결재}_목록
 
         this.TableUtils.export({ oTable, sFileName });
       },
@@ -455,7 +456,7 @@ sap.ui.define(
 
           if (!mSearchConditions.Werks || !mSearchConditions.Orgeh) return;
 
-          const sAppstateNullText = this.getBundleText('LABEL_00388');
+          const sAppstateNullText = this.getBundleText('LABEL_00102');
           const aRowData = await Client.getEntitySet(this.getViewModel(ServiceNames.WORKTIME), 'TimeReaderCheck', {
             Austy: sAuth,
             Werks: mSearchConditions.Werks,
@@ -476,6 +477,7 @@ sap.ui.define(
               Appsttx: o.Appst === '' ? sAppstateNullText : o.Appsttx,
               Beguzf: this.TimeUtils.nvl(o.Beguzf),
               Enduzf: this.TimeUtils.nvl(o.Enduzf),
+              Dedhr: this.TimeUtils.nvl(o.Dedhr),
             }))
           );
 

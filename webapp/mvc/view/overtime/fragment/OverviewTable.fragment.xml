@@ -2,7 +2,7 @@
     xmlns:table="sap.ui.table"
     xmlns:core="sap.ui.core">
     <HBox>
-        <table:Table id="overviewTable" class="row-link" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/busy}" noData="{i18n>MSG_00001}" cellClick=".onSelectRow">
+        <table:Table id="overtimeTable" class="row-link" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/busy}" noData="{i18n>MSG_00001}" cellClick=".onSelectRow">
             <table:rowSettingsTemplate>
                 <table:RowSettings highlight="{ path: 'Appst', formatter: '.TableUtils.rowHighlight' }" />
             </table:rowSettingsTemplate>
@@ -18,19 +18,19 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="12%" filterProperty="Orgtx" sortProperty="Orgtx">
-                    <Label text="{i18n>LABEL_00224}" />
+                    <Label text="{i18n>LABEL_00219}" />
                     <table:template>
                         <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10%" filterProperty="Ltext" sortProperty="Ltext">
-                    <Label text="{i18n>LABEL_00351}" />
+                    <Label text="{i18n>LABEL_00177}" />
                     <table:template>
                         <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Ename" sortProperty="Ename">
-                    <Label text="{i18n>LABEL_00353}"/>
+                    <Label text="{i18n>LABEL_00174}"/>
                     <table:template>
                         <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
@@ -38,7 +38,7 @@
                 <table:Column width="10%" filterProperty="Datum" sortProperty="Datum">
                     <Label text="{i18n>LABEL_07002}"/>
                     <table:template>
-                        <Text text="{ path: 'Datum', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                        <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="auto" filterProperty="Beguz" sortProperty="Beguz">
@@ -54,7 +54,7 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Abrst" sortProperty="Abrst">
-                    <Label text="{i18n>LABEL_00330}"/>
+                    <Label text="{i18n>LABEL_00180}"/>
                     <table:template>
                         <Text text="{ path: 'Abrst', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
@@ -62,23 +62,23 @@
                 <table:Column width="8%" filterProperty="Apename" sortProperty="Apename">
                     <Label text="{i18n>LABEL_00135}" />
                     <table:template>
-                        <Text text="{Apename}" width="100%" textAlign="Center" wrapping="false" />
+                        <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Appda" sortProperty="Appda">
-                    <Label text="{i18n>LABEL_00266}" />
+                    <Label text="{i18n>LABEL_00189}" />
                     <table:template>
                         <Text text="{ path: 'Appda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Sgnpnm" sortProperty="Sgnpnm">
-                    <Label text="{i18n>LABEL_00356}" />
+                    <Label text="{i18n>LABEL_00171}" />
                     <table:template>
                         <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8%" filterProperty="Sgnda" sortProperty="Sgnda">
-                    <Label text="{i18n>LABEL_00269}" />
+                    <Label text="{i18n>LABEL_00186}" />
                     <table:template>
                         <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                     </table:template>

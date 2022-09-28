@@ -267,6 +267,7 @@ sap.ui.define(
           TI: 'attendance',
           TJ: 'commuteCheck',
           TG: 'shift',
+          TK: 'overtime',
         };
 
         if (!mRowData || !_.has(mApptyRoute, mRowData.Appty)) return;
@@ -284,7 +285,7 @@ sap.ui.define(
           mParams.push(mRowData.Werks);
           mParams.push(mRowData.Orgeh);
           mParams.push(mRowData.Kostl ? mRowData.Kostl : 'NA');
-        } else if (mRowData.Appty === 'TH' || mRowData.Appty === 'TG') {
+        } else if (mRowData.Appty === 'TH' || mRowData.Appty === 'TG' || mRowData.Appty === 'TK') {
           mParams.push(mRowData.Werks);
           mParams.push(mRowData.Orgeh);
         }
@@ -300,7 +301,7 @@ sap.ui.define(
 
       onPressExcelDownload() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const sFileName = this.getBundleText('LABEL_00282', 'LABEL_06001'); // {근태타각정보조회}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_06001'); // {근태타각정보조회}_목록
 
         this.TableUtils.export({ oTable, sFileName });
       },
@@ -328,7 +329,14 @@ sap.ui.define(
           });
           oViewModel.setProperty(
             '/list',
-            _.map(aRowData, (o) => _.omit(o, '__metadata'))
+            _.map(aRowData, (o) => ({
+              ..._.omit(o, '__metadata'),
+              Beguz: o.Beguz === '0000' ? '' : o.Beguz,
+              Beguzf: o.Beguzf === '0000' ? '' : o.Beguzf,
+              Enduz: o.Enduz === '0000' ? '' : o.Enduz,
+              Enduzf: o.Enduzf === '0000' ? '' : o.Enduzf,
+              Dedhr: o.Dedhr === '0000' ? '' : o.Dedhr,
+            }))
           );
         } catch (oError) {
           this.debug('Controller > commuteRecord > retrieveList Error', oError);

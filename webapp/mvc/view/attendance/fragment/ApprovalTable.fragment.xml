@@ -22,25 +22,25 @@
                 </template>
             </Column>
             <Column width="auto">
-                <m:Label text="{i18n>LABEL_00224}" />
+                <m:Label text="{i18n>LABEL_00219}" />
                 <template>
                     <m:Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
                 </template>
             </Column>
             <Column width="auto">
-                <m:Label text="{i18n>LABEL_00351}" />
+                <m:Label text="{i18n>LABEL_00177}" />
                 <template>
                     <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </template>
             </Column>
             <Column width="auto">
-                <m:Label text="{i18n>LABEL_00381}" />
+                <m:Label text="{i18n>LABEL_00122}" />
                 <template>
                     <m:Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />
                 </template>
             </Column>
             <Column width="14%">
-                <m:Label text="{i18n>LABEL_00382}" />
+                <m:Label text="{i18n>LABEL_00120}" />
                 <template>
                     <m:Text text="{Period}" width="100%" textAlign="Center" wrapping="false" />
                 </template>

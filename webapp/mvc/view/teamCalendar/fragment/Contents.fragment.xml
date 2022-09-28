@@ -20,17 +20,17 @@
           <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" enabled="{= ${/auth} === 'H' }" busyIndicatorDelay="0" busy="{/busy/Persa}" change=".onChangeWerks">
             <core:Item key="{Persa}" text="{Pbtxt}" />
           </ComboBox>
-          <Label text="{i18n>LABEL_00224}" />
+          <Label text="{i18n>LABEL_00219}" />
           <ComboBox items="{/entry/Orgeh}" selectedKey="{/searchConditions/Orgeh}" busyIndicatorDelay="0" busy="{/busy/Orgeh}" change=".onChangeOrgeh">
             <core:Item key="{Orgeh}" text="{Fulln}" />
           </ComboBox>
-          <Label text="{i18n>LABEL_00351}" />
+          <Label text="{i18n>LABEL_00177}" />
           <ComboBox items="{/entry/Kostl}" selectedKey="{/searchConditions/Kostl}" busyIndicatorDelay="0" busy="{/busy/Kostl}" change=".onChangeKostl">
             <core:Item key="{Kostl}" text="{Ltext}" />
           </ComboBox>
-          <Label text="{i18n>LABEL_00328}" />
+          <Label text="{i18n>LABEL_00181}" />
           <DatePicker width="250px" displayFormat="yyyy.MM" valueFormat="yyyyMM" value="{/searchConditions/Tyymm}" busyIndicatorDelay="0" busy="{/busy/Tyymm}" />
-          <CheckBox text="{i18n>LABEL_00369}" selected="{ path: '/searchConditions/Downinc', type: 'sap.ui.tesna.mvc.model.type.Boolean' }" visible="{= ${/auth} !== 'E' }" busyIndicatorDelay="0" busy="{/busy/Orgeh}" />
+          <CheckBox text="{i18n>LABEL_00159}" selected="{ path: '/searchConditions/Downinc', type: 'sap.ui.tesna.mvc.model.type.Boolean' }" visible="{= ${/auth} !== 'E' }" busyIndicatorDelay="0" busy="{/busy/Orgeh}" />
           <Button text="{i18n>LABEL_00100}" icon="/sap/public/bc/ui2/zui5_tesnahr/images/icon_search03.png" iconDensityAware="false" busyIndicatorDelay="0" busy="{/busy/Button}" press=".onPressSearch"/>
         </HBox>
       </HBox>

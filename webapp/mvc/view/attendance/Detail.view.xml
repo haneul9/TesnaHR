@@ -27,7 +27,7 @@
                     </HBox>
                     <HBox class="table-actions">
                         <Button text="{i18n>LABEL_00134}" press=".onPressAddNewApprovalBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') }" />
-                        <Button text="{i18n>LABEL_00383}" press=".onPressAddCancleApprolvalBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') }" />
+                        <Button text="{i18n>LABEL_00119}" press=".onPressAddCancleApprolvalBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') }" />
                         <Button icon="sap-icon://less" text="{i18n>LABEL_00110}" press=".onPressDelRowBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') }" enabled="{= !!${/form/list}.length }" />
                     </HBox>
                 </HBox>

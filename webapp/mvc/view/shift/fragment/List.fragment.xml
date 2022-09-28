@@ -19,11 +19,11 @@
                     <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" enabled="{= ${/auth} === 'H' }" busyIndicatorDelay="0" busy="{/contentsBusy/search}" change=".onChangeWerks">
                         <core:Item key="{Persa}" text="{Pbtxt}" />
                     </ComboBox>
-                    <Label text="{i18n>LABEL_00224}" />
+                    <Label text="{i18n>LABEL_00219}" />
                     <ComboBox items="{/entry/Orgeh}" selectedKey="{/searchConditions/Orgeh}" busyIndicatorDelay="0" busy="{/contentsBusy/search}" change=".onChangeOrgeh">
                         <core:Item key="{Orgeh}" text="{Fulln}" />
                     </ComboBox>
-                    <Label text="{i18n>LABEL_00266}" />
+                    <Label text="{i18n>LABEL_00189}" />
                     <custom:DateRangeSelection class="sapIcon_Date" dateValue="{ path: '/searchConditions/Apbeg', type: 'sap.ui.tesna.mvc.model.type.Date' }" secondDateValue="{ path: '/searchConditions/Apend', type: 'sap.ui.tesna.mvc.model.type.Date' }" />
                     <Button text="{i18n>LABEL_00100}" icon="/sap/public/bc/ui2/zui5_tesnahr/images/icon_search03.png" iconDensityAware="false" enabled="{/isActiveSearch}" press=".onPressSearch" busyIndicatorDelay="0" busy="{/contentsBusy/search}" />
                 </HBox>

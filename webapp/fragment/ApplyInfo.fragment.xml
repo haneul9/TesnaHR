@@ -12,7 +12,7 @@
       <VBox>
         <Text text="{/ApplyInfo/Apename}"/>
       </VBox>
-      <Label text="{i18n>LABEL_00226}"/>
+      <Label text="{i18n>LABEL_00218}"/>
       <VBox>
         <Text text="{/ApplyInfo/Aporgtx}"/>
       </VBox>

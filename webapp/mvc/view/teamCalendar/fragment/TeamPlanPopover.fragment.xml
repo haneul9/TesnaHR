@@ -5,7 +5,7 @@
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="py-6-px">
             <Label text="{i18n>LABEL_02022}:" />
             <Text text="{/calendar/detail/data/Awrsntx1}" />
-            <Label text="{i18n>LABEL_00261}:" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
+            <Label text="{i18n>LABEL_00190}:" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
             <Text text="{/calendar/detail/data/Appsttx1}" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
             <Label text="{i18n>LABEL_00154}:" visible="{= ${/calendar/detail/data/Holyn} === 'X'}" />
             <Text text="{/calendar/detail/data/Atrsn1}" visible="{= ${/calendar/detail/data/Holyn} === 'X'}" />
@@ -15,7 +15,7 @@
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="border-top py-6-px" visible="{= !!${/calendar/detail/data/Awrsntx2} }">
             <Label text="{i18n>LABEL_02022}:" />
             <Text text="{/calendar/detail/data/Awrsntx2}" />
-            <Label text="{i18n>LABEL_00261}:" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
+            <Label text="{i18n>LABEL_00190}:" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
             <Text text="{/calendar/detail/data/Appsttx2}" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
             <Label text="{i18n>LABEL_00154}:" visible="{= ${/calendar/detail/data/Holyn} === 'X'}" />
             <Text text="{/calendar/detail/data/Atrsn2}" visible="{= ${/calendar/detail/data/Holyn} === 'X'}" />

@@ -37,7 +37,7 @@ sap.ui.define(
           oArguments.appno === 'N'
             ? '' //
             : oArguments.flag === 'WE' || oArguments.flag === 'WD'
-            ? this.getBundleText('LABEL_00360') // 결재
+            ? this.getBundleText('LABEL_00165') // 결재
             : this.getBundleText('LABEL_00100'); // 조회
 
         return `${this.getBundleText('LABEL_01002')} ${sRouteText}`;
@@ -334,7 +334,7 @@ sap.ui.define(
         }
 
         if (_.some(aList, (o) => !o.Pernr)) {
-          MessageBox.alert(this.getBundleText('MSG_00005', 'LABEL_00353')); // {대상자}를 선택하세요.
+          MessageBox.alert(this.getBundleText('MSG_00005', 'LABEL_00174')); // {대상자}를 선택하세요.
           return;
         }
 
@@ -386,7 +386,7 @@ sap.ui.define(
 
         // {승인}하시겠습니까?
         MessageBox.confirm(this.getBundleText('MSG_00006', 'LABEL_00123'), {
-          actions: [this.getBundleText('LABEL_00121'), MessageBox.Action.CANCEL],
+          actions: [this.getBundleText('LABEL_00123'), MessageBox.Action.CANCEL],
           onClose: async (sAction) => {
             if (!sAction || sAction === MessageBox.Action.CANCEL) {
               this.setContentsBusy(false, 'all');

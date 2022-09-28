@@ -5,7 +5,7 @@
   <VBox id="fileAttachmentBox" class="vCardBox" visible="{/settings/visible}" busy="true" busyIndicatorDelay="0">
     <HBox class="table-toolbar">
       <HBox class="title">
-        <Title level="H2" text="{i18n>LABEL_00248}" />
+        <Title level="H2" text="{i18n>LABEL_00195}" />
         <Text text="{/settings/message}" visible="{= ${/settings/editable} &amp;&amp; !!${/settings/message} }" class="desc-txt" />
       </HBox>
       <HBox class="table-actions">
@@ -38,7 +38,7 @@
           </table:template>
         </table:Column>
         <table:Column>
-          <Label text="{i18n>LABEL_00248}" width="100%" />
+          <Label text="{i18n>LABEL_00195}" width="100%" />
           <table:template>
             <HBox width="100%">
               <Link text="{Fname}" href="{Uri}" target="_blank" width="100%" textAlign="Begin" subtle="{New}">

@@ -37,28 +37,40 @@
                     <m:Label text="{i18n>LABEL_00210}"/>
                 </multiLabels>
                 <template>
-                    <m:Input value="{Ename}" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" width="100%" maxSuggestionWidth="400px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'employees', templateShareable: false }" class="required tableRow_Text" editable="{= !${/form/Appst} }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
+                    <m:Input value="{Ename}" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin'}" width="100%" maxSuggestionWidth="500px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'employees', templateShareable: false }" class="required tableRow_Text" editable="{= !${/form/Appst} }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
                         <m:suggestionColumns>
-                            <m:Column width="40%" popinDisplay="Inline" demandPopin="true">
-                                <m:Label text="{i18n>LABEL_00210}"/>
+                            <m:Column width="6%" popinDisplay="Inline">
+                                <m:Label text="" />
                             </m:Column>
-                            <m:Column popinDisplay="Inline" demandPopin="true">
-                                <m:Label text="{i18n>LABEL_00209}"/>
+                            <m:Column width="14%" popinDisplay="Inline" demandPopin="true">
+                                <m:Label text="{i18n>LABEL_00210}" />
                             </m:Column>
-                            <m:Column width="15%" popinDisplay="Inline">
-                                <m:Label text="{i18n>LABEL_00214}"/>
+                            <m:Column width="20%" popinDisplay="Inline" demandPopin="true">
+                                <m:Label text="{i18n>LABEL_00209}" />
+                            </m:Column>
+                            <m:Column width="12%" popinDisplay="Inline">
+                                <m:Label text="{i18n>LABEL_00214}" />
                             </m:Column>
                             <m:Column popinDisplay="Inline" minScreenWidth="Tablet">
-                                <m:Label text="{i18n>LABEL_00226}"/>
+                                <m:Label text="{i18n>LABEL_00218}" />
+                            </m:Column>
+                            <m:Column width="20%" popinDisplay="Inline" minScreenWidth="Tablet">
+                                <m:Label text="{i18n>LABEL_00221}" />
                             </m:Column>
                         </m:suggestionColumns>
                         <m:suggestionRows>
                             <m:ColumnListItem>
                                 <m:cells>
-                                    <m:Label text="{Ename}"/>
-                                    <m:Label text="{Pernr}"/>
-                                    <m:Label text="{Zzcaltltx}"/>
-                                    <m:Label text="{Orgtx}"/>
+                                    <m:Image src="{Picurl}" mode="Background" class="members-photo sapUiTinyMarginEnd" error=".loadErrorAvatarImage">
+                                        <m:layoutData>
+                                            <m:FlexItemData minHeight="30px" maxHeight="30px" />
+                                        </m:layoutData>
+                                    </m:Image>
+                                    <m:Label text="{Ename}" />
+                                    <m:Label text="{Pernr}" />
+                                    <m:Label text="{Zzcaltltx}" />
+                                    <m:Label text="{Orgtx}" />
+                                    <m:Label text="{ path: 'Gbdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" />
                                 </m:cells>
                             </m:ColumnListItem>
                         </m:suggestionRows>
@@ -76,34 +88,34 @@
             </Column>
             <Column width="12%">
                 <multiLabels>
-                    <m:Label text="{i18n>LABEL_00224}"/>
-                    <m:Label text="{i18n>LABEL_00224}"/>
+                    <m:Label text="{i18n>LABEL_00219}"/>
+                    <m:Label text="{i18n>LABEL_00219}"/>
                 </multiLabels>
                 <template>
                     <m:Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
                 </template>
             </Column>
-            <Column width="12%" headerSpan="2">
+            <Column width="10%" headerSpan="2">
                 <multiLabels>
-                    <m:Label text="{i18n>LABEL_00354}"/>
+                    <m:Label text="{i18n>LABEL_00173}"/>
                     <m:Label text="{i18n>LABEL_01003}"/>
                 </multiLabels>
                 <template>
                     <m:Text text="{Rtext2}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
                 </template>
             </Column>
-            <Column width="10%">
+            <Column width="12%">
                 <multiLabels>
-                    <m:Label text="{i18n>LABEL_00354}"/>
+                    <m:Label text="{i18n>LABEL_00173}"/>
                     <m:Label text="{i18n>LABEL_01004}"/>
                 </multiLabels>
                 <template>
                     <m:Text text="{Ltext2}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
                 </template>
             </Column>
-            <Column width="13%" headerSpan="2" visible="{= !${/form/Appst} }">
+            <Column width="11%" headerSpan="2" visible="{= !${/form/Appst} }">
                 <multiLabels>
-                    <m:Label text="{i18n>LABEL_00355}"/>
+                    <m:Label text="{i18n>LABEL_00172}"/>
                     <m:Label text="{i18n>LABEL_01003}"/>
                 </multiLabels>
                 <template>
@@ -112,9 +124,9 @@
                     </m:ComboBox>
                 </template>
             </Column>
-            <Column width="11%" visible="{= !${/form/Appst} }">
+            <Column width="13%" visible="{= !${/form/Appst} }">
                 <multiLabels>
-                    <m:Label text="{i18n>LABEL_00355}"/>
+                    <m:Label text="{i18n>LABEL_00172}"/>
                     <m:Label text="{i18n>LABEL_01004}"/>
                 </multiLabels>
                 <template>
@@ -125,7 +137,7 @@
             </Column>
             <Column width="13%" headerSpan="2" visible="{= !!${/form/Appst} }">
                 <multiLabels>
-                    <m:Label text="{i18n>LABEL_00355}"/>
+                    <m:Label text="{i18n>LABEL_00172}"/>
                     <m:Label text="{i18n>LABEL_01003}"/>
                 </multiLabels>
                 <template>
@@ -134,7 +146,7 @@
             </Column>
             <Column width="11%" visible="{= !!${/form/Appst} }">
                 <multiLabels>
-                    <m:Label text="{i18n>LABEL_00355}"/>
+                    <m:Label text="{i18n>LABEL_00172}"/>
                     <m:Label text="{i18n>LABEL_01004}"/>
                 </multiLabels>
                 <template>

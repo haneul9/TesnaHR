@@ -280,7 +280,7 @@ sap.ui.define(
           oRemoveModel.remove(sUrl, {
             success: resolve,
             error: (Error) => {
-              const sMessage1 = AppUtils.getBundleText('MSG_00008', 'LABEL_00250'); // {파일삭제}중 오류가 발생하였습니다.
+              const sMessage1 = AppUtils.getBundleText('MSG_00008', 'LABEL_00194'); // {파일삭제}중 오류가 발생하였습니다.
               const sMessage2 = AppUtils.getBundleText('MSG_00052', Fname); // 파일명 : {0}
 
               reject({ code: 'E', message: `${sMessage1}\n\n${sMessage2}`, data: { Appno, Appty, Fnumr, Fname, Error } });

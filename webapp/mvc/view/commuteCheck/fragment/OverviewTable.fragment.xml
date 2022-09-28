@@ -10,7 +10,7 @@
             <table:Column width="60px">
                 <Label text="{i18n>LABEL_00144}" />
                 <table:template>
-                    <Text text="{Appsttx}" width="100%" textAlign="Center" wrapping="false">
+                    <Text class="red-highlight" text="{Appsttx}" width="100%" textAlign="Center" wrapping="false">
                         <customData>
                             <core:CustomData key="status" value="Z{Appst}" writeToDom="true" />
                         </customData>
@@ -42,13 +42,13 @@
                 </table:template>
             </table:Column>
             <table:Column width="50px">
-                <Label text="{i18n>LABEL_00350}" />
+                <Label text="{i18n>LABEL_00178}" />
                 <table:template>
                     <Text text="{Daytx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
             <table:Column width="60px">
-                <Label text="{i18n>LABEL_00385}" />
+                <Label text="{i18n>LABEL_00113}" />
                 <table:template>
                     <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
@@ -105,7 +105,7 @@
                     </VBox>
                 </table:template>
             </table:Column>
-            <table:Column width="80px">
+            <table:Column width="100px">
                 <Label text="{i18n>LABEL_06013}" />
                 <table:template>
                     <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />
@@ -114,7 +114,7 @@
             <table:Column width="100px">
                 <Label text="{i18n>LABEL_06021}" />
                 <table:template>
-                    <Text text="{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                    <ObjectStatus class="table-object-status font-black" text="{= !!${Dedhr} ? '-' : ''}{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" state="Error" />
                 </table:template>
             </table:Column>
             <table:Column width="120px">
@@ -124,31 +124,31 @@
                 </table:template>
             </table:Column>
             <table:Column width="120px">
-                <Label text="{i18n>LABEL_00266}" />
+                <Label text="{i18n>LABEL_00189}" />
                 <table:template>
                     <Text text="{ path: 'Appda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
             <table:Column width="120px">
-                <Label text="{i18n>LABEL_00356}" />
+                <Label text="{i18n>LABEL_00171}" />
                 <table:template>
                     <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
             <table:Column width="120px">
-                <Label text="{i18n>LABEL_00269}" />
+                <Label text="{i18n>LABEL_00186}" />
                 <table:template>
                     <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
             <table:Column width="140px">
-                <Label text="{i18n>LABEL_00387}" />
+                <Label text="{i18n>LABEL_00109}" />
                 <table:template>
                     <Link target="_blank" textAlign="Center" width="100%" text="{ path: 'Appno', type: 'sap.ui.tesna.mvc.model.type.Docno' }" press=".onPressRowApprovalDetail" />
                 </table:template>
             </table:Column>
             <table:Column width="140px">
-                <Label text="{i18n>LABEL_00386}" />
+                <Label text="{i18n>LABEL_00111}" />
                 <table:template>
                     <Link target="_blank" textAlign="Center" width="100%" text="{Apptytx}" press=".onPressRowApprovalDetail" />
                 </table:template>

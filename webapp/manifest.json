@@ -113,6 +113,8 @@
         { "pattern": "h/commuteCheck/{appno}/:flag:", "name": "h/commuteCheck-detail", "target": "commuteCheckDetail" },
 
         { "pattern": "individualWorkState/:pernr:/:year:/:month:", "name": "individualWorkState", "target": "individualWorkState" },
+        { "pattern": "m/individualWorkState/:pernr:/:year:/:month:", "name": "m/individualWorkState", "target": "m/individualWorkState" },
+        { "pattern": "h/individualWorkState/:pernr:/:year:/:month:", "name": "h/individualWorkState", "target": "h/individualWorkState" },
         
         { "pattern": "overtime", "name": "overtime", "target": "overtime" },
         { "pattern": "m/overtime", "name": "m/overtime", "target": "m/overtime" },
@@ -156,7 +158,9 @@
         "h/commuteCheck": { "viewId": "h_commuteCheck", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "MainH" },
         "commuteCheckDetail": { "viewId": "commuteCheckDetail", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "Detail" },
 
-        "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "Main" },
+        "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainE" },
+        "m/individualWorkState": { "viewId": "m_individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainM" },
+        "h/individualWorkState": { "viewId": "h_individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainH" },
         
         "overtime": { "viewId": "overtime", "viewPath": "sap.ui.tesna.mvc.view.overtime", "viewName": "ListE" },
         "m/overtime": { "viewId": "m_overtime", "viewPath": "sap.ui.tesna.mvc.view.overtime", "viewName": "ListM" },

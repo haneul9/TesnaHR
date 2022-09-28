@@ -24,19 +24,19 @@
             <VBox class="vCardBox" busyIndicatorDelay="0" busy="{/contentsBusy/table}">
                 <HBox alignItems="Center" class="table-toolbar">
                     <HBox class="title">
-                        <Title level="H2" text="{i18n>LABEL_00373}" />
+                        <Title level="H2" text="{i18n>LABEL_00153}" />
                     </HBox>
                 </HBox>
                 <grid:CSSGrid gridTemplateColumns="1fr 7fr" gridGap="1px 0" class="form-grid">
-                    <Label text="{i18n>LABEL_00224}" />
+                    <Label text="{i18n>LABEL_00219}" />
                     <VBox>
                         <Text text="{/form/Orgtx}" />
                     </VBox>
-                    <Label text="{i18n>LABEL_00374}" />
+                    <Label text="{i18n>LABEL_00152}" />
                     <VBox>
                         <DatePicker width="250px" displayFormat="yyyy.MM" valueFormat="yyyyMM" value="{/form/Tyymm}" editable="{= !${/form/Appst} || ${/form/Appst} === '10' }" change=".onChangeTyymm" />
                     </VBox>
-                    <Label text="{i18n>LABEL_00375}"/>
+                    <Label text="{i18n>LABEL_00151}"/>
                     <VBox>
                         <Text text="{/form/TmDateTxt}" visible="{= !!${/form/TmDateTxt} }" />
                     </VBox>
@@ -58,7 +58,7 @@
             </VBox>
             <VBox class="vCardBox">
                 <HBox alignItems="Center" class="table-toolbar">
-                    <Title text="{i18n>LABEL_00358}" level="H2" />
+                    <Title text="{i18n>LABEL_00167}" level="H2" />
                 </HBox>
                 <TextArea width="100%" rows="5" growing="true" value="{/form/Aprsn}" maxLength="{/fieldLimit/Aprsn}" editable="{= !${/form/Appst} || ${/form/Appst} === '10' }" />
             </VBox>

@@ -3,90 +3,89 @@
     xmlns:table="sap.ui.table"
     xmlns:core="sap.ui.core"
     xmlns:custom="sap.ui.tesna.control">
-    <Dialog id="detailDialog" title="{i18n>LABEL_27001}" contentWidth="1100px" contentHeight="auto" busyIndicatorDelay="0" busy="{/dialog/busy}" afterClose=".onHolidayDialogAfterClose">
+    <Dialog title="{i18n>LABEL_07010}" contentWidth="1100px" contentHeight="auto" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}" afterClose=".onDialogAfterClose">
         <buttons>
-            <Button text="{i18n>LABEL_00103}" type="Emphasized" enabled="{/dialog/isActiveSave}" press=".onDialogSavBtn" />
+            <Button text="{i18n>LABEL_00103}" type="Emphasized" enabled="{/dialog/calcCompleted}" press=".onDialogSavBtn" />
             <Button text="{i18n>LABEL_00115}" press=".onDialogClose" class="cancel" />
         </buttons>
         <content>
             <VBox class="vCardBox sapUiMediumMarginBottom">
                 <grid:CSSGrid gridTemplateColumns="1fr 2fr 1fr 2fr" gridGap="1px 0" class="form-grid">
-                    <Label text="{i18n>LABEL_27004}"/>
+                    <Label text="{i18n>LABEL_07002}"/>
                     <HBox>
-                        <custom:DatePicker width="260px" dateValue="{ path: '/dialog/grid/Datum', type: 'sap.ui.tesna.mvc.model.type.Date' }" change=".onWorkDatePicker" class="sapIcon_Date required" />
+                        <custom:DatePicker width="260px" dateValue="{ path: '/dialog/grid/Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" change=".onDialogCalcTime" class="sapIcon_Date required" />
                     </HBox>
-                    <Label text="{i18n>LABEL_27009}"/>
+                    <Label text="{i18n>LABEL_07007}"/>
                     <HBox>
-                        <TimePicker width="120px" dateValue="{ path: '/dialog/grid/Beguz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/dialog/initBeguz}" minutesStep="30" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required" change=".onChangeWorkTime" />
-                        <Text text="~" class="mx-5-px" />
-                        <TimePicker width="120px" dateValue="{ path: '/dialog/grid/Enduz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/dialog/initEnduz}" minutesStep="30" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required" change=".onChangeWorkTime" />
-                        <Input value="{ path: '/dialog/grid/Abrst', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" editable="false" class="ml-10-px" />
-                    </HBox>
-                    <Label text="{i18n>LABEL_41006}"/>
-                    <HBox>
-                        <Input width="260px" value="{/dialog/grid/Atrsn}" class="required">
-                            <layoutData>
-                                <FlexItemData growFactor="1" />
-                            </layoutData>
-                        </Input>
-                    </HBox>
-                    <Label text="{i18n>LABEL_41003}"/>
-                    <HBox>
-                        <TimePicker width="120px" dateValue="{ path: '/dialog/grid/Pdbeg', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/dialog/initBeguz}" minutesStep="30" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onChangeBreakTime" />
-                        <Text text="~" class="mx-5-px" />
-                        <TimePicker width="120px" dateValue="{ path: '/dialog/grid/Pdend', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/dialog/initEnduz}" minutesStep="30" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onChangeBreakTime" />
-                        <Input value="{ path: '/dialog/grid/Brktm', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" editable="false" class="ml-10-px" />
-                    </HBox>
-                    <Label text="{i18n>LABEL_41007}"/>
-                    <HBox>
-                        <ComboBox width="260px" class="required" selectedKey="{/dialog/grid/Subty}" enabled="{/dialog/enableSubty}" items="{ path: '/dialog/subtyEntry', templateShareable: false, filters: [{path: 'visible', operator: 'EQ', value1: 'X'}] }">
-                            <core:Item text="{Ztext}" key="{Zcode}" />
+                        <TimePicker width="120px" dateValue="{ path: '/dialog/grid/Beguz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/dialog/initBeguz}" minutesStep="30" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiSmallMarginEnd" change=".onDialogCalcTime" />
+                        <ComboBox width="124px" class="required" selectedKey="{/dialog/grid/Abrst}" change=".onDialogCalcTime">
+                            <items>
+                                <core:Item text="4시간" key="4" />
+                                <core:Item text="8시간" key="8" />
+                                <core:Item text="10시간" key="10" />
+                            </items>
                         </ComboBox>
                     </HBox>
-                    <Label text="{i18n>LABEL_41005}"/>
+                    <Label text="{i18n>LABEL_07009}"/>
                     <HBox>
-                        <custom:DatePicker width="260px" dateValue="{ path: '/dialog/grid/Subda', type: 'sap.ui.tesna.mvc.model.type.Date' }" class="sapIcon_Date required" />
+                        <Input value="{/dialog/grid/Period}" editable="false" />
+                    </HBox>
+                    <Label text="{i18n>LABEL_07008}"/>
+                    <HBox>
+                        <Input width="260px" value="{/dialog/grid/Atrsn}" class="required" />
                     </HBox>
                 </grid:CSSGrid>
             </VBox>
             <VBox class="vCardBox">
                 <HBox alignItems="Center" class="table-toolbar" justifyContent="SpaceBetween">
                     <HBox class="title">
-                        <Title level="H4" text="{i18n>LABEL_02023}" />
-                        <Text text="{i18n>MSG_27003}" class="desc-txt" />
+                        <Title level="H4" text="{i18n>LABEL_07011}" />
+                        <Text text="{i18n>MSG_07001}" class="desc-txt" />
                     </HBox>
                     <HBox class="button-group">
                         <Button icon="sap-icon://add" text="{i18n>LABEL_00107}" press=".onDialogAdd" />
                         <Button icon="sap-icon://less" text="{i18n>LABEL_00110}" press=".onDialogDel" />
                     </HBox>
                 </HBox>
-                <table:Table id="holidayWorkTargetsTable" selectionMode="{/dialog/listMode}" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/dialog/list}" visibleRowCount="{/dialog/rowCount}" noData="{i18n>MSG_00001}">
+                <table:Table id="overtimeTargetsTable" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/dialog/list}" visibleRowCount="{/dialog/rowCount}" noData="{i18n>MSG_00001}">
                     <table:columns>
                         <table:Column width="auto">
-                            <Label text="{i18n>LABEL_00209}" />
+                            <Label text="{i18n>LABEL_00210}" />
                             <table:template>
-                                <Input value="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" maxSuggestionWidth="350px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/dialog/employees', templateShareable: true }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest" textAlign="Center">
+                                <Input value="{Ename}" width="100%" maxSuggestionWidth="500px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/entry/Employees', templateShareable: false }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest" textAlign="Center">
                                     <suggestionColumns>
-                                        <Column popinDisplay="Inline" demandPopin="true">
-                                            <Label text="{i18n>LABEL_00210}"/>
+                                        <Column width="6%" popinDisplay="Inline">
+                                            <Label text="" />
                                         </Column>
-                                        <Column popinDisplay="Inline" demandPopin="true">
-                                            <Label text="{i18n>LABEL_00209}"/>
+                                        <Column width="14%" popinDisplay="Inline" demandPopin="true">
+                                            <Label text="{i18n>LABEL_00210}" />
+                                        </Column>
+                                        <Column width="20%" popinDisplay="Inline" demandPopin="true">
+                                            <Label text="{i18n>LABEL_00209}" />
+                                        </Column>
+                                        <Column width="12%" popinDisplay="Inline">
+                                            <Label text="{i18n>LABEL_00214}" />
                                         </Column>
                                         <Column popinDisplay="Inline" minScreenWidth="Tablet">
-                                            <Label text="{i18n>LABEL_00226}"/>
+                                            <Label text="{i18n>LABEL_00218}" />
                                         </Column>
-                                        <Column popinDisplay="Inline">
-                                            <Label text="{i18n>LABEL_00215}"/>
+                                        <Column width="20%" popinDisplay="Inline" minScreenWidth="Tablet">
+                                            <Label text="{i18n>LABEL_00221}" />
                                         </Column>
                                     </suggestionColumns>
                                     <suggestionRows>
                                         <ColumnListItem>
                                             <cells>
-                                                <Label text="{Ename}"/>
-                                                <Label text="{Pernr}"/>
-                                                <Label text="{Orgtx}"/>
-                                                <Label text="{Zzjikgbt}"/>
+                                                <Image src="{Picurl}" mode="Background" class="members-photo sapUiTinyMarginEnd" error=".loadErrorAvatarImage">
+                                                    <layoutData>
+                                                        <FlexItemData minHeight="30px" maxHeight="30px" />
+                                                    </layoutData>
+                                                </Image>
+                                                <Label text="{Ename}" />
+                                                <Label text="{Pernr}" />
+                                                <Label text="{Zzcaltltx}" />
+                                                <Label text="{Orgtx}" />
+                                                <Label text="{ path: 'Gbdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" />
                                             </cells>
                                         </ColumnListItem>
                                     </suggestionRows>
@@ -94,27 +93,33 @@
                             </table:template>
                         </table:Column>
                         <table:Column width="auto">
-                            <Label text="{i18n>LABEL_00210}" />
+                            <Label text="{i18n>LABEL_00209}" />
                             <table:template>
-                                <Text text="{Ename}" width="100%" textAlign="Center" />
+                                <Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" />
                             </table:template>
                         </table:Column>
                         <table:Column width="auto">
-                            <Label text="{i18n>LABEL_00215}" />
+                            <Label text="{i18n>LABEL_00214}" />
                             <table:template>
-                                <Text text="{Zzjikgbt}" width="100%" textAlign="Center" />
+                                <Text text="{Zzcaltltx}" width="100%" textAlign="Center" />
                             </table:template>
                         </table:Column>
                         <table:Column width="auto">
                             <Label text="{i18n>LABEL_00217}" />
                             <table:template>
-                                <Text text="{Zzjikcht}" width="100%" textAlign="Center" />
+                                <Text text="{Zzpsgrptx}" width="100%" textAlign="Center" />
                             </table:template>
                         </table:Column>
                         <table:Column width="auto">
-                            <Label text="{i18n>LABEL_00224}" />
+                            <Label text="{i18n>LABEL_00219}" />
                             <table:template>
                                 <Text text="{Orgtx}" width="100%" textAlign="Center" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="auto">
+                            <Label text="{i18n>LABEL_00177}" />
+                            <table:template>
+                                <Text text="{Ltext}" width="100%" textAlign="Center" />
                             </table:template>
                         </table:Column>
                     </table:columns>

@@ -12,7 +12,7 @@
     <content>
       <VBox class="hCardBox sapUiSmallMarginBottom">
         <HBox class="form-bar" alignItems="Center">
-          <Label text="{i18n>LABEL_00259}" />
+          <Label text="{i18n>LABEL_00191}" />
           <custom:DatePicker dateValue="{ path: '/Datum', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="200px" change=".onPressSearchOrg" />
           <Label text="{i18n>LABEL_00201}" />
           <Input value="{/Stext}" width="200px" submit=".onPressSearchOrg" />
@@ -23,13 +23,13 @@
         <table:Table class="radio-selection-table" enableSelectAll="false" selectionBehavior="Row" rows="{/orglist}" visibleRowCount="{/rowcount}" rowHeight="44" columnHeaderHeight="45" rowSelectionChange=".onOrganizationRowSelection">
           <table:columns>
             <table:Column width="auto" sortProperty="Stext" filterProperty="Stext">
-              <Label text="{i18n>LABEL_00227}"/>
+              <Label text="{i18n>LABEL_00216}"/>
               <table:template>
                 <Text text="{Stext}" width="100%" wrapping="false" class="tableRow_Text"/>
               </table:template>
             </table:Column>
             <table:Column width="200px" sortProperty="EnameM" filterProperty="EnameM">
-              <Label text="{i18n>LABEL_00230}"/>
+              <Label text="{i18n>LABEL_00213}"/>
               <table:template>
                 <Text text="{EnameM}" textAlign="Center" width="100%" wrapping="false" class="tableRow_Text"/>
               </table:template>

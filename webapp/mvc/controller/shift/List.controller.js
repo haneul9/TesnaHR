@@ -54,7 +54,7 @@ sap.ui.define(
             totalCount: 0,
             rowCount: 1,
             isShowProgress: false,
-            ObjTxt2: this.getBundleText('LABEL_00359'), // 기안
+            ObjTxt2: this.getBundleText('LABEL_00166'), // 기안
           },
           list: [],
         };
@@ -255,7 +255,7 @@ sap.ui.define(
 
       onPressExcelDownload() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const sFileName = this.getBundleText('LABEL_00282', 'LABEL_01002'); // {근무일정변경신청}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_01002'); // {근무일정변경신청}_목록
 
         this.TableUtils.export({ oTable, sFileName });
       },

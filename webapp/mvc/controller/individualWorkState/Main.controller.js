@@ -125,7 +125,7 @@ sap.ui.define(
           oViewModel.setProperty('/WeekWorkDate', oParameter.year ? moment().year(_.toNumber(sYear)).month(_.toNumber(sMonth)).toDate() : new Date());
           oViewModel.setProperty(
             '/MonthStrList',
-            _.times(12, (d) => ({ label: `${d++}${this.getBundleText('LABEL_00253')}` })) // 월
+            _.times(12, (d) => ({ label: `${d++}${this.getBundleText('LABEL_00192')}` })) // 월
           );
 
           this.setAppointee(sPernr);
@@ -412,14 +412,23 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         if (_.isEqual(sPernr, this.getAppointeeProperty('Pernr'))) {
-          oViewModel.setProperty('/appointee', AppUtils.getAppComponent().getAppointeeModel().getData());
+          const mAppointee = AppUtils.getAppComponent().getAppointeeModel().getData();
+
+          oViewModel.setProperty('/appointee', mAppointee);
         } else {
           const [mAppointee] = await Client.getEntitySet(this.getModel(ServiceNames.COMMON), 'EmpSearchResult', {
             Actda: moment().hours(9).toDate(),
             Ename: sPernr,
           });
 
-          oViewModel.setProperty('/appointee', { ...mAppointee, Orgtx: mAppointee.Fulln, Photo: mAppointee.Photo || this.getUnknownAvatarImageURL() });
+          oViewModel.setProperty('/appointee', {
+            ...mAppointee,
+            Pernm: mAppointee.Ename,
+            Orgtx: mAppointee.Fulln,
+            Stext: mAppointee.Fulln,
+            Zzcaltltx: _.chain([mAppointee.Zzcaltltx, mAppointee.Zzpsgrptx]).compact().join(' / ').value(),
+            Photo: mAppointee.Photo || this.getUnknownAvatarImageURL(),
+          });
         }
       },
 
@@ -471,7 +480,7 @@ sap.ui.define(
 
       setMonth(sMonth = moment().month()) {
         const oViewModel = this.getViewModel();
-        const sMonthLabel = this.getBundleText('LABEL_00253'); // 월
+        const sMonthLabel = this.getBundleText('LABEL_00192'); // 월
 
         oViewModel.setProperty('/WorkMonth', _.toNumber(sMonth) + 1);
         oViewModel.setProperty(
@@ -532,7 +541,7 @@ sap.ui.define(
 
       // 년도 선택시 화면전체 년도
       formYear(sYear = moment().year()) {
-        return this.getViewModel().setProperty('/FullYear', `${sYear}${this.getBundleText('LABEL_00252')}`); // 년
+        return this.getViewModel().setProperty('/FullYear', `${sYear}${this.getBundleText('LABEL_00193')}`); // 년
       },
 
       async retrievePlan(sYear) {

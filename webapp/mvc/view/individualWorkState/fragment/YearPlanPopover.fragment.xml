@@ -5,7 +5,7 @@
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="py-6-px">
             <Label text="{i18n>LABEL_02022}:" />
             <Text text="{/YearPlan/detail/Awrsntx1}" />
-            <Label text="{i18n>LABEL_00261}:" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
+            <Label text="{i18n>LABEL_00190}:" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
             <Text text="{/YearPlan/detail/Appsttx1}" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
             <Label text="{i18n>LABEL_00154}:" visible="{= ${/YearPlan/detail/Holyn} === 'X'}" />
             <Text text="{/YearPlan/detail/Atrsn1}" visible="{= ${/YearPlan/detail/Holyn} === 'X'}" />
@@ -15,7 +15,7 @@
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="border-top py-6-px" visible="{= !!${/YearPlan/detail/Awrsntx2} }">
             <Label text="{i18n>LABEL_02022}:" />
             <Text text="{/YearPlan/detail/Awrsntx2}" />
-            <Label text="{i18n>LABEL_00261}:" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
+            <Label text="{i18n>LABEL_00190}:" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
             <Text text="{/YearPlan/detail/Appsttx2}" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
             <Label text="{i18n>LABEL_00154}:" visible="{= ${/YearPlan/detail/Holyn} === 'X'}" />
             <Text text="{/YearPlan/detail/Atrsn2}" visible="{= ${/YearPlan/detail/Holyn} === 'X'}" />

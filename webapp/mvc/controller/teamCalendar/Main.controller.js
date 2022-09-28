@@ -310,10 +310,19 @@ sap.ui.define(
             Austy: oViewModel.getProperty('/auth'),
           });
 
-          oViewModel.setProperty('/searchConditions/Orgeh', _.get(aEntries, [0, 'Orgeh']));
+          oViewModel.setProperty(
+            '/searchConditions/Orgeh',
+            _.chain(aEntries)
+              .filter((o) => o.Orgeh !== '00000000')
+              .get([0, 'Orgeh'])
+              .value()
+          );
           oViewModel.setProperty(
             '/entry/Orgeh',
-            _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+            _.chain(aEntries)
+              .filter((o) => o.Orgeh !== '00000000')
+              .map((o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+              .value()
           );
         } catch (oError) {
           throw oError;
@@ -409,10 +418,10 @@ sap.ui.define(
       convertPlanData(aGridData) {
         const mWorkType = {
           '': '',
-          T: this.getBundleText('LABEL_00370'), // 통상
-          F: 'OFF',
-          D: this.getBundleText('LABEL_00298'), // 주간
-          N: this.getBundleText('LABEL_00299'), // 야간
+          T: '통', // 통상
+          F: '휴',
+          D: '주', // 주간
+          N: '야', // 야간
         };
 
         return [
@@ -428,7 +437,8 @@ sap.ui.define(
               .value(),
           }), //
           this.getBoxObject({ align: 'center', label: _.get(aGridData, [0, 'Zzcaltltx']), classNames: 'Normal' }),
-          this.getBoxObject({ align: 'start', label: _.get(aGridData, [0, 'Orgtx']), classNames: 'Normal' }),
+          this.getBoxObject({ align: 'center', label: _.get(aGridData, [0, 'Orgtx']), classNames: 'Normal' }),
+          this.getBoxObject({ align: 'center', label: _.get(aGridData, [0, 'Rtext']), classNames: 'Normal' }),
           ..._.map(aGridData, (o) => ({
             ..._.chain(o)
               .pick([
@@ -479,7 +489,8 @@ sap.ui.define(
         return [
           this.getBoxObject({ label: this.getBundleText('LABEL_00210'), classNames: 'Header' }), // 성명
           this.getBoxObject({ label: this.getBundleText('LABEL_00136'), classNames: 'Header' }), // 직급/직책
-          this.getBoxObject({ label: this.getBundleText('LABEL_00224'), classNames: 'Header' }), // 부서
+          this.getBoxObject({ label: this.getBundleText('LABEL_00219'), classNames: 'Header' }), // 부서
+          this.getBoxObject({ label: this.getBundleText('LABEL_00188'), classNames: 'Header' }), // 근무일정규칙
           ..._.times(iCurrentDayInMonth, (d) =>
             this.getBoxObject({
               label: _.toString(d + 1),
@@ -507,10 +518,10 @@ sap.ui.define(
 
           const mWorkType = {
             '': '',
-            T: this.getBundleText('LABEL_00370'), // 통상
+            T: this.getBundleText('LABEL_00158'), // 통상
             F: 'OFF',
-            D: this.getBundleText('LABEL_00298'), // 주간
-            N: this.getBundleText('LABEL_00299'), // 야간
+            D: this.getBundleText('LABEL_00184'), // 주간
+            N: this.getBundleText('LABEL_00183'), // 야간
           };
 
           oViewModel.setProperty(
@@ -545,7 +556,7 @@ sap.ui.define(
         const sTyymm = oViewModel.getProperty('/searchConditions/Tyymm');
         const iCurrentDayInMonth = moment(sTyymm).daysInMonth();
 
-        oViewModel.setProperty('/calendar/columnTemplate', `100px 80px 180px repeat(${iCurrentDayInMonth}, 1fr)`);
+        oViewModel.setProperty('/calendar/columnTemplate', `100px 80px 180px 140px repeat(${iCurrentDayInMonth}, 1fr)`);
         oViewModel.setProperty('/calendar/plans', this.getGridHeader([], iCurrentDayInMonth));
       },
 
@@ -605,7 +616,7 @@ sap.ui.define(
         const aCustomColumns = [
           { type: 'String', label: this.getBundleText('LABEL_00210'), property: 'Ename' },
           { type: 'String', label: this.getBundleText('LABEL_00136'), property: 'Zzcaltltx' },
-          { type: 'String', label: this.getBundleText('LABEL_00224'), property: 'Orgtx' },
+          { type: 'String', label: this.getBundleText('LABEL_00219'), property: 'Orgtx' },
           ..._.times(moment(`${sTyymm}01`).daysInMonth(), (d) => ({ type: 'String', label: _.toString(d + 1), property: `Dayngt${d}` })),
         ];
 

@@ -4,6 +4,7 @@ sap.ui.define(
     'sap/m/MessageToast',
     'sap/ui/core/Fragment',
     'sap/ui/tesna/control/MessageBox',
+    'sap/ui/tesna/common/exceptions/UI5Error',
     'sap/ui/tesna/common/AppUtils',
     'sap/ui/tesna/common/ApprovalStatusHandler',
     'sap/ui/tesna/common/FileAttachmentBoxHandler',
@@ -16,6 +17,7 @@ sap.ui.define(
     MessageToast,
     Fragment,
     MessageBox,
+    UI5Error,
     AppUtils,
     ApprovalStatusHandler,
     FileAttachmentBoxHandler,
@@ -44,7 +46,7 @@ sap.ui.define(
           oArguments.appno === 'N'
             ? '' //
             : oArguments.flag === 'WE' || oArguments.flag === 'WD'
-            ? this.getBundleText('LABEL_00360') // 결재
+            ? this.getBundleText('LABEL_00165') // 결재
             : this.getBundleText('LABEL_00100'); // 조회
 
         return `${this.getBundleText('LABEL_04001')} ${sRouteText}`;
@@ -71,10 +73,10 @@ sap.ui.define(
           },
           entry: {
             Wtype: [
-              { Zcode: 'T', Ztext: this.getBundleText('LABEL_00379') }, // 통
-              { Zcode: 'F', Ztext: this.getBundleText('LABEL_00380') }, // 휴
-              { Zcode: 'D', Ztext: this.getBundleText('LABEL_00377') }, // 주
-              { Zcode: 'N', Ztext: this.getBundleText('LABEL_00378') }, // 야
+              { Zcode: 'T', Ztext: this.getBundleText('LABEL_00126') }, // 통
+              { Zcode: 'F', Ztext: this.getBundleText('LABEL_00125') }, // 휴
+              { Zcode: 'D', Ztext: this.getBundleText('LABEL_00133') }, // 주
+              { Zcode: 'N', Ztext: this.getBundleText('LABEL_00127') }, // 야
             ],
           },
           form: {
@@ -137,10 +139,10 @@ sap.ui.define(
         oViewModel.setData(this.initializeModel());
 
         this.DAY_WORK_TYPES = {
-          D: this.getBundleText('LABEL_00377'),
-          N: this.getBundleText('LABEL_00378'),
-          T: this.getBundleText('LABEL_00379'),
-          F: this.getBundleText('LABEL_00380'),
+          D: this.getBundleText('LABEL_00133'),
+          N: this.getBundleText('LABEL_00127'),
+          T: this.getBundleText('LABEL_00126'),
+          F: this.getBundleText('LABEL_00125'),
         };
 
         // 신청,조회 - B, Work to do - WE, Not Work to do - WD
@@ -393,10 +395,13 @@ sap.ui.define(
           const oTable = this.byId(sPrcty === 'S' ? this.DIALOG_TABLE_ID : this.LIST_TABLE_ID);
           const mFormData = _.cloneDeep(oViewModel.getProperty('/form'));
           const aSelectedIndex = oTable.getSelectedIndices();
-          const aTableData = sPrcty === 'S' ? oViewModel.getProperty('/dialog/list') : oViewModel.getProperty('/form/list');
+          const aTableList = oViewModel.getProperty('/form/list');
+          const aDialogTableList = oViewModel.getProperty('/dialog/list');
+          const aTableData = sPrcty === 'S' ? aDialogTableList : aTableList;
           const aSelectedData = _.chain(aTableData)
             .cloneDeep()
             .filter((o, i) => sPrcty === 'A' || _.includes(aSelectedIndex, i))
+            .concat(sPrcty === 'S' ? aTableList : [])
             .value();
 
           const { Appno } = await Client.create(oModel, 'DailyShiftChangeApply', {
@@ -493,7 +498,7 @@ sap.ui.define(
           return;
         }
 
-        const sFileName = this.getBundleText('LABEL_00282', 'LABEL_04001'); // {기술직계획근무변경신청}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_04001'); // {기술직계획근무변경신청}_목록
         const aTableData = _.chain(this.getViewModel().getProperty('/dialog/list'))
           .cloneDeep()
           .filter((o, i) => _.includes(aSelectedIndices, i))
@@ -646,7 +651,7 @@ sap.ui.define(
 
         // {승인}하시겠습니까?
         MessageBox.confirm(this.getBundleText('MSG_00006', 'LABEL_00123'), {
-          actions: [this.getBundleText('LABEL_00121'), MessageBox.Action.CANCEL],
+          actions: [this.getBundleText('LABEL_00123'), MessageBox.Action.CANCEL],
           onClose: async (sAction) => {
             if (!sAction || sAction === MessageBox.Action.CANCEL) {
               this.setContentsBusy(false, 'all');

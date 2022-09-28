@@ -41,13 +41,13 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="auto" sortProperty="Abrst" filterProperty="Abrst">
-                    <Label text="{i18n>LABEL_00330}"/>
+                    <Label text="{i18n>LABEL_00180}"/>
                     <table:template>
                         <Text text="{Abrst}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="auto" sortProperty="ZreqDate" filterProperty="ZreqDate">
-                    <Label text="{i18n>LABEL_00266}"/>
+                    <Label text="{i18n>LABEL_00189}"/>
                     <table:template>
                         <HBox>
                             <Text text="{ path: 'ZreqDate', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" visible="{= !${ZappUrl} }" textAlign="Center" wrapping="false" class="tableRow_Text">
@@ -64,7 +64,7 @@
                     </table:template>
                 </table:Column>
                 <table:Column width="auto" sortProperty="ZappDate" filterProperty="ZappDate">
-                    <Label text="{i18n>LABEL_00269}"/>
+                    <Label text="{i18n>LABEL_00186}"/>
                     <table:template>
                         <Text text="{ path: 'ZappDate', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text"/>
                     </table:template>

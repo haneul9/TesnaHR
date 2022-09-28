@@ -43,7 +43,7 @@ sap.ui.define(
           oArguments.appno === 'N'
             ? '' //
             : oArguments.flag === 'WE' || oArguments.flag === 'WD'
-            ? this.getBundleText('LABEL_00360') // 결재
+            ? this.getBundleText('LABEL_00165') // 결재
             : this.getBundleText('LABEL_00100'); // 조회
 
         return `${this.getBundleText('LABEL_05001')} ${sRouteText}`; // 근태신청
@@ -480,7 +480,7 @@ sap.ui.define(
 
         // {승인}하시겠습니까?
         MessageBox.confirm(this.getBundleText('MSG_00006', 'LABEL_00123'), {
-          actions: [this.getBundleText('LABEL_00121'), MessageBox.Action.CANCEL],
+          actions: [this.getBundleText('LABEL_00123'), MessageBox.Action.CANCEL],
           onClose: async (sAction) => {
             if (!sAction || sAction === MessageBox.Action.CANCEL) {
               this.setContentsBusy(false);
@@ -805,7 +805,7 @@ sap.ui.define(
           .value();
 
         if (aSelectedData.length !== 1) {
-          MessageBox.alert(this.getBundleText('MSG_00020', 'LABEL_00383')); // {취소신청}할 행을 선택하세요.
+          MessageBox.alert(this.getBundleText('MSG_00020', 'LABEL_00119')); // {취소신청}할 행을 선택하세요.
           return;
         }
 
@@ -1018,7 +1018,7 @@ sap.ui.define(
           const oModel = this.getModel(ServiceNames.WORKTIME);
           const mFormData = oViewModel.getProperty('/form');
 
-          const aFormList = oViewModel.getProperty('/form/list');
+          const aFormList = _.filter(oViewModel.getProperty('/form/list'), (o) => o.Aptyp === 'C');
           const aResults = await Client.getEntitySet(oModel, 'LeaveApprList', {
             ..._.pick(mFormData, ['Werks', 'Orgeh', 'Kostl']),
           });

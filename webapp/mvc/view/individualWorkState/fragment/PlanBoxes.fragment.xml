@@ -5,7 +5,7 @@
     <VBox width="100%" class="vCardBox small" busyIndicatorDelay="0" busy="{/busy/calendar}">
         <HBox class="table-toolbar">
             <HBox class="title">
-                <Title level="H2" text="{i18n>LABEL_02032}" class="sapUiSmallMarginEnd" />
+                <Title level="H2" text="{i18n>LABEL_02016}" class="sapUiSmallMarginEnd" />
                 <Text text="{i18n>MSG_02001}" class="desc-txt ml-0" />
             </HBox>
         </HBox>

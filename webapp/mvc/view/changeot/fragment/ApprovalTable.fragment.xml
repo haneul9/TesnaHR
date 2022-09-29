@@ -1,0 +1,125 @@
+<core:FragmentDefinition xmlns="sap.ui.table"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core">
+    <Table id="changeotApprovalTable" selectionMode="{/form/listMode}" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/form/list}" visibleRowCount="{/form/rowCount}" noData="{i18n>MSG_00001}">
+        <columns>
+            <Column width="5%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00147}"/>
+                    <m:Label text="{i18n>LABEL_00147}"/>
+                </multiLabels>
+                <template>
+                    <m:ObjectStatus text="{Apptyptx}" state="{= ${Apptyp} === 'C' ? 'Indication03' : 'Error' }" class="table-object-status" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00209}"/>
+                    <m:Label text="{i18n>LABEL_00209}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00210}" />
+                    <m:Label text="{i18n>LABEL_00210}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="10%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00219}" />
+                    <m:Label text="{i18n>LABEL_00219}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="10%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00177}" />
+                    <m:Label text="{i18n>LABEL_00177}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="auto">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_07002}"/>
+                    <m:Label text="{i18n>LABEL_07002}"/>
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="6%" headerSpan="3">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00173}" />
+                    <m:Label text="{i18n>LABEL_00223}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'BeguzB', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="6%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00173}" />
+                    <m:Label text="{i18n>LABEL_00224}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'EnduzB', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="6%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00173}" />
+                    <m:Label text="{i18n>LABEL_00180}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'AbrstB', type: 'sap.ui.tesna.mvc.model.type.Decimal' }{i18n>LABEL_00180}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="6%" headerSpan="3">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00172}" />
+                    <m:Label text="{i18n>LABEL_00223}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'Beguz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="6%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00172}" />
+                    <m:Label text="{i18n>LABEL_00224}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="6%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00172}" />
+                    <m:Label text="{i18n>LABEL_00180}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{ path: 'Abrst', type: 'sap.ui.tesna.mvc.model.type.Decimal' }{i18n>LABEL_00180}" width="100%" textAlign="Center" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="12%">
+                <multiLabels>
+                    <m:Label text="{i18n>LABEL_00154}" />
+                    <m:Label text="{i18n>LABEL_00154}" />
+                </multiLabels>
+                <template>
+                    <m:Text text="{Atrsn}" width="100%" wrapping="false" />
+                </template>
+            </Column>
+        </columns>
+    </Table>
+</core:FragmentDefinition>

@@ -3,7 +3,7 @@
     xmlns:core="sap.ui.core">
     <Popover title="{/calendar/detail/title}" contentMinWidth="300px" class="year-popover" placement="Auto">
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="py-6-px">
-            <Label text="{i18n>LABEL_02022}:" />
+            <Label text="{i18n>LABEL_02018}:" />
             <Text text="{/calendar/detail/data/Awrsntx1}" />
             <Label text="{i18n>LABEL_00190}:" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
             <Text text="{/calendar/detail/data/Appsttx1}" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
@@ -13,7 +13,7 @@
             <Text text="{/calendar/detail/data/Duration1}" />
         </grid:CSSGrid>
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="border-top py-6-px" visible="{= !!${/calendar/detail/data/Awrsntx2} }">
-            <Label text="{i18n>LABEL_02022}:" />
+            <Label text="{i18n>LABEL_02018}:" />
             <Text text="{/calendar/detail/data/Awrsntx2}" />
             <Label text="{i18n>LABEL_00190}:" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />
             <Text text="{/calendar/detail/data/Appsttx2}" visible="{= ${/calendar/detail/data/Holyn} !== 'X'}" />

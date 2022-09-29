@@ -83,9 +83,15 @@ sap.ui.define(
       },
 
       getWeekHeader() {
-        const aWeekNames = _.times(7, (e) => {
-          return `${this.oController.getBundleText(`LABEL_020${e + 25}`)}`; // 월,화,수,목,금,토,일
-        });
+        const aWeekNames = [
+          this.oController.getBundleText('LABEL_MON'), // 월
+          this.oController.getBundleText('LABEL_TUE'), // 화
+          this.oController.getBundleText('LABEL_WED'), // 수
+          this.oController.getBundleText('LABEL_THU'), // 목
+          this.oController.getBundleText('LABEL_FRI'), // 금
+          this.oController.getBundleText('LABEL_SAT'), // 토
+          this.oController.getBundleText('LABEL_SUN'), // 일
+        ];
         const mWeekHeaders = aWeekNames.map((o) => this.getBoxObject({ label: o, classNames: 'Header' }));
 
         return [
@@ -95,8 +101,8 @@ sap.ui.define(
           ...mWeekHeaders,
           ...mWeekHeaders,
           ...mWeekHeaders,
-          this.getBoxObject({ label: this.oController.getBundleText('LABEL_02025'), classNames: 'Header' }),
-          this.getBoxObject({ label: this.oController.getBundleText('LABEL_02026'), classNames: 'Header' }),
+          this.getBoxObject({ label: this.oController.getBundleText('LABEL_MON'), classNames: 'Header' }), // 월
+          this.getBoxObject({ label: this.oController.getBundleText('LABEL_TUE'), classNames: 'Header' }), // 화
         ];
       },
 

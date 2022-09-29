@@ -1,0 +1,124 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:core="sap.ui.core"
+    xmlns:custom="sap.ui.tesna.control">
+    <Dialog title="{i18n>LABEL_07016}" contentWidth="1000px" contentHeight="auto" busyIndicatorDelay="0" busy="{/contentsBusy/dialog}" afterClose=".onDialogAfterClose">
+        <buttons>
+            <Button text="{i18n>LABEL_00103}" type="Emphasized" enabled="{/dialog/calcCompleted}" press=".onDialogSavBtn" />
+            <Button text="{i18n>LABEL_00115}" press=".onDialogClose" class="cancel" />
+        </buttons>
+        <content>
+            <VBox class="vCardBox">
+                <grid:CSSGrid gridTemplateColumns="1fr 2fr 1fr 2fr" gridGap="1px 0" class="form-grid">
+                    <Label text="{i18n>LABEL_00174}" />
+                    <HBox>
+                        <layoutData>
+                            <grid:GridItemLayoutData gridColumn="span 3" />
+                        </layoutData>
+                        <Input value="{/dialog/grid/Ename}" width="150px" maxSuggestionWidth="500px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/entry/Employees', templateShareable: false }" enabled="{= ${/auth} !== 'E' }" class="required sapUiSmallMarginEnd" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
+                            <suggestionColumns>
+                                <Column width="6%" popinDisplay="Inline">
+                                    <Label text="" />
+                                </Column>
+                                <Column width="14%" popinDisplay="Inline" demandPopin="true">
+                                    <Label text="{i18n>LABEL_00210}" />
+                                </Column>
+                                <Column width="20%" popinDisplay="Inline" demandPopin="true">
+                                    <Label text="{i18n>LABEL_00209}" />
+                                </Column>
+                                <Column width="12%" popinDisplay="Inline">
+                                    <Label text="{i18n>LABEL_00214}" />
+                                </Column>
+                                <Column popinDisplay="Inline" minScreenWidth="Tablet">
+                                    <Label text="{i18n>LABEL_00218}" />
+                                </Column>
+                                <Column width="20%" popinDisplay="Inline" minScreenWidth="Tablet">
+                                    <Label text="{i18n>LABEL_00221}" />
+                                </Column>
+                            </suggestionColumns>
+                            <suggestionRows>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Image src="{Picurl}" mode="Background" class="members-photo sapUiTinyMarginEnd" error=".loadErrorAvatarImage">
+                                            <layoutData>
+                                                <FlexItemData minHeight="30px" maxHeight="30px" />
+                                            </layoutData>
+                                        </Image>
+                                        <Label text="{Ename}" />
+                                        <Label text="{Pernr}" />
+                                        <Label text="{Zzcaltltx}" />
+                                        <Label text="{Orgtx}" />
+                                        <Label text="{ path: 'Gbdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" />
+                                    </cells>
+                                </ColumnListItem>
+                            </suggestionRows>
+                        </Input>
+                        <Input value="{/dialog/grid/PernrInfoTxt}" editable="false" />
+                    </HBox>
+                    <Label text="{i18n>LABEL_07002}" />
+                    <HBox>
+                        <custom:DatePicker width="150px" dateValue="{ path: '/dialog/grid/Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" change=".onDialogCalcTime" class="sapIcon_Date required" />
+                    </HBox>
+                    <Label text="{i18n>LABEL_00225}" />
+                    <HBox>
+                        <ComboBox width="124px" class="required sapUiTinyMarginEnd" selectedKey="{/dialog/grid/Apptyp}" enabled="{/dialog/calcCompleted}" change=".onChangeApptyp">
+                            <items>
+                                <core:Item text="{i18n>LABEL_00226}" key="C" />
+                                <core:Item text="{i18n>LABEL_00118}" key="D" />
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                    <Label text="{i18n>LABEL_07007}{i18n>LABEL_07014}" />
+                    <HBox>
+                        <ComboBox width="124px" class="required sapUiTinyMarginEnd" selectedKey="{/dialog/grid/DayngtB}" enabled="false">
+                            <items>
+                                <core:Item text="{i18n>LABEL_00184}" key="D" />
+                                <core:Item text="{i18n>LABEL_00183}" key="N" />
+                                <core:Item text="{i18n>LABEL_00158}" key="T" />
+                            </items>
+                        </ComboBox>
+                        <ComboBox width="128px" class="required" selectedKey="{/dialog/grid/AbrstB}" enabled="false">
+                            <items>
+                                <core:Item text="4{i18n>LABEL_00180}" key="4" />
+                                <core:Item text="8{i18n>LABEL_00180}" key="8" />
+                                <core:Item text="10{i18n>LABEL_00180}" key="10" />
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                    <Label text="{i18n>LABEL_07009}{i18n>LABEL_07014}" />
+                    <HBox>
+                        <Input value="{/dialog/grid/PeriodB}" editable="false" />
+                    </HBox>
+                    <Label text="{i18n>LABEL_07007}{i18n>LABEL_07015}" visible="{= ${/dialog/grid/Apptyp} === 'C' }" />
+                    <HBox visible="{= ${/dialog/grid/Apptyp} === 'C' }">
+                        <ComboBox width="124px" class="required sapUiTinyMarginEnd" selectedKey="{/dialog/grid/Dayngt}" enabled="{/dialog/calcCompleted}" change=".onCalcAfterOvertime">
+                            <items>
+                                <core:Item text="{i18n>LABEL_00184}" key="D" />
+                                <core:Item text="{i18n>LABEL_00183}" key="N" />
+                                <core:Item text="{i18n>LABEL_00158}" key="T" />
+                            </items>
+                        </ComboBox>
+                        <ComboBox width="128px" class="required" selectedKey="{/dialog/grid/Abrst}" enabled="{/dialog/calcCompleted}" change=".onCalcAfterOvertime">
+                            <items>
+                                <core:Item text="4{i18n>LABEL_00180}" key="4" />
+                                <core:Item text="8{i18n>LABEL_00180}" key="8" />
+                                <core:Item text="10{i18n>LABEL_00180}" key="10" />
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                    <Label text="{i18n>LABEL_07009}{i18n>LABEL_07015}" visible="{= ${/dialog/grid/Apptyp} === 'C' }" />
+                    <HBox visible="{= ${/dialog/grid/Apptyp} === 'C' }">
+                        <Input value="{/dialog/grid/Period}" editable="false" />
+                    </HBox>
+                    <Label text="{i18n>LABEL_00154}" />
+                    <HBox>
+                        <layoutData>
+                            <grid:GridItemLayoutData gridColumn="span 3" />
+                        </layoutData>
+                        <Input width="600px" value="{/dialog/grid/Atrsn}" enabled="{/dialog/calcCompleted}" />
+                    </HBox>
+                </grid:CSSGrid>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>

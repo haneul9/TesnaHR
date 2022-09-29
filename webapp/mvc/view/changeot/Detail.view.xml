@@ -1,0 +1,41 @@
+<mvc:View controllerName="sap.ui.tesna.mvc.controller.changeot.Detail"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:custom="sap.ui.tesna.control">
+    <Page showHeader="false">
+        <VBox class="contents-header">
+            <HBox justifyContent="SpaceBetween" class="breadcrumbs">
+                <custom:Breadcrumbs />
+                <HBox class="button-group">
+                    <Button type="Emphasized" text="{i18n>LABEL_00121}" press=".onPressApproval" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'B' &amp;&amp; (!${/form/Appst} || ${/form/Appst} === '10') }" enabled="{= !!${/form/list}.length }" />
+                    <Button type="Emphasized" text="{i18n>LABEL_00118}" press=".onPressCancel" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'B' &amp;&amp; (${/form/Appst} === '10' || ${/form/Appst} === '20') }" />
+                    <Button type="Emphasized" text="{i18n>LABEL_00123}" press=".onPressApprove" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'WE' }" />
+                    <Button type="Reject" text="{i18n>LABEL_00124}" press=".onPressReject" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/displayMode} === 'WE' }" />
+                    <Button text="{i18n>LABEL_00146}" press=".onNavBack" visible="{= ${/displayMode} === 'B' }" />
+                    <Button text="{i18n>LABEL_00146}" press=".onHistoryBack" visible="{= ${/displayMode} !== 'B' }" />
+                    <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" press=".onPagePrint" />
+                </HBox>
+            </HBox>
+        </VBox>
+        <VBox class="contents" busyIndicatorDelay="0" busy="{/contentsBusy/all}">
+            <VBox class="vCardBox">
+                <HBox class="table-toolbar" justifyContent="SpaceBetween">
+                    <HBox alignItems="Center" class="title">
+                        <Title level="H2" text="{i18n>LABEL_00129}" />
+                        <Text text="{/form/TmdatTxt}" class="desc-txt" visible="{= !!${/form/TmdatTxt} }" />
+                    </HBox>
+                    <HBox class="table-actions">
+                        <Button icon="sap-icon://add" text="{i18n>LABEL_00107}" press=".onPressAddRowBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') }" />
+                        <Button icon="sap-icon://less" text="{i18n>LABEL_00110}" press=".onPressDelRowBtn" visible="{= (!${/form/Appst} || ${/form/Appst} === '10') }" />
+                    </HBox>
+                </HBox>
+                <VBox>
+                    <core:Fragment fragmentName="sap.ui.tesna.mvc.view.changeot.fragment.ApprovalTable" type="XML" />
+                </VBox>
+            </VBox>
+            <core:Fragment fragmentName="sap.ui.tesna.fragment.FileAttachmentBox" type="XML" />
+            <core:Fragment fragmentName="sap.ui.tesna.fragment.ApprovalStatus" type="XML" />
+        </VBox>
+    </Page>
+</mvc:View>

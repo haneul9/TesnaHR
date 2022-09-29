@@ -26,9 +26,9 @@ sap.ui.define(
   ) => {
     'use strict';
 
-    return BaseController.extend('sap.ui.tesna.mvc.controller.overtime.Detail', {
+    return BaseController.extend('sap.ui.tesna.mvc.controller.changeot.Detail', {
       DISPLAY_MODE: '',
-      LIST_TABLE_ID: 'overtimeApprovalTable',
+      LIST_TABLE_ID: 'changeotApprovalTable',
       LIST_DIALOG_CALCLE_TABLE_ID: 'dialogCancelTable',
 
       ApprovalStatusHandler: null,
@@ -46,7 +46,7 @@ sap.ui.define(
             ? this.getBundleText('LABEL_00165') // 결재
             : this.getBundleText('LABEL_00100'); // 조회
 
-        return `${this.getBundleText('LABEL_07001')} ${sRouteText}`; // 특근신청
+        return `${this.getBundleText('LABEL_07013')} ${sRouteText}`; // 특근변경신청
       },
 
       getBreadcrumbsLinks() {
@@ -54,7 +54,20 @@ sap.ui.define(
       },
 
       getApprovalType() {
-        return 'TK';
+        return 'TL';
+      },
+
+      /**
+       * @override
+       */
+      onBeforeShow() {
+        BaseController.prototype.onBeforeShow.apply(this, arguments);
+
+        this.TableUtils.adjustRowSpan({
+          oTable: this.byId(this.LIST_TABLE_ID),
+          aColIndices: [0, 1, 2, 3, 4, 5, 12],
+          sTheadOrTbody: 'thead',
+        });
       },
 
       initializeModel() {
@@ -86,10 +99,7 @@ sap.ui.define(
           },
           dialog: {
             calcCompleted: false,
-            initBeguz: moment('0900', 'hhmm').toDate(),
             grid: {},
-            list: [],
-            rowCount: 0,
           },
         };
       },
@@ -148,7 +158,7 @@ sap.ui.define(
           this.settingsAttachTable();
           this.settingsApprovalStatus();
         } catch (oError) {
-          this.debug('Controller > overtime Detail > loadPage Error', oError);
+          this.debug('Controller > changeot Detail > loadPage Error', oError);
 
           if (oError instanceof Error) oError = new UI5Error({ message: this.getBundleText('MSG_00043') }); // 잘못된 접근입니다.
 
@@ -173,7 +183,7 @@ sap.ui.define(
           const oModel = this.getModel(ServiceNames.WORKTIME);
           const mFormData = oViewModel.getProperty('/form');
 
-          const aResults = await Client.getEntitySet(oModel, 'OtWorkApply', {
+          const aResults = await Client.getEntitySet(oModel, 'OtworkChangeApply', {
             Appno: mFormData.Appno,
             Werks: mFormData.Werks,
           });
@@ -250,12 +260,12 @@ sap.ui.define(
           const mFormData = _.cloneDeep(oViewModel.getProperty('/form'));
           const aTableData = _.cloneDeep(oViewModel.getProperty('/form/list'));
 
-          const { Appno } = await Client.deep(oModel, 'OtWorkApply', {
+          const { Appno } = await Client.deep(oModel, 'OtworkChangeApply', {
+            ..._.get(aTableData, 0),
+            ..._.chain(mFormData).pick(['Appno', 'Werks', 'Orgeh']).omitBy(_.isNil).omitBy(_.isEmpty).value(),
             Prcty: 'C',
             Austy: oViewModel.getProperty('/auth'),
-            Pernr: this.getAppointeeProperty('Pernr'),
-            ..._.chain(mFormData).pick(['Appno', 'Werks', 'Orgeh']).omitBy(_.isNil).omitBy(_.isEmpty).value(),
-            OtWorkNav: aTableData,
+            OtworkChangeNav: aTableData,
           });
 
           oViewModel.setProperty('/form/Appno', Appno);
@@ -283,7 +293,7 @@ sap.ui.define(
           const oModel = this.getModel(ServiceNames.WORKTIME);
           const sAppno = _.cloneDeep(oViewModel.getProperty('/form/Appno'));
 
-          await Client.remove(oModel, 'OtWorkApply', {
+          await Client.remove(oModel, 'OtworkChangeApply', {
             Appno: sAppno,
           });
 
@@ -296,7 +306,7 @@ sap.ui.define(
           });
         } catch (oError) {
           this.setContentsBusy(false);
-          this.debug('Controller > overtime Detail > deleteProcess Error', oError);
+          this.debug('Controller > changeot Detail > deleteProcess Error', oError);
 
           AppUtils.handleError(oError);
         }
@@ -308,6 +318,10 @@ sap.ui.define(
       onHistoryBack() {
         this.setContentsBusy(true);
         history.back();
+      },
+
+      onChangeApptyp(oEvent) {
+        this.getViewModel().setProperty('/dialog/grid/Apptyptx', oEvent.getParameter('value'));
       },
 
       onPressApproval() {
@@ -327,7 +341,7 @@ sap.ui.define(
 
               await this.createProcess();
             } catch (oError) {
-              this.debug('Controller > overtime Detail > onPressApproval Error', oError);
+              this.debug('Controller > changeot Detail > onPressApproval Error', oError);
 
               AppUtils.handleError(oError);
             } finally {
@@ -377,7 +391,7 @@ sap.ui.define(
                 onClose: () => this.onHistoryBack(),
               });
             } catch (oError) {
-              this.debug('Controller > overtime Detail > onPressApprove Error', oError);
+              this.debug('Controller > changeot Detail > onPressApprove Error', oError);
 
               AppUtils.handleError(oError);
             } finally {
@@ -410,7 +424,7 @@ sap.ui.define(
                 onClose: () => this.onHistoryBack(),
               });
             } catch (oError) {
-              this.debug('Controller > overtime Detail > onPressReject Error', oError);
+              this.debug('Controller > changeot Detail > onPressReject Error', oError);
 
               AppUtils.handleError(oError);
             } finally {
@@ -433,41 +447,38 @@ sap.ui.define(
         if (!this.pFormDialog) {
           this.pFormDialog = await Fragment.load({
             id: oView.getId(),
-            name: 'sap.ui.tesna.mvc.view.overtime.fragment.FormDialog',
+            name: 'sap.ui.tesna.mvc.view.changeot.fragment.FormDialog',
             controller: this,
           });
 
           this.pFormDialog.attachBeforeOpen(async () => {
             try {
               const oViewModel = this.getViewModel();
-              const mSessionData = this.getAppointeeData();
 
               oViewModel.setProperty('/dialog/grid', {});
 
-              const sZzjobgr = this.getAppointeeProperty('Zzjobgr');
-
-              if (sZzjobgr !== '32') {
-                oViewModel.setProperty('/dialog/rowCount', 0);
-                oViewModel.setProperty('/dialog/list', []);
-              } else {
-                oViewModel.setProperty('/dialog/rowCount', 1);
-                oViewModel.setProperty('/dialog/list', [
-                  {
-                    Pernr: mSessionData.Pernr,
-                    Ename: mSessionData.Pernm,
-                    Zzcaltltx: mSessionData.Zzcaltltx,
-                    Zzpsgrptx: mSessionData.Zzpsgrptx,
-                    Orgeh: mSessionData.Orgeh,
-                    Orgtx: mSessionData.Stext,
-                    Kostl: mSessionData.Kostl,
-                    Ltext: mSessionData.Ltext,
-                  },
-                ]);
-              }
-
               await this.retrieveTimePernrList();
+
+              if (!this.isMss() && !this.isHass()) {
+                const oViewModel = this.getViewModel();
+                const aEmployees = oViewModel.getProperty('/entry/Employees');
+                const sPernr = this.getAppointeeProperty('Pernr');
+                const mEmployee = _.find(aEmployees, { Pernr: sPernr });
+
+                if (!!mEmployee) {
+                  oViewModel.setProperty(`/dialog/grid/Pernr`, mEmployee.Pernr);
+                  oViewModel.setProperty(`/dialog/grid/Ename`, mEmployee.Ename);
+                  oViewModel.setProperty(`/dialog/grid/Zzcaltl`, mEmployee.Zzcaltl);
+                  oViewModel.setProperty(`/dialog/grid/Zzcaltltx`, mEmployee.Zzcaltltx);
+                  oViewModel.setProperty(`/dialog/grid/Orgeh`, mEmployee.Orgeh);
+                  oViewModel.setProperty(`/dialog/grid/Orgtx`, mEmployee.Orgtx);
+                  oViewModel.setProperty(`/dialog/grid/Kostl`, mEmployee.Kostl2);
+                  oViewModel.setProperty(`/dialog/grid/Ltext`, mEmployee.Ltext2);
+                  oViewModel.setProperty(`/dialog/grid/PernrInfoTxt`, `(${mEmployee.Pernr}, ${mEmployee.Zzcaltltx}, ${mEmployee.Orgtx})`);
+                }
+              }
             } catch (oError) {
-              this.debug('Controller > overtime Detail > onPressAddNewApprovalBtn Error', oError);
+              this.debug('Controller > changeot Detail > onPressAddNewApprovalBtn Error', oError);
 
               AppUtils.handleError(oError);
             } finally {
@@ -503,7 +514,7 @@ sap.ui.define(
 
       onDialogDel() {
         const oViewModel = this.getViewModel();
-        const oTable = this.byId('overtimeTargetsTable');
+        const oTable = this.byId('changeotTargetsTable');
         const aTableData = oViewModel.getProperty('/dialog/list');
         const aSelectedIndices = oTable.getSelectedIndices();
 
@@ -538,40 +549,40 @@ sap.ui.define(
         const oInput = oEvent.getSource();
         const oSelectedSuggestionRow = oEvent.getParameter('selectedRow');
 
+        oViewModel.setProperty('/dialog/calcCompleted', false);
+
         if (oSelectedSuggestionRow) {
           const oContext = oSelectedSuggestionRow.getBindingContext();
           const mSuggestionData = oContext.getObject();
-          const sRowPath = oInput.getParent().getBindingContext().getPath();
 
           oInput.setValue(mSuggestionData.Ename);
 
-          oViewModel.setProperty(`${sRowPath}/Pernr`, mSuggestionData.Pernr);
-          oViewModel.setProperty(`${sRowPath}/Zzcaltltx`, mSuggestionData.Zzcaltltx);
-          oViewModel.setProperty(`${sRowPath}/Zzpsgrptx`, mSuggestionData.Zzpsgrptx);
-          oViewModel.setProperty(`${sRowPath}/Orgeh`, mSuggestionData.Orgeh);
-          oViewModel.setProperty(`${sRowPath}/Orgtx`, mSuggestionData.Orgtx);
-          oViewModel.setProperty(`${sRowPath}/Kostl`, mSuggestionData.Kostl2);
-          oViewModel.setProperty(`${sRowPath}/Ltext`, mSuggestionData.Ltext2);
+          oViewModel.setProperty(`/dialog/grid/Pernr`, mSuggestionData.Pernr);
+          oViewModel.setProperty(`/dialog/grid/Zzcaltltx`, mSuggestionData.Zzcaltltx);
+          oViewModel.setProperty(`/dialog/grid/Zzpsgrptx`, mSuggestionData.Zzpsgrptx);
+          oViewModel.setProperty(`/dialog/grid/Orgeh`, mSuggestionData.Orgeh);
+          oViewModel.setProperty(`/dialog/grid/Orgtx`, mSuggestionData.Orgtx);
+          oViewModel.setProperty(`/dialog/grid/Kostl`, mSuggestionData.Kostl2);
+          oViewModel.setProperty(`/dialog/grid/Ltext`, mSuggestionData.Ltext2);
+          oViewModel.setProperty(`/dialog/grid/PernrInfoTxt`, `(${mSuggestionData.Pernr}, ${mSuggestionData.Zzcaltltx}, ${mSuggestionData.Orgtx})`);
 
-          const bCalcComplete = oViewModel.getProperty('/dialog/calcCompleted');
-          if (!bCalcComplete) this.onDialogCalcTime();
+          oViewModel.refresh();
         }
 
         oInput.getBinding('suggestionRows').filter([]);
+
+        this.onDialogCalcTime();
       },
 
       onSubmitSuggest(oEvent) {
         const oViewModel = this.getViewModel();
-        const oInput = oEvent.getSource();
-        const oContext = oInput.getParent().getBindingContext();
-        const sRowPath = oContext.getPath();
         const sInputValue = oEvent.getParameter('value');
 
-        if (!sInputValue) {
-          const aTargetList = oViewModel.getProperty('/dialog/list');
+        oViewModel.setProperty('/dialog/calcCompleted', false);
 
-          if (aTargetList.length === 1) oViewModel.setProperty('/dialog/calcCompleted', false);
-          oViewModel.setProperty(`${sRowPath}`, {});
+        if (!sInputValue) {
+          oViewModel.setProperty('/dialog/grid', {});
+          oViewModel.refresh();
 
           return;
         }
@@ -580,22 +591,20 @@ sap.ui.define(
         const [mEmployee] = _.filter(aEmployees, (o) => _.startsWith(o.Ename, sInputValue));
 
         if (!_.isEmpty(mEmployee)) {
-          oViewModel.setProperty(`${sRowPath}/Pernr`, mEmployee.Pernr);
-          oViewModel.setProperty(`${sRowPath}/Zzcaltltx`, mEmployee.Zzcaltltx);
-          oViewModel.setProperty(`${sRowPath}/Zzpsgrptx`, mEmployee.Zzpsgrptx);
-          oViewModel.setProperty(`${sRowPath}/Orgeh`, mEmployee.Orgeh);
-          oViewModel.setProperty(`${sRowPath}/Orgtx`, mEmployee.Orgtx);
-          oViewModel.setProperty(`${sRowPath}/Kostl`, mEmployee.Kostl2);
-          oViewModel.setProperty(`${sRowPath}/Ltext`, mEmployee.Ltext2);
-
-          const bCalcComplete = oViewModel.getProperty('/dialog/calcCompleted');
-          if (!bCalcComplete) this.onDialogCalcTime();
+          oViewModel.setProperty(`/dialog/grid/Pernr`, mEmployee.Pernr);
+          oViewModel.setProperty(`/dialog/grid/Ename`, mEmployee.Ename);
+          oViewModel.setProperty(`/dialog/grid/Zzcaltl`, mEmployee.Zzcaltl);
+          oViewModel.setProperty(`/dialog/grid/Zzcaltltx`, mEmployee.Zzcaltltx);
+          oViewModel.setProperty(`/dialog/grid/Orgeh`, mEmployee.Orgeh);
+          oViewModel.setProperty(`/dialog/grid/Orgtx`, mEmployee.Orgtx);
+          oViewModel.setProperty(`/dialog/grid/Kostl`, mEmployee.Kostl2);
+          oViewModel.setProperty(`/dialog/grid/Ltext`, mEmployee.Ltext2);
+          oViewModel.setProperty(`/dialog/grid/PernrInfoTxt`, `(${mEmployee.Pernr}, ${mEmployee.Zzcaltltx}, ${mEmployee.Orgtx})`);
         } else {
-          const aTargetList = oViewModel.getProperty('/dialog/list');
-
-          if (aTargetList.length === 1) oViewModel.setProperty('/dialog/calcCompleted', false);
-          oViewModel.setProperty(`${sRowPath}`, {});
+          oViewModel.setProperty('/dialog/grid', {});
         }
+
+        oViewModel.refresh();
       },
 
       onPressDelRowBtn() {
@@ -635,32 +644,72 @@ sap.ui.define(
           const oViewModel = this.getViewModel();
 
           try {
-            const aTargetList = oViewModel.getProperty('/dialog/list');
             const mDialogFormData = _.cloneDeep(oViewModel.getProperty('/dialog/grid'));
 
-            if (!mDialogFormData.Tmdat || !mDialogFormData.Dayngt || !mDialogFormData.Abrst) return;
+            if (!mDialogFormData.Pernr || !mDialogFormData.Tmdat) return;
 
-            if (aTargetList.length < 1) {
-              throw new UI5Error({ code: 'A', message: this.getBundleText('MSG_00065') }); // 대상자를 1명 이상 지정하여 주시기 바랍니다.
-            }
-
-            const mResult = await Client.create(this.getModel(ServiceNames.WORKTIME), 'OtWorkApply', {
-              Pernr: _.get(aTargetList, [0, 'Pernr']),
+            const mResult = await Client.create(this.getModel(ServiceNames.WORKTIME), 'OtworkChangeApply', {
+              Prcty: 'D',
+              Pernr: mDialogFormData.Pernr,
               Tmdat: this.DateUtils.parse(mDialogFormData.Tmdat),
-              Dayngt: mDialogFormData.Dayngt,
-              Abrst: mDialogFormData.Abrst,
             });
 
-            oViewModel.setProperty('/dialog/grid/Period', `${this.TimeUtils.toString(mResult.Beguz, 'HH:mm')} ~ ${this.TimeUtils.toString(mResult.Enduz, 'HH:mm')}`);
             oViewModel.setProperty('/dialog/grid/Beguz', mResult.Beguz);
             oViewModel.setProperty('/dialog/grid/Enduz', mResult.Enduz);
+            oViewModel.setProperty('/dialog/grid/Abrst', _.chain(mResult.Abrst).toNumber().toString().value());
+            oViewModel.setProperty('/dialog/grid/Dayngt', mResult.Dayngt);
+            oViewModel.setProperty('/dialog/grid/Period', `${this.TimeUtils.toString(mResult.Beguz, 'HH:mm')} ~ ${this.TimeUtils.toString(mResult.Enduz, 'HH:mm')}`);
+            oViewModel.setProperty('/dialog/grid/BeguzB', mResult.BeguzB);
+            oViewModel.setProperty('/dialog/grid/EnduzB', mResult.EnduzB);
+            oViewModel.setProperty('/dialog/grid/AbrstB', _.chain(mResult.AbrstB).toNumber().toString().value());
+            oViewModel.setProperty('/dialog/grid/DayngtB', mResult.DayngtB);
+            oViewModel.setProperty('/dialog/grid/PeriodB', `${this.TimeUtils.toString(mResult.BeguzB, 'HH:mm')} ~ ${this.TimeUtils.toString(mResult.EnduzB, 'HH:mm')}`);
             oViewModel.setProperty('/dialog/calcCompleted', true);
           } catch (oError) {
-            oViewModel.setProperty('/dialog/calcCompleted', false);
+            oViewModel.setProperty('/dialog/grid/Apptyp', null);
+            oViewModel.setProperty('/dialog/grid/Beguz', null);
             oViewModel.setProperty('/dialog/grid/Enduz', null);
+            oViewModel.setProperty('/dialog/grid/Abrst', null);
+            oViewModel.setProperty('/dialog/grid/Dayngt', null);
             oViewModel.setProperty('/dialog/grid/Period', null);
+            oViewModel.setProperty('/dialog/grid/BeguzB', null);
+            oViewModel.setProperty('/dialog/grid/EnduzB', null);
+            oViewModel.setProperty('/dialog/grid/AbrstB', null);
+            oViewModel.setProperty('/dialog/grid/DayngtB', null);
+            oViewModel.setProperty('/dialog/grid/PeriodB', null);
+            oViewModel.setProperty('/dialog/calcCompleted', false);
 
-            this.debug('Controller > overtime Detail > onDialogCalcTime Error', oError);
+            this.debug('Controller > changeot Detail > onDialogCalcTime Error', oError);
+
+            AppUtils.handleError(oError);
+          } finally {
+            this.setContentsBusy(false, 'dialog');
+          }
+        }, 0);
+      },
+
+      async onCalcAfterOvertime() {
+        this.setContentsBusy(true, 'dialog');
+
+        setTimeout(async () => {
+          const oViewModel = this.getViewModel();
+
+          try {
+            const mDialogFormData = _.cloneDeep(oViewModel.getProperty('/dialog/grid'));
+
+            if (!mDialogFormData.Dayngt || !mDialogFormData.Abrst) return;
+
+            const mResult = await Client.create(this.getModel(ServiceNames.WORKTIME), 'OtworkChangeApply', {
+              Prcty: 'T',
+              Tmdat: this.DateUtils.parse(mDialogFormData.Tmdat),
+              ..._.pick(mDialogFormData, ['Pernr', 'Dayngt', 'Abrst']),
+            });
+
+            oViewModel.setProperty('/dialog/grid/Beguz', mResult.Beguz);
+            oViewModel.setProperty('/dialog/grid/Enduz', mResult.Enduz);
+            oViewModel.setProperty('/dialog/grid/Period', `${this.TimeUtils.toString(mResult.Beguz, 'HH:mm')} ~ ${this.TimeUtils.toString(mResult.Enduz, 'HH:mm')}`);
+          } catch (oError) {
+            this.debug('Controller > changeot Detail > onCalcAfterOvertime Error', oError);
 
             AppUtils.handleError(oError);
           } finally {
@@ -675,17 +724,9 @@ sap.ui.define(
         if (this.validRequiredInputData()) return;
 
         const oViewModel = this.getViewModel();
-        const aFormList = oViewModel.getProperty('/form/list');
         const mDialogGrid = oViewModel.getProperty('/dialog/grid');
-        const aTargets = oViewModel.getProperty('/dialog/list');
-        const aRowData = [
-          ...aFormList,
-          ..._.chain(aTargets)
-            .filter((o) => !_.isEmpty(o.Pernr))
-            .uniqBy('Pernr')
-            .map((o) => ({ ...o, ...mDialogGrid }))
-            .value(),
-        ];
+        const aFormList = oViewModel.getProperty('/form/list');
+        const aRowData = [...aFormList, mDialogGrid];
 
         oViewModel.setProperty('/form/rowCount', aRowData.length || 1);
         oViewModel.setProperty('/form/list', aRowData);
@@ -696,17 +737,14 @@ sap.ui.define(
       validExistRows() {
         const oViewModel = this.getViewModel();
         const aApprovalList = oViewModel.getProperty('/form/list');
-        const aAddedList = oViewModel.getProperty('/dialog/list');
-        const dDatum = oViewModel.getProperty('/dialog/grid/Tmdat');
+        const mAddedData = oViewModel.getProperty('/dialog/grid');
 
         if (
-          _.some(aAddedList, (o) => {
-            return _.chain(aApprovalList)
-              .filter((t) => _.isEqual(t.Pernr, o.Pernr) && moment(dDatum).isSame(moment(t.Tmdat), 'day'))
-              .size()
-              .gt(0)
-              .value();
-          })
+          _.chain(aApprovalList)
+            .filter((t) => _.isEqual(t.Pernr, mAddedData.Pernr) && moment(mAddedData.Tmdat).isSame(moment(t.Tmdat), 'day'))
+            .size()
+            .gt(0)
+            .value()
         ) {
           MessageBox.alert(this.getBundleText('MSG_07002')); // 동일한 사번/일자 데이터가 존재하여 저장이 불가합니다.
           return true;
@@ -718,26 +756,19 @@ sap.ui.define(
       validRequiredInputData() {
         const oViewModel = this.getViewModel();
         const mInputData = oViewModel.getProperty('/dialog/grid');
-        const aTargets = oViewModel.getProperty('/dialog/list');
 
-        if (!mInputData.Tmdat) {
-          MessageBox.alert(this.getBundleText('MSG_00002', 'LABEL_07002')); // {근무일}을 입력하세요.
+        if (!mInputData.Apptyp) {
+          MessageBox.alert(this.getBundleText('MSG_00004', 'LABEL_00225')); // {신청구분}을 선택하세요.
           return true;
         }
 
-        if (_.isEmpty(mInputData.Atrsn)) {
-          MessageBox.alert(this.getBundleText('MSG_00003', 'LABEL_07008')); // {특근사유}를 입력하세요.
+        if (!mInputData.Dayngt) {
+          MessageBox.alert(this.getBundleText('MSG_00004', 'LABEL_07012')); // {특근구분}을 선택하세요.
           return true;
         }
 
-        if (
-          _.chain(aTargets)
-            .filter((o) => !_.isEmpty(o.Pernr))
-            .size()
-            .isEqual(0)
-            .value()
-        ) {
-          MessageBox.alert(this.getBundleText('MSG_07003')); // 대상자를 등록하세요.
+        if (!mInputData.Abrst) {
+          MessageBox.alert(this.getBundleText('MSG_00004', 'LABEL_07007')); // {특근시간}을 선택하세요.
           return true;
         }
 

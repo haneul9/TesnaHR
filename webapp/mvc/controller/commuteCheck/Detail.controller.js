@@ -155,7 +155,12 @@ sap.ui.define(
             ...mFormData,
             rowCount: Math.min(aResults.length, 10),
             listMode: !mFormData.Appst || mFormData.Appst === '10' ? 'MultiToggle' : 'None',
-            list: _.map(aResults, (o) => _.omit(o, '__metadata')),
+            list: _.map(aResults, (o) => ({
+              ..._.omit(o, '__metadata'),
+              Beguzf: this.TimeUtils.nvl(o.Beguzf),
+              Enduzf: this.TimeUtils.nvl(o.Enduzf),
+              Dedhr: this.TimeUtils.nvl(o.Dedhr),
+            })),
           });
         } catch (oError) {
           throw oError;

@@ -3,7 +3,7 @@
     <VBox width="100%" class="vCardBox small" busyIndicatorDelay="0" busy="{/busy/byYear}">
         <HBox justifyContent="SpaceBetween" class="table-toolbar">
             <HBox class="title">
-                <Title level="H2" text="{i18n>LABEL_02021}" />
+                <Title level="H2" text="{i18n>LABEL_02017}" />
                 <Text text="{/FullYear}" class="desc-txt" />
             </HBox>
             <ComboBox width="200px" items="{/TimeTypes}" selectedKey="{/WorkTypeUse}" change=".onChangeWorkTypeUse">

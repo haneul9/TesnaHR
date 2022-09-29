@@ -17,14 +17,14 @@ sap.ui.define(
   ) => {
     'use strict';
 
-    return BaseController.extend('sap.ui.tesna.mvc.controller.overtime.List', {
+    return BaseController.extend('sap.ui.tesna.mvc.controller.changeot.List', {
       ROUTE_NAME: '',
-      LIST_TABLE_ID: 'overtimeTable',
-      CHART_CONTAINER_ID: 'chart-overtime-summary-app-dial-container',
-      CHART_ID: 'overtimeSummaryChart',
+      LIST_TABLE_ID: 'changeotTable',
+      CHART_CONTAINER_ID: 'chart-changeot-summary-app-dial-container',
+      CHART_ID: 'changeotSummaryChart',
 
       getCurrentLocationText() {
-        return this.getBundleText('LABEL_07001'); // 특근신청
+        return this.getBundleText('LABEL_07013'); // 특근변경신청
       },
 
       getBreadcrumbsLinks() {
@@ -85,7 +85,7 @@ sap.ui.define(
           await this.retrieveSummary();
           await this.retrieveList();
         } catch (oError) {
-          this.debug('Controller > overtime List > onObjectMatched Error', oError);
+          this.debug('Controller > changeot List > onObjectMatched Error', oError);
 
           AppUtils.handleError(oError);
         } finally {
@@ -127,7 +127,7 @@ sap.ui.define(
 
           if (!mSearchConditions.Werks || !mSearchConditions.Orgeh) return;
 
-          const aRowData = await Client.getEntitySet(this.getViewModel(ServiceNames.WORKTIME), 'OtWorkApply', {
+          const aRowData = await Client.getEntitySet(this.getViewModel(ServiceNames.WORKTIME), 'OtworkChangeApply', {
             Austy: sAuth,
             Werks: mSearchConditions.Werks,
             Orgeh: mSearchConditions.Orgeh,
@@ -382,7 +382,7 @@ sap.ui.define(
 
           await this.retrieveList();
         } catch (oError) {
-          this.debug('Controller > overtime List > onPressSearch Error', oError);
+          this.debug('Controller > changeot List > onPressSearch Error', oError);
 
           AppUtils.handleError(oError);
         } finally {
@@ -402,7 +402,7 @@ sap.ui.define(
 
           this.toggleActiveSearch();
         } catch (oError) {
-          this.debug('Controller > overtime List > onChangePersa Error', oError);
+          this.debug('Controller > changeot List > onChangePersa Error', oError);
 
           AppUtils.handleError(oError);
         } finally {
@@ -421,7 +421,7 @@ sap.ui.define(
 
           this.toggleActiveSearch();
         } catch (oError) {
-          this.debug('Controller > overtime List > onChangeOrgeh Error', oError);
+          this.debug('Controller > changeot List > onChangeOrgeh Error', oError);
 
           AppUtils.handleError(oError);
         } finally {
@@ -435,7 +435,7 @@ sap.ui.define(
 
       onPressExcelDownload() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_07001'); // {특근신청}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_07013'); // {특근변경신청}_목록
 
         this.TableUtils.export({ oTable, sFileName });
       },

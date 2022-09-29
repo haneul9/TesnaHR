@@ -15,14 +15,20 @@
                     <HBox>
                         <custom:DatePicker width="260px" dateValue="{ path: '/dialog/grid/Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" change=".onDialogCalcTime" class="sapIcon_Date required" />
                     </HBox>
-                    <Label text="{i18n>LABEL_07007}"/>
+                    <Label text="{i18n>LABEL_07012}"/>
                     <HBox>
-                        <TimePicker width="120px" dateValue="{ path: '/dialog/grid/Beguz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/dialog/initBeguz}" minutesStep="30" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiSmallMarginEnd" change=".onDialogCalcTime" />
-                        <ComboBox width="124px" class="required" selectedKey="{/dialog/grid/Abrst}" change=".onDialogCalcTime">
+                        <ComboBox width="124px" class="required sapUiTinyMarginEnd" selectedKey="{/dialog/grid/Dayngt}" change=".onDialogCalcTime">
                             <items>
-                                <core:Item text="4시간" key="4" />
-                                <core:Item text="8시간" key="8" />
-                                <core:Item text="10시간" key="10" />
+                                <core:Item text="{i18n>LABEL_00184}" key="D" />
+                                <core:Item text="{i18n>LABEL_00183}" key="N" />
+                                <core:Item text="{i18n>LABEL_00158}" key="T" />
+                            </items>
+                        </ComboBox>
+                        <ComboBox width="128px" class="required" selectedKey="{/dialog/grid/Abrst}" change=".onDialogCalcTime">
+                            <items>
+                                <core:Item text="4{i18n>LABEL_00180}" key="4" />
+                                <core:Item text="8{i18n>LABEL_00180}" key="8" />
+                                <core:Item text="10{i18n>LABEL_00180}" key="10" />
                             </items>
                         </ComboBox>
                     </HBox>

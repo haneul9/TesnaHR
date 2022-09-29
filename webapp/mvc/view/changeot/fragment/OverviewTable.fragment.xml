@@ -1,0 +1,95 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <HBox>
+        <table:Table id="changeotTable" class="row-link" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/busy}" noData="{i18n>MSG_00001}" cellClick=".onSelectRow">
+            <table:rowSettingsTemplate>
+                <table:RowSettings highlight="{ path: 'Appst', formatter: '.TableUtils.rowHighlight' }" />
+            </table:rowSettingsTemplate>
+            <table:columns>
+                <table:Column width="4%" filterProperty="Appsttx" sortProperty="Appsttx">
+                    <Label text="{i18n>LABEL_00144}" />
+                    <table:template>
+                        <Text text="{Appsttx}" width="100%" textAlign="Center" wrapping="false">
+                            <customData>
+                                <core:CustomData key="status" value="Z{Appst}" writeToDom="true" />
+                            </customData>
+                        </Text>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10%" filterProperty="Orgtx" sortProperty="Orgtx">
+                    <Label text="{i18n>LABEL_00219}" />
+                    <table:template>
+                        <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="9%" filterProperty="Ltext" sortProperty="Ltext">
+                    <Label text="{i18n>LABEL_00177}" />
+                    <table:template>
+                        <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="7%" filterProperty="Ename" sortProperty="Ename">
+                    <Label text="{i18n>LABEL_00174}"/>
+                    <table:template>
+                        <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8%" filterProperty="Ename" sortProperty="Ename">
+                    <Label text="{i18n>LABEL_00222}"/>
+                    <table:template>
+                        <Text text="{Zzcaltltx}" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="9%" filterProperty="Datum" sortProperty="Datum">
+                    <Label text="{i18n>LABEL_07002}"/>
+                    <table:template>
+                        <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="9%" filterProperty="Beguz" sortProperty="Beguz">
+                    <Label text="{i18n>LABEL_07003}"/>
+                    <table:template>
+                        <Text text="{ path: 'Beguz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="9%" filterProperty="Enduz" sortProperty="Enduz">
+                    <Label text="{i18n>LABEL_07004}"/>
+                    <table:template>
+                        <Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8%" filterProperty="Abrst" sortProperty="Abrst">
+                    <Label text="{i18n>LABEL_00180}"/>
+                    <table:template>
+                        <Text text="{ path: 'Abrst', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto" filterProperty="Apename" sortProperty="Apename">
+                    <Label text="{i18n>LABEL_00135}" />
+                    <table:template>
+                        <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto" filterProperty="Appda" sortProperty="Appda">
+                    <Label text="{i18n>LABEL_00189}" />
+                    <table:template>
+                        <Text text="{ path: 'Appda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto" filterProperty="Sgnpnm" sortProperty="Sgnpnm">
+                    <Label text="{i18n>LABEL_00171}" />
+                    <table:template>
+                        <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="auto" filterProperty="Sgnda" sortProperty="Sgnda">
+                    <Label text="{i18n>LABEL_00186}" />
+                    <table:template>
+                        <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </HBox>
+</core:FragmentDefinition>

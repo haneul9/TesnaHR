@@ -4,6 +4,7 @@ sap.ui.define(
     'sap/ui/tesna/control/MessageBox',
     'sap/ui/tesna/common/AppUtils',
     'sap/ui/tesna/common/ApprovalStatusHandler',
+    'sap/ui/tesna/common/exceptions/UI5Error',
     'sap/ui/tesna/common/odata/Client',
     'sap/ui/tesna/common/odata/ServiceNames',
     'sap/ui/tesna/mvc/controller/BaseController',
@@ -13,6 +14,7 @@ sap.ui.define(
     MessageBox,
     AppUtils,
     ApprovalStatusHandler,
+    UI5Error,
     Client,
     ServiceNames,
     BaseController
@@ -310,11 +312,22 @@ sap.ui.define(
           return;
         }
 
+        if (
+          !_.chain(this.getViewModel().getProperty('/list'))
+            .filter((o, i) => _.includes(aSelectedIndices, i) && !!o.Appno && o.Appno !== '0000000000')
+            .size()
+            .isEqual(0)
+            .value()
+        ) {
+          MessageBox.alert(this.getBundleText('MSG_00066')); // 미신청 상태의 데이터만 신청이 가능합니다.
+          return;
+        }
+
         this.setContentsBusy(true);
 
-        // {신청}하시겠습니까?
-        MessageBox.confirm(this.getBundleText('MSG_00006', 'LABEL_00121'), {
-          actions: [this.getBundleText('LABEL_00121'), MessageBox.Action.CANCEL],
+        // 신청데이터에 대하여 재검증을 실시한 이후 이상이 없을 경우에만 신청처리됩니다.\n진행하시겠습니까?
+        MessageBox.confirm(this.getBundleText('MSG_06002'), {
+          actions: [this.getBundleText('LABEL_00114'), MessageBox.Action.CANCEL],
           onClose: async (sAction) => {
             if (!sAction || sAction === MessageBox.Action.CANCEL) {
               this.setContentsBusy(false);
@@ -322,26 +335,39 @@ sap.ui.define(
             }
 
             try {
+              const oModel = this.getModel(ServiceNames.WORKTIME);
+              const aReturnMsg = [];
               const aSelectedTableData = _.chain(this.getViewModel().getProperty('/list'))
                 .filter((o, i) => _.includes(aSelectedIndices, i))
                 .cloneDeep()
                 .value();
 
-              const { Appno } = await Client.deep(this.getModel(ServiceNames.WORKTIME), 'TimeReaderCheck', {
-                ..._.get(aSelectedTableData, 0),
-                TimeReaderNav: aSelectedTableData,
-              });
+              for (const mPayload of aSelectedTableData) {
+                const mReturnData = await Client.create(oModel, 'TimeReaderCheck', mPayload);
 
-              // 결재선 저장
-              await this.ApprovalStatusHandler.saveWithNoDisplay(Appno);
+                if (mReturnData.Retcode === 'I') {
+                  mPayload.Dedhr = mReturnData.Dedhr;
+                  mPayload.Lateyn = mReturnData.Lateyn;
 
-              // {신청}되었습니다.
-              MessageBox.success(this.getBundleText('MSG_00007', 'LABEL_00121'), {
-                onClose: () => {
-                  this.setContentsBusy(false);
-                  this.onPressSearch();
-                },
-              });
+                  aReturnMsg.push(mReturnData.Retmsg);
+                } else if (mReturnData.Retcode === 'E') {
+                  throw new UI5Error({ message: mReturnData.Retmsg });
+                }
+              }
+
+              if (aReturnMsg.length > 0) {
+                MessageBox.alert(_.join(aReturnMsg, '\n'), {
+                  onClose: async () => {
+                    try {
+                      await this.createProcess(aSelectedTableData);
+                    } catch (oError) {
+                      AppUtils.handleError(oError);
+                    }
+                  },
+                });
+              } else {
+                this.createProcess(aSelectedTableData);
+              }
             } catch (oError) {
               this.debug('Controller > commuteCheck > onPressApprove Error', oError);
 
@@ -350,6 +376,28 @@ sap.ui.define(
             }
           },
         });
+      },
+
+      async createProcess(aRowData) {
+        try {
+          const { Appno } = await Client.deep(this.getModel(ServiceNames.WORKTIME), 'TimeReaderCheck', {
+            ..._.get(aRowData, 0),
+            TimeReaderNav: aRowData,
+          });
+
+          // // 결재선 저장
+          await this.ApprovalStatusHandler.saveWithNoDisplay(Appno);
+
+          // {신청}되었습니다.
+          MessageBox.success(this.getBundleText('MSG_00007', 'LABEL_00121'), {
+            onClose: () => {
+              this.setContentsBusy(false);
+              this.onPressSearch();
+            },
+          });
+        } catch (oError) {
+          throw oError;
+        }
       },
 
       onPressCancel() {

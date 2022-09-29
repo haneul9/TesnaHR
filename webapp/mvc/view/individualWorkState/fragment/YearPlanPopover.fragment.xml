@@ -3,7 +3,7 @@
     xmlns:core="sap.ui.core">
     <Popover title="{/YearPlan/title}" class="year-popover" contentMinWidth="300px" placement="Auto">
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="py-6-px">
-            <Label text="{i18n>LABEL_02022}:" />
+            <Label text="{i18n>LABEL_02018}:" />
             <Text text="{/YearPlan/detail/Awrsntx1}" />
             <Label text="{i18n>LABEL_00190}:" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
             <Text text="{/YearPlan/detail/Appsttx1}" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
@@ -13,7 +13,7 @@
             <Text text="{/YearPlan/detail/Duration1}" />
         </grid:CSSGrid>
         <grid:CSSGrid gridTemplateColumns="1fr 3fr" gridRowGap="0" class="border-top py-6-px" visible="{= !!${/YearPlan/detail/Awrsntx2} }">
-            <Label text="{i18n>LABEL_02022}:" />
+            <Label text="{i18n>LABEL_02018}:" />
             <Text text="{/YearPlan/detail/Awrsntx2}" />
             <Label text="{i18n>LABEL_00190}:" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />
             <Text text="{/YearPlan/detail/Appsttx2}" visible="{= ${/YearPlan/detail/Holyn} !== 'X'}" />

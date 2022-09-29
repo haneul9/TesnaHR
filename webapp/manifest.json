@@ -112,6 +112,13 @@
         { "pattern": "m/commuteCheck/{appno}/:flag:", "name": "m/commuteCheck-detail", "target": "commuteCheckDetail" },
         { "pattern": "h/commuteCheck/{appno}/:flag:", "name": "h/commuteCheck-detail", "target": "commuteCheckDetail" },
 
+        { "pattern": "changeot", "name": "changeot", "target": "changeot" },
+        { "pattern": "m/changeot", "name": "m/changeot", "target": "m/changeot" },
+        { "pattern": "h/changeot", "name": "h/changeot", "target": "h/changeot" },
+        { "pattern": "changeot/{appno}/{werks}/{orgeh}/:flag:", "name": "changeot-detail", "target": "changeotDetail" },
+        { "pattern": "m/changeot/{appno}/{werks}/{orgeh}/:flag:", "name": "m/changeot-detail", "target": "changeotDetail" },
+        { "pattern": "h/changeot/{appno}/{werks}/{orgeh}/:flag:", "name": "h/changeot-detail", "target": "changeotDetail" },
+
         { "pattern": "individualWorkState/:pernr:/:year:/:month:", "name": "individualWorkState", "target": "individualWorkState" },
         { "pattern": "m/individualWorkState/:pernr:/:year:/:month:", "name": "m/individualWorkState", "target": "m/individualWorkState" },
         { "pattern": "h/individualWorkState/:pernr:/:year:/:month:", "name": "h/individualWorkState", "target": "h/individualWorkState" },
@@ -157,6 +164,11 @@
         "m/commuteCheck": { "viewId": "m_commuteCheck", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "MainM" },
         "h/commuteCheck": { "viewId": "h_commuteCheck", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "MainH" },
         "commuteCheckDetail": { "viewId": "commuteCheckDetail", "viewPath": "sap.ui.tesna.mvc.view.commuteCheck", "viewName": "Detail" },
+
+        "changeot": { "viewId": "changeot", "viewPath": "sap.ui.tesna.mvc.view.changeot", "viewName": "ListE" },
+        "m/changeot": { "viewId": "m_changeot", "viewPath": "sap.ui.tesna.mvc.view.changeot", "viewName": "ListM" },
+        "h/changeot": { "viewId": "h_changeot", "viewPath": "sap.ui.tesna.mvc.view.changeot", "viewName": "ListH" },
+        "changeotDetail": { "viewId": "changeotDetail", "viewPath": "sap.ui.tesna.mvc.view.changeot", "viewName": "Detail" },
 
         "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainE" },
         "m/individualWorkState": { "viewId": "m_individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainM" },

@@ -4,7 +4,7 @@
     <VBox width="50%" class="vCardBox small sapUiMediumMarginEnd" busyIndicatorDelay="0" busy="{/busy/plan}">
         <HBox class="table-toolbar">
             <HBox class="title">
-                <Title level="H2" text="{i18n>LABEL_02040}" />
+                <Title level="H2" text="{i18n>LABEL_02005}" />
                 <Text text="{/FullYear}" class="desc-txt" />
             </HBox>
         </HBox>

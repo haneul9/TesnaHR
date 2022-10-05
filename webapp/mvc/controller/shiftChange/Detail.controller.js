@@ -49,7 +49,7 @@ sap.ui.define(
             ? this.getBundleText('LABEL_00165') // 결재
             : this.getBundleText('LABEL_00100'); // 조회
 
-        return `${this.getBundleText('LABEL_04001')} ${sRouteText}`;
+        return `${this.getBundleText('LABEL_04001')} ${sRouteText}`;  // 근무계획변경신청
       },
 
       getBreadcrumbsLinks() {
@@ -498,7 +498,7 @@ sap.ui.define(
           return;
         }
 
-        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_04001'); // {기술직계획근무변경신청}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_04001'); // {근무계획변경신청}_목록
         const aTableData = _.chain(this.getViewModel().getProperty('/dialog/list'))
           .cloneDeep()
           .filter((o, i) => _.includes(aSelectedIndices, i))

@@ -492,58 +492,6 @@ sap.ui.define(
         this.pFormDialog.open();
       },
 
-      onDialogAdd() {
-        const oViewModel = this.getViewModel();
-        const aDialogTable = oViewModel.getProperty('/dialog/list');
-
-        oViewModel.setProperty('/dialog/rowCount', Math.min(aDialogTable.length + 1, 5));
-        oViewModel.setProperty('/dialog/list', [
-          ...aDialogTable,
-          {
-            Pernr: '',
-            Ename: '',
-            Zzcaltltx: '',
-            Zzpsgrptx: '',
-            Orgeh: '',
-            Orgtx: '',
-            Kostl: '',
-            Ltext: '',
-          },
-        ]);
-      },
-
-      onDialogDel() {
-        const oViewModel = this.getViewModel();
-        const oTable = this.byId('changeotTargetsTable');
-        const aTableData = oViewModel.getProperty('/dialog/list');
-        const aSelectedIndices = oTable.getSelectedIndices();
-
-        if (aSelectedIndices.length < 1) {
-          MessageBox.alert(this.getBundleText('MSG_00055')); // 삭제할 데이터를 선택하세요.
-          return;
-        }
-
-        // 선택된 행을 삭제하시겠습니까?
-        MessageBox.confirm(this.getBundleText('MSG_00021'), {
-          onClose: function (sAction) {
-            if (MessageBox.Action.CANCEL === sAction) return;
-
-            const aUnSelectedData = aTableData.filter((elem, idx) => {
-              return !aSelectedIndices.some(function (iIndex) {
-                return iIndex === idx;
-              });
-            });
-
-            if (aUnSelectedData.length < 1) oViewModel.setProperty('/dialog/calcCompleted', false);
-
-            oViewModel.setProperty('/dialog/list', aUnSelectedData);
-            oViewModel.setProperty('/dialog/rowCount', Math.min(_.size(aUnSelectedData), 5));
-
-            oTable.clearSelection();
-          }.bind(this),
-        });
-      },
-
       onSelectSuggest(oEvent) {
         const oViewModel = this.getViewModel();
         const oInput = oEvent.getSource();

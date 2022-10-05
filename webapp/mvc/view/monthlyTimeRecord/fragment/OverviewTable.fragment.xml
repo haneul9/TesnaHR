@@ -1,0 +1,116 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <table:Table id="monthlyTimeRecordTable" selectionMode="None" fixedColumnCount="6" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/list}" visibleRowCount="{/listInfo/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table}" noData="{i18n>MSG_00001}" cellClick=".onSelectRow">
+        <table:columns>
+            <table:Column width="160px" filterProperty="Orgtx" sortProperty="Orgtx">
+                <Label text="{i18n>LABEL_00219}" />
+                <table:template>
+                    <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="160px" filterProperty="Ltext" sortProperty="Ltext">
+                <Label text="{i18n>LABEL_00177}" />
+                <table:template>
+                    <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px" filterProperty="Ename" sortProperty="Ename">
+                <Label text="{i18n>LABEL_00210}" />
+                <table:template>
+                    <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px" filterProperty="Pernr" sortProperty="Pernr">
+                <Label text="{i18n>LABEL_00209}" />
+                <table:template>
+                    <Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px" filterProperty="Zzcaltltx" sortProperty="Zzcaltltx">
+                <Label text="{i18n>LABEL_00157}" />
+                <table:template>
+                    <Text text="{Zzcaltltx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px" filterProperty="Tyymm" sortProperty="Tyymm">
+                <Label text="{i18n>LABEL_00227}" />
+                <table:template>
+                    <Text text="{ path: 'Tyymm', type: 'sap.ui.tesna.mvc.model.type.Month' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="YeonjangTime" sortProperty="YeonjangTime">
+                <Label text="{i18n>LABEL_08002}" />
+                <table:template>
+                    <Text text="{ path: 'YeonjangTime', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="YaganTime" sortProperty="YaganTime">
+                <Label text="{i18n>LABEL_08003}" />
+                <table:template>
+                    <Text text="{ path: 'YaganTime', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="JuhyuTime" sortProperty="JuhyuTime">
+                <Label text="{i18n>LABEL_08004}" />
+                <table:template>
+                    <Text text="{ path: 'JuhyuTime', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="JuhyuYeonjangTime" sortProperty="JuhyuYeonjangTime">
+                <Label text="{i18n>LABEL_08005}" />
+                <table:template>
+                    <Text text="{ path: 'JuhyuYeonjangTime', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="GeunmuilSu" sortProperty="GeunmuilSu">
+                <Label text="{i18n>LABEL_08006}" />
+                <table:template>
+                    <Text text="{ path: 'GeunmuilSu', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="GyeolgeunilSu" sortProperty="GyeolgeunilSu">
+                <Label text="{i18n>LABEL_08007}" />
+                <table:template>
+                    <Text text="{ path: 'GyeolgeunilSu', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="YugeupilSu" sortProperty="YugeupilSu">
+                <Label text="{i18n>LABEL_08008}" />
+                <table:template>
+                    <Text text="{ path: 'YugeupilSu', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="UnpaidLeaveSu" sortProperty="UnpaidLeaveSu">
+                <Label text="{i18n>LABEL_08009}" />
+                <table:template>
+                    <Text text="{ path: 'UnpaidLeaveSu', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="UnpaidLeaveSu2" sortProperty="UnpaidLeaveSu2">
+                <Label text="{i18n>LABEL_08010}" />
+                <table:template>
+                    <Text text="{ path: 'UnpaidLeaveSu2', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="NoCheckSu" sortProperty="NoCheckSu">
+                <Label text="{i18n>LABEL_08011}" />
+                <table:template>
+                    <Text text="{ path: 'NoCheckSu', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="LateSu" sortProperty="LateSu">
+                <Label text="{i18n>LABEL_08012}" />
+                <table:template>
+                    <Text text="{ path: 'LateSu', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="DutyDays" sortProperty="DutyDays">
+                <Label text="{i18n>LABEL_08013}" />
+                <table:template>
+                    <Text text="{ path: 'DutyDays', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

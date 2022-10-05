@@ -293,6 +293,15 @@ sap.ui.define(
         aRows.forEach((row) => _.forOwn(mColorMap, (value, key) => $(`#${row.getId()}-col${key}`).addClass(value)));
       },
 
+      clearTablePicker(oTable) {
+        oTable.getRows().forEach((row) => {
+          _.chain(row.getCells())
+            .filter((cell) => _.startsWith(cell.sId, '__picker'))
+            .forEach((cell) => cell.setValue())
+            .commit();
+        });
+      },
+
       /**************************
        * Formatter
        *************************/

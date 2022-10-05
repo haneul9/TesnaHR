@@ -101,9 +101,9 @@
         { "pattern": "m/attendance/{appno}/{werks}/{orgeh}/{kostl}/:flag:", "name": "m/attendance-detail", "target": "attendanceDetail" },
         { "pattern": "h/attendance/{appno}/{werks}/{orgeh}/{kostl}/:flag:", "name": "h/attendance-detail", "target": "attendanceDetail" },
 
-        { "pattern": "commuteRecord", "name": "commuteRecord", "target": "commuteRecord" },
-        { "pattern": "m/commuteRecord", "name": "m/commuteRecord", "target": "m/commuteRecord" },
-        { "pattern": "h/commuteRecord", "name": "h/commuteRecord", "target": "h/commuteRecord" },
+        { "pattern": "commuteRecord/:werks:/:orgeh:/:kostl:/:tmdat:", "name": "commuteRecord", "target": "commuteRecord" },
+        { "pattern": "m/commuteRecord/:werks:/:orgeh:/:kostl:/:tmdat:", "name": "m/commuteRecord", "target": "m/commuteRecord" },
+        { "pattern": "h/commuteRecord/:werks:/:orgeh:/:kostl:/:tmdat:", "name": "h/commuteRecord", "target": "h/commuteRecord" },
 
         { "pattern": "commuteCheck", "name": "commuteCheck", "target": "commuteCheck" },
         { "pattern": "m/commuteCheck", "name": "m/commuteCheck", "target": "m/commuteCheck" },
@@ -119,9 +119,17 @@
         { "pattern": "m/changeot/{appno}/{werks}/{orgeh}/:flag:", "name": "m/changeot-detail", "target": "changeotDetail" },
         { "pattern": "h/changeot/{appno}/{werks}/{orgeh}/:flag:", "name": "h/changeot-detail", "target": "changeotDetail" },
 
+        { "pattern": "dailyTimeRecord/{werks}/{orgeh}/{kostl}/{pernr}/{ename}/{tyymm}", "name": "dailyTimeRecord", "target": "dailyTimeRecord" },
+        { "pattern": "m/dailyTimeRecord/{werks}/{orgeh}/{kostl}/{pernr}/{ename}/{tyymm}", "name": "m/dailyTimeRecord", "target": "m/dailyTimeRecord" },
+        { "pattern": "h/dailyTimeRecord/{werks}/{orgeh}/{kostl}/{pernr}/{ename}/{tyymm}", "name": "h/dailyTimeRecord", "target": "h/dailyTimeRecord" },
+
         { "pattern": "individualWorkState/:pernr:/:year:/:month:", "name": "individualWorkState", "target": "individualWorkState" },
         { "pattern": "m/individualWorkState/:pernr:/:year:/:month:", "name": "m/individualWorkState", "target": "m/individualWorkState" },
         { "pattern": "h/individualWorkState/:pernr:/:year:/:month:", "name": "h/individualWorkState", "target": "h/individualWorkState" },
+        
+        { "pattern": "monthlyTimeRecord", "name": "monthlyTimeRecord", "target": "monthlyTimeRecord" },
+        { "pattern": "m/monthlyTimeRecord", "name": "m/monthlyTimeRecord", "target": "m/monthlyTimeRecord" },
+        { "pattern": "h/monthlyTimeRecord", "name": "h/monthlyTimeRecord", "target": "h/monthlyTimeRecord" },
         
         { "pattern": "overtime", "name": "overtime", "target": "overtime" },
         { "pattern": "m/overtime", "name": "m/overtime", "target": "m/overtime" },
@@ -170,9 +178,17 @@
         "h/changeot": { "viewId": "h_changeot", "viewPath": "sap.ui.tesna.mvc.view.changeot", "viewName": "ListH" },
         "changeotDetail": { "viewId": "changeotDetail", "viewPath": "sap.ui.tesna.mvc.view.changeot", "viewName": "Detail" },
 
+        "dailyTimeRecord": { "viewId": "dailyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.dailyTimeRecord", "viewName": "MainE" },
+        "m/dailyTimeRecord": { "viewId": "m_dailyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.dailyTimeRecord", "viewName": "MainM" },
+        "h/dailyTimeRecord": { "viewId": "h_dailyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.dailyTimeRecord", "viewName": "MainH" },
+        
         "individualWorkState": { "viewId": "individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainE" },
         "m/individualWorkState": { "viewId": "m_individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainM" },
         "h/individualWorkState": { "viewId": "h_individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainH" },
+
+        "monthlyTimeRecord": { "viewId": "monthlyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeRecord", "viewName": "MainE" },
+        "m/monthlyTimeRecord": { "viewId": "m_monthlyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeRecord", "viewName": "MainM" },
+        "h/monthlyTimeRecord": { "viewId": "h_monthlyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeRecord", "viewName": "MainH" },
         
         "overtime": { "viewId": "overtime", "viewPath": "sap.ui.tesna.mvc.view.overtime", "viewName": "ListE" },
         "m/overtime": { "viewId": "m_overtime", "viewPath": "sap.ui.tesna.mvc.view.overtime", "viewName": "ListM" },

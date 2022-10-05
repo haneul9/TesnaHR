@@ -28,7 +28,7 @@ sap.ui.define(
       ApprovalStatusHandler: null,
 
       getCurrentLocationText() {
-        return this.getBundleText('LABEL_06019'); // 이상근태확인신청결재
+        return this.getBundleText('LABEL_06019'); // 근태확인신청
       },
 
       getBreadcrumbsLinks() {
@@ -73,6 +73,7 @@ sap.ui.define(
             infoMessage: this.getBundleText('MSG_06001'), // 근태, 특근, 근무일정, 근무계획 신청 승인 시 자동으로 완료 처리됩니다.
           },
           list: [],
+          original: {},
         };
       },
 
@@ -236,6 +237,55 @@ sap.ui.define(
         oViewModel.refresh();
       },
 
+      onCortyCheck(oEvent) {
+        const oViewModel = this.getViewModel();
+        const oRowBindingContext = oEvent.getSource().getParent().getBindingContext();
+        const sRowPath = oRowBindingContext.getPath();
+        const mRowObject = _.chain(oRowBindingContext.getObject())
+          .cloneDeep()
+          .pick(['Pernr', 'Tmdat', 'Begdaf', 'Beguzf', 'Enddaf', 'Enduzf'])
+          .tap((obj) => {
+            _.set(obj, 'Tmdat', moment(obj.Tmdat).format('YYYYMMDD'));
+            _.set(obj, 'Begdaf', obj.Begdaf ? this.DateUtils.format(obj.Begdaf) : null);
+            _.set(obj, 'Beguzf', obj.Beguzf ? this.TimeUtils.toString(obj.Beguzf, 'HH:mm') : null);
+            _.set(obj, 'Enddaf', obj.Enddaf ? this.DateUtils.format(obj.Enddaf) : null);
+            _.set(obj, 'Enduzf', obj.Enduzf ? this.TimeUtils.toString(obj.Enduzf, 'HH:mm') : null);
+          })
+          .value();
+        const mSelectedOriginal = _.get(oViewModel.getProperty('/original'), [mRowObject.Pernr, mRowObject.Tmdat]);
+
+        if (mRowObject.Begdaf && mRowObject.Beguzf && mRowObject.Enddaf && mRowObject.Enduzf) {
+          if (
+            _.isEqual(mSelectedOriginal.Begdaf, mRowObject.Begdaf) &&
+            _.isEqual(mSelectedOriginal.Beguzf, mRowObject.Beguzf) &&
+            _.isEqual(mSelectedOriginal.Enddaf, mRowObject.Enddaf) &&
+            _.isEqual(mSelectedOriginal.Enduzf, mRowObject.Enduzf)
+          ) {
+            oViewModel.setProperty(`${sRowPath}/Corty`, null);
+          } else if (_.isEqual(mSelectedOriginal.Enddaf, mRowObject.Enddaf) && _.isEqual(mSelectedOriginal.Enduzf, mRowObject.Enduzf)) {
+            oViewModel.setProperty(`${sRowPath}/Corty`, '10'); // 출근시간 변경완료
+          } else if (_.isEqual(mSelectedOriginal.Begdaf, mRowObject.Begdaf) && _.isEqual(mSelectedOriginal.Beguzf, mRowObject.Beguzf)) {
+            oViewModel.setProperty(`${sRowPath}/Corty`, '20'); // 퇴근시간 변경완료
+          } else {
+            oViewModel.setProperty(`${sRowPath}/Corty`, '30'); // 출퇴근시간 변경완료
+          }
+        } else if (mRowObject.Begdaf && mRowObject.Beguzf && (!mRowObject.Enddaf || !mRowObject.Enduzf)) {
+          if (_.isEqual(mSelectedOriginal.Begdaf, mRowObject.Begdaf) && _.isEqual(mSelectedOriginal.Beguzf, mRowObject.Beguzf)) {
+            oViewModel.setProperty(`${sRowPath}/Corty`, null);
+          } else {
+            oViewModel.setProperty(`${sRowPath}/Corty`, '10'); // 출근시간 변경완료
+          }
+        } else if (mRowObject.Enddaf && mRowObject.Enduzf && (!mRowObject.Begdaf || !mRowObject.Beguzf)) {
+          if (_.isEqual(mSelectedOriginal.Enddaf, mRowObject.Enddaf) && _.isEqual(mSelectedOriginal.Enduzf, mRowObject.Enduzf)) {
+            oViewModel.setProperty(`${sRowPath}/Corty`, null);
+          } else {
+            oViewModel.setProperty(`${sRowPath}/Corty`, '20'); // 퇴근시간 변경완료
+          }
+        } else {
+          oViewModel.setProperty(`${sRowPath}/Corty`, null);
+        }
+      },
+
       async onChangeWerks() {
         try {
           this.setContentsBusy(true, 'search');
@@ -264,22 +314,6 @@ sap.ui.define(
           this.setContentsBusy(false, 'search');
         }
       },
-
-      // onChangeTimeFormat(oEvent) {
-      //   const oSource = oEvent.getSource();
-      //   const aSourceValue = _.split(oSource.getValue(), ':');
-
-      //   if (aSourceValue.length !== 2) return;
-
-      //   const sConvertedMinutesValue = this.TimeUtils.stepMinutes(_.get(aSourceValue, 1), 1);
-
-      //   if (aSourceValue[1] === sConvertedMinutesValue) return;
-
-      //   const aConvertTimes = [_.get(aSourceValue, 0), sConvertedMinutesValue];
-
-      //   oSource.setValue(_.join(aConvertTimes, ':'));
-      //   oSource.setDateValue(moment(_.join(aConvertTimes, ''), 'hhmm').toDate());
-      // },
 
       onScrollTable() {
         this.setDetailsTableStyle();
@@ -361,6 +395,7 @@ sap.ui.define(
                     try {
                       await this.createProcess(aSelectedTableData);
                     } catch (oError) {
+                      this.setContentsBusy(false);
                       AppUtils.handleError(oError);
                     }
                   },
@@ -385,7 +420,7 @@ sap.ui.define(
             TimeReaderNav: aRowData,
           });
 
-          // // 결재선 저장
+          // 결재선 저장
           await this.ApprovalStatusHandler.saveWithNoDisplay(Appno);
 
           // {신청}되었습니다.
@@ -489,7 +524,7 @@ sap.ui.define(
 
       onPressExcelDownload() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_06019'); // {이상근태확인신청결재}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_06019'); // {근태확인신청}_목록
 
         this.TableUtils.export({ oTable, sFileName });
       },
@@ -503,6 +538,10 @@ sap.ui.define(
           const sAuth = oViewModel.getProperty('/auth');
 
           if (!mSearchConditions.Werks || !mSearchConditions.Orgeh) return;
+
+          oViewModel.setProperty('/list', []);
+          oViewModel.refresh(true);
+          this.TableUtils.clearTablePicker(oTable);
 
           const sAppstateNullText = this.getBundleText('LABEL_00102');
           const aRowData = await Client.getEntitySet(this.getViewModel(ServiceNames.WORKTIME), 'TimeReaderCheck', {
@@ -528,8 +567,34 @@ sap.ui.define(
               Dedhr: this.TimeUtils.nvl(o.Dedhr),
             }))
           );
+          oViewModel.setProperty(
+            '/original',
+            _.chain(aRowData)
+              .groupBy('Pernr')
+              .tap((data) => {
+                _.forOwn(data, (v, p) => {
+                  _.set(
+                    data,
+                    p,
+                    _.chain(v)
+                      .map((o) => ({
+                        Tmdat: moment(o.Tmdat).format('YYYYMMDD'),
+                        Begdaf: this.DateUtils.format(o.Begdaf),
+                        Beguzf: this.TimeUtils.toString(o.Beguzf, 'HH:mm'),
+                        Enddaf: this.DateUtils.format(o.Enddaf),
+                        Enduzf: this.TimeUtils.toString(o.Enduzf, 'HH:mm'),
+                      }))
+                      .keyBy((k) => moment(k.Tmdat).format('YYYYMMDD'))
+                      .value()
+                  );
+                });
+              })
+              .value()
+          );
 
+          setTimeout(() => oTable.setFirstVisibleRow(), 100);
           oTable.clearSelection();
+          oViewModel.refresh(true);
           this.setDetailsTableStyle();
         } catch (oError) {
           this.debug('Controller > commuteCheck > retrieveList Error', oError);

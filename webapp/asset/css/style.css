@@ -828,14 +828,14 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 
 .sapMText[data-status="Z"], .sapMText[data-status="Z10"] {color:var(--BorderColorReadonly) !important}
 .red-highlight.sapMText[data-status="Z"], .red-highlight.sapMText[data-status="Z10"] { font-weight: 900; color: #fe5f58 !important}
-.sapMText[data-status="Z20"] {color:var(--BorderColorWarning) !important}
+.sapMText[data-status="Z20"], .sapMText[data-status="REX"] {color:var(--BorderColorWarning) !important}
 .sapMText[data-status="Z30"] {color:var(--BorderColorSuccess) !important}
 .sapMText[data-status="Z40"] {color:var(--BorderColorError) !important}
 .sapMText[data-status="Z50"] {color:var(--BorderColorFocus) !important}
 .sapMText[data-status="T10"] {color:var(--BorderColorError) !important}
 .sapMText[data-status="T20"] {color:var(--BorderColorWarning) !important}
 .sapMText[data-status="T30"] {color:var(--BorderColorSuccess) !important}
-.sapMText[data-status="T50"] {color:var(--BorderColorFocus) !important}
+.sapMText[data-status="T50"], .sapMText[data-status="RE"] {color:var(--BorderColorFocus) !important}
 
 /* Mobile Icon */
 .sapUiIcon[data-status="Z10"],

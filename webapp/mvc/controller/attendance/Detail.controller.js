@@ -804,7 +804,7 @@ sap.ui.define(
           }))
           .value();
 
-        if (aSelectedData.length !== 1) {
+        if (aSelectedData.length < 1) {
           MessageBox.alert(this.getBundleText('MSG_00020', 'LABEL_00119')); // {취소신청}할 행을 선택하세요.
           return;
         }
@@ -818,6 +818,8 @@ sap.ui.define(
 
       onPressFormCancelDialogClose() {
         this.pFormCalcleDialog.close();
+        this.pFormCalcleDialog.destroy();
+        this.pFormCalcleDialog = null;
       },
 
       onChangeWorkStartDate() {

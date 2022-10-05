@@ -17,19 +17,19 @@
                     </Text>
                 </table:template>
             </table:Column>
-            <table:Column width="160px">
+            <table:Column width="140px">
                 <Label text="{i18n>LABEL_01004}" />
                 <table:template>
                     <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="100px">
+            <table:Column width="80px">
                 <Label text="{i18n>LABEL_00209}" />
                 <table:template>
                     <Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="100px">
+            <table:Column width="60px">
                 <Label text="{i18n>LABEL_00210}" />
                 <table:template>
                     <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
@@ -41,43 +41,43 @@
                     <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="50px">
+            <table:Column width="40px">
                 <Label text="{i18n>LABEL_00178}" />
                 <table:template>
                     <Text text="{Daytx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="60px">
+            <table:Column width="50px">
                 <Label text="{i18n>LABEL_00113}" />
                 <table:template>
                     <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="150px">
+            <table:Column width="140px">
                 <Label text="{i18n>LABEL_06004}" />
                 <table:template>
-                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= ${Apposyn} === 'X' }" />
+                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= !${Appno} || ${Appno} === '0000000000' }" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px">
+            <table:Column width="110px">
                 <Label text="{i18n>LABEL_06005}" />
                 <table:template>
-                    <TimePicker dateValue="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initBeguz}" enabled="{= ${Apposyn} === 'X' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" />
+                    <TimePicker dateValue="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initBeguz}" enabled="{= !${Appno} || ${Appno} === '0000000000' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
-            <table:Column width="150px">
+            <table:Column width="140px">
                 <Label text="{i18n>LABEL_06006}" />
                 <table:template>
-                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= ${Apposyn} === 'X' }" />
+                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= !${Appno} || ${Appno} === '0000000000' }" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px">
+            <table:Column width="110px">
                 <Label text="{i18n>LABEL_06007}" />
                 <table:template>
-                    <TimePicker dateValue="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initEnduz}" enabled="{= ${Apposyn} === 'X' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" />
+                    <TimePicker dateValue="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initEnduz}" enabled="{= !${Appno} || ${Appno} === '0000000000' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
-            <table:Column width="200px">
+            <table:Column width="180px">
                 <Label text="{i18n>LABEL_06008}" />
                 <table:template>
                     <Text text="{Tagerrtx}" width="100%" textAlign="Center" wrapping="false" />
@@ -92,7 +92,7 @@
             <table:Column width="200px">
                 <Label text="{i18n>LABEL_06011}" />
                 <table:template>
-                    <ComboBox selectedKey="{Corty}" items="{ path: '/entry/Corty', templateShareable: false }" enabled="{= ${Apposyn} === 'X' }">
+                    <ComboBox selectedKey="{Corty}" items="{ path: '/entry/Corty', templateShareable: false }" enabled="{= !${Appno} || ${Appno} === '0000000000' }">
                         <core:Item key="{Corty}" text="{Cortytx}" />
                     </ComboBox>
                 </table:template>
@@ -101,7 +101,7 @@
                 <Label text="{i18n>LABEL_06012}" />
                 <table:template>
                     <VBox alignItems="Center">
-                        <CheckBox selected="{ path: 'Lateyn', type: 'sap.ui.tesna.mvc.model.type.Boolean' }" enabled="{= ${Apposyn} === 'X' }" />
+                        <CheckBox selected="{ path: 'Lateyn', type: 'sap.ui.tesna.mvc.model.type.Boolean' }" enabled="false" />
                     </VBox>
                 </table:template>
             </table:Column>

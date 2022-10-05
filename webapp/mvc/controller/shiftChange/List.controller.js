@@ -20,7 +20,7 @@ sap.ui.define(
       ROUTE_NAME: '',
 
       getCurrentLocationText() {
-        return this.getBundleText('LABEL_04001'); // 기술직계획근무변경신청
+        return this.getBundleText('LABEL_04001'); // 근무계획변경신청
       },
 
       getBreadcrumbsLinks() {
@@ -237,7 +237,7 @@ sap.ui.define(
 
       onPressExcelDownload() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_04001'); // {기술직계획근무변경신청}_목록
+        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_04001'); // {근무계획변경신청}_목록
 
         this.TableUtils.export({ oTable, sFileName });
       },

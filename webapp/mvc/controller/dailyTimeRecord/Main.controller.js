@@ -1,26 +1,19 @@
 sap.ui.define(
   [
-    //
+    // prettier 방지용 주석
     'sap/ui/tesna/common/AppUtils',
     'sap/ui/tesna/common/odata/Client',
     'sap/ui/tesna/common/odata/ServiceNames',
     'sap/ui/tesna/mvc/controller/BaseController',
   ],
-  (
-    //
-    AppUtils,
-    Client,
-    ServiceNames,
-    BaseController
-  ) => {
+  function (AppUtils, Client, ServiceNames, BaseController) {
     'use strict';
 
-    return BaseController.extend('sap.ui.tesna.mvc.controller.commuteRecord.List', {
-      LIST_TABLE_ID: 'commuteRecordListTable',
-      ROUTE_NAME: '',
+    return BaseController.extend('sap.ui.tesna.mvc.controller.dailyTimeRecord.Main', {
+      LIST_TABLE_ID: 'dailyTimeRecordTable',
 
       getCurrentLocationText() {
-        return this.getBundleText('LABEL_06001'); // 근태타각정보조회
+        return this.getBundleText('LABEL_08014'); // 근무일지 일별조회
       },
 
       getBreadcrumbsLinks() {
@@ -28,48 +21,19 @@ sap.ui.define(
       },
 
       rowHighlight(sValue) {
-        const vValue = !parseInt(sValue, 10) ? sValue : parseInt(sValue, 10);
-
-        switch (vValue) {
-          case 10:
+        switch (sValue) {
+          case 'X':
             // 오류
-            return sap.ui.core.IndicationColor.Indication02;
-          case 20:
-            // 확인
             return sap.ui.core.IndicationColor.Indication03;
-          case 30:
-            // 수정완료
-            return sap.ui.core.IndicationColor.Indication04;
-          case 50:
-            // 정상
-            return sap.ui.core.IndicationColor.Indication05;
           default:
-            return null;
+            return sap.ui.core.IndicationColor.Indication05;
         }
-      },
-
-      /**
-       * @override
-       */
-      onBeforeShow() {
-        BaseController.prototype.onBeforeShow.apply(this, arguments);
-
-        this.TableUtils.adjustRowSpan({
-          oTable: this.byId(this.LIST_TABLE_ID),
-          aColIndices: [4, 5, 6, 7, 8, 9, 10, 15, 16],
-          sTheadOrTbody: 'thead',
-          bIncludeFixedColumns: true,
-          aFixedColIndices: [0, 1, 2, 3, 4, 5, 6, 7],
-        });
       },
 
       initializeModel() {
         return {
-          busy: false,
           auth: '',
-          isPossibleApproval: true,
           contentsBusy: {
-            buttonApproval: false,
             search: false,
             table: false,
           },
@@ -83,11 +47,10 @@ sap.ui.define(
             Werks: '',
             Orgeh: '',
             Kostl: '',
-            Apbeg: null,
-            Apend: null,
+            Begmm: moment().subtract(1, 'month').format('YYYYMM'),
+            Endmm: moment().format('YYYYMM'),
             Pernr: '',
             Ename: '',
-            Errdata: '',
           },
           listInfo: {
             totalCount: 0,
@@ -100,35 +63,50 @@ sap.ui.define(
       async onObjectMatched(oParameter, sRouteName) {
         const oViewModel = this.getViewModel();
 
-        this.ROUTE_NAME = sRouteName;
-
         try {
           oViewModel.setSizeLimit(500);
           this.setContentsBusy(true);
 
           oViewModel.setProperty('/auth', this.isHass() ? 'H' : this.isMss() ? 'M' : 'E');
+          oViewModel.setProperty('/searchConditions/Begmm', oParameter.tyymm);
+          oViewModel.setProperty('/searchConditions/Endmm', oParameter.tyymm);
 
           const sKostl = !oParameter.kostl || _.toUpper(oParameter.kostl) === 'NA' ? null : oParameter.kostl;
-          const sTmdat = oParameter.tmdat ? moment(oParameter.tmdat).hours(9).toDate() : null;
-
-          oViewModel.setProperty('/searchConditions/Apbeg', sTmdat || moment().subtract(1, 'month').add(1, 'day').hours(9).toDate());
-          oViewModel.setProperty('/searchConditions/Apend', sTmdat || moment().hours(9).toDate());
+          const sPernr = !oParameter.pernr || _.toUpper(oParameter.pernr) === 'NA' ? null : oParameter.pernr;
+          const sEname = !oParameter.ename || _.toUpper(oParameter.ename) === 'NA' ? null : oParameter.ename;
 
           await this.setPersaEntry(oParameter.werks);
           await this.setOrgehEntry(oParameter.orgeh);
           await this.setKostlEntry(sKostl);
 
           await Promise.all([
-            this.retrieveTimePernrList(), //
+            this.retrieveTimePernrList(sPernr, sEname), //
             this.retrieveList(),
           ]);
         } catch (oError) {
-          this.debug('Controller > commuteRecord > onObjectMatched Error', oError);
+          this.debug('Controller > dailyTimeRecord > onObjectMatched Error', oError);
 
           AppUtils.handleError(oError);
         } finally {
           this.setContentsBusy(false);
         }
+      },
+
+      setContentsBusy(bContentsBusy = true, vTarget = []) {
+        const oViewModel = this.getViewModel();
+        const mBusy = oViewModel.getProperty('/contentsBusy');
+
+        if (_.isEmpty(vTarget)) {
+          _.forOwn(mBusy, (v, p) => _.set(mBusy, p, bContentsBusy));
+        } else {
+          if (_.isArray(vTarget)) {
+            _.forEach(vTarget, (s) => _.set(mBusy, s, bContentsBusy));
+          } else {
+            _.set(mBusy, vTarget, bContentsBusy);
+          }
+        }
+
+        oViewModel.refresh();
       },
 
       async setPersaEntry(sWerks) {
@@ -149,7 +127,7 @@ sap.ui.define(
               .map((o) => _.omit(o, '__metadata'))
               .value()
           );
-          oViewModel.setProperty('/searchConditions/Werks', sWerks ? sWerks : _.get(aEntries, [0, 'Persa']));
+          oViewModel.setProperty('/searchConditions/Werks', !sWerks ? _.get(aEntries, [0, 'Persa']) : sWerks);
         } catch (oError) {
           throw oError;
         }
@@ -175,7 +153,7 @@ sap.ui.define(
             '/entry/Orgeh',
             _.map(aEntries, (o) => _.omit(o, '__metadata'))
           );
-          oViewModel.setProperty('/searchConditions/Orgeh', sOrgeh ? sOrgeh : _.get(aEntries, [0, 'Orgeh']));
+          oViewModel.setProperty('/searchConditions/Orgeh', !sOrgeh ? _.get(aEntries, [0, 'Orgeh']) : sOrgeh);
         } catch (oError) {
           throw oError;
         }
@@ -205,7 +183,7 @@ sap.ui.define(
 
           const sAuth = oViewModel.getProperty('/auth');
 
-          oViewModel.setProperty('/searchConditions/Kostl', !sKostl ? _.get(aEntries, [sAuth === 'E' ? 1 : 0, 'Kostl']) : sKostl);
+          oViewModel.setProperty('/searchConditions/Kostl', sKostl ? sKostl : _.get(aEntries, [sAuth === 'E' ? 1 : 0, 'Kostl']));
           oViewModel.setProperty(
             '/entry/Kostl',
             _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
@@ -215,21 +193,90 @@ sap.ui.define(
         }
       },
 
-      setContentsBusy(bContentsBusy = true, vTarget = []) {
-        const oViewModel = this.getViewModel();
-        const mBusy = oViewModel.getProperty('/contentsBusy');
+      setTableColorStyle() {
+        const oTable = this.byId(this.LIST_TABLE_ID);
 
-        if (_.isEmpty(vTarget)) {
-          _.forOwn(mBusy, (v, p) => _.set(mBusy, p, bContentsBusy));
-        } else {
-          if (_.isArray(vTarget)) {
-            _.forEach(vTarget, (s) => _.set(mBusy, s, bContentsBusy));
-          } else {
-            _.set(mBusy, vTarget, bContentsBusy);
-          }
+        setTimeout(() => {
+          this.TableUtils.setColorColumn({
+            oTable,
+            mColorMap: {
+              10: 'bgType10',
+              11: 'bgType10',
+              12: 'bgType10',
+              13: 'bgType10',
+              14: 'bgType11',
+              15: 'bgType11',
+              16: 'bgType11',
+              17: 'bgType11',
+              18: 'bgType11',
+              19: 'bgType11',
+              20: 'bgType11',
+              21: 'bgType11',
+            },
+          });
+        }, 100);
+      },
+
+      async retrieveTimePernrList(sPernr, sEname) {
+        try {
+          const oViewModel = this.getViewModel();
+          const sAuth = oViewModel.getProperty('/auth');
+
+          oViewModel.setProperty('/searchConditions/Pernr', sPernr || '');
+          oViewModel.setProperty('/searchConditions/Ename', sEname || '');
+
+          if (sAuth === 'E') return;
+
+          const mSearchConditions = oViewModel.getProperty('/searchConditions');
+          const aResults = await Client.getEntitySet(this.getModel(ServiceNames.WORKTIME), 'TimePernrList', {
+            Austy: sAuth,
+            Begda: moment().hours(9).toDate(),
+            Werks: mSearchConditions.Werks,
+            Orgeh: !mSearchConditions.Orgeh || mSearchConditions.Orgeh === '00000000' ? '' : mSearchConditions.Orgeh,
+            Kostl2: !mSearchConditions.Kostl || mSearchConditions.Kostl === '00000000' ? '' : mSearchConditions.Kostl,
+          });
+
+          oViewModel.setProperty(
+            '/entry/Employees',
+            _.map(aResults, (o) => _.omit(o, '__metadata'))
+          );
+        } catch (oError) {
+          throw oError;
         }
+      },
 
-        oViewModel.refresh();
+      async retrieveList() {
+        const oViewModel = this.getViewModel();
+
+        try {
+          const oTable = this.byId(this.LIST_TABLE_ID);
+          const mSearchConditions = oViewModel.getProperty('/searchConditions');
+          const sAuth = oViewModel.getProperty('/auth');
+
+          if (!mSearchConditions.Werks || !mSearchConditions.Orgeh) return;
+
+          const aRowData = await Client.getEntitySet(this.getViewModel(ServiceNames.WORKTIME), 'DailyTimeResult', {
+            Austy: sAuth,
+            ..._.pick(mSearchConditions, ['Werks', 'Orgeh', 'Pernr', 'Begmm', 'Endmm']),
+            Kostl: mSearchConditions.Kostl === '00000000' ? null : mSearchConditions.Kostl,
+          });
+
+          oViewModel.setProperty('/listInfo', {
+            ...oViewModel.getProperty('/listInfo'),
+            ...this.TableUtils.count({ oTable, aRowData, sStatCode: 'Tstat' }),
+          });
+          oViewModel.setProperty(
+            '/list',
+            _.map(aRowData, (o) => _.omit(o, '__metadata'))
+          );
+        } catch (oError) {
+          this.debug('Controller > dailyTimeRecord > retrieveList Error', oError);
+
+          AppUtils.handleError(oError);
+        } finally {
+          this.setTableColorStyle();
+          this.setContentsBusy(false, ['search', 'table']);
+        }
       },
 
       async onChangeWerks() {
@@ -239,7 +286,7 @@ sap.ui.define(
           await this.setOrgehEntry();
           await this.setKostlEntry();
         } catch (oError) {
-          this.debug('Controller > commuteRecord > onChangePersa Error', oError);
+          this.debug('Controller > dailyTimeRecord > onChangePersa Error', oError);
 
           AppUtils.handleError(oError);
         } finally {
@@ -254,7 +301,7 @@ sap.ui.define(
           await this.setKostlEntry();
           await this.retrieveTimePernrList();
         } catch (oError) {
-          this.debug('Controller > commuteRecord > onChangeOrgeh Error', oError);
+          this.debug('Controller > dailyTimeRecord > onChangeOrgeh Error', oError);
 
           AppUtils.handleError(oError);
         } finally {
@@ -268,7 +315,7 @@ sap.ui.define(
 
           await this.retrieveTimePernrList();
         } catch (oError) {
-          this.debug('Controller > commuteRecord > onChangeKostl Error', oError);
+          this.debug('Controller > dailyTimeRecord > onChangeKostl Error', oError);
 
           AppUtils.handleError(oError);
         } finally {
@@ -320,35 +367,26 @@ sap.ui.define(
         oViewModel.refresh();
       },
 
-      onPressRowApprovalDetail(oEvent) {
-        const mRowData = oEvent.getSource().getParent().getBindingContext().getObject();
-        const mApptyRoute = {
-          TH: 'shiftChange',
-          TI: 'attendance',
-          TJ: 'commuteCheck',
-          TG: 'shift',
-          TK: 'overtime',
-        };
-
-        if (!mRowData || !_.has(mApptyRoute, mRowData.Appty)) return;
-
-        const sHost = window.location.href.split('#')[0];
+      onSelectRow(oEvent) {
+        const oViewModel = this.getViewModel();
+        const sPath = oEvent.getParameters().rowBindingContext.getPath();
+        const mRowData = oViewModel.getProperty(sPath);
+        const mSearchConditions = oViewModel.getProperty('/searchConditions');
         const sAuth = this.getViewModel().getProperty('/auth');
+        const sHost = window.location.href.split('#')[0];
         const sRouteName = _.chain(sAuth === 'E' ? null : _.lowerCase(sAuth))
-          .concat(mApptyRoute[mRowData.Appty])
+          .concat('commuteRecord')
           .compact()
           .join('/')
           .value();
-        const mParams = [mRowData.Appno];
+        const mParams = [
+          mSearchConditions.Werks, //
+          mSearchConditions.Orgeh,
+          !mSearchConditions.Kostl ? 'NA' : mSearchConditions.Kostl,
+          moment(mRowData.Tmdat).format('YYYY-MM-DD'),
+        ];
 
-        if (mRowData.Appty === 'TI') {
-          mParams.push(mRowData.Werks);
-          mParams.push(mRowData.Orgeh);
-          mParams.push(mRowData.Kostl ? mRowData.Kostl : 'NA');
-        } else if (mRowData.Appty === 'TH' || mRowData.Appty === 'TG' || mRowData.Appty === 'TK') {
-          mParams.push(mRowData.Werks);
-          mParams.push(mRowData.Orgeh);
-        }
+        if (!mSearchConditions.Werks || !mSearchConditions.Orgeh || !mRowData.Tmdat) return;
 
         window.open(`${sHost}#/${sRouteName}/${mParams.join('/')}`, '_blank');
       },
@@ -361,79 +399,9 @@ sap.ui.define(
 
       onPressExcelDownload() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const sFileName = this.getBundleText('LABEL_00185', 'LABEL_06001'); // {근태타각정보조회}_목록
+        const sFileName = this.getBundleText('LABEL_08014', 'LABEL_08001'); // {근무일지 일별조회}_목록
 
         this.TableUtils.export({ oTable, sFileName });
-      },
-
-      async retrieveList() {
-        const oViewModel = this.getViewModel();
-
-        try {
-          const oTable = this.byId(this.LIST_TABLE_ID);
-          const mSearchConditions = oViewModel.getProperty('/searchConditions');
-          const sAuth = oViewModel.getProperty('/auth');
-
-          if (!mSearchConditions.Werks || !mSearchConditions.Orgeh) return;
-
-          const aRowData = await Client.getEntitySet(this.getViewModel(ServiceNames.WORKTIME), 'TimeReaderInfo', {
-            ..._.pick(mSearchConditions, ['Werks', 'Orgeh', 'Pernr', 'Errdata']),
-            Austy: sAuth,
-            Kostl: mSearchConditions.Kostl === '00000000' ? null : mSearchConditions.Kostl,
-            Apbeg: this.DateUtils.parse(mSearchConditions.Apbeg),
-            Apend: this.DateUtils.parse(mSearchConditions.Apend),
-          });
-
-          oViewModel.setProperty('/listInfo', {
-            ...oViewModel.getProperty('/listInfo'),
-            ...this.TableUtils.count({ oTable, aRowData, sStatCode: 'Tstat' }),
-          });
-          oViewModel.setProperty(
-            '/list',
-            _.map(aRowData, (o) => ({
-              ..._.omit(o, '__metadata'),
-              Beguz: o.Beguz === '0000' ? '' : o.Beguz,
-              Beguzf: o.Beguzf === '0000' ? '' : o.Beguzf,
-              Enduz: o.Enduz === '0000' ? '' : o.Enduz,
-              Enduzf: o.Enduzf === '0000' ? '' : o.Enduzf,
-              Dedhr: o.Dedhr === '0000' ? '' : o.Dedhr,
-            }))
-          );
-        } catch (oError) {
-          this.debug('Controller > commuteRecord > retrieveList Error', oError);
-
-          AppUtils.handleError(oError);
-        } finally {
-          this.setContentsBusy(false, ['search', 'table']);
-        }
-      },
-
-      async retrieveTimePernrList() {
-        try {
-          const oViewModel = this.getViewModel();
-          const sAuth = oViewModel.getProperty('/auth');
-
-          oViewModel.setProperty('/searchConditions/Pernr', '');
-          oViewModel.setProperty('/searchConditions/Ename', '');
-
-          if (sAuth === 'E') return;
-
-          const mSearchConditions = oViewModel.getProperty('/searchConditions');
-          const aResults = await Client.getEntitySet(this.getModel(ServiceNames.WORKTIME), 'TimePernrList', {
-            Austy: sAuth,
-            Begda: moment().hours(9).toDate(),
-            Werks: mSearchConditions.Werks,
-            Orgeh: !mSearchConditions.Orgeh || mSearchConditions.Orgeh === '00000000' ? '' : mSearchConditions.Orgeh,
-            Kostl2: !mSearchConditions.Kostl || mSearchConditions.Kostl === '00000000' ? '' : mSearchConditions.Kostl,
-          });
-
-          oViewModel.setProperty(
-            '/entry/Employees',
-            _.map(aResults, (o) => _.omit(o, '__metadata'))
-          );
-        } catch (oError) {
-          throw oError;
-        }
       },
     });
   }

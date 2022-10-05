@@ -125,7 +125,7 @@ sap.ui.define(
           oViewModel.setProperty('/WeekWorkDate', oParameter.year ? moment().year(_.toNumber(sYear)).month(_.toNumber(sMonth)).toDate() : new Date());
           oViewModel.setProperty(
             '/MonthStrList',
-            _.times(12, (d) => ({ label: `${d++}${this.getBundleText('LABEL_00192')}` })) // 월
+            _.times(12, (d) => ({ label: `${++d}${this.getBundleText('LABEL_00192')}` })) // 월
           );
 
           this.setAppointee(sPernr);
@@ -686,7 +686,12 @@ sap.ui.define(
           oViewModel.setProperty('/DailyWorkCount', aDayWorks.length);
           oViewModel.setProperty(
             '/DailyWorkList',
-            _.map(aDayWorks, (o, i) => ({ No: ++i, ...o }))
+            _.map(aDayWorks, (o, i) => ({
+              ...o,
+              No: ++i,
+              Beguz: o.Beguz === '-' ? null : o.Beguz,
+              Enduz: o.Enduz === '-' ? null : o.Enduz,
+            }))
           );
 
           this.setContentsBusy(false, 'byDay');

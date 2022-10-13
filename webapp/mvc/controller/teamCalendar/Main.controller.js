@@ -399,7 +399,11 @@ sap.ui.define(
       },
 
       getGridBody(aPlanData) {
-        const aPlanValues = _.chain(aPlanData).groupBy('Pernr').values().value();
+        const aPlanValues = _.chain(aPlanData)
+          .groupBy('Pernr')
+          .values()
+          .map((o) => _.orderBy(o, 'Tmdat'))
+          .value();
 
         if (aPlanValues.length > this.readPerSize) {
           this.isReadMore = true;
@@ -527,6 +531,7 @@ sap.ui.define(
           oViewModel.setProperty(
             '/calendar/excel',
             _.chain(aResults)
+              .cloneDeep()
               .groupBy('Pernr')
               .map((o) => {
                 return {

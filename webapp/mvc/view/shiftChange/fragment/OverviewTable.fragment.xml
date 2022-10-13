@@ -37,7 +37,7 @@
             <table:Column width="14%" filterProperty="Ltext" sortProperty="Ltext">
                 <Label text="{i18n>LABEL_01004}" />
                 <table:template>
-                    <Text text="{Ltext}" width="100%" wrapping="false" />
+                    <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
             <table:Column width="auto" filterProperty="Tyymm" sortProperty="Tyymm">

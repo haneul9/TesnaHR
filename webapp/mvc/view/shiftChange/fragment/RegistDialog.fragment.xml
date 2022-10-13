@@ -40,7 +40,7 @@
                         <Column width="160px">
                             <m:Label text="{i18n>LABEL_01004}" />
                             <template>
-                                <m:Text text="{Ltext}" width="100%" wrapping="false" />
+                                <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                             </template>
                         </Column>
                         <Column width="80px" visible="{/form/visibleColumns/Dayngt1}">

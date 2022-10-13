@@ -24,7 +24,7 @@
             <Column width="160px" filterProperty="Ltext" sortProperty="Ltext">
                 <m:Label text="{i18n>LABEL_01004}" />
                 <template>
-                    <m:Text text="{Ltext}" width="100%" wrapping="false" />
+                    <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </template>
             </Column>
             <Column width="50px" filterProperty="Dayngt01" sortProperty="Dayngt01" visible="{/form/visibleColumns/Dayngt1}">

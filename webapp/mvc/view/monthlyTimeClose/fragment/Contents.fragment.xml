@@ -6,6 +6,8 @@
             <HBox justifyContent="SpaceBetween" class="breadcrumbs">
                 <custom:Breadcrumbs />
                 <HBox class="button-group">
+                    <Button type="Emphasized" text="{i18n>LABEL_09013}" busyIndicatorDelay="0" busy="{/contentsBusy/button}" />
+                    <Button type="Reject" text="{i18n>LABEL_09015}" busyIndicatorDelay="0" busy="{/contentsBusy/button}" />
                     <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" press=".onPagePrint" />
                     <!-- <Button icon="sap-icon://sys-help" text="{i18n>LABEL_00132}" press=".onPressHelp" /> -->
                 </HBox>

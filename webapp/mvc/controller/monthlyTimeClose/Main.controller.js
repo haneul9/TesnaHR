@@ -27,6 +27,7 @@ sap.ui.define(
         return {
           auth: '',
           contentsBusy: {
+            button: false,
             search: false,
             table: false,
           },

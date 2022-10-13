@@ -364,6 +364,9 @@ sap.ui.define(
         let sCurrentLocationText;
         if (oController && typeof oController.getCurrentLocationText === 'function') {
           sCurrentLocationText = oController.getCurrentLocationText(mRouteArguments, mConfig.name);
+          document.title = `My Time - ${sCurrentLocationText}`;
+        } else {
+          document.title = 'My Time';
         }
 
         let aLinks;

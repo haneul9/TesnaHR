@@ -43,7 +43,7 @@
             <table:Column width="auto" filterProperty="Tyymm" sortProperty="Tyymm">
                 <Label text="{i18n>LABEL_00156}" />
                 <table:template>
-                    <Text text="{ path: 'Tyymm', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
+                    <Text text="{ path: 'Tyymm', type: 'sap.ui.tesna.mvc.model.type.Month' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
             <table:Column width="auto" filterProperty="Begda" sortProperty="Begda">

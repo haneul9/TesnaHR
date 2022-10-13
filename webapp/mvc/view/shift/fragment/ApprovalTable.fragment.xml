@@ -19,7 +19,7 @@
                     <m:Label text="{i18n>LABEL_00149}"/>
                 </multiLabels>
                 <template>
-                    <custom:DatePicker class="required" dateValue="{ path: 'Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin' }" minDate="{Apbeg}" editable="{= !${/form/Appst} }" />
+                    <custom:DatePicker class="required" dateValue="{ path: 'Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" textAlign="{= ${/form/Appst} ? 'Center' : 'Begin' }" minDate="{Begda}" editable="{= !${/form/Appst} }" />
                 </template>
             </Column>
             <Column width="6%">
@@ -42,10 +42,10 @@
                             <m:Column width="6%" popinDisplay="Inline">
                                 <m:Label text="" />
                             </m:Column>
-                            <m:Column width="14%" popinDisplay="Inline" demandPopin="true">
+                            <m:Column width="16%" popinDisplay="Inline" demandPopin="true">
                                 <m:Label text="{i18n>LABEL_00210}" />
                             </m:Column>
-                            <m:Column width="20%" popinDisplay="Inline" demandPopin="true">
+                            <m:Column width="18%" popinDisplay="Inline" demandPopin="true">
                                 <m:Label text="{i18n>LABEL_00209}" />
                             </m:Column>
                             <m:Column width="12%" popinDisplay="Inline">

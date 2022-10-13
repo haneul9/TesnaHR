@@ -17,6 +17,12 @@
                         </Text>
                     </table:template>
                 </table:Column>
+                <table:Column width="4%">
+                    <Label text="{i18n>LABEL_00147}"/>
+                    <table:template>
+                        <ObjectStatus text="{Aptyptx}" state="{= ${Aptyp} === 'A' ? 'Indication05' : 'Error' }" class="table-object-status" />
+                    </table:template>
+                </table:Column>
                 <table:Column width="12%" filterProperty="Orgtx" sortProperty="Orgtx">
                     <Label text="{i18n>LABEL_00219}" />
                     <table:template>
@@ -47,7 +53,7 @@
                         <Text text="{Period}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8%" filterProperty="Daytm" sortProperty="Daytm">
+                <table:Column width="6%" filterProperty="Daytm" sortProperty="Daytm">
                     <Label text="{i18n>LABEL_05010}"/>
                     <table:template>
                         <Text text="{Daytm}" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />

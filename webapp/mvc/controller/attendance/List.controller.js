@@ -320,7 +320,7 @@ sap.ui.define(
 
           const sAuth = oViewModel.getProperty('/auth');
 
-          if (sAuth !== 'H') {
+          if (sAuth === 'M') {
             const mSearchConditions = oViewModel.getProperty('/searchConditions');
 
             if (_.isEmpty(mSearchConditions.Werks)) {

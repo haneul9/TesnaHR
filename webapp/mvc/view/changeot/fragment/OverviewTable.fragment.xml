@@ -17,6 +17,12 @@
                         </Text>
                     </table:template>
                 </table:Column>
+                <table:Column width="4%">
+                    <Label text="{i18n>LABEL_00147}"/>
+                    <table:template>
+                        <ObjectStatus text="{Apptyptx}" state="{= ${Apptyp} === 'A' ? 'Indication05' : ${Apptyp} === 'C' ? 'Indication03' : 'Error' }" class="table-object-status" />
+                    </table:template>
+                </table:Column>
                 <table:Column width="10%" filterProperty="Orgtx" sortProperty="Orgtx">
                     <Label text="{i18n>LABEL_00219}" />
                     <table:template>
@@ -47,13 +53,13 @@
                         <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="9%" filterProperty="Beguz" sortProperty="Beguz">
+                <table:Column width="7%" filterProperty="Beguz" sortProperty="Beguz">
                     <Label text="{i18n>LABEL_07003}"/>
                     <table:template>
                         <Text text="{ path: 'Beguz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="9%" filterProperty="Enduz" sortProperty="Enduz">
+                <table:Column width="7%" filterProperty="Enduz" sortProperty="Enduz">
                     <Label text="{i18n>LABEL_07004}"/>
                     <table:template>
                         <Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />

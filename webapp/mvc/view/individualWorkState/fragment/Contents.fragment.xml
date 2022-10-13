@@ -7,7 +7,7 @@
                 <custom:Breadcrumbs />
                 <HBox>
                     <Button text="{i18n>LABEL_00146}" press=".onNavBack" visible="{= !!${/previousHash} }" />
-                    <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" class="sapUiTinyMarginEnd" press=".onPagePrint" />
+                    <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" class="sapUiTinyMarginEnd sapUiTinyMarginBegin" press=".onPagePrint" />
                 </HBox>
             </HBox>
         </VBox>

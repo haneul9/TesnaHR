@@ -37,7 +37,7 @@
                     <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="100px" filterProperty="Pernr" sortProperty="Pernr">
+            <table:Column width="80px" filterProperty="Pernr" sortProperty="Pernr">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00209}" />
                     <Label text="{i18n>LABEL_00209}" />
@@ -160,13 +160,14 @@
                     <Label text="{i18n>LABEL_06012}" wrapping="true" />
                 </table:multiLabels>
                 <table:template>
-                    <Text text="{Lateyn}" width="100%" textAlign="Center" wrapping="false" />
+                    <core:Icon width="100%" src="sap-icon://accept" color="#FE5F58" size="1.5em" visible="{= ${Lateyn} === 'X' }" />
+                    <!-- <Text text="{Lateyn}" width="100%" textAlign="Center" wrapping="false" /> -->
                 </table:template>
             </table:Column>
-            <table:Column width="50px" filterProperty="Awrsntx" sortProperty="Awrsntx">
+            <table:Column width="180px" filterProperty="Awrsntx" sortProperty="Awrsntx">
                 <table:multiLabels>
-                    <Label text="{i18n>LABEL_06013}" wrapping="true" />
-                    <Label text="{i18n>LABEL_06013}" wrapping="true" />
+                    <Label text="{i18n>LABEL_06022}" wrapping="true" />
+                    <Label text="{i18n>LABEL_06022}" wrapping="true" />
                 </table:multiLabels>
                 <table:template>
                     <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />

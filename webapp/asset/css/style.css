@@ -828,14 +828,14 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 
 .sapMText[data-status="Z"], .sapMText[data-status="Z10"] {color:var(--BorderColorReadonly) !important}
 .red-highlight.sapMText[data-status="Z"], .red-highlight.sapMText[data-status="Z10"] { font-weight: 900; color: #fe5f58 !important}
-.sapMText[data-status="Z20"], .sapMText[data-status="REX"] {color:var(--BorderColorWarning) !important}
+.sapMText[data-status="Z20"], .sapMText[data-status="REtrue"] {color:var(--BorderColorWarning) !important}
 .sapMText[data-status="Z30"] {color:var(--BorderColorSuccess) !important}
-.sapMText[data-status="Z40"] {color:var(--BorderColorError) !important}
-.sapMText[data-status="Z50"] {color:var(--BorderColorFocus) !important}
+.sapMText[data-status="Z40"], .sapMText[data-status="Z미마감"] {color:var(--BorderColorError) !important}
+.sapMText[data-status="Z50"], .sapMText[data-status="Z마감"] {color:var(--BorderColorFocus) !important}
 .sapMText[data-status="T10"] {color:var(--BorderColorError) !important}
 .sapMText[data-status="T20"] {color:var(--BorderColorWarning) !important}
 .sapMText[data-status="T30"] {color:var(--BorderColorSuccess) !important}
-.sapMText[data-status="T50"], .sapMText[data-status="RE"] {color:var(--BorderColorFocus) !important}
+.sapMText[data-status="T50"], .sapMText[data-status="REfalse"] {color:var(--BorderColorFocus) !important}
 
 /* Mobile Icon */
 .sapUiIcon[data-status="Z10"],
@@ -1007,7 +1007,7 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .org-container .label, .org-container .content {font-size:12px; line-height:20px}
 .org-container .label {font-weight:bold}
 
-.bgType01 {background-color:#e9f7ae}
+.bgType01 { background-color: #E9F7AE; }
 .bgType02 {background-color:#aad2fc}
 .bgType03 {background-color:#f6abfd}
 .bgType04 {background-color:#81daea}
@@ -1019,6 +1019,7 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .bgType10 {background-color:#d8ffc3}
 .bgType11 {background-color:#fffbcf}
 .bgType12 {background-color:#d0f2ff}
+.bgType13 { background-color: #ffd5e6; }
 
 .node-button-div {display:inline-block !important; margin-left:-4px}
 .org-chart-container > div {height:100%}

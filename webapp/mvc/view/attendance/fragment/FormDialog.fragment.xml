@@ -21,10 +21,10 @@
                             <Column width="6%" popinDisplay="Inline">
                                 <Label text="" />
                             </Column>
-                            <Column width="14%" popinDisplay="Inline" demandPopin="true">
+                            <Column width="16%" popinDisplay="Inline" demandPopin="true">
                                 <Label text="{i18n>LABEL_00210}" />
                             </Column>
-                            <Column width="20%" popinDisplay="Inline" demandPopin="true">
+                            <Column width="18%" popinDisplay="Inline" demandPopin="true">
                                 <Label text="{i18n>LABEL_00209}" />
                             </Column>
                             <Column width="12%" popinDisplay="Inline">
@@ -54,7 +54,7 @@
                             </ColumnListItem>
                         </suggestionRows>
                     </Input>
-                    <Input value="{/form/dialog/data/PernrInfoTxt}" editable="false" />
+                    <Input width="300px" value="{/form/dialog/data/PernrInfoTxt}" editable="false" />
                 </HBox>
                 <Label text="{i18n>LABEL_05014}" />
                 <Input value="{/form/dialog/data/Blqtx}" editable="false" />

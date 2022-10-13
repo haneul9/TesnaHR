@@ -23,7 +23,7 @@
     "technology": "UI5",
     "icons": {
       "icon": "sap-icon://detail-view",
-      "favIcon": "",
+      "favIcon": "asset/favicon.ico",
       "phone": "",
       "phone@2": "",
       "tablet": "",
@@ -127,6 +127,10 @@
         { "pattern": "m/individualWorkState/:pernr:/:year:/:month:", "name": "m/individualWorkState", "target": "m/individualWorkState" },
         { "pattern": "h/individualWorkState/:pernr:/:year:/:month:", "name": "h/individualWorkState", "target": "h/individualWorkState" },
         
+        { "pattern": "monthlyTimeClose", "name": "monthlyTimeClose", "target": "monthlyTimeClose" },
+        { "pattern": "m/monthlyTimeClose", "name": "m/monthlyTimeClose", "target": "m/monthlyTimeClose" },
+        { "pattern": "h/monthlyTimeClose", "name": "h/monthlyTimeClose", "target": "h/monthlyTimeClose" },
+        
         { "pattern": "monthlyTimeRecord", "name": "monthlyTimeRecord", "target": "monthlyTimeRecord" },
         { "pattern": "m/monthlyTimeRecord", "name": "m/monthlyTimeRecord", "target": "m/monthlyTimeRecord" },
         { "pattern": "h/monthlyTimeRecord", "name": "h/monthlyTimeRecord", "target": "h/monthlyTimeRecord" },
@@ -186,6 +190,10 @@
         "m/individualWorkState": { "viewId": "m_individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainM" },
         "h/individualWorkState": { "viewId": "h_individualWorkState", "viewPath": "sap.ui.tesna.mvc.view.individualWorkState", "viewName": "MainH" },
 
+        "monthlyTimeClose": { "viewId": "monthlyTimeClose", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeClose", "viewName": "MainE" },
+        "m/monthlyTimeClose": { "viewId": "m_monthlyTimeClose", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeClose", "viewName": "MainM" },
+        "h/monthlyTimeClose": { "viewId": "h_monthlyTimeClose", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeClose", "viewName": "MainH" },
+        
         "monthlyTimeRecord": { "viewId": "monthlyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeRecord", "viewName": "MainE" },
         "m/monthlyTimeRecord": { "viewId": "m_monthlyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeRecord", "viewName": "MainM" },
         "h/monthlyTimeRecord": { "viewId": "h_monthlyTimeRecord", "viewPath": "sap.ui.tesna.mvc.view.monthlyTimeRecord", "viewName": "MainH" },

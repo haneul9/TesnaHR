@@ -29,7 +29,7 @@
                     <Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="60px">
+            <table:Column width="100px">
                 <Label text="{i18n>LABEL_00210}" />
                 <table:template>
                     <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
@@ -100,9 +100,10 @@
             <table:Column width="100px">
                 <Label text="{i18n>LABEL_06012}" />
                 <table:template>
-                    <VBox alignItems="Center">
+                    <core:Icon width="100%" src="sap-icon://accept" color="#FE5F58" size="1.5em" visible="{= ${Lateyn} === 'X' }" />
+                    <!-- <VBox alignItems="Center">
                         <CheckBox selected="{ path: 'Lateyn', type: 'sap.ui.tesna.mvc.model.type.Boolean' }" enabled="false" />
-                    </VBox>
+                    </VBox> -->
                 </table:template>
             </table:Column>
             <table:Column width="100px">

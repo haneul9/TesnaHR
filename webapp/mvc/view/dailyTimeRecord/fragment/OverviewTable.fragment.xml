@@ -160,7 +160,7 @@
                     <ObjectStatus class="table-object-status font-black" text="{= !!${Dedhr} ? '-' : ''}{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" state="Error" />
                 </table:template>
             </table:Column>
-            <table:Column width="100px" filterProperty="Awrsntx" sortProperty="Awrsntx">
+            <table:Column width="180px" filterProperty="Awrsntx" sortProperty="Awrsntx">
                 <Label text="{i18n>LABEL_08020}" />
                 <table:template>
                     <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />

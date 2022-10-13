@@ -20,10 +20,10 @@
                                 <Column width="6%" popinDisplay="Inline">
                                     <Label text="" />
                                 </Column>
-                                <Column width="14%" popinDisplay="Inline" demandPopin="true">
+                                <Column width="16%" popinDisplay="Inline" demandPopin="true">
                                     <Label text="{i18n>LABEL_00210}" />
                                 </Column>
-                                <Column width="20%" popinDisplay="Inline" demandPopin="true">
+                                <Column width="18%" popinDisplay="Inline" demandPopin="true">
                                     <Label text="{i18n>LABEL_00209}" />
                                 </Column>
                                 <Column width="12%" popinDisplay="Inline">

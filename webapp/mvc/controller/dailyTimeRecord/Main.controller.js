@@ -267,7 +267,11 @@ sap.ui.define(
           });
           oViewModel.setProperty(
             '/list',
-            _.map(aRowData, (o) => _.omit(o, '__metadata'))
+            _.map(aRowData, (o) => ({
+              ..._.omit(o, '__metadata'),
+              Dedhr: this.TimeUtils.nvl(o.Dedhr),
+              Lastclock: o.Lastclock === '00:00~00:00' ? '' : o.Lastclock,
+            }))
           );
         } catch (oError) {
           this.debug('Controller > dailyTimeRecord > retrieveList Error', oError);

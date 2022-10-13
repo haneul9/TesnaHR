@@ -1,0 +1,132 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <table:Table id="monthlyTimeCloseTable1" selectionMode="None" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/table1/list}" visibleRowCount="{/table1/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table}" noData="{i18n>MSG_00001}">
+        <table:rowSettingsTemplate>
+            <table:RowSettings highlight="{ path: 'Clstx', formatter: '.rowHighlight' }" />
+        </table:rowSettingsTemplate>
+        <table:columns>
+            <table:Column width="4%" filterProperty="Clstx" sortProperty="Clstx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00147}" />
+                    <Label text="{i18n>LABEL_00147}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Clstx}" width="100%" textAlign="Center" wrapping="false">
+                        <customData>
+                            <core:CustomData key="status" value="Z{Clstx}" writeToDom="true" />
+                        </customData>
+                    </Text>
+                </table:template>
+            </table:Column>
+            <table:Column width="18%" filterProperty="Orgtx" sortProperty="Orgtx">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00219}" />
+                    <Label text="{i18n>LABEL_00219}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Empcnt" sortProperty="Empcnt">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09003}" />
+                    <Label text="{i18n>LABEL_09003}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Empcnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Noapp1" sortProperty="Noapp1">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_00102}" />
+                    <Label text="{i18n>LABEL_06020}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Noapp1', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" headerSpan="6" filterProperty="Nosgn1" sortProperty="Nosgn1">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09004}" />
+                    <Label text="{i18n>LABEL_06020}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Nosgn1', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Nosgn2" sortProperty="Nosgn2">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09004}" />
+                    <Label text="{i18n>LABEL_01003}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Nosgn2', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Nosgn3" sortProperty="Nosgn3">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09004}" />
+                    <Label text="{i18n>LABEL_09005}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Nosgn3', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Nosgn4" sortProperty="Nosgn4">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09004}" />
+                    <Label text="{i18n>LABEL_09006}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Nosgn4', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Nosgn5" sortProperty="Nosgn5">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09004}" />
+                    <Label text="{i18n>LABEL_09007}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Nosgn5', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Nosgn6" sortProperty="Nosgn6">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09004}" />
+                    <Label text="{i18n>LABEL_09008}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Nosgn6', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Retrocnt" sortProperty="Retrocnt">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09009}" />
+                    <Label text="{i18n>LABEL_09009}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{ path: 'Retrocnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8%" headerSpan="2" filterProperty="Clsnm1" sortProperty="Clsnm1">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09010}" />
+                    <Label text="{i18n>LABEL_09011}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Clsnm1}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto" filterProperty="Clsdt1" sortProperty="Clsdt1">
+                <table:multiLabels>
+                    <Label text="{i18n>LABEL_09010}" />
+                    <Label text="{i18n>LABEL_09012}" />
+                </table:multiLabels>
+                <table:template>
+                    <Text text="{Clsdt1}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

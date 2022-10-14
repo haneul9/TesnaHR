@@ -119,27 +119,6 @@ sap.ui.define(
         }
       },
 
-      async callbackAppointeeChange() {
-        const oViewModel = this.getViewModel();
-
-        try {
-          oViewModel.setProperty('/busy', true);
-
-          await this.setPersaEntry();
-          await this.setOrgehEntry();
-          await this.setKostlEntry();
-
-          await this.retrieveQuota();
-          await this.retrieveList();
-        } catch (oError) {
-          this.debug('Controller > Attendance List > callbackAppointeeChange Error', oError);
-
-          AppUtils.handleError(oError);
-        } finally {
-          oViewModel.setProperty('/busy', false);
-        }
-      },
-
       async retrieveQuota() {
         const oViewModel = this.getViewModel();
 
@@ -207,23 +186,30 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         try {
-          oViewModel.setProperty('/entry/Persa', []);
-          oViewModel.setProperty('/entry/Orgeh', []);
-          oViewModel.setProperty('/entry/Kostl', []);
-          oViewModel.setProperty('/searchConditions/Werks', '');
-          oViewModel.setProperty('/searchConditions/Orgeh', '');
-          oViewModel.setProperty('/searchConditions/Kostl', '');
+          if (this.isHass() || this.isMss()) {
+            oViewModel.setProperty('/entry/Persa', []);
+            oViewModel.setProperty('/entry/Orgeh', []);
+            oViewModel.setProperty('/entry/Kostl', []);
+            oViewModel.setProperty('/searchConditions/Werks', '');
+            oViewModel.setProperty('/searchConditions/Orgeh', '');
+            oViewModel.setProperty('/searchConditions/Kostl', '');
 
-          const aEntries = await Client.getEntitySet(this.getModel(ServiceNames.COMMON), 'PersAreaList', {
-            Actty: '1',
-            Wave: '1',
-          });
+            const aEntries = await Client.getEntitySet(this.getModel(ServiceNames.COMMON), 'PersAreaList', {
+              Actty: '1',
+              Wave: '1',
+            });
 
-          oViewModel.setProperty('/searchConditions/Werks', _.get(aEntries, [0, 'Persa']));
-          oViewModel.setProperty(
-            '/entry/Persa',
-            _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
-          );
+            oViewModel.setProperty('/searchConditions/Werks', _.get(aEntries, [0, 'Persa']));
+            oViewModel.setProperty(
+              '/entry/Persa',
+              _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+            );
+          } else {
+            const mAppointeeData = this.getAppointeeData();
+
+            oViewModel.setProperty('/entry/Persa', [_.pick(mAppointeeData, ['Persa', 'Pbtxt'])]);
+            oViewModel.setProperty('/searchConditions/Werks', mAppointeeData.Persa);
+          }
         } catch (oError) {
           throw oError;
         }

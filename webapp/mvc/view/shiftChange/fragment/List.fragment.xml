@@ -15,8 +15,8 @@
         <VBox class="contents">
             <HBox class="vCardBox" justifyContent="SpaceBetween" height="80px">
                 <HBox class="form-bar" alignItems="Center">
-                    <Label text="{i18n>LABEL_00220}" />
-                    <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" enabled="{= ${/auth} === 'H' }" busyIndicatorDelay="0" busy="{/contentsBusy/search}" change=".onChangeWerks">
+                    <Label text="{i18n>LABEL_00220}" visible="{= ${/auth} !== 'E' }" />
+                    <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" enabled="{= ${/auth} === 'H' }" visible="{= ${/auth} !== 'E' }" busyIndicatorDelay="0" busy="{/contentsBusy/search}" change=".onChangeWerks">
                         <core:Item key="{Persa}" text="{Pbtxt}" />
                     </ComboBox>
                     <Label text="{i18n>LABEL_00219}" />

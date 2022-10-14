@@ -113,21 +113,28 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         try {
-          oViewModel.setProperty('/entry/Persa', []);
-          oViewModel.setProperty('/entry/Orgeh', []);
+          if (this.isHass() || this.isMss()) {
+            oViewModel.setProperty('/entry/Persa', []);
+            oViewModel.setProperty('/entry/Orgeh', []);
 
-          const aEntries = await Client.getEntitySet(this.getModel(ServiceNames.COMMON), 'PersAreaList', {
-            Actty: '1',
-            Wave: '1',
-          });
+            const aEntries = await Client.getEntitySet(this.getModel(ServiceNames.COMMON), 'PersAreaList', {
+              Actty: '1',
+              Wave: '1',
+            });
 
-          oViewModel.setProperty(
-            '/entry/Persa',
-            _.chain(aEntries)
-              .map((o) => _.omit(o, '__metadata'))
-              .value()
-          );
-          oViewModel.setProperty('/searchConditions/Werks', !sWerks ? _.get(aEntries, [0, 'Persa']) : sWerks);
+            oViewModel.setProperty(
+              '/entry/Persa',
+              _.chain(aEntries)
+                .map((o) => _.omit(o, '__metadata'))
+                .value()
+            );
+            oViewModel.setProperty('/searchConditions/Werks', !sWerks ? _.get(aEntries, [0, 'Persa']) : sWerks);
+          } else {
+            const mAppointeeData = this.getAppointeeData();
+
+            oViewModel.setProperty('/entry/Persa', [_.pick(mAppointeeData, ['Persa', 'Pbtxt'])]);
+            oViewModel.setProperty('/searchConditions/Werks', mAppointeeData.Persa);
+          }
         } catch (oError) {
           throw oError;
         }

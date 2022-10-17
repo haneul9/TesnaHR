@@ -62,9 +62,7 @@ sap.ui.define(
             Orgeh: '',
             Apbeg: moment().subtract(1, 'month').set('date', 16).hours(9).toDate(),
             Apend: moment().hours(9).toDate(),
-            Pernr: '',
-            Ename: '',
-            Errdata: '',
+            Clsin: '',
           },
           listInfo: {
             totalCount: 0,
@@ -558,6 +556,7 @@ sap.ui.define(
             Kostl: mSearchConditions.Kostl === '00000000' ? null : mSearchConditions.Kostl,
             Apbeg: this.DateUtils.parse(mSearchConditions.Apbeg),
             Apend: this.DateUtils.parse(mSearchConditions.Apend),
+            Clsin: mSearchConditions.Clsin,
           });
 
           oViewModel.setProperty('/listInfo', {

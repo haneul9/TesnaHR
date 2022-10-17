@@ -108,8 +108,10 @@ sap.ui.define(
 
           this.toggleActiveSearch();
 
-          await this.retrieveQuota();
-          await this.retrieveList();
+          await Promise.all([
+            this.retrieveQuota(), //
+            this.retrieveList(),
+          ]);
         } catch (oError) {
           this.debug('Controller > Attendance List > onObjectMatched Error', oError);
 

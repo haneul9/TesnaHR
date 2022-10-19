@@ -544,6 +544,7 @@ sap.ui.define(
                 return {
                   ..._.chain(o).get(0).pick(['Ename', 'Orgtx', 'Ltext', 'Zzcaltltx']).value(),
                   ..._.chain(o)
+                    .orderBy('Tmdat')
                     .map((v, i) => ({ [`Dayngt${i}`]: mWorkType[v.Dayngt] }))
                     .reduce((acc, cur) => ({ ...acc, ...cur }), {})
                     .value(),

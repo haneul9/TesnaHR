@@ -455,6 +455,7 @@ sap.ui.define(
                   {
                     Pernr: mSessionData.Pernr,
                     Ename: mSessionData.Pernm,
+                    Zzcaltl: mSessionData.Zzcaltl,
                     Zzcaltltx: mSessionData.Zzcaltltx,
                     Zzpsgrptx: mSessionData.Zzpsgrptx,
                     Orgeh: mSessionData.Orgeh,
@@ -546,6 +547,7 @@ sap.ui.define(
           oInput.setValue(mSuggestionData.Ename);
 
           oViewModel.setProperty(`${sRowPath}/Pernr`, mSuggestionData.Pernr);
+          oViewModel.setProperty(`${sRowPath}/Zzcaltl`, mSuggestionData.Zzcaltl);
           oViewModel.setProperty(`${sRowPath}/Zzcaltltx`, mSuggestionData.Zzcaltltx);
           oViewModel.setProperty(`${sRowPath}/Zzpsgrptx`, mSuggestionData.Zzpsgrptx);
           oViewModel.setProperty(`${sRowPath}/Orgeh`, mSuggestionData.Orgeh);
@@ -581,6 +583,7 @@ sap.ui.define(
 
         if (!_.isEmpty(mEmployee)) {
           oViewModel.setProperty(`${sRowPath}/Pernr`, mEmployee.Pernr);
+          oViewModel.setProperty(`${sRowPath}/Zzcaltl`, mEmployee.Zzcaltl);
           oViewModel.setProperty(`${sRowPath}/Zzcaltltx`, mEmployee.Zzcaltltx);
           oViewModel.setProperty(`${sRowPath}/Zzpsgrptx`, mEmployee.Zzpsgrptx);
           oViewModel.setProperty(`${sRowPath}/Orgeh`, mEmployee.Orgeh);

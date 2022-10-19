@@ -3,6 +3,7 @@ sap.ui.define(
     // prettier 방지용 주석
     'sap/ui/base/Object',
     'sap/ui/model/json/JSONModel',
+    'sap/ui/tesna/control/MessageBox',
     'sap/ui/tesna/common/AppUtils',
     'sap/ui/tesna/common/exceptions/UI5Error',
     'sap/ui/tesna/common/odata/Client',
@@ -12,6 +13,7 @@ sap.ui.define(
     // prettier 방지용 주석
     BaseObject,
     JSONModel,
+    MessageBox,
     AppUtils,
     UI5Error,
     Client,
@@ -22,6 +24,7 @@ sap.ui.define(
     return BaseObject.extend('sap.ui.tesna.common.ApprovalStatusHandler', {
       oController: null,
       oApprovalStatusBox: null,
+      sTableId: 'commonApprovalStatusTable',
 
       APPROVAL_STATUS: {
         APPROVAL: '20',
@@ -47,6 +50,7 @@ sap.ui.define(
           Orgeh: null,
           visible: true,
           activeInput: false,
+          Employees: [],
           ...mOptions,
         };
 
@@ -62,7 +66,10 @@ sap.ui.define(
 
           this.oApprovalStatusBox.setModel(oBoxModel);
 
-          this.readApprovalData();
+          Promise.all([
+            this.readApprovalData(), //
+            this.readEmployees(),
+          ]);
         }
       },
 
@@ -205,10 +212,173 @@ sap.ui.define(
 
           oBoxModel.setProperty('/settings/activeInput', bActiveInput);
           oBoxModel.refresh(true);
+
+          this.setDetailsTableStyle();
         } catch (oError) {
           AppUtils.handleError(oError);
         } finally {
           this.oApprovalStatusBox.setBusy(false);
+        }
+      },
+
+      async readEmployees() {
+        try {
+          const oBoxModel = this.oApprovalStatusBox.getModel();
+          const mSettings = oBoxModel.getProperty('/settings');
+
+          if (mSettings.Mode !== 'N') return;
+
+          const oModel = this.oController.getModel(ServiceNames.WORKTIME);
+          const mAppointeeData = this.oController.getAppointeeData();
+          const aResults = await Client.getEntitySet(oModel, 'TimePernrList', {
+            Austy: mSettings.Austy,
+            Begda: moment().hours(9).toDate(),
+            Werks: mAppointeeData.Werks,
+            Pernr: mSettings.Austy === 'E' ? mAppointeeData.Pernr : null,
+            Orgeh: mSettings.Austy === 'E' ? null : mAppointeeData.Orgeh,
+          });
+
+          oBoxModel.setProperty(
+            '/settings/Employees',
+            _.map(aResults, (o) => _.omit(o, '__metadata'))
+          );
+        } catch (oError) {
+          AppUtils.handleError(oError);
+        }
+      },
+
+      setDetailsTableStyle() {
+        setTimeout(() => {
+          const oTable = this.oController.getView().byId(this.sTableId);
+          const sDomTableId = oTable.getId();
+
+          oTable.getRows().forEach((row, i) => {
+            const mRowData = row.getBindingContext().getObject();
+
+            if (mRowData.Linty === '40') {
+              $(`#${sDomTableId}-rowsel${i}`).removeClass('disabled-table-selection');
+            } else {
+              $(`#${sDomTableId}-rowsel${i}`).addClass('disabled-table-selection');
+            }
+          });
+        }, 100);
+      },
+
+      onRefAdd() {
+        const oBoxModel = this.oApprovalStatusBox.getModel();
+        const aApprovals = oBoxModel.getProperty('/list');
+
+        oBoxModel.setProperty('/rowCount', aApprovals.length + 1);
+        oBoxModel.setProperty('/list', [
+          ...aApprovals,
+          {
+            enabledComments: false,
+            Seqnr: _.toString(aApprovals.length + 1),
+            Linty: '40',
+            Lintytx: this.oController.getBundleText('LABEL_00231'), // 참조
+            Perpic: '',
+            Pernr: '',
+            Ename: '',
+            Zzcaltltx: '',
+            Zzpsgrptx: '',
+            Orgtx: '',
+            Appsttx: '',
+            Sgntm: '',
+          },
+        ]);
+
+        this.setDetailsTableStyle();
+      },
+
+      onRefDel() {
+        const oBoxModel = this.oApprovalStatusBox.getModel();
+        const aApprovals = oBoxModel.getProperty('/list');
+        const oTable = this.oController.getView().byId(this.sTableId);
+        const aSelectedIndices = oTable.getSelectedIndices();
+
+        if (aSelectedIndices.length < 1) {
+          MessageBox.alert(this.oController.getBundleText('MSG_00020', 'LABEL_00110')); // {삭제}할 행을 선택하세요.
+          return;
+        }
+
+        // 선택된 행을 삭제하시겠습니까?
+        MessageBox.confirm(this.oController.getBundleText('MSG_00021'), {
+          onClose: (sAction) => {
+            if (MessageBox.Action.CANCEL === sAction) return;
+
+            const aUnSelectedData = aApprovals.filter((elem, idx) => {
+              return !aSelectedIndices.some(function (iIndex) {
+                return iIndex === idx;
+              });
+            });
+
+            oBoxModel.setProperty(
+              '/list',
+              _.map(aUnSelectedData, (o, i) => _.set(o, 'Seqnr', _.toString(i + 1)))
+            );
+            oBoxModel.setProperty('/rowCount', aUnSelectedData.length);
+
+            oTable.clearSelection();
+            this.setDetailsTableStyle();
+          },
+        });
+      },
+
+      onApprovalRefSelectSuggest(oEvent) {
+        const oBoxModel = this.oApprovalStatusBox.getModel();
+        const oInput = oEvent.getSource();
+        const oSelectedSuggestionRow = oEvent.getParameter('selectedRow');
+
+        if (oSelectedSuggestionRow) {
+          const oContext = oSelectedSuggestionRow.getBindingContext();
+          const mSuggestionData = oContext.getObject();
+          const sRowPath = oInput.getParent().getBindingContext().getPath();
+
+          oInput.setValue(mSuggestionData.Ename);
+
+          oBoxModel.setProperty(`${sRowPath}/Perpic`, mSuggestionData.Picurl);
+          oBoxModel.setProperty(`${sRowPath}/Pernr`, mSuggestionData.Pernr);
+          oBoxModel.setProperty(`${sRowPath}/Orgeh`, mSuggestionData.Orgeh);
+          oBoxModel.setProperty(`${sRowPath}/Orgtx`, mSuggestionData.Orgtx);
+          oBoxModel.setProperty(`${sRowPath}/Zzcaltl`, mSuggestionData.Zzcaltl);
+          oBoxModel.setProperty(`${sRowPath}/Zzcaltltx`, mSuggestionData.Zzcaltltx);
+          oBoxModel.setProperty(`${sRowPath}/Zzpsgrptx`, mSuggestionData.Zzpsgrptx);
+        }
+
+        oInput.getBinding('suggestionRows').filter([]);
+      },
+
+      onApprovalRefSubmitSuggest(oEvent) {
+        const oBoxModel = this.oApprovalStatusBox.getModel();
+        const oInput = oEvent.getSource();
+        const oContext = oInput.getParent().getBindingContext();
+        const sRowPath = oContext.getPath();
+        const sInputValue = oEvent.getParameter('value');
+
+        if (!sInputValue) {
+          oBoxModel.setProperty(`${sRowPath}/Perpic`, null);
+          oBoxModel.setProperty(`${sRowPath}/Ename`, null);
+          oBoxModel.setProperty(`${sRowPath}/Pernr`, null);
+          oBoxModel.setProperty(`${sRowPath}/Orgeh`, null);
+          oBoxModel.setProperty(`${sRowPath}/Orgtx`, null);
+          oBoxModel.setProperty(`${sRowPath}/Zzcaltl`, null);
+          oBoxModel.setProperty(`${sRowPath}/Zzcaltltx`, null);
+          oBoxModel.setProperty(`${sRowPath}/Zzpsgrptx`, null);
+
+          return;
+        }
+
+        const aEmployees = oBoxModel.getProperty('/settings/Employees');
+        const [mEmployee] = _.filter(aEmployees, (o) => _.startsWith(o.Ename, sInputValue));
+
+        if (!_.isEmpty(mEmployee)) {
+          oBoxModel.setProperty(`${sRowPath}/Perpic`, mEmployee.Picurl);
+          oBoxModel.setProperty(`${sRowPath}/Pernr`, mEmployee.Pernr);
+          oBoxModel.setProperty(`${sRowPath}/Orgeh`, mEmployee.Orgeh);
+          oBoxModel.setProperty(`${sRowPath}/Orgtx`, mEmployee.Orgtx);
+          oBoxModel.setProperty(`${sRowPath}/Zzcaltl`, mEmployee.Zzcaltl);
+          oBoxModel.setProperty(`${sRowPath}/Zzcaltltx`, mEmployee.Zzcaltltx);
+          oBoxModel.setProperty(`${sRowPath}/Zzpsgrptx`, mEmployee.Zzpsgrptx);
         }
       },
     });

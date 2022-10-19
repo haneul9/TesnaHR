@@ -66,6 +66,9 @@ sap.ui.define(
         mSessionData.DTFMTYYYYMM = mSessionData.DTFMT.replace(/([a-zA-Z]{4})([^a-zA-Z]?)([a-zA-Z]{2}).*/, '$1$2$3');
         mSessionData.DTFMTYYYY = mSessionData.DTFMT.replace(/([a-zA-Z]{4}).*/, '$1');
         mSessionData.Photo = mSessionData.Photo || AppUtils.getUnknownAvatarImageURL();
+        mSessionData.Persa = 'II00';
+        mSessionData.Pbtxt = '두산테스나';
+        mSessionData.Werks = 'II00';
 
         return mSessionData;
       },

@@ -341,6 +341,29 @@ sap.ui.define(
         return this.FileAttachmentBoxHandler;
       },
 
+      onRefAdd(oEvent) {
+        this.getApprovalStatusHandler().onRefAdd(oEvent);
+      },
+
+      onRefDel(oEvent) {
+        this.getApprovalStatusHandler().onRefDel(oEvent);
+      },
+
+      onApprovalRefSelectSuggest(oEvent) {
+        this.getApprovalStatusHandler().onApprovalRefSelectSuggest(oEvent);
+      },
+
+      onApprovalRefSubmitSuggest(oEvent) {
+        this.getApprovalStatusHandler().onApprovalRefSubmitSuggest(oEvent);
+      },
+
+      /**
+       * ApprovalStatus.fragment.xml
+       */
+      getApprovalStatusHandler() {
+        return this.ApprovalStatusHandler;
+      },
+
       getStaticResourceURL(sResourcePath) {
         return AppUtils.getStaticResourceURL(sResourcePath);
       },

@@ -996,6 +996,7 @@ sap.ui.define(
                 .map((o) => ({
                   ..._.pick(o, ['Tmgrp', 'Tmgrptx']),
                   items: _.chain(aResults)
+                    .reject((o) => _.includes(['A1KR0030', 'A1KR0040'], o.Awrsn)) // 반반차 제외로직 추가 22/10/18
                     .filter({ Tmgrp: o.Tmgrp })
                     .map((t) => _.set(t, 'Awrsntx', _.replace(t.Awrsntx, '@', '')))
                     .value(),
@@ -1006,7 +1007,10 @@ sap.ui.define(
             oViewModel.setProperty('/form/dialog/data/Awrsn', null);
             oViewModel.setProperty(
               '/entry/TimeReasons',
-              _.map(aResults, (o) => _.omit(o, '__metadata'))
+              _.chain(aResults)
+                .reject((o) => _.includes(['A1KR0030', 'A1KR0040'], o.Awrsn)) // 반반차 제외로직 추가 22/10/18
+                .map((o) => _.omit(o, '__metadata'))
+                .value()
             );
           }
         } catch (oError) {

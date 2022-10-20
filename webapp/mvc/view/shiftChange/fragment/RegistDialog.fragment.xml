@@ -19,25 +19,25 @@
                         </m:HBox>
                     </extension>
                     <columns>
-                        <Column width="100px">
+                        <Column width="100px" filterProperty="Pernr" sortProperty="Pernr">
                             <m:Label text="{i18n>LABEL_00209}"/>
                             <template>
                                 <m:Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text" />
                             </template>
                         </Column>
-                        <Column width="100px">
+                        <Column width="100px" filterProperty="Ename" sortProperty="Ename">
                             <m:Label text="{i18n>LABEL_00210}" />
                             <template>
                                 <m:Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
                             </template>
                         </Column>
-                        <Column width="100px">
+                        <Column width="100px" filterProperty="Zzcaltltx" sortProperty="Zzcaltltx">
                             <m:Label text="{i18n>LABEL_00157}" />
                             <template>
                                 <m:Text text="{Zzcaltltx}" width="100%" textAlign="Center" wrapping="false" />
                             </template>
                         </Column>
-                        <Column width="160px">
+                        <Column width="160px" filterProperty="Ltext" sortProperty="Ltext">
                             <m:Label text="{i18n>LABEL_01004}" />
                             <template>
                                 <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />

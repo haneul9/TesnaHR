@@ -11,7 +11,7 @@
                 <ObjectStatus text="{i18n>LABEL_09014}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication04" />
                 <ObjectStatus text="{i18n>LABEL_09013}" class="sapUiSmallMarginEnd" icon="sap-icon://circle-task-2" state="Indication05" />
             </HBox>
-            <Button icon="sap-icon://excel-attachment" text="Excel" press=".onPressExcelDownload" busyIndicatorDelay="0" busy="{/contentsBusy/table}">
+            <Button icon="sap-icon://excel-attachment" text="Excel" press=".onPressExcelDownload" busyIndicatorDelay="0" busy="{/contentsBusy/table1}">
                 <customData>
                     <core:CustomData key="order" value="1" />
                 </customData>

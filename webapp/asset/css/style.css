@@ -344,6 +344,21 @@ html[lang="en"] .portlet-p10 .portlet-p10-list>.sapMHBox .sapMFlexItem:nth-child
 [data-new-attachment="O"]:focus {text-decoration:none !important; cursor:default; color:#000 !important}
 [data-deteled-attachment="O"] {text-decoration:line-through}
 
+.info-field-group .sapMFlexBox + .sapMFlexBox {margin-left:30px}
+.info-field-group .sapMFlexItem:not(.sapMFlexBox) {margin-left:10px; line-height:16px}
+.info-field-group .sapMFlexItem .sapMLabel {line-height:14px; font-size:14px; color:#333}
+.info-field-group .sapMFlexItem .sapMLabel.sub-title {position:relative; margin-left:0px; line-height:16px; font-size:16px}
+.info-field-group .sapMFlexItem .sapMText {line-height:16px; font-size:16px; color:#333}
+.info-field-group .sapMFlexItem .sapMCb {height:16px; line-height:16px}
+.info-field-group .sapMFlexItem .sapMCb>label {vertical-align:unset}
+.info-field-group .sapMFlexItem .sapMCb.sapMCbHasLabel:focus:before {border:none !important}
+.info-field-group .sapMFlexItem .sapMCbBg {top:1px}
+.info-field-group .sapMMsgStripMessage {overflow:hidden; margin-left: 9px;}
+.info-field-group.message-strip.sapMMsgStripInformation {min-height:auto; padding:2px 10px; border-color:transparent; background-color:transparent}
+.info-field-group.message-strip.sapMMsgStripInformation .sapMMsgStripIcon {text-align: start; width: 1rem; color:#7798ae;}
+.info-field-group.message-strip.sapMMsgStripInformation .sapMText {line-height:16px; font-size:14px; color:#627988}
+.info-field-group.message-strip .sapMFlexItem:first-child {margin-left:0}
+
 /**
 * Publishing
 **/
@@ -836,6 +851,9 @@ h4.sapMTitle {font-size:20px; font-weight:800; color:#222}
 .sapMText[data-status="T20"] {color:var(--BorderColorWarning) !important}
 .sapMText[data-status="T30"] {color:var(--BorderColorSuccess) !important}
 .sapMText[data-status="T50"], .sapMText[data-status="REfalse"] {color:var(--BorderColorFocus) !important}
+.sapMText[data-step="step20"], .sapMText[data-step="step30"] { color: #ffc02e; }
+.sapMText[data-step="step40"], .sapMText[data-step="step90"] { color: #fd5f58; }
+.sapMText[data-step="step50"] { color: #27c840; }
 
 /* Mobile Icon */
 .sapUiIcon[data-status="Z10"],

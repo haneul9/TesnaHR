@@ -140,7 +140,7 @@ sap.ui.define(
           const errorJSON = JSON.parse(oError.responseText);
 
           if (errorJSON.error.innererror.errordetails && errorJSON.error.innererror.errordetails.length) {
-            mErrorData.code = errorJSON.error.code === 'SY/530' ? 'E' : errorJSON.error.code;
+            mErrorData.code = !_.includes(['I', 'W', 'A', 'E']) ? 'E' : errorJSON.error.code;
             mErrorData.message = errorJSON.error.innererror.errordetails[0].message;
           } else if (errorJSON.error.message) {
             // mErrorData.code = 'I';

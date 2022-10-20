@@ -6,8 +6,8 @@
             <HBox justifyContent="SpaceBetween" class="breadcrumbs">
                 <custom:Breadcrumbs />
                 <HBox class="button-group">
-                    <Button type="Emphasized" text="{i18n>LABEL_09013}" busyIndicatorDelay="0" busy="{/contentsBusy/button}" />
-                    <Button type="Reject" text="{i18n>LABEL_09015}" busyIndicatorDelay="0" busy="{/contentsBusy/button}" />
+                    <Button type="Emphasized" text="{i18n>LABEL_09013}" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/auth} !== 'E' }" press=".onPressComplete" />
+                    <Button type="Reject" text="{i18n>LABEL_09015}" busyIndicatorDelay="0" busy="{/contentsBusy/button}" visible="{= ${/auth} !== 'E' }" press=".onPressCancle" />
                     <Button icon="sap-icon://print" text="{i18n>LABEL_00131}" press=".onPagePrint" />
                     <!-- <Button icon="sap-icon://sys-help" text="{i18n>LABEL_00132}" press=".onPressHelp" /> -->
                 </HBox>
@@ -16,13 +16,9 @@
         <VBox class="contents">
             <HBox class="vCardBox" justifyContent="SpaceBetween" height="80px">
                 <HBox class="form-bar" alignItems="Center">
-                    <Label text="{i18n>LABEL_00220}" visible="{= ${/auth} !== 'E' }" />
-                    <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" visible="{= ${/auth} !== 'E' }" busyIndicatorDelay="0" busy="{/contentsBusy/search}" change=".onChangeWerks">
+                    <Label text="{i18n>LABEL_00220}" />
+                    <ComboBox items="{/entry/Persa}" selectedKey="{/searchConditions/Werks}" enabled="{= ${/auth} === 'H' }" busyIndicatorDelay="0" busy="{/contentsBusy/search}">
                         <core:Item key="{Persa}" text="{Pbtxt}" />
-                    </ComboBox>
-                    <Label text="{i18n>LABEL_00219}" />
-                    <ComboBox items="{/entry/Orgeh}" selectedKey="{/searchConditions/Orgeh}" busyIndicatorDelay="0" busy="{/contentsBusy/search}">
-                        <core:Item key="{Orgeh}" text="{Fulln}" />
                     </ComboBox>
                     <Label text="{i18n>LABEL_00227}" />
                     <DatePicker width="120px" displayFormat="yyyy.MM" valueFormat="yyyyMM" value="{/searchConditions/Tyymm}" />
@@ -32,6 +28,18 @@
             <VBox class="vCardBox">
                 <core:Fragment fragmentName="sap.ui.tesna.mvc.view.monthlyTimeClose.fragment.OverviewTableHeader" type="XML" />
                 <core:Fragment fragmentName="sap.ui.tesna.mvc.view.monthlyTimeClose.fragment.OverviewTable" type="XML" />
+            </VBox>
+            <VBox class="vCardBox">
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.monthlyTimeClose.fragment.TimeReaderTableHeader" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.monthlyTimeClose.fragment.TimeReaderTable" type="XML" />
+            </VBox>
+            <VBox class="vCardBox">
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.monthlyTimeClose.fragment.NotApproveTableHeader" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.monthlyTimeClose.fragment.NotApproveTable" type="XML" />
+            </VBox>
+            <VBox class="vCardBox">
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.monthlyTimeClose.fragment.ApproveTableHeader" type="XML" />
+                <core:Fragment fragmentName="sap.ui.tesna.mvc.view.monthlyTimeClose.fragment.ApproveTable" type="XML" />
             </VBox>
         </VBox>
     </Page>

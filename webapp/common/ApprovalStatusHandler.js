@@ -50,6 +50,7 @@ sap.ui.define(
           Orgeh: null,
           visible: true,
           activeInput: false,
+          activeRef: false,
           Employees: [],
           ...mOptions,
         };
@@ -180,6 +181,7 @@ sap.ui.define(
           const oModel = this.oController.getModel(ServiceNames.APPROVAL);
           const aRowData = await Client.getEntitySet(oModel, 'ApproverList2', {
             Prcty: mSettings.Mode,
+            Austy: mSettings.Austy,
             ..._.pick(mSettings, ['Pernr', 'Appno', 'Appty', 'Orgeh']),
           });
 
@@ -209,6 +211,10 @@ sap.ui.define(
                 .value();
             })
           );
+
+          if (mSettings.Mode === 'N' && mSettings.EndPoint === 'B') {
+            oBoxModel.setProperty('/settings/activeRef', true);
+          }
 
           oBoxModel.setProperty('/settings/activeInput', bActiveInput);
           oBoxModel.refresh(true);

@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <HBox justifyContent="SpaceBetween" class="header-wrap">
+        <HBox class="header">
+            <Title level="H3" text="{i18n>LABEL_09023}" class="sapUiSmallMarginEnd" />
+            <Text text="total {/table4/totalCount}" />
+        </HBox>
+        <HBox>
+            <Button icon="sap-icon://excel-attachment" text="Excel" press=".onPressExcelDownload" busyIndicatorDelay="0" busy="{/contentsBusy/table4}">
+                <customData>
+                    <core:CustomData key="order" value="4" />
+                </customData>
+            </Button>
+        </HBox>
+    </HBox>
+</core:FragmentDefinition>

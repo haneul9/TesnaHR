@@ -790,12 +790,8 @@ sap.ui.define(
       onPressFormCancelDialogSave() {
         const oViewModel = this.getViewModel();
         const oTable = this.byId(this.LIST_DIALOG_CALCLE_TABLE_ID);
-        const aSelectedIndices = oTable.getSelectedIndices();
         const aTableData = oViewModel.getProperty('/form/list');
-        const aDialogList = oViewModel.getProperty('/form/dialog/list');
-        const aSelectedData = _.chain(aDialogList)
-          .filter((o, i) => _.includes(aSelectedIndices, i))
-          .cloneDeep()
+        const aSelectedData = _.chain(this.TableUtils.getSelectionData(oTable))
           .map((o) => ({
             ..._.chain(o).omit('__metadata').omitBy(_.isNil).value(),
             Appno: '',
@@ -812,7 +808,7 @@ sap.ui.define(
         oViewModel.setProperty('/form/rowCount', _.sum([aTableData.length, aSelectedData.length]));
         oViewModel.setProperty('/form/list', _.concat(aTableData, aSelectedData));
 
-        oTable.clearSelection();
+        this.TableUtils.clearTable(oTable);
         this.onPressFormCancelDialogClose();
       },
 

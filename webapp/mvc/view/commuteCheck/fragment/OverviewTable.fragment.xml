@@ -7,7 +7,7 @@
             <table:RowSettings highlight="{ path: 'Appst', formatter: '.TableUtils.rowHighlight' }" />
         </table:rowSettingsTemplate>
         <table:columns>
-            <table:Column width="60px">
+            <table:Column width="60px" filterProperty="Appsttx" sortProperty="Appsttx">
                 <Label text="{i18n>LABEL_00144}" />
                 <table:template>
                     <Text class="red-highlight" text="{Appsttx}" width="100%" textAlign="Center" wrapping="false">
@@ -17,37 +17,37 @@
                     </Text>
                 </table:template>
             </table:Column>
-            <table:Column width="140px">
+            <table:Column width="140px" filterProperty="Ltext" sortProperty="Ltext">
                 <Label text="{i18n>LABEL_01004}" />
                 <table:template>
                     <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="80px">
+            <table:Column width="80px" filterProperty="Pernr" sortProperty="Pernr">
                 <Label text="{i18n>LABEL_00209}" />
                 <table:template>
                     <Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="100px">
+            <table:Column width="100px" filterProperty="Ename" sortProperty="Ename">
                 <Label text="{i18n>LABEL_00210}" />
                 <table:template>
                     <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="100px">
+            <table:Column width="100px" filterProperty="TmdatFormatted" sortProperty="Tmdat">
                 <Label text="{i18n>LABEL_06016}" />
                 <table:template>
                     <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="50px">
+            <table:Column width="50px" filterProperty="Daytx" sortProperty="Daytx">
                 <Label text="{i18n>LABEL_00178}" />
                 <table:template>
                     <Text text="{Daytx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="50px">
+            <table:Column width="50px" filterProperty="Dayngttx" sortProperty="Dayngttx">
                 <Label text="{i18n>LABEL_00113}" />
                 <table:template>
                     <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
@@ -77,13 +77,13 @@
                     <TimePicker dateValue="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initEnduz}" enabled="{= !${Appno} || ${Appno} === '0000000000' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
-            <table:Column width="180px">
+            <table:Column width="180px" filterProperty="Tagerrtx" sortProperty="Tagerrtx">
                 <Label text="{i18n>LABEL_06008}" />
                 <table:template>
                     <Text text="{Tagerrtx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="70px">
+            <table:Column width="70px" filterProperty="Abserrtx" sortProperty="Abserrtx">
                 <Label text="{i18n>LABEL_06010}" />
                 <table:template>
                     <Text text="{Abserrtx}" width="100%" textAlign="Center" wrapping="false" />
@@ -97,58 +97,55 @@
                     </ComboBox>
                 </table:template>
             </table:Column>
-            <table:Column width="100px">
+            <table:Column width="100px" filterProperty="Lateyn" sortProperty="Lateyn">
                 <Label text="{i18n>LABEL_06012}" />
                 <table:template>
                     <core:Icon width="100%" src="sap-icon://accept" color="#FE5F58" size="1.5em" visible="{= ${Lateyn} === 'X' }" />
-                    <!-- <VBox alignItems="Center">
-                        <CheckBox selected="{ path: 'Lateyn', type: 'sap.ui.tesna.mvc.model.type.Boolean' }" enabled="false" />
-                    </VBox> -->
                 </table:template>
             </table:Column>
-            <table:Column width="100px">
+            <table:Column width="100px" filterProperty="Awrsntx" sortProperty="Awrsntx">
                 <Label text="{i18n>LABEL_06013}" />
                 <table:template>
                     <Text text="{Awrsntx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="100px">
+            <table:Column width="100px" filterProperty="Dedhr" sortProperty="Dedhr">
                 <Label text="{i18n>LABEL_06021}" />
                 <table:template>
                     <ObjectStatus class="table-object-status font-black" text="{= !!${Dedhr} ? '-' : ''}{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" state="Error" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px">
+            <table:Column width="120px" filterProperty="Apppnm" sortProperty="Apppnm">
                 <Label text="{i18n>LABEL_00135}" />
                 <table:template>
                     <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px">
+            <table:Column width="120px" filterProperty="AppdaFormatted" sortProperty="Appda">
                 <Label text="{i18n>LABEL_00189}" />
                 <table:template>
                     <Text text="{ path: 'Appda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px">
+            <table:Column width="120px" filterProperty="Sgnpnm" sortProperty="Sgnpnm">
                 <Label text="{i18n>LABEL_00171}" />
                 <table:template>
                     <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px">
+            <table:Column width="120px" filterProperty="SgndaFormatted" sortProperty="Sgnda">
                 <Label text="{i18n>LABEL_00186}" />
                 <table:template>
                     <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
-            <table:Column width="140px">
+            <table:Column width="140px" filterProperty="Appno" sortProperty="Appno">
                 <Label text="{i18n>LABEL_00109}" />
                 <table:template>
                     <Link target="_blank" textAlign="Center" width="100%" text="{ path: 'Appno', type: 'sap.ui.tesna.mvc.model.type.Docno' }" press=".onPressRowApprovalDetail" />
                 </table:template>
             </table:Column>
-            <table:Column width="140px">
+            <table:Column width="140px" filterProperty="Apptytx" sortProperty="Apptytx">
                 <Label text="{i18n>LABEL_00111}" />
                 <table:template>
                     <Link target="_blank" textAlign="Center" width="100%" text="{Apptytx}" press=".onPressRowApprovalDetail" />

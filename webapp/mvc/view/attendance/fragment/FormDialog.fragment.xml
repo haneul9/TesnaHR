@@ -83,6 +83,8 @@
                     <TimePicker id="endTime" dateValue="{ path: '/form/dialog/data/Enduz', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/form/dialog/initEnduz}" minutesStep="{/form/dialog/minutesStep}" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time required sapUiTinyMarginBegin" enabled="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" change=".onChangeTimeFormat" />
                     <Input value="{ path: '/form/dialog/data/Daytm', formatter: '.formatDaytm' }" editable="false" class="sapUiTinyMarginBegin color-09" />
                 </HBox>
+                <Label text="" visible="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" />
+                <MessageStrip class="info-field-group message-strip" text="{i18n>MSG_05002}" showIcon="true" customIcon="sap-icon://message-information" visible="{= !!${/form/dialog/data/Pernr} &amp;&amp; ${/form/dialog/data/Gubun} === 1 }" />
                 <Label text="{i18n>LABEL_05011}" />
                 <Input width="274px" value="{/form/dialog/data/Taker}" enabled="{= !!${/form/dialog/data/Pernr} }" />
                 <Label text="{i18n>LABEL_05012}" />

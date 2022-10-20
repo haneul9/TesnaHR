@@ -108,6 +108,15 @@ sap.ui.define(
         return iVisibleRowCount;
       },
 
+      getSelectionData(oTable) {
+        const aSelectedIndices = oTable.getSelectedIndices();
+
+        return _.chain(oTable.getBinding('rows').getContexts())
+          .filter((o, i) => _.includes(aSelectedIndices, i))
+          .map((o) => ({ ...o.getObject() }))
+          .value();
+      },
+
       export({ oTable, sFileName, aTableData = [], aCustomColumns = [], sStatCode = 'ZappStatAl', sStatTxt = 'ZappStxtAl' }) {
         if (!oTable && !aCustomColumns) return;
 
@@ -220,6 +229,19 @@ sap.ui.define(
         });
       },
 
+      clearTable(oTable) {
+        oTable.clearSelection();
+        oTable.getBinding().sort(null);
+        oTable.getBinding().filter(null);
+
+        const aColumns = oTable.getColumns();
+
+        for (const col of aColumns) {
+          col.setSorted(false);
+          oTable.filter(col, null);
+        }
+      },
+
       /**
        * @param {object} o = {
        *   table: sap.ui.table.Table instance
@@ -242,6 +264,7 @@ sap.ui.define(
           },
         });
       },
+
       /**
        * @param  {Array} aTableData - 대상목록
        * @param  {Object} mSumField - 합계 라벨 필드정보 ex) { Field01: '합계' }

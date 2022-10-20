@@ -6,12 +6,12 @@
             <HBox class="title">
                 <Title level="H2" text="{i18n>LABEL_00169}" />
             </HBox>
-            <HBox class="table-actions" visible="{/settings/activeInput}">
+            <HBox class="table-actions" visible="{/settings/activeRef}">
                 <Button icon="sap-icon://add" text="{i18n>LABEL_00229}" press=".onRefAdd" />
                 <Button icon="sap-icon://less" text="{i18n>LABEL_00230}" press=".onRefDel" />
             </HBox>
         </HBox>
-        <table:Table id="commonApprovalStatusTable" width="100%" enableSelectAll="false" selectionMode="{= ${/settings/activeInput} ? 'MultiToggle' : 'None'}" columnHeaderHeight="45" rowHeight="44" visibleRowCount="{/rowCount}" rows="{/list}" noData="{i18n>MSG_00001}">
+        <table:Table id="commonApprovalStatusTable" width="100%" enableSelectAll="false" selectionMode="{= ${/settings/activeRef} ? 'MultiToggle' : 'None'}" columnHeaderHeight="45" rowHeight="44" visibleRowCount="{/rowCount}" rows="{/list}" noData="{i18n>MSG_00001}">
             <table:columns>
                 <table:Column width="4%">
                     <Label text="No"/>
@@ -29,11 +29,11 @@
                     <Label text="{i18n>LABEL_00210}"/>
                     <table:template>
                         <VBox>
-                            <HBox justifyContent="Center" alignItems="Center" visible="{= !${/settings/activeInput} || ${Linty} !== '40' }">
+                            <HBox justifyContent="Center" alignItems="Center" visible="{= !${/settings/activeRef} || ${Linty} !== '40' }">
                                 <Image src="{Perpic}" class="member-photo mt-4-px" mode="Background" width="34px" height="34px" error=".loadErrorAvatarImage" />
                                 <Text text="{Ename}" width="100%" textAlign="Center" class="ml-4-px" />
                             </HBox>
-                            <HBox justifyContent="Center" alignItems="Center" visible="{= ${/settings/activeInput} &amp;&amp; ${Linty} === '40' }">
+                            <HBox justifyContent="Center" alignItems="Center" visible="{= ${/settings/activeRef} &amp;&amp; ${Linty} === '40' }">
                                 <Image src="{Perpic}" class="member-photo mt-4-px mr-4-px" mode="Background" width="34px" height="34px" error=".loadErrorAvatarImage" />
                                 <Input value="{Ename}" textAlign="Begin" width="100%" maxSuggestionWidth="500px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/settings/Employees', templateShareable: false }" busyIndicatorDelay="0" busy="{/contentsBusy/search}" suggestionItemSelected=".onApprovalRefSelectSuggest" submit=".onApprovalRefSubmitSuggest">
                                     <suggestionColumns>

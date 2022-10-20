@@ -376,10 +376,7 @@ sap.ui.define(
             try {
               const oModel = this.getModel(ServiceNames.WORKTIME);
               const aReturnMsg = [];
-              const aSelectedTableData = _.chain(this.getViewModel().getProperty('/list'))
-                .filter((o, i) => _.includes(aSelectedIndices, i))
-                .cloneDeep()
-                .value();
+              const aSelectedTableData = this.TableUtils.getSelectionData(oTable);
 
               for (const mPayload of aSelectedTableData) {
                 const mReturnData = await Client.create(oModel, 'TimeReaderCheck', mPayload);
@@ -449,11 +446,7 @@ sap.ui.define(
           return;
         }
 
-        const aSelectedTableData = _.chain(this.getViewModel().getProperty('/list'))
-          .filter((o, i) => _.includes(aSelectedIndices, i))
-          .cloneDeep()
-          .uniqBy('Appno')
-          .value();
+        const aSelectedTableData = _.chain(this.TableUtils.getSelectionData(oTable)).uniqBy('Appno').value();
 
         if (_.filter(aSelectedTableData, (o) => o.Appst !== '20').length > 0) {
           MessageBox.alert(this.getBundleText('MSG_00064')); // 신청 상태의 데이터만 취소가 가능합니다.
@@ -497,11 +490,12 @@ sap.ui.define(
       onPressRowApprovalDetail(oEvent) {
         const mRowData = oEvent.getSource().getParent().getBindingContext().getObject();
         const mApptyRoute = {
+          TG: 'shift',
           TH: 'shiftChange',
           TI: 'attendance',
           TJ: 'commuteCheck',
-          TG: 'shift',
           TK: 'overtime',
+          TL: 'changeot',
         };
 
         if (!mRowData || !_.has(mApptyRoute, mRowData.Appty)) return;
@@ -519,7 +513,7 @@ sap.ui.define(
           mParams.push(mRowData.Werks);
           mParams.push(mRowData.Orgeh);
           mParams.push(mRowData.Kostl ? mRowData.Kostl : 'NA');
-        } else if (mRowData.Appty === 'TH' || mRowData.Appty === 'TG' || mRowData.Appty === 'TK') {
+        } else if (_.includes(['TG', 'TH', 'TK', 'TL'], mRowData.Appty)) {
           mParams.push(mRowData.Werks);
           mParams.push(mRowData.Orgeh);
         }
@@ -571,6 +565,9 @@ sap.ui.define(
               Beguzf: this.TimeUtils.nvl(o.Beguzf),
               Enduzf: this.TimeUtils.nvl(o.Enduzf),
               Dedhr: this.TimeUtils.nvl(o.Dedhr),
+              TmdatFormatted: this.DateUtils.format(o.Tmdat),
+              AppdaFormatted: this.DateUtils.format(o.Appda),
+              SgndaFormatted: this.DateUtils.format(o.Sgnda),
             }))
           );
           oViewModel.setProperty(
@@ -599,7 +596,7 @@ sap.ui.define(
           );
 
           setTimeout(() => oTable.setFirstVisibleRow(), 100);
-          oTable.clearSelection();
+          this.TableUtils.clearTable(oTable);
           oViewModel.refresh(true);
           this.setDetailsTableStyle();
         } catch (oError) {

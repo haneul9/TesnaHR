@@ -1,0 +1,98 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <table:Table id="monthlyTimeCloseTable2" selectionMode="None" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/table2/list}" visibleRowCount="{/table2/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table2}" noData="{i18n>MSG_00001}">
+        <table:columns>
+            <table:Column width="4%" filterProperty="Idx" sortProperty="Idx">
+                <Label text="No." />
+                <table:template>
+                    <Text text="{Idx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10%" filterProperty="Orgtx" sortProperty="Orgtx">
+                <Label text="{i18n>LABEL_00219}" />
+                <table:template>
+                    <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10%" filterProperty="Ltext" sortProperty="Ltext">
+                <Label text="{i18n>LABEL_01004}" />
+                <table:template>
+                    <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Pernr" sortProperty="Pernr">
+                <Label text="{i18n>LABEL_00209}" />
+                <table:template>
+                    <Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Ename" sortProperty="Ename">
+                <Label text="{i18n>LABEL_00210}" />
+                <table:template>
+                    <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8%" filterProperty="Tmdat" sortProperty="Tmdat">
+                <Label text="{i18n>LABEL_06016}" />
+                <table:template>
+                    <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="4%" filterProperty="Daytx" sortProperty="Daytx">
+                <Label text="{i18n>LABEL_00178}" />
+                <table:template>
+                    <Text text="{Daytx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="4%" filterProperty="Dayngttx" sortProperty="Dayngttx">
+                <Label text="{i18n>LABEL_00113}" />
+                <table:template>
+                    <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="7%" filterProperty="Begdaf" sortProperty="Begdaf">
+                <Label text="{i18n>LABEL_06004}" />
+                <table:template>
+                    <Text text="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="7%" filterProperty="Beguzf" sortProperty="Beguzf">
+                <Label text="{i18n>LABEL_06005}" />
+                <table:template>
+                    <Text text="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="7%" filterProperty="Enddaf" sortProperty="Enddaf">
+                <Label text="{i18n>LABEL_06006}" />
+                <table:template>
+                    <Text text="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="7%" filterProperty="Enduzf" sortProperty="Enduzf">
+                <Label text="{i18n>LABEL_06007}" />
+                <table:template>
+                    <Text text="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10%" filterProperty="Tagerrtx" sortProperty="Tagerrtx">
+                <Label text="{i18n>LABEL_06008}" />
+                <table:template>
+                    <Text text="{Tagerrtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="6%" filterProperty="Abserrtx" sortProperty="Abserrtx">
+                <Label text="{i18n>LABEL_06010}" />
+                <table:template>
+                    <Text text="{Abserrtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto" filterProperty="Todo1" sortProperty="Todo1">
+                <Label text="{i18n>LABEL_06023}" />
+                <table:template>
+                    <Text text="{Todo1}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

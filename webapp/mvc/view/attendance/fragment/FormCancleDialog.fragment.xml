@@ -14,43 +14,43 @@
                         </m:HBox>
                     </extension>
                     <columns>
-                        <Column width="auto">
+                        <Column width="auto" filterProperty="Pernr" sortProperty="Pernr">
                             <m:Label text="{i18n>LABEL_00209}" />
                             <template>
                                 <m:Text text="{ path: 'Pernr', type: 'sap.ui.tesna.mvc.model.type.Pernr' }" width="100%" textAlign="Center" />
                             </template>
                         </Column>
-                        <Column width="auto">
+                        <Column width="auto" filterProperty="Ename" sortProperty="Ename">
                             <m:Label text="{i18n>LABEL_00210}" />
                             <template>
                                 <m:Text text="{Ename}" width="100%" textAlign="Center" />
                             </template>
                         </Column>
-                        <Column width="auto">
+                        <Column width="auto" filterProperty="Orgtx" sortProperty="Orgtx">
                             <m:Label text="{i18n>LABEL_00219}" />
                             <template>
                                 <m:Text text="{Orgtx}" width="100%" textAlign="Center" />
                             </template>
                         </Column>
-                        <Column width="14%">
+                        <Column width="14%" filterProperty="Ltext" sortProperty="Ltext">
                             <m:Label text="{i18n>LABEL_00177}" />
                             <template>
                                 <m:Text text="{Ltext}" width="100%" textAlign="Center" />
                             </template>
                         </Column>
-                        <Column width="12%">
+                        <Column width="12%" filterProperty="Awrsntx" sortProperty="Awrsntx">
                             <m:Label text="{i18n>LABEL_00122}" />
                             <template>
                                 <m:Text text="{Awrsntx}" width="100%" textAlign="Center" />
                             </template>
                         </Column>
-                        <Column width="18%">
+                        <Column width="18%" filterProperty="Period" sortProperty="Period">
                             <m:Label text="{i18n>LABEL_00120}" />
                             <template>
                                 <m:Text text="{Period}" width="100%" textAlign="Center" />
                             </template>
                         </Column>
-                        <Column width="6%">
+                        <Column width="6%" filterProperty="Daytm" sortProperty="Daytm">
                             <m:Label text="{i18n>LABEL_05010}" />
                             <template>
                                 <m:Text text="{Daytm}" width="100%" textAlign="Center" />

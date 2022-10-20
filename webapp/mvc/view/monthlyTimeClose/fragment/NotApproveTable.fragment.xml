@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <table:Table id="monthlyTimeCloseTable3" selectionMode="None" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/table3/list}" visibleRowCount="{/table3/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table3}" noData="{i18n>MSG_00001}" cellClick=".onSelectRow">
+        <table:columns>
+            <table:Column width="4%" filterProperty="Idx" sortProperty="Idx">
+                <Label text="No." />
+                <table:template>
+                    <Text text="{Idx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10%" filterProperty="Apptx" sortProperty="Apptx">
+                <Label text="{i18n>LABEL_00111}" />
+                <table:template>
+                    <Text text="{Apptx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12%" filterProperty="Orgtx" sortProperty="Orgtx">
+                <Label text="{i18n>LABEL_00175}" />
+                <table:template>
+                    <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="auto" filterProperty="Apptl" sortProperty="Apptl">
+                <Label text="{i18n>LABEL_09024}" />
+                <table:template>
+                    <Text text="{Apptl}" width="100%" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8%" filterProperty="Apppnm" sortProperty="Apppnm">
+                <Label text="{i18n>LABEL_00135}" />
+                <table:template>
+                    <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12%" filterProperty="Appdt" sortProperty="Appdt">
+                <Label text="{i18n>LABEL_00137}" />
+                <table:template>
+                    <Text text="{Appdt}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8%" filterProperty="Sgnpnm" sortProperty="Sgnpnm">
+                <Label text="{i18n>LABEL_00171}" />
+                <table:template>
+                    <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12%" filterProperty="Sgndt" sortProperty="Sgndt">
+                <Label text="{i18n>LABEL_00232}" />
+                <table:template>
+                    <Text text="{Sgndt}" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

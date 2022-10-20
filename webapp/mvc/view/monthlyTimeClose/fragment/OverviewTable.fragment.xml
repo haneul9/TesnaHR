@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:table="sap.ui.table"
     xmlns:core="sap.ui.core">
-    <table:Table id="monthlyTimeCloseTable1" selectionMode="None" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/table1/list}" visibleRowCount="{/table1/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table}" noData="{i18n>MSG_00001}">
+    <table:Table id="monthlyTimeCloseTable1" selectionMode="{= ${/auth} === 'M' ? 'MultiToggle' : 'None' }" width="100%" columnHeaderHeight="45" rowHeight="44" rows="{/table1/list}" visibleRowCount="{/table1/rowCount}" busyIndicatorDelay="0" busy="{/contentsBusy/table1}" noData="{i18n>MSG_00001}">
         <table:rowSettingsTemplate>
             <table:RowSettings highlight="{ path: 'Clstx', formatter: '.rowHighlight' }" />
         </table:rowSettingsTemplate>

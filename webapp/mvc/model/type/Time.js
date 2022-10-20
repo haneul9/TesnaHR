@@ -64,7 +64,7 @@ sap.ui.define(
         }
 
         if (typeof oValue === 'string' || oValue instanceof String) {
-          return this.getMoment(oValue).format(sHHmmss);
+          return _.size(oValue) === 4 ? oValue.replace(/(\d{2})(\d)/g, '$1:$2') : this.getMoment(oValue).format(sHHmmss);
         }
 
         throw new FormatException(`Don't know how to format Time to ${sTargetType}`);

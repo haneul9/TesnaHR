@@ -31,7 +31,7 @@ sap.ui.define(
         return {
           busy: false,
           auth: '',
-          isPossibleApproval: true,
+          isPossibleApproval: false,
           isActiveSearch: false,
           contentsBusy: {
             buttonApproval: false,
@@ -72,6 +72,7 @@ sap.ui.define(
           await this.setOrgehEntry();
 
           this.toggleActiveSearch();
+          this.toggleActiveApproval();
 
           await this.retrieveList();
         } catch (oError) {
@@ -89,6 +90,13 @@ sap.ui.define(
         const sAuth = oViewModel.getProperty('/auth');
 
         oViewModel.setProperty('/isActiveSearch', _.isEqual(sAuth, 'H') ? true : !_.isEmpty(mSearchConditions.Orgeh));
+      },
+
+      toggleActiveApproval() {
+        const oViewModel = this.getViewModel();
+        const mSearchConditions = oViewModel.getProperty('/searchConditions');
+
+        oViewModel.setProperty('/isPossibleApproval', !_.isEmpty(mSearchConditions.Orgeh) && !_.isEqual(mSearchConditions.Orgeh, '00000000'));
       },
 
       async setPersaEntry() {
@@ -202,6 +210,7 @@ sap.ui.define(
 
           this.setOrgehEntry();
           this.toggleActiveSearch();
+          this.toggleActiveApproval();
         } catch (oError) {
           this.debug('Controller > shiftChange > onChangePersa Error', oError);
 
@@ -213,6 +222,7 @@ sap.ui.define(
 
       onChangeOrgeh() {
         this.toggleActiveSearch();
+        this.toggleActiveApproval();
       },
 
       onPressSearch() {

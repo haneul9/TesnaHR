@@ -49,7 +49,7 @@ sap.ui.define(
             ? this.getBundleText('LABEL_00165') // 결재
             : this.getBundleText('LABEL_00100'); // 조회
 
-        return `${this.getBundleText('LABEL_04001')} ${sRouteText}`;  // 근무계획변경신청
+        return `${this.getBundleText('LABEL_04001')} ${sRouteText}`; // 근무계획변경신청
       },
 
       getBreadcrumbsLinks() {
@@ -235,7 +235,7 @@ sap.ui.define(
             }),
           ]);
 
-          const mHeaderInfo = { ...mFormData, ...mHeader };
+          const mHeaderInfo = { ...mFormData, ..._.omit(mHeader, ['Orgeh', 'Orgtx']) };
 
           oViewModel.setProperty('/form', {
             ...mHeaderInfo,
@@ -392,17 +392,10 @@ sap.ui.define(
 
         try {
           const oModel = this.getModel(ServiceNames.WORKTIME);
-          const oTable = this.byId(sPrcty === 'S' ? this.DIALOG_TABLE_ID : this.LIST_TABLE_ID);
+          const oDialogTable = this.byId(this.DIALOG_TABLE_ID);
+          const aTableList = _.cloneDeep(oViewModel.getProperty('/form/list'));
+          const aSelectedData = sPrcty === 'A' ? aTableList : [...aTableList, ...this.TableUtils.getSelectionData(oDialogTable)];
           const mFormData = _.cloneDeep(oViewModel.getProperty('/form'));
-          const aSelectedIndex = oTable.getSelectedIndices();
-          const aTableList = oViewModel.getProperty('/form/list');
-          const aDialogTableList = oViewModel.getProperty('/dialog/list');
-          const aTableData = sPrcty === 'S' ? aDialogTableList : aTableList;
-          const aSelectedData = _.chain(aTableData)
-            .cloneDeep()
-            .filter((o, i) => sPrcty === 'A' || _.includes(aSelectedIndex, i))
-            .concat(sPrcty === 'S' ? aTableList : [])
-            .value();
 
           const { Appno } = await Client.create(oModel, 'DailyShiftChangeApply', {
             Prcty: sPrcty,
@@ -745,7 +738,7 @@ sap.ui.define(
             .attachAfterOpen(() => {
               this.toggleTableWeekendClass(this.DIALOG_TABLE_ID);
             })
-            .attachBeforeClose(() => this.byId(this.DIALOG_TABLE_ID).clearSelection());
+            .attachBeforeClose(() => this.TableUtils.clearTable(this.byId(this.DIALOG_TABLE_ID)));
 
           oView.addDependent(this.pRegistDialog);
         }

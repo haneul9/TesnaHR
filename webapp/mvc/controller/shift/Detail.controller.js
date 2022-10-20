@@ -187,7 +187,7 @@ sap.ui.define(
         };
 
         return Promise.all([
-          Client.getEntitySet(oModel, 'TimePernrList', mPayload), //
+          Client.getEntitySet(oModel, 'TimePernrList', { Austy: oViewModel.getProperty('/auth'), ...mPayload }), //
           Client.getEntitySet(oModel, 'TimeSchkzList', _.omit(mPayload, 'Orgeh')),
           Client.getEntitySet(oModel, 'KostlList', mPayload),
         ]);

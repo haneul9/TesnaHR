@@ -111,10 +111,12 @@ sap.ui.define(
       getSelectionData(oTable) {
         const aSelectedIndices = oTable.getSelectedIndices();
 
-        return _.chain(oTable.getBinding('rows').getContexts())
-          .filter((o, i) => _.includes(aSelectedIndices, i))
-          .map((o) => ({ ...o.getObject() }))
-          .value();
+        return (
+          _.chain(oTable.getBinding('rows').getContexts())
+            .filter((o, i) => _.includes(aSelectedIndices, i))
+            .map((o) => ({ ...o.getObject() }))
+            .value() ?? []
+        );
       },
 
       export({ oTable, sFileName, aTableData = [], aCustomColumns = [], sStatCode = 'ZappStatAl', sStatTxt = 'ZappStxtAl' }) {

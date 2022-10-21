@@ -344,16 +344,16 @@ sap.ui.define(
 
       onPressApprove() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const aSelectedIndices = oTable.getSelectedIndices();
+        const aSelectedTableData = this.TableUtils.getSelectionData(oTable);
 
-        if (!aSelectedIndices.length) {
+        if (!aSelectedTableData.length) {
           MessageBox.alert(this.getBundleText('MSG_00010', 'LABEL_00121')); // {신청}할 데이터를 선택하세요.
           return;
         }
 
         if (
-          !_.chain(this.getViewModel().getProperty('/list'))
-            .filter((o, i) => _.includes(aSelectedIndices, i) && !!o.Appno && o.Appno !== '0000000000')
+          !_.chain(aSelectedTableData)
+            .filter((o) => !!o.Appno && o.Appno !== '0000000000')
             .size()
             .isEqual(0)
             .value()
@@ -376,7 +376,6 @@ sap.ui.define(
             try {
               const oModel = this.getModel(ServiceNames.WORKTIME);
               const aReturnMsg = [];
-              const aSelectedTableData = this.TableUtils.getSelectionData(oTable);
 
               for (const mPayload of aSelectedTableData) {
                 const mReturnData = await Client.create(oModel, 'TimeReaderCheck', mPayload);
@@ -439,14 +438,12 @@ sap.ui.define(
 
       onPressCancel() {
         const oTable = this.byId(this.LIST_TABLE_ID);
-        const aSelectedIndices = oTable.getSelectedIndices();
+        const aSelectedTableData = _.chain(this.TableUtils.getSelectionData(oTable)).uniqBy('Appno').value();
 
-        if (!aSelectedIndices.length) {
+        if (!aSelectedTableData.length) {
           MessageBox.alert(this.getBundleText('MSG_00010', 'LABEL_00118')); // {취소}할 데이터를 선택하세요.
           return;
         }
-
-        const aSelectedTableData = _.chain(this.TableUtils.getSelectionData(oTable)).uniqBy('Appno').value();
 
         if (_.filter(aSelectedTableData, (o) => o.Appst !== '20').length > 0) {
           MessageBox.alert(this.getBundleText('MSG_00064')); // 신청 상태의 데이터만 취소가 가능합니다.

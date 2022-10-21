@@ -448,6 +448,7 @@ sap.ui.define(
               .value(),
           }), //
           this.getBoxObject({ align: 'center', label: _.get(aGridData, [0, 'Zzcaltltx']), classNames: 'Normal' }),
+          this.getBoxObject({ align: 'center', label: _.get(aGridData, [0, 'Number']), classNames: 'Normal' }),
           this.getBoxObject({ align: 'center', label: _.get(aGridData, [0, 'Orgtx']), classNames: 'Normal' }),
           this.getBoxObject({ align: 'center', label: _.get(aGridData, [0, 'Rtext']), classNames: 'Normal' }),
           ..._.map(aGridData, (o) => ({
@@ -500,6 +501,7 @@ sap.ui.define(
         return [
           this.getBoxObject({ label: this.getBundleText('LABEL_00210'), classNames: 'Header' }), // 성명
           this.getBoxObject({ label: this.getBundleText('LABEL_00136'), classNames: 'Header' }), // 직급/직책
+          this.getBoxObject({ label: 'No.', classNames: 'Header' }),
           this.getBoxObject({ label: this.getBundleText('LABEL_00219'), classNames: 'Header' }), // 부서
           this.getBoxObject({ label: this.getBundleText('LABEL_00188'), classNames: 'Header' }), // 근무일정규칙
           ..._.times(iCurrentDayInMonth, (d) =>
@@ -542,7 +544,7 @@ sap.ui.define(
               .groupBy('Pernr')
               .map((o) => {
                 return {
-                  ..._.chain(o).get(0).pick(['Ename', 'Orgtx', 'Ltext', 'Zzcaltltx']).value(),
+                  ..._.chain(o).get(0).pick(['Ename', 'Number', 'Orgtx', 'Ltext', 'Zzcaltltx']).value(),
                   ..._.chain(o)
                     .orderBy('Tmdat')
                     .map((v, i) => ({ [`Dayngt${i}`]: mWorkType[v.Dayngt] }))
@@ -569,7 +571,7 @@ sap.ui.define(
         const sTyymm = oViewModel.getProperty('/searchConditions/Tyymm');
         const iCurrentDayInMonth = moment(sTyymm).daysInMonth();
 
-        oViewModel.setProperty('/calendar/columnTemplate', `100px 80px 180px 140px repeat(${iCurrentDayInMonth}, 1fr)`);
+        oViewModel.setProperty('/calendar/columnTemplate', `100px 80px 30px 180px 140px repeat(${iCurrentDayInMonth}, 1fr)`);
         oViewModel.setProperty('/calendar/plans', this.getGridHeader([], iCurrentDayInMonth));
       },
 
@@ -629,6 +631,7 @@ sap.ui.define(
         const aCustomColumns = [
           { type: 'String', label: this.getBundleText('LABEL_00210'), property: 'Ename' },
           { type: 'String', label: this.getBundleText('LABEL_00136'), property: 'Zzcaltltx' },
+          { type: 'String', label: 'No.', property: 'Number' },
           { type: 'String', label: this.getBundleText('LABEL_00219'), property: 'Orgtx' },
           ..._.times(moment(`${sTyymm}01`).daysInMonth(), (d) => ({ type: 'String', label: _.toString(d + 1), property: `Dayngt${d}` })),
         ];

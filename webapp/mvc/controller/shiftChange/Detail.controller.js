@@ -394,7 +394,13 @@ sap.ui.define(
           const oModel = this.getModel(ServiceNames.WORKTIME);
           const oDialogTable = this.byId(this.DIALOG_TABLE_ID);
           const aTableList = _.cloneDeep(oViewModel.getProperty('/form/list'));
-          const aSelectedData = sPrcty === 'A' ? aTableList : [...aTableList, ...this.TableUtils.getSelectionData(oDialogTable)];
+          const aSelectedData =
+            sPrcty === 'A'
+              ? aTableList
+              : [
+                  ...aTableList, //
+                  ...this.TableUtils.getSelectionData(oDialogTable),
+                ];
           const mFormData = _.cloneDeep(oViewModel.getProperty('/form'));
 
           const { Appno } = await Client.create(oModel, 'DailyShiftChangeApply', {

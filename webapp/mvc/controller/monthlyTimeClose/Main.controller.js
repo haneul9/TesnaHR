@@ -349,14 +349,12 @@ sap.ui.define(
         let sConfirmLabel = 'MSG_09004'; // 마감처리 하시겠습니까?
 
         if (sAuth === 'M') {
-          const aSelectedIndices = oTable.getSelectedIndices();
+          aSelectedData = this.TableUtils.getSelectionData(oTable);
 
-          if (aSelectedIndices.length < 1) {
+          if (aSelectedData.length < 1) {
             MessageBox.alert(this.getBundleText('MSG_09001')); // Overview에서 데이터를 선택하여 주십시오.
             return;
           }
-
-          aSelectedData = this.TableUtils.getSelectionData(oTable);
 
           if (
             _.chain(aSelectedData)
@@ -423,14 +421,12 @@ sap.ui.define(
         let aSelectedData = [];
 
         if (sAuth === 'M') {
-          const aSelectedIndices = oTable.getSelectedIndices();
+          aSelectedData = this.TableUtils.getSelectionData(oTable);
 
-          if (aSelectedIndices.length < 1) {
+          if (aSelectedData.length < 1) {
             MessageBox.alert(this.getBundleText('MSG_09001')); // Overview에서 데이터를 선택하여 주십시오.
             return;
           }
-
-          aSelectedData = this.TableUtils.getSelectionData(oTable);
 
           if (
             _.chain(aSelectedData)

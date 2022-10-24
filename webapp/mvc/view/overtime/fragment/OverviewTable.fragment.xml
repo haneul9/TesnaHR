@@ -35,19 +35,19 @@
                         <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10%" filterProperty="Datum" sortProperty="Datum">
+                <table:Column width="10%" filterProperty="TmdatFormatted" sortProperty="TmdatFormatted">
                     <Label text="{i18n>LABEL_07002}"/>
                     <table:template>
                         <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="auto" filterProperty="Beguz" sortProperty="Beguz">
+                <table:Column width="auto" filterProperty="BeguzFormatted" sortProperty="BeguzFormatted">
                     <Label text="{i18n>LABEL_07003}"/>
                     <table:template>
                         <Text text="{ path: 'Beguz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8%" filterProperty="Enduz" sortProperty="Enduz">
+                <table:Column width="8%" filterProperty="EnduzFormatted" sortProperty="EnduzFormatted">
                     <Label text="{i18n>LABEL_07004}"/>
                     <table:template>
                         <Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
@@ -65,7 +65,7 @@
                         <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8%" filterProperty="Appda" sortProperty="Appda">
+                <table:Column width="8%" filterProperty="AppdaFormatted" sortProperty="AppdaFormatted">
                     <Label text="{i18n>LABEL_00189}" />
                     <table:template>
                         <Text text="{ path: 'Appda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
@@ -77,7 +77,7 @@
                         <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8%" filterProperty="Sgnda" sortProperty="Sgnda">
+                <table:Column width="8%" filterProperty="SgndaFormatted" sortProperty="SgndaFormatted">
                     <Label text="{i18n>LABEL_00186}" />
                     <table:template>
                         <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />

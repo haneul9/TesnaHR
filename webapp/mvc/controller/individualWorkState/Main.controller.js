@@ -26,6 +26,12 @@ sap.ui.define(
       sDialChartId: 'WeekWorkDialChart',
       sDialChartDiv: 'chart-weekWork-app-dial-container',
 
+      LIST_TABLE1_ID: 'individualTable1',
+      LIST_TABLE2_ID: 'individualTable2',
+      LIST_TABLE3_ID: 'individualTable3',
+      LIST_TABLE4_ID: 'individualTable4',
+      LIST_TABLE5_ID: 'individualTable5',
+
       getCurrentLocationText() {
         return this.getBundleText('LABEL_02001'); // My Time Calendar
       },
@@ -583,6 +589,9 @@ sap.ui.define(
             _.filter(aQuarters, (o) => _.toNumber(o.Ktart) > 20)
           );
 
+          this.TableUtils.clearTable(this.byId(this.LIST_TABLE1_ID));
+          this.TableUtils.clearTable(this.byId(this.LIST_TABLE2_ID));
+
           this.setContentsBusy(false, 'quarter');
         } catch (oError) {
           this.debug('Controller > individualWorkState > retrieveQuarter Error', oError);
@@ -610,6 +619,9 @@ sap.ui.define(
 
           oViewModel.setProperty('/MonthWorkList', aWorkings);
           oViewModel.setProperty('/OTWorkList', aOvertimes);
+
+          this.TableUtils.clearTable(this.byId(this.LIST_TABLE3_ID));
+          this.TableUtils.clearTable(this.byId(this.LIST_TABLE4_ID));
 
           this.setContentsBusy(false, 'work');
         } catch (oError) {
@@ -691,8 +703,16 @@ sap.ui.define(
               No: ++i,
               Beguz: o.Beguz === '-' ? null : o.Beguz,
               Enduz: o.Enduz === '-' ? null : o.Enduz,
+              BegdaFormatted: this.DateUtils.format(o.Begda),
+              EnddaFormatted: this.DateUtils.format(o.Endda),
+              AppdtFormatted: this.DateUtils.format(o.Appdt),
+              SgndtFormatted: this.DateUtils.format(o.Sgndt),
+              BeguzFormatted: this.TimeUtils.format(o.Beguz),
+              EnduzFormatted: this.TimeUtils.format(o.Enduz),
             }))
           );
+
+          this.TableUtils.clearTable(this.byId(this.LIST_TABLE5_ID));
 
           this.setContentsBusy(false, 'byDay');
         } catch (oError) {

@@ -55,7 +55,7 @@
                     <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="100px" filterProperty="Tmdat" sortProperty="Tmdat">
+            <table:Column width="100px" filterProperty="TmdatFormatted" sortProperty="TmdatFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06016}" />
                     <Label text="{i18n>LABEL_06016}" />
@@ -82,7 +82,7 @@
                     <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px" headerSpan="4" filterProperty="Begdaf" sortProperty="Begdaf">
+            <table:Column width="120px" headerSpan="4" filterProperty="BegdafFormatted" sortProperty="BegdafFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06003}" />
                     <Label text="{i18n>LABEL_06004}" />
@@ -91,7 +91,7 @@
                     <Text text="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px" filterProperty="Beguzf" sortProperty="Beguzf">
+            <table:Column width="120px" filterProperty="BeguzfFormatted" sortProperty="BeguzfFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06003}" />
                     <Label text="{i18n>LABEL_06005}" />
@@ -100,7 +100,7 @@
                     <Text text="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px" filterProperty="Enddaf" sortProperty="Enddaf">
+            <table:Column width="120px" filterProperty="EnddafFormatted" sortProperty="EnddafFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06003}" />
                     <Label text="{i18n>LABEL_06006}" />
@@ -109,7 +109,7 @@
                     <Text text="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px" filterProperty="Enduzf" sortProperty="Enduzf">
+            <table:Column width="120px" filterProperty="EnduzfFormatted" sortProperty="EnduzfFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06003}" />
                     <Label text="{i18n>LABEL_06007}" />
@@ -161,7 +161,6 @@
                 </table:multiLabels>
                 <table:template>
                     <core:Icon width="100%" src="sap-icon://accept" color="#FE5F58" size="1.5em" visible="{= ${Lateyn} === 'X' }" />
-                    <!-- <Text text="{Lateyn}" width="100%" textAlign="Center" wrapping="false" /> -->
                 </table:template>
             </table:Column>
             <table:Column width="180px" filterProperty="Awrsntx" sortProperty="Awrsntx">
@@ -182,7 +181,7 @@
                     <ObjectStatus class="table-object-status font-black" text="{= !!${Dedhr} ? '-' : ''}{ path: 'Dedhr', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" state="Error" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px" headerSpan="4" filterProperty="Begda" sortProperty="Begda">
+            <table:Column width="120px" headerSpan="4" filterProperty="BegdaFormatted" sortProperty="BegdaFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06014}" />
                     <Label text="{i18n>LABEL_06004}" />
@@ -191,7 +190,7 @@
                     <Text text="{ path: 'Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px" filterProperty="Beguz" sortProperty="Beguz">
+            <table:Column width="120px" filterProperty="BeguzFormatted" sortProperty="BeguzFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06014}" />
                     <Label text="{i18n>LABEL_06005}" />
@@ -200,7 +199,7 @@
                     <Text text="{ path: 'Beguz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px" filterProperty="Endda" sortProperty="Endda">
+            <table:Column width="120px" filterProperty="EnddaFormatted" sortProperty="EnddaFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06014}" />
                     <Label text="{i18n>LABEL_06006}" />
@@ -209,7 +208,7 @@
                     <Text text="{ path: 'Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="120px" filterProperty="Enduz" sortProperty="Enduz">
+            <table:Column width="120px" filterProperty="EnduzFormatted" sortProperty="EnduzFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_06014}" />
                     <Label text="{i18n>LABEL_06007}" />

@@ -73,7 +73,7 @@
                     <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%" filterProperty="Begda" sortProperty="Begda">
+            <table:Column width="7%" filterProperty="BegdaFormatted" sortProperty="BegdaFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00148}" />
                     <Label text="{i18n>LABEL_00148}" />
@@ -82,7 +82,7 @@
                     <Text text="{ path: 'Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%" filterProperty="Endda" sortProperty="Endda">
+            <table:Column width="7%" filterProperty="EnddaFormatted" sortProperty="EnddaFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00149}" />
                     <Label text="{i18n>LABEL_00149}" />
@@ -109,7 +109,7 @@
                     <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%" filterProperty="Sgndt" sortProperty="Sgndt">
+            <table:Column width="7%" filterProperty="SgndtFormatted" sortProperty="SgndtFormatted">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00186}" />
                     <Label text="{i18n>LABEL_00186}" />

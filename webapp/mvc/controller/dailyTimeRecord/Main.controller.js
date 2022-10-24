@@ -278,8 +278,11 @@ sap.ui.define(
               ..._.omit(o, '__metadata'),
               Dedhr: this.TimeUtils.nvl(o.Dedhr),
               Lastclock: o.Lastclock === '00:00~00:00' ? '' : o.Lastclock,
+              TmdatFormatted: this.DateUtils.format(o.Tmdat),
             }))
           );
+
+          this.TableUtils.clearTable(oTable);
         } catch (oError) {
           this.debug('Controller > dailyTimeRecord > retrieveList Error', oError);
 

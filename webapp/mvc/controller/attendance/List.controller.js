@@ -177,8 +177,14 @@ sap.ui.define(
           });
           oViewModel.setProperty(
             '/list',
-            _.map(aRowData, (o) => _.omit(o, '__metadata'))
+            _.map(aRowData, (o) => ({
+              ..._.omit(o, '__metadata'),
+              AppdaFormatted: this.DateUtils.format(o.Appda),
+              SgndaFormatted: this.DateUtils.format(o.Sgnda),
+            }))
           );
+
+          this.TableUtils.clearTable(oTable);
         } catch (oError) {
           throw oError;
         }

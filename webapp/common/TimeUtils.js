@@ -70,9 +70,15 @@ sap.ui.define(
         },
 
         format(vValue, sTimeFormat = 'HH:mm') {
+          if (!vValue || (_.has(vValue, 'ms') && _.isEqual(vValue.ms, 0))) {
+            return null;
+          }
+
           if (typeof vValue === 'string' || vValue instanceof String) {
             const sTimeString = vValue.replace(/[^\d]/g, '');
             return moment(`19700101${sTimeString}`, 'YYYYMMDDHHmmss').format(sTimeFormat);
+          } else if (_.has(vValue, 'ms')) {
+            return this.toString(vValue, sTimeFormat);
           }
         },
       };

@@ -65,7 +65,7 @@
                         <Text text="{Apppnm}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8%" filterProperty="Appda" sortProperty="Appda">
+                <table:Column width="8%" filterProperty="AppdaFormatted" sortProperty="AppdaFormatted">
                     <Label text="{i18n>LABEL_00189}" />
                     <table:template>
                         <Text text="{ path: 'Appda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />
@@ -77,7 +77,7 @@
                         <Text text="{Sgnpnm}" width="100%" textAlign="Center" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8%" filterProperty="Sgnda" sortProperty="Sgnda">
+                <table:Column width="8%" filterProperty="SgndaFormatted" sortProperty="SgndaFormatted">
                     <Label text="{i18n>LABEL_00186}" />
                     <table:template>
                         <Text text="{ path: 'Sgnda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" />

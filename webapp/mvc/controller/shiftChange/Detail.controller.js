@@ -138,12 +138,7 @@ sap.ui.define(
         oViewModel.setSizeLimit(10000);
         oViewModel.setData(this.initializeModel());
 
-        this.DAY_WORK_TYPES = {
-          D: this.getBundleText('LABEL_00133'),
-          N: this.getBundleText('LABEL_00127'),
-          T: this.getBundleText('LABEL_00126'),
-          F: this.getBundleText('LABEL_00125'),
-        };
+        this.DAY_WORK_TYPES = _.chain(oViewModel.getProperty('/entry/Wtype')).keyBy('Zcode').mapValues('Ztext').value();
 
         // 신청,조회 - B, Work to do - WE, Not Work to do - WD
         this.DISPLAY_MODE = oParameter.flag || 'B';
@@ -191,6 +186,7 @@ sap.ui.define(
             await this.setTmPeriod();
           }
 
+          this.TableUtils.clearTable(this.byId(this.LIST_TABLE_ID));
           this.setWeekends();
           this.toggleColumns();
           this.toggleTableWeekendClass(this.LIST_TABLE_ID);
@@ -241,7 +237,16 @@ sap.ui.define(
             ...mHeaderInfo,
             rowCount: Math.min(aResults.length, 10),
             listMode: !mHeaderInfo.Appst || mHeaderInfo.Appst === '10' ? 'MultiToggle' : 'None',
-            list: _.map(aResults, (o) => _.omit(o, '__metadata')),
+            list: _.map(aResults, (o) => ({
+              ..._.omit(o, '__metadata'),
+              ..._.chain(31)
+                .times((i) => {
+                  const sFieldName = `Dayngt${_.padStart(i + 1, 2, '0')}`;
+                  return { [`${sFieldName}Formatted`]: this.DAY_WORK_TYPES[o[sFieldName]] };
+                })
+                .reduce((acc, cur) => ({ ...acc, ...cur }), {})
+                .value(),
+            })),
             TmDateTxt: `${this.DateUtils.format(mHeaderInfo.Tmdat)} ( ${this.getBundleText('LABEL_04002')}: ${this.DateUtils.format(mHeaderInfo.Clsda)} ${this.TimeUtils.format(mHeaderInfo.Clstm)} )`,
           });
         } catch (oError) {

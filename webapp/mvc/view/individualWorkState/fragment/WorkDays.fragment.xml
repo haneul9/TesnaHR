@@ -12,7 +12,7 @@
             </ComboBox>
         </HBox>
         <HBox justifyContent="SpaceBetween">
-            <table:Table class="pr-20-px" rows="{/MonthWorkList}" visibleRowCount="6" width="100%" selectionMode="None" columnHeaderHeight="38" rowHeight="37" noData="{i18n>MSG_00001}">
+            <table:Table id="individualTable3" class="pr-20-px" rows="{/MonthWorkList}" visibleRowCount="6" width="100%" selectionMode="None" columnHeaderHeight="38" rowHeight="37" noData="{i18n>MSG_00001}">
                 <table:Column width="auto" sortProperty="Wktxt" filterProperty="Wktxt">
                     <Label text="{i18n>LABEL_02012}"/>
                     <table:template>
@@ -32,7 +32,7 @@
                     </table:template>
                 </table:Column>
             </table:Table>
-            <table:Table rows="{/OTWorkList}" visibleRowCount="6" width="100%" selectionMode="None" columnHeaderHeight="38" rowHeight="37" noData="{i18n>MSG_00001}">
+            <table:Table id="individualTable4" rows="{/OTWorkList}" visibleRowCount="6" width="100%" selectionMode="None" columnHeaderHeight="38" rowHeight="37" noData="{i18n>MSG_00001}">
                 <table:Column width="auto" sortProperty="Ottxt" filterProperty="Ottxt">
                     <Label text="{i18n>LABEL_02013}"/>
                     <table:template>

@@ -142,8 +142,17 @@ sap.ui.define(
           });
           oViewModel.setProperty(
             '/list',
-            _.map(aRowData, (o) => _.omit(o, '__metadata'))
+            _.map(aRowData, (o) => ({
+              ..._.omit(o, '__metadata'),
+              TmdatFormatted: this.DateUtils.format(o.Tmdat),
+              AppdaFormatted: this.DateUtils.format(o.Appda),
+              SgndaFormatted: this.DateUtils.format(o.Sgnda),
+              BeguzFormatted: this.TimeUtils.format(o.Beguz),
+              EnduzFormatted: this.TimeUtils.format(o.Enduz),
+            }))
           );
+
+          this.TableUtils.clearTable(oTable);
         } catch (oError) {
           throw oError;
         }

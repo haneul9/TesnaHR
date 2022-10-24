@@ -27,7 +27,7 @@
                     <m:Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt01" sortProperty="Dayngt01" visible="{/form/visibleColumns/Dayngt1}">
+            <Column width="50px" filterProperty="Dayngt01Formatted" sortProperty="Dayngt01Formatted" visible="{/form/visibleColumns/Dayngt1}">
                 <m:Label text="1" />
                 <template>
                     <m:Text text="{ path: 'Dayngt01', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -37,7 +37,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt02" sortProperty="Dayngt02" visible="{/form/visibleColumns/Dayngt2}">
+            <Column width="50px" filterProperty="Dayngt02Formatted" sortProperty="Dayngt02Formatted" visible="{/form/visibleColumns/Dayngt2}">
                 <m:Label text="2" />
                 <template>
                     <m:Text text="{ path: 'Dayngt02', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -47,7 +47,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt03" sortProperty="Dayngt03" visible="{/form/visibleColumns/Dayngt3}">
+            <Column width="50px" filterProperty="Dayngt03Formatted" sortProperty="Dayngt03Formatted" visible="{/form/visibleColumns/Dayngt3}">
                 <m:Label text="3" />
                 <template>
                     <m:Text text="{ path: 'Dayngt03', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -57,7 +57,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt04" sortProperty="Dayngt04" visible="{/form/visibleColumns/Dayngt4}">
+            <Column width="50px" filterProperty="Dayngt04Formatted" sortProperty="Dayngt04Formatted" visible="{/form/visibleColumns/Dayngt4}">
                 <m:Label text="4" />
                 <template>
                     <m:Text text="{ path: 'Dayngt04', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -67,7 +67,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt05" sortProperty="Dayngt05" visible="{/form/visibleColumns/Dayngt5}">
+            <Column width="50px" filterProperty="Dayngt05Formatted" sortProperty="Dayngt05Formatted" visible="{/form/visibleColumns/Dayngt5}">
                 <m:Label text="5" />
                 <template>
                     <m:Text text="{ path: 'Dayngt05', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -77,7 +77,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt06" sortProperty="Dayngt06" visible="{/form/visibleColumns/Dayngt6}">
+            <Column width="50px" filterProperty="Dayngt06Formatted" sortProperty="Dayngt06Formatted" visible="{/form/visibleColumns/Dayngt6}">
                 <m:Label text="6" />
                 <template>
                     <m:Text text="{ path: 'Dayngt06', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -87,7 +87,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt07" sortProperty="Dayngt07" visible="{/form/visibleColumns/Dayngt7}">
+            <Column width="50px" filterProperty="Dayngt07Formatted" sortProperty="Dayngt07Formatted" visible="{/form/visibleColumns/Dayngt7}">
                 <m:Label text="7" />
                 <template>
                     <m:Text text="{ path: 'Dayngt07', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -97,7 +97,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt08" sortProperty="Dayngt08" visible="{/form/visibleColumns/Dayngt8}">
+            <Column width="50px" filterProperty="Dayngt08Formatted" sortProperty="Dayngt08Formatted" visible="{/form/visibleColumns/Dayngt8}">
                 <m:Label text="8" />
                 <template>
                     <m:Text text="{ path: 'Dayngt08', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -107,7 +107,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt09" sortProperty="Dayngt09" visible="{/form/visibleColumns/Dayngt9}">
+            <Column width="50px" filterProperty="Dayngt09Formatted" sortProperty="Dayngt09Formatted" visible="{/form/visibleColumns/Dayngt9}">
                 <m:Label text="9" />
                 <template>
                     <m:Text text="{ path: 'Dayngt09', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -117,7 +117,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt10" sortProperty="Dayngt10" visible="{/form/visibleColumns/Dayngt10}">
+            <Column width="50px" filterProperty="Dayngt10Formatted" sortProperty="Dayngt10Formatted" visible="{/form/visibleColumns/Dayngt10}">
                 <m:Label text="10" />
                 <template>
                     <m:Text text="{ path: 'Dayngt10', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -127,7 +127,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt11" sortProperty="Dayngt11" visible="{/form/visibleColumns/Dayngt11}">
+            <Column width="50px" filterProperty="Dayngt11Formatted" sortProperty="Dayngt11Formatted" visible="{/form/visibleColumns/Dayngt11}">
                 <m:Label text="11" />
                 <template>
                     <m:Text text="{ path: 'Dayngt11', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -137,7 +137,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt12" sortProperty="Dayngt12" visible="{/form/visibleColumns/Dayngt12}">
+            <Column width="50px" filterProperty="Dayngt12Formatted" sortProperty="Dayngt12Formatted" visible="{/form/visibleColumns/Dayngt12}">
                 <m:Label text="12" />
                 <template>
                     <m:Text text="{ path: 'Dayngt12', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -147,7 +147,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt13" sortProperty="Dayngt13" visible="{/form/visibleColumns/Dayngt13}">
+            <Column width="50px" filterProperty="Dayngt13Formatted" sortProperty="Dayngt13Formatted" visible="{/form/visibleColumns/Dayngt13}">
                 <m:Label text="13" />
                 <template>
                     <m:Text text="{ path: 'Dayngt13', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -157,7 +157,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt14" sortProperty="Dayngt14" visible="{/form/visibleColumns/Dayngt14}">
+            <Column width="50px" filterProperty="Dayngt14Formatted" sortProperty="Dayngt14Formatted" visible="{/form/visibleColumns/Dayngt14}">
                 <m:Label text="14" />
                 <template>
                     <m:Text text="{ path: 'Dayngt14', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -167,7 +167,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt15" sortProperty="Dayngt15" visible="{/form/visibleColumns/Dayngt15}">
+            <Column width="50px" filterProperty="Dayngt15Formatted" sortProperty="Dayngt15Formatted" visible="{/form/visibleColumns/Dayngt15}">
                 <m:Label text="15" />
                 <template>
                     <m:Text text="{ path: 'Dayngt15', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -177,7 +177,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt16" sortProperty="Dayngt16" visible="{/form/visibleColumns/Dayngt16}">
+            <Column width="50px" filterProperty="Dayngt16Formatted" sortProperty="Dayngt16Formatted" visible="{/form/visibleColumns/Dayngt16}">
                 <m:Label text="16" />
                 <template>
                     <m:Text text="{ path: 'Dayngt16', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -187,7 +187,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt17" sortProperty="Dayngt17" visible="{/form/visibleColumns/Dayngt17}">
+            <Column width="50px" filterProperty="Dayngt17Formatted" sortProperty="Dayngt17Formatted" visible="{/form/visibleColumns/Dayngt17}">
                 <m:Label text="17" />
                 <template>
                     <m:Text text="{ path: 'Dayngt17', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -197,7 +197,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt18" sortProperty="Dayngt18" visible="{/form/visibleColumns/Dayngt18}">
+            <Column width="50px" filterProperty="Dayngt18Formatted" sortProperty="Dayngt18Formatted" visible="{/form/visibleColumns/Dayngt18}">
                 <m:Label text="18" />
                 <template>
                     <m:Text text="{ path: 'Dayngt18', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -207,7 +207,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt19" sortProperty="Dayngt19" visible="{/form/visibleColumns/Dayngt19}">
+            <Column width="50px" filterProperty="Dayngt19Formatted" sortProperty="Dayngt19Formatted" visible="{/form/visibleColumns/Dayngt19}">
                 <m:Label text="19" />
                 <template>
                     <m:Text text="{ path: 'Dayngt19', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -217,7 +217,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt20" sortProperty="Dayngt20" visible="{/form/visibleColumns/Dayngt20}">
+            <Column width="50px" filterProperty="Dayngt20Formatted" sortProperty="Dayngt20Formatted" visible="{/form/visibleColumns/Dayngt20}">
                 <m:Label text="20" />
                 <template>
                     <m:Text text="{ path: 'Dayngt20', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -227,7 +227,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt21" sortProperty="Dayngt21" visible="{/form/visibleColumns/Dayngt21}">
+            <Column width="50px" filterProperty="Dayngt21Formatted" sortProperty="Dayngt21Formatted" visible="{/form/visibleColumns/Dayngt21}">
                 <m:Label text="21" />
                 <template>
                     <m:Text text="{ path: 'Dayngt21', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -237,7 +237,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt22" sortProperty="Dayngt22" visible="{/form/visibleColumns/Dayngt22}">
+            <Column width="50px" filterProperty="Dayngt22Formatted" sortProperty="Dayngt22Formatted" visible="{/form/visibleColumns/Dayngt22}">
                 <m:Label text="22" />
                 <template>
                     <m:Text text="{ path: 'Dayngt22', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -247,7 +247,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt23" sortProperty="Dayngt23" visible="{/form/visibleColumns/Dayngt23}">
+            <Column width="50px" filterProperty="Dayngt23Formatted" sortProperty="Dayngt23Formatted" visible="{/form/visibleColumns/Dayngt23}">
                 <m:Label text="23" />
                 <template>
                     <m:Text text="{ path: 'Dayngt23', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -257,7 +257,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt24" sortProperty="Dayngt24" visible="{/form/visibleColumns/Dayngt24}">
+            <Column width="50px" filterProperty="Dayngt24Formatted" sortProperty="Dayngt24Formatted" visible="{/form/visibleColumns/Dayngt24}">
                 <m:Label text="24" />
                 <template>
                     <m:Text text="{ path: 'Dayngt24', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -267,7 +267,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt25" sortProperty="Dayngt25" visible="{/form/visibleColumns/Dayngt25}">
+            <Column width="50px" filterProperty="Dayngt25Formatted" sortProperty="Dayngt25Formatted" visible="{/form/visibleColumns/Dayngt25}">
                 <m:Label text="25" />
                 <template>
                     <m:Text text="{ path: 'Dayngt25', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -277,7 +277,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt26" sortProperty="Dayngt26" visible="{/form/visibleColumns/Dayngt26}">
+            <Column width="50px" filterProperty="Dayngt26Formatted" sortProperty="Dayngt26Formatted" visible="{/form/visibleColumns/Dayngt26}">
                 <m:Label text="26" />
                 <template>
                     <m:Text text="{ path: 'Dayngt26', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -287,7 +287,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt27" sortProperty="Dayngt27" visible="{/form/visibleColumns/Dayngt27}">
+            <Column width="50px" filterProperty="Dayngt27Formatted" sortProperty="Dayngt27Formatted" visible="{/form/visibleColumns/Dayngt27}">
                 <m:Label text="27" />
                 <template>
                     <m:Text text="{ path: 'Dayngt27', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -297,7 +297,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt28" sortProperty="Dayngt28" visible="{/form/visibleColumns/Dayngt28}">
+            <Column width="50px" filterProperty="Dayngt28Formatted" sortProperty="Dayngt28Formatted" visible="{/form/visibleColumns/Dayngt28}">
                 <m:Label text="28" />
                 <template>
                     <m:Text text="{ path: 'Dayngt28', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -307,7 +307,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt29" sortProperty="Dayngt29" visible="{/form/visibleColumns/Dayngt29}">
+            <Column width="50px" filterProperty="Dayngt29Formatted" sortProperty="Dayngt29Formatted" visible="{/form/visibleColumns/Dayngt29}">
                 <m:Label text="29" />
                 <template>
                     <m:Text text="{ path: 'Dayngt29', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -317,7 +317,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt30" sortProperty="Dayngt30" visible="{/form/visibleColumns/Dayngt30}">
+            <Column width="50px" filterProperty="Dayngt30Formatted" sortProperty="Dayngt30Formatted" visible="{/form/visibleColumns/Dayngt30}">
                 <m:Label text="30" />
                 <template>
                     <m:Text text="{ path: 'Dayngt30', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">
@@ -327,7 +327,7 @@
                     </m:Text>
                 </template>
             </Column>
-            <Column width="50px" filterProperty="Dayngt31" sortProperty="Dayngt31" visible="{/form/visibleColumns/Dayngt31}">
+            <Column width="50px" filterProperty="Dayngt31Formatted" sortProperty="Dayngt31Formatted" visible="{/form/visibleColumns/Dayngt31}">
                 <m:Label text="31" />
                 <template>
                     <m:Text text="{ path: 'Dayngt31', formatter: '.formatDayngt' }" width="100%" textAlign="Center" wrapping="false">

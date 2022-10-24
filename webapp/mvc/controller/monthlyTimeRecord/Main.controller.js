@@ -260,6 +260,8 @@ sap.ui.define(
             '/list',
             _.map(aRowData, (o) => _.omit(o, '__metadata'))
           );
+
+          this.TableUtils.clearTable(oTable);
         } catch (oError) {
           this.debug('Controller > monthlyTimeRecord > retrieveList Error', oError);
 

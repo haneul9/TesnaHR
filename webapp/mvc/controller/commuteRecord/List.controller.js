@@ -404,8 +404,19 @@ sap.ui.define(
               Enduz: o.Enduz === '0000' ? '' : o.Enduz,
               Enduzf: o.Enduzf === '0000' ? '' : o.Enduzf,
               Dedhr: o.Dedhr === '0000' ? '' : o.Dedhr,
+              TmdatFormatted: this.DateUtils.format(o.Tmdat),
+              BegdafFormatted: this.DateUtils.format(o.Begdaf),
+              EnddafFormatted: this.DateUtils.format(o.Enddaf),
+              BegdaFormatted: this.DateUtils.format(o.Begda),
+              EnddaFormatted: this.DateUtils.format(o.Endda),
+              BeguzfFormatted: this.TimeUtils.format(o.Beguzf),
+              EnduzfFormatted: this.TimeUtils.format(o.Enduzf),
+              BeguzFormatted: this.TimeUtils.format(o.Beguz),
+              EnduzFormatted: this.TimeUtils.format(o.Enduz),
             }))
           );
+
+          this.TableUtils.clearTable(oTable);
         } catch (oError) {
           this.debug('Controller > commuteRecord > retrieveList Error', oError);
 

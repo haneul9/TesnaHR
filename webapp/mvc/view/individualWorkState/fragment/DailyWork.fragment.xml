@@ -9,20 +9,20 @@
             </HBox>
         </HBox>
         <HBox justifyContent="SpaceBetween">
-            <table:Table rows="{/DailyWorkList}" visibleRowCount="{/DailyWorkCount}" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" noData="{i18n>MSG_00001}">
+            <table:Table id="individualTable5" rows="{/DailyWorkList}" visibleRowCount="{/DailyWorkCount}" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" noData="{i18n>MSG_00001}">
                 <table:Column width="80px" sortProperty="No" filterProperty="No">
                     <Label text="{i18n>LABEL_00164}"/>
                     <table:template>
                         <Text text="{No}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="auto" sortProperty="Begda" filterProperty="Begda">
+                <table:Column width="auto" sortProperty="BegdaFormatted" filterProperty="BegdaFormatted">
                     <Label text="{i18n>LABEL_00148}"/>
                     <table:template>
                         <Text text="{ path: 'Begda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="auto" sortProperty="Endda" filterProperty="Endda">
+                <table:Column width="auto" sortProperty="EnddaFormatted" filterProperty="EnddaFormatted">
                     <Label text="{i18n>LABEL_00149}"/>
                     <table:template>
                         <Text text="{ path: 'Endda', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text"/>
@@ -40,13 +40,13 @@
                         <Text text="{Awrsntx}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="auto" sortProperty="Beguz" filterProperty="Beguz">
+                <table:Column width="auto" sortProperty="BeguzFormatted" filterProperty="BeguzFormatted">
                     <Label text="{i18n>LABEL_07003}"/>
                     <table:template>
                         <Text text="{ path: 'Beguz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="auto" sortProperty="Enduz" filterProperty="Enduz">
+                <table:Column width="auto" sortProperty="EnduzFormatted" filterProperty="EnduzFormatted">
                     <Label text="{i18n>LABEL_07004}"/>
                     <table:template>
                         <Text text="{ path: 'Enduz', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
@@ -58,7 +58,7 @@
                         <Text text="{Duration}" textAlign="Center" wrapping="false" width="100%" class="tableRow_Text"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="auto" sortProperty="Appdt" filterProperty="Appdt">
+                <table:Column width="auto" sortProperty="AppdtFormatted" filterProperty="AppdtFormatted">
                     <Label text="{i18n>LABEL_00189}"/>
                     <table:template>
                         <HBox>
@@ -70,7 +70,7 @@
                         </HBox>
                     </table:template>
                 </table:Column>
-                <table:Column width="auto" sortProperty="Sgndt" filterProperty="Sgndt">
+                <table:Column width="auto" sortProperty="SgndtFormatted" filterProperty="SgndtFormatted">
                     <Label text="{i18n>LABEL_00186}"/>
                     <table:template>
                         <Text text="{ path: 'Sgndt', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" class="tableRow_Text"/>

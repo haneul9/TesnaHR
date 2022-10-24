@@ -9,7 +9,7 @@
             </HBox>
         </HBox>
         <HBox justifyContent="SpaceBetween">
-            <table:Table class="pr-20-px" rows="{/VacaTypeList1}" visibleRowCount="3" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" noData="{i18n>MSG_00001}">
+            <table:Table id="individualTable1" class="pr-20-px" rows="{/VacaTypeList1}" visibleRowCount="3" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" noData="{i18n>MSG_00001}">
                 <table:Column width="auto" sortProperty="Kotxt" filterProperty="Kotxt">
                     <Label text="{i18n>LABEL_02007}"/>
                     <table:template>
@@ -35,7 +35,7 @@
                     </table:template>
                 </table:Column>
             </table:Table>
-            <table:Table rows="{/VacaTypeList2}" visibleRowCount="3" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" noData="{i18n>MSG_00001}">
+            <table:Table id="individualTable2" rows="{/VacaTypeList2}" visibleRowCount="3" width="100%" selectionMode="None" columnHeaderHeight="45" rowHeight="44" noData="{i18n>MSG_00001}">
                 <table:Column width="auto" sortProperty="Kotxt" filterProperty="Kotxt">
                     <Label text="{i18n>LABEL_02007}"/>
                     <table:template>

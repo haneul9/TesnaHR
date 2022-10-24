@@ -206,6 +206,8 @@ sap.ui.define(
                   .get([0, 'Clsdt2'])
                   .value(), // LABEL_09014: 미마감
           });
+
+          this.TableUtils.clearTable(this.byId(this.LIST_TABLE1_ID));
         } catch (oError) {
           throw oError;
         } finally {
@@ -236,8 +238,15 @@ sap.ui.define(
               Idx: i + 1,
               Beguzf: this.TimeUtils.nvl(o.Beguzf),
               Enduzf: this.TimeUtils.nvl(o.Enduzf),
+              TmdatFormatted: this.DateUtils.format(o.Tmdat),
+              BegdafFormatted: this.DateUtils.format(o.Begdaf),
+              EnddafFormatted: this.DateUtils.format(o.Enddaf),
+              BeguzfFormatted: this.TimeUtils.format(o.Beguzf),
+              EnduzfFormatted: this.TimeUtils.format(o.Enduzf),
             })),
           });
+
+          this.TableUtils.clearTable(this.byId(this.LIST_TABLE2_ID));
         } catch (oError) {
           throw oError;
         } finally {
@@ -247,6 +256,7 @@ sap.ui.define(
 
       async retrieveMonthlyCloseList(sPrcty) {
         const oViewModel = this.getViewModel();
+        const oTable = sPrcty === '1' ? this.byId(this.LIST_TABLE3_ID) : this.byId(this.LIST_TABLE4_ID);
         const sTablePath = sPrcty === '1' ? 'table3' : 'table4';
 
         try {
@@ -266,6 +276,8 @@ sap.ui.define(
               Idx: i + 1,
             })),
           });
+
+          this.TableUtils.clearTable(oTable);
         } catch (oError) {
           throw oError;
         } finally {

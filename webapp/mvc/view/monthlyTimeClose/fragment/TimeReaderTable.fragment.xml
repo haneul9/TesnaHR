@@ -33,7 +33,7 @@
                     <Text text="{Ename}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="8%" filterProperty="Tmdat" sortProperty="Tmdat">
+            <table:Column width="8%" filterProperty="TmdatFormatted" sortProperty="TmdatFormatted">
                 <Label text="{i18n>LABEL_06016}" />
                 <table:template>
                     <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
@@ -51,25 +51,25 @@
                     <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%" filterProperty="Begdaf" sortProperty="Begdaf">
+            <table:Column width="7%" filterProperty="BegdafFormatted" sortProperty="BegdafFormatted">
                 <Label text="{i18n>LABEL_06004}" />
                 <table:template>
                     <Text text="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%" filterProperty="Beguzf" sortProperty="Beguzf">
+            <table:Column width="7%" filterProperty="BeguzfFormatted" sortProperty="BeguzfFormatted">
                 <Label text="{i18n>LABEL_06005}" />
                 <table:template>
                     <Text text="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%" filterProperty="Enddaf" sortProperty="Enddaf">
+            <table:Column width="7%" filterProperty="EnddafFormatted" sortProperty="EnddafFormatted">
                 <Label text="{i18n>LABEL_06006}" />
                 <table:template>
                     <Text text="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="7%" filterProperty="Enduzf" sortProperty="Enduzf">
+            <table:Column width="7%" filterProperty="EnduzfFormatted" sortProperty="EnduzfFormatted">
                 <Label text="{i18n>LABEL_06007}" />
                 <table:template>
                     <Text text="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />

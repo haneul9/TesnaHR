@@ -2,6 +2,7 @@ sap.ui.define(
   [
     //
     'sap/m/MessageToast',
+    'sap/ui/table/SelectionMode',
     'sap/ui/core/Fragment',
     'sap/ui/tesna/control/MessageBox',
     'sap/ui/tesna/common/exceptions/UI5Error',
@@ -15,6 +16,7 @@ sap.ui.define(
   (
     //
     MessageToast,
+    SelectionMode,
     Fragment,
     MessageBox,
     UI5Error,
@@ -143,7 +145,7 @@ sap.ui.define(
         // 신청,조회 - B, Work to do - WE, Not Work to do - WD
         this.DISPLAY_MODE = oParameter.flag || 'B';
         oViewModel.setProperty('/displayMode', this.DISPLAY_MODE);
-        oViewModel.setProperty('/auth', this.isMss() ? 'M' : this.isHass() ? 'H' : 'E');
+        oViewModel.setProperty('/auth', this.currentAuth());
         oViewModel.setProperty('/form/Appno', oParameter.appno === 'N' ? '' : oParameter.appno);
         oViewModel.setProperty('/form/Werks', oParameter.werks);
         oViewModel.setProperty('/form/Orgeh', oParameter.orgeh);
@@ -180,7 +182,7 @@ sap.ui.define(
           if (sAppno) {
             await this.retriveDocument();
           } else {
-            oViewModel.setProperty('/form/listMode', 'MultiToggle');
+            oViewModel.setProperty('/form/listMode', SelectionMode.MultiToggle);
             oViewModel.setProperty('/form/Tyymm', moment().format('YYYYMM'));
 
             await this.setTmPeriod();
@@ -236,9 +238,9 @@ sap.ui.define(
           oViewModel.setProperty('/form', {
             ...mHeaderInfo,
             rowCount: Math.min(aResults.length, 10),
-            listMode: !mHeaderInfo.Appst || mHeaderInfo.Appst === '10' ? 'MultiToggle' : 'None',
+            listMode: !mHeaderInfo.Appst || mHeaderInfo.Appst === '10' ? SelectionMode.MultiToggle : SelectionMode.None,
             list: _.map(aResults, (o) => ({
-              ..._.omit(o, '__metadata'),
+              ...o,
               ..._.chain(31)
                 .times((i) => {
                   const sFieldName = `Dayngt${_.padStart(i + 1, 2, '0')}`;
@@ -270,7 +272,7 @@ sap.ui.define(
             Werks: mFormData.Werks,
             Orgeh: mFormData.Orgeh,
             Tyymm: mFormData.Tyymm,
-            Austy: this.isHass() ? 'H' : this.isMss() ? 'M' : 'E',
+            Austy: this.currentAuth(),
           });
 
           if (!_.isEmpty(mReturn)) {
@@ -353,7 +355,7 @@ sap.ui.define(
           const mFormData = oViewModel.getProperty('/form');
           const aEntries = await Client.getEntitySet(this.getModel(ServiceNames.NIGHTWORK), 'TimeOrgehList', {
             Werks: mFormData.Werks,
-            Austy: this.isHass() ? 'H' : this.isMss() ? 'M' : 'E',
+            Austy: this.currentAuth(),
           });
 
           oViewModel.setProperty('/form/Orgtx', _.chain(aEntries).find({ Orgeh: mFormData.Orgeh }).get('Fulln').value());
@@ -739,10 +741,7 @@ sap.ui.define(
               });
 
               oViewModel.setProperty('/dialog/rowCount', Math.min(aResults.length, 12));
-              oViewModel.setProperty(
-                '/dialog/list',
-                _.map(aResults, (o) => _.omit(o, '__metadata'))
-              );
+              oViewModel.setProperty('/dialog/list', aResults);
 
               this.setContentsBusy(false, ['table', 'dialog']);
             })

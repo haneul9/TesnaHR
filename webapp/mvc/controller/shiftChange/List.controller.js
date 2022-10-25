@@ -66,10 +66,12 @@ sap.ui.define(
           oViewModel.setSizeLimit(500);
           this.setContentsBusy(true);
 
-          oViewModel.setProperty('/auth', this.isHass() ? 'H' : this.isMss() ? 'M' : 'E');
+          oViewModel.setProperty('/auth', this.currentAuth());
 
-          await this.setPersaEntry();
-          await this.setOrgehEntry();
+          if (!this.isNavBackDetail()) {
+            await this.setPersaEntry();
+            await this.setOrgehEntry();
+          }
 
           this.toggleActiveSearch();
           this.toggleActiveApproval();
@@ -87,9 +89,8 @@ sap.ui.define(
       toggleActiveSearch() {
         const oViewModel = this.getViewModel();
         const mSearchConditions = oViewModel.getProperty('/searchConditions');
-        const sAuth = oViewModel.getProperty('/auth');
 
-        oViewModel.setProperty('/isActiveSearch', _.isEqual(sAuth, 'H') ? true : !_.isEmpty(mSearchConditions.Orgeh));
+        oViewModel.setProperty('/isActiveSearch', this.isHass() ? true : !_.isEmpty(mSearchConditions.Orgeh));
       },
 
       toggleActiveApproval() {
@@ -103,7 +104,7 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         try {
-          if (this.isHass() || this.isMss()) {
+          if (!_.isEqual(this.currentAuth(), 'E')) {
             oViewModel.setProperty('/entry/Persa', []);
             oViewModel.setProperty('/entry/Orgeh', []);
 
@@ -112,13 +113,8 @@ sap.ui.define(
               Wave: '1',
             });
 
-            oViewModel.setProperty(
-              '/entry/Persa',
-              _.chain(aEntries)
-                .map((o) => _.omit(o, '__metadata'))
-                .value()
-            );
             oViewModel.setProperty('/searchConditions/Werks', _.get(aEntries, [0, 'Persa']));
+            oViewModel.setProperty('/entry/Persa', aEntries);
           } else {
             const mAppointeeData = this.getAppointeeData();
 
@@ -146,11 +142,8 @@ sap.ui.define(
             Austy: oViewModel.getProperty('/auth'),
           });
 
-          oViewModel.setProperty(
-            '/entry/Orgeh',
-            _.map(aEntries, (o) => _.omit(o, '__metadata'))
-          );
           oViewModel.setProperty('/searchConditions/Orgeh', _.get(aEntries, [0, 'Orgeh']));
+          oViewModel.setProperty('/entry/Orgeh', aEntries);
         } catch (oError) {
           throw oError;
         }
@@ -181,7 +174,7 @@ sap.ui.define(
           oViewModel.setProperty(
             '/list',
             _.map(aRowData, (o) => ({
-              ..._.omit(o, '__metadata'),
+              ...o,
               BegdaFormatted: this.DateUtils.format(o.Begda),
               EnddaFormatted: this.DateUtils.format(o.Endda),
               AppdtFormatted: this.DateUtils.format(o.Appdt),

@@ -3,6 +3,7 @@ sap.ui.define(
   [
     // prettier 방지용 주석
     'sap/ui/tesna/control/MessageBox',
+    'sap/ui/table/SelectionMode',
     'sap/ui/tesna/common/exceptions/UI5Error',
     'sap/ui/tesna/common/AppUtils',
     'sap/ui/tesna/common/ApprovalStatusHandler',
@@ -13,6 +14,7 @@ sap.ui.define(
   (
     // prettier 방지용 주석
     MessageBox,
+    SelectionMode,
     UI5Error,
     AppUtils,
     ApprovalStatusHandler,
@@ -80,7 +82,7 @@ sap.ui.define(
         // 신청,조회 - B, Work to do - WE, Not Work to do - WD
         this.DISPLAY_MODE = oParameter.flag || 'B';
         oViewModel.setProperty('/displayMode', this.DISPLAY_MODE);
-        oViewModel.setProperty('/auth', this.isMss() ? 'M' : this.isHass() ? 'H' : 'E');
+        oViewModel.setProperty('/auth', this.currentAuth());
         oViewModel.setProperty('/form/Appno', oParameter.appno === 'N' ? '' : oParameter.appno);
         oViewModel.setProperty('/previousName', _.chain(sRouteName).split('-', 1).head().value());
 
@@ -115,7 +117,7 @@ sap.ui.define(
           if (sAppno) {
             await this.retriveDocument();
           } else {
-            oViewModel.setProperty('/form/listMode', 'MultiToggle');
+            oViewModel.setProperty('/form/listMode', SelectionMode.MultiToggle);
           }
 
           this.settingsApprovalStatus();
@@ -154,9 +156,9 @@ sap.ui.define(
           oViewModel.setProperty('/form', {
             ...mFormData,
             rowCount: Math.min(aResults.length, 10),
-            listMode: !mFormData.Appst || mFormData.Appst === '10' ? 'MultiToggle' : 'None',
+            listMode: !mFormData.Appst || mFormData.Appst === '10' ? SelectionMode.MultiToggle : SelectionMode.None,
             list: _.map(aResults, (o) => ({
-              ..._.omit(o, '__metadata'),
+              ...o,
               Beguzf: this.TimeUtils.nvl(o.Beguzf),
               Enduzf: this.TimeUtils.nvl(o.Enduzf),
               Dedhr: this.TimeUtils.nvl(o.Dedhr),

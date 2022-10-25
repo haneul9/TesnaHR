@@ -3,6 +3,7 @@ sap.ui.define(
   [
     // prettier 방지용 주석
     'sap/ui/core/Fragment',
+    'sap/ui/table/SelectionMode',
     'sap/ui/tesna/control/MessageBox',
     'sap/ui/tesna/common/exceptions/UI5Error',
     'sap/ui/tesna/common/AppUtils',
@@ -15,6 +16,7 @@ sap.ui.define(
   (
     // prettier 방지용 주석
     Fragment,
+    SelectionMode,
     MessageBox,
     UI5Error,
     AppUtils,
@@ -87,7 +89,7 @@ sap.ui.define(
             Kostl: '',
             TmdatTxt: '',
             rowCount: 0,
-            listMode: 'None',
+            listMode: SelectionMode.None,
             list: [],
             dialog: {
               minutesStep: 10,
@@ -111,7 +113,7 @@ sap.ui.define(
         // 신청,조회 - B, Work to do - WE, Not Work to do - WD
         this.DISPLAY_MODE = oParameter.flag || 'B';
         oViewModel.setProperty('/displayMode', this.DISPLAY_MODE);
-        oViewModel.setProperty('/auth', this.isMss() ? 'M' : this.isHass() ? 'H' : 'E');
+        oViewModel.setProperty('/auth', this.currentAuth());
         oViewModel.setProperty('/form/Appno', oParameter.appno === 'N' ? '' : oParameter.appno);
         oViewModel.setProperty('/form/Werks', oParameter.werks);
         oViewModel.setProperty('/form/Orgeh', oParameter.orgeh);
@@ -149,9 +151,9 @@ sap.ui.define(
           if (sAppno) {
             await this.retriveDocument();
           } else {
-            await this.retrieveTmdat();
+            oViewModel.setProperty('/form/listMode', SelectionMode.MultiToggle);
 
-            oViewModel.setProperty('/form/listMode', 'MultiToggle');
+            await this.retrieveTmdat();
           }
 
           this.settingsAttachTable();
@@ -193,8 +195,8 @@ sap.ui.define(
           oViewModel.setProperty('/form', {
             ...mFormData,
             rowCount: Math.min(aResults.length, 10),
-            listMode: !mFormData.Appst || mFormData.Appst === '10' ? 'MultiToggle' : 'None',
-            list: _.map(aResults, (o) => _.omit(o, '__metadata')),
+            listMode: !mFormData.Appst || mFormData.Appst === '10' ? SelectionMode.MultiToggle : SelectionMode.None,
+            list: aResults,
           });
         } catch (oError) {
           throw oError;
@@ -322,7 +324,7 @@ sap.ui.define(
               mDialogFormData.Awrsn &&
               mDialogFormData.Begda &&
               mDialogFormData.Endda &&
-              _.includes(['A1KR0010', 'A1KR0020', 'A1KR0030', 'A1KR0040', 'A1KR0060', 'A1KR0070', 'A1KR0080', 'A1KR0090'], mDialogFormData.Awrsn)
+              _.includes(['A1KR0010', 'A1KR0020', 'A1KR0030', 'A1KR0040', 'A1KR0060', 'A1KR0070', 'A1KR0080', 'A1KR0090', 'C2II0010', 'C2II0020'], mDialogFormData.Awrsn)
             ) {
             } else {
               return;
@@ -562,7 +564,7 @@ sap.ui.define(
 
               this.getViewModel().setProperty('/form/dialog/data', { Datim: 'X' });
 
-              if (!this.isMss() && !this.isHass()) {
+              if (_.isEqual(this.currentAuth(), 'E')) {
                 const oViewModel = this.getViewModel();
                 const aEmployees = oViewModel.getProperty('/entry/Employees');
                 const sPernr = this.getAppointeeProperty('Pernr');
@@ -939,17 +941,14 @@ sap.ui.define(
           const sAuth = oViewModel.getProperty('/auth');
           const aResults = await Client.getEntitySet(oModel, 'TimePernrList', {
             Austy: sAuth,
-            Pernr: sAuth === 'E' ? this.getAppointeeProperty('Pernr') : null,
-            Begda: moment().hours(9).toDate(),
             Werks: mFormData.Werks,
             Orgeh: sAuth === 'E' ? null : mFormData.Orgeh,
+            Pernr: sAuth === 'E' ? this.getAppointeeProperty('Pernr') : null,
+            Begda: moment().hours(9).toDate(),
             Kostl2: mFormData.Kostl,
           });
 
-          oViewModel.setProperty(
-            '/entry/Employees',
-            _.map(aResults, (o) => _.omit(o, '__metadata'))
-          );
+          oViewModel.setProperty('/entry/Employees', aResults);
         } catch (oError) {
           throw oError;
         }
@@ -962,10 +961,7 @@ sap.ui.define(
           const mFormData = oViewModel.getProperty('/form');
           const aResults = await Client.getEntitySet(oModel, 'TimeTypeList', { Werks: mFormData.Werks });
 
-          oViewModel.setProperty(
-            '/entry/TimeTypes',
-            _.map(aResults, (o) => _.omit(o, '__metadata'))
-          );
+          oViewModel.setProperty('/entry/TimeTypes', aResults);
         } catch (oError) {
           throw oError;
         }
@@ -1032,10 +1028,7 @@ sap.ui.define(
           );
 
           oViewModel.setProperty('/form/dialog/rowCount', Math.min(aAvailableList.length, 10));
-          oViewModel.setProperty(
-            '/form/dialog/list',
-            _.map(aAvailableList, (o) => _.omit(o, '__metadata'))
-          );
+          oViewModel.setProperty('/form/dialog/list', aAvailableList);
         } catch (oError) {
           throw oError;
         }

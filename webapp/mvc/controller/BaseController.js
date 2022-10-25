@@ -3,7 +3,6 @@ sap.ui.define(
     // prettier 방지용 주석
     'sap/ui/core/UIComponent',
     'sap/ui/core/mvc/Controller',
-    'sap/ui/core/Fragment',
     'sap/ui/core/routing/HashChanger',
     'sap/ui/core/routing/History',
     'sap/ui/model/json/JSONModel',
@@ -20,7 +19,6 @@ sap.ui.define(
     // prettier 방지용 주석
     UIComponent,
     Controller,
-    Fragment,
     HashChanger,
     History,
     JSONModel,
@@ -94,6 +92,12 @@ sap.ui.define(
 
       getBreadcrumbsLinks: null,
 
+      isNavBackDetail() {
+        const aHistory = _.takeRight(History.getInstance().aHistory, 2);
+        AppUtils.debug(`Route history - ${aHistory}`);
+        return aHistory.length === 2 && _.startsWith(aHistory[1], aHistory[0]);
+      },
+
       /**
        * Convenience method for accessing the router in every controller of the application.
        * @public
@@ -112,6 +116,10 @@ sap.ui.define(
       isHass() {
         const sHash = HashChanger.getInstance().getHash();
         return /^h\//.test(sHash) || /^mobile\/h\//.test(sHash);
+      },
+
+      currentAuth() {
+        return this.isHass() ? 'H' : this.isMss() ? 'M' : 'E';
       },
 
       /**

@@ -3,6 +3,7 @@ sap.ui.define(
   [
     // prettier 방지용 주석
     'sap/ui/core/Fragment',
+    'sap/ui/table/SelectionMode',
     'sap/ui/tesna/control/MessageBox',
     'sap/ui/tesna/common/exceptions/UI5Error',
     'sap/ui/tesna/common/AppUtils',
@@ -10,19 +11,22 @@ sap.ui.define(
     'sap/ui/tesna/common/FileAttachmentBoxHandler',
     'sap/ui/tesna/common/odata/Client',
     'sap/ui/tesna/common/odata/ServiceNames',
+    'sap/ui/tesna/common/Validator',
     'sap/ui/tesna/mvc/controller/BaseController',
   ],
   (
     // prettier 방지용 주석
     Fragment,
-    MessageBox,
-    UI5Error,
-    AppUtils,
-    ApprovalStatusHandler,
-    FileAttachmentBoxHandler,
-    Client,
-    ServiceNames,
-    BaseController
+	SelectionMode,
+	MessageBox,
+	UI5Error,
+	AppUtils,
+	ApprovalStatusHandler,
+	FileAttachmentBoxHandler,
+	Client,
+	ServiceNames,
+	Validator,
+	BaseController
   ) => {
     'use strict';
 
@@ -113,7 +117,7 @@ sap.ui.define(
         // 신청,조회 - B, Work to do - WE, Not Work to do - WD
         this.DISPLAY_MODE = oParameter.flag || 'B';
         oViewModel.setProperty('/displayMode', this.DISPLAY_MODE);
-        oViewModel.setProperty('/auth', this.isMss() ? 'M' : this.isHass() ? 'H' : 'E');
+        oViewModel.setProperty('/auth', this.currentAuth());
         oViewModel.setProperty('/form/Appno', oParameter.appno === 'N' ? '' : oParameter.appno);
         oViewModel.setProperty('/form/Werks', oParameter.werks);
         oViewModel.setProperty('/form/Orgeh', oParameter.orgeh);
@@ -152,7 +156,7 @@ sap.ui.define(
           } else {
             await this.retrieveTmdat();
 
-            oViewModel.setProperty('/form/listMode', 'MultiToggle');
+            oViewModel.setProperty('/form/listMode', SelectionMode.MultiToggle);
           }
 
           this.settingsAttachTable();
@@ -193,8 +197,8 @@ sap.ui.define(
           oViewModel.setProperty('/form', {
             ...mFormData,
             rowCount: Math.min(aResults.length, 10),
-            listMode: !mFormData.Appst || mFormData.Appst === '10' ? 'MultiToggle' : 'None',
-            list: _.map(aResults, (o) => _.omit(o, '__metadata')),
+            listMode: !mFormData.Appst || mFormData.Appst === '10' ? SelectionMode.MultiToggle : SelectionMode.None,
+            list: aResults,
           });
         } catch (oError) {
           throw oError;
@@ -459,7 +463,7 @@ sap.ui.define(
 
               await this.retrieveTimePernrList();
 
-              if (!this.isMss() && !this.isHass()) {
+              if (_.isEqual(this.currentAuth(), 'E')) {
                 const oViewModel = this.getViewModel();
                 const aEmployees = oViewModel.getProperty('/entry/Employees');
                 const sPernr = this.getAppointeeProperty('Pernr');
@@ -703,22 +707,14 @@ sap.ui.define(
 
       validRequiredInputData() {
         const oViewModel = this.getViewModel();
-        const mInputData = oViewModel.getProperty('/dialog/grid');
+        const mFieldValue = oViewModel.getProperty('/dialog/grid');
+        const aFieldProperties = [
+          { field: 'Apptyp', label: 'LABEL_00225', type: Validator.SELECT1 }, // 신청구분
+          { field: 'Dayngt', label: 'LABEL_07012', type: Validator.SELECT1 }, // 특근구분
+          { field: 'Abrst', label: 'LABEL_07007', type: Validator.SELECT1 }, // 특근시간
+        ];
 
-        if (!mInputData.Apptyp) {
-          MessageBox.alert(this.getBundleText('MSG_00004', 'LABEL_00225')); // {신청구분}을 선택하세요.
-          return true;
-        }
-
-        if (!mInputData.Dayngt) {
-          MessageBox.alert(this.getBundleText('MSG_00004', 'LABEL_07012')); // {특근구분}을 선택하세요.
-          return true;
-        }
-
-        if (!mInputData.Abrst) {
-          MessageBox.alert(this.getBundleText('MSG_00004', 'LABEL_07007')); // {특근시간}을 선택하세요.
-          return true;
-        }
+        if (!Validator.check({ mFieldValue, aFieldProperties })) return true;
 
         return false;
       },
@@ -740,10 +736,7 @@ sap.ui.define(
             Orgeh: sAuth === 'E' ? null : mFormData.Orgeh,
           });
 
-          oViewModel.setProperty(
-            '/entry/Employees',
-            _.map(aResults, (o) => _.omit(o, '__metadata'))
-          );
+          oViewModel.setProperty('/entry/Employees', aResults);
         } catch (oError) {
           throw oError;
         }

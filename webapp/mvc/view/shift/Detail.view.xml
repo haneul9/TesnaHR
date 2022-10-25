@@ -1,7 +1,8 @@
 <mvc:View controllerName="sap.ui.tesna.mvc.controller.shift.Detail"
+    xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
-    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
     xmlns:custom="sap.ui.tesna.control">
     <Page showHeader="false">
         <VBox class="contents-header">
@@ -28,6 +29,12 @@
                         <Text text="{/form/TmdatTxt}" class="desc-txt" visible="{= !!${/form/TmdatTxt} }" />
                     </HBox>
                     <HBox class="table-actions">
+                        <Button icon="sap-icon://download" text="Download" press=".onPressDialogExcelDownload" />
+                        <u:FileUploader icon="sap-icon://upload" buttonText="Upload" buttonOnly="true" change=".onPressDialogExcelUpload">
+                            <u:layoutData>
+                                <FlexItemData maxHeight="40px" />
+                            </u:layoutData>
+                        </u:FileUploader>
                         <Button icon="sap-icon://add" text="{i18n>LABEL_00107}" press=".onPressAddBtn" visible="{= !${/form/Appst} }" />
                         <Button icon="sap-icon://less" text="{i18n>LABEL_00110}" press=".onPressDelBtn" visible="{= !${/form/Appst} }" />
                     </HBox>

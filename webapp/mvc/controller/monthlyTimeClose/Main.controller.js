@@ -93,7 +93,7 @@ sap.ui.define(
           oViewModel.setSizeLimit(500);
           this.setContentsBusy(true);
 
-          oViewModel.setProperty('/auth', this.isHass() ? 'H' : this.isMss() ? 'M' : 'E');
+          oViewModel.setProperty('/auth', this.currentAuth());
           oViewModel.setProperty('/searchConditions/Tyymm', moment().date() < 16 ? moment().subtract(1, 'month').format('YYYYMM') : moment().format('YYYYMM'));
 
           await this.setPersaEntry();
@@ -134,7 +134,7 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         try {
-          if (this.isHass() || this.isMss()) {
+          if (!_.isEqual(this.currentAuth(), 'E')) {
             oViewModel.setProperty('/entry/Persa', []);
             oViewModel.setProperty('/entry/Orgeh', []);
 
@@ -143,13 +143,8 @@ sap.ui.define(
               Wave: '1',
             });
 
-            oViewModel.setProperty(
-              '/entry/Persa',
-              _.chain(aEntries)
-                .map((o) => _.omit(o, '__metadata'))
-                .value()
-            );
             oViewModel.setProperty('/searchConditions/Werks', _.get(aEntries, [0, 'Persa']));
+            oViewModel.setProperty('/entry/Persa', aEntries);
           } else {
             const mAppointeeData = this.getAppointeeData();
 
@@ -234,7 +229,7 @@ sap.ui.define(
             totalCount: aRowData.length || 0,
             rowCount: Math.min(aRowData.length, 5),
             list: _.map(aRowData, (o, i) => ({
-              ..._.omit(o, '__metadata'),
+              ...o,
               Idx: i + 1,
               Beguzf: this.TimeUtils.nvl(o.Beguzf),
               Enduzf: this.TimeUtils.nvl(o.Enduzf),
@@ -272,7 +267,7 @@ sap.ui.define(
             totalCount: aRowData.length || 0,
             rowCount: Math.min(aRowData.length, 5),
             list: _.map(aRowData, (o, i) => ({
-              ..._.omit(o, '__metadata'),
+              ...o,
               Idx: i + 1,
             })),
           });
@@ -356,11 +351,10 @@ sap.ui.define(
       onPressComplete() {
         const oViewModel = this.getViewModel();
         const oTable = this.byId(this.LIST_TABLE1_ID);
-        const sAuth = this.getViewModel().getProperty('/auth');
         let aSelectedData = [];
         let sConfirmLabel = 'MSG_09004'; // 마감처리 하시겠습니까?
 
-        if (sAuth === 'M') {
+        if (this.isMss()) {
           aSelectedData = this.TableUtils.getSelectionData(oTable);
 
           if (aSelectedData.length < 1) {
@@ -383,7 +377,7 @@ sap.ui.define(
             MessageBox.alert(this.getBundleText('MSG_09003')); // 미처리, 미결재 건수가 모두 0인 경우에만 마감이 가능합니다.
             return;
           }
-        } else if (sAuth === 'H') {
+        } else if (this.isHass()) {
           aSelectedData = oViewModel.getProperty('/table1/list');
 
           if (
@@ -408,7 +402,7 @@ sap.ui.define(
             }
 
             try {
-              await this.createProcess('C', sAuth === 'H' ? _.take(aSelectedData) : aSelectedData);
+              await this.createProcess('C', this.isHass() ? _.take(aSelectedData) : aSelectedData);
               await this.retrieveMonthlyCloseOverview();
 
               oTable.clearSelection();
@@ -429,10 +423,9 @@ sap.ui.define(
       onPressCancle() {
         const oViewModel = this.getViewModel();
         const oTable = this.byId(this.LIST_TABLE1_ID);
-        const sAuth = this.getViewModel().getProperty('/auth');
         let aSelectedData = [];
 
-        if (sAuth === 'M') {
+        if (this.isMss()) {
           aSelectedData = this.TableUtils.getSelectionData(oTable);
 
           if (aSelectedData.length < 1) {
@@ -450,7 +443,7 @@ sap.ui.define(
             MessageBox.alert(this.getBundleText('MSG_09006')); // 마감 상태의 데이터만 선택하여 주십시오.
             return;
           }
-        } else if (sAuth === 'H') {
+        } else if (this.isHass()) {
           aSelectedData = oViewModel.getProperty('/table1/list');
         }
 
@@ -466,7 +459,7 @@ sap.ui.define(
             }
 
             try {
-              await this.createProcess('D', sAuth === 'H' ? _.take(aSelectedData) : aSelectedData);
+              await this.createProcess('D', this.isHass() ? _.take(aSelectedData) : aSelectedData);
               await this.retrieveMonthlyCloseOverview();
 
               oTable.clearSelection();

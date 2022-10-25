@@ -3,6 +3,7 @@ sap.ui.define(
   [
     // prettier 방지용 주석
     'sap/ui/core/Fragment',
+    'sap/ui/table/SelectionMode',
     'sap/ui/tesna/control/MessageBox',
     'sap/ui/tesna/common/exceptions/UI5Error',
     'sap/ui/tesna/common/AppUtils',
@@ -10,11 +11,13 @@ sap.ui.define(
     'sap/ui/tesna/common/FileAttachmentBoxHandler',
     'sap/ui/tesna/common/odata/Client',
     'sap/ui/tesna/common/odata/ServiceNames',
+    'sap/ui/tesna/common/Validator',
     'sap/ui/tesna/mvc/controller/BaseController',
   ],
   (
     // prettier 방지용 주석
     Fragment,
+    SelectionMode,
     MessageBox,
     UI5Error,
     AppUtils,
@@ -22,6 +25,7 @@ sap.ui.define(
     FileAttachmentBoxHandler,
     Client,
     ServiceNames,
+    Validator,
     BaseController
   ) => {
     'use strict';
@@ -103,7 +107,7 @@ sap.ui.define(
         // 신청,조회 - B, Work to do - WE, Not Work to do - WD
         this.DISPLAY_MODE = oParameter.flag || 'B';
         oViewModel.setProperty('/displayMode', this.DISPLAY_MODE);
-        oViewModel.setProperty('/auth', this.isMss() ? 'M' : this.isHass() ? 'H' : 'E');
+        oViewModel.setProperty('/auth', this.currentAuth());
         oViewModel.setProperty('/form/Appno', oParameter.appno === 'N' ? '' : oParameter.appno);
         oViewModel.setProperty('/form/Werks', oParameter.werks);
         oViewModel.setProperty('/form/Orgeh', oParameter.orgeh);
@@ -142,7 +146,7 @@ sap.ui.define(
           } else {
             await this.retrieveTmdat();
 
-            oViewModel.setProperty('/form/listMode', 'MultiToggle');
+            oViewModel.setProperty('/form/listMode', SelectionMode.MultiToggle);
           }
 
           this.settingsAttachTable();
@@ -183,8 +187,8 @@ sap.ui.define(
           oViewModel.setProperty('/form', {
             ...mFormData,
             rowCount: Math.min(aResults.length, 10),
-            listMode: !mFormData.Appst || mFormData.Appst === '10' ? 'MultiToggle' : 'None',
-            list: _.map(aResults, (o) => _.omit(o, '__metadata')),
+            listMode: !mFormData.Appst || mFormData.Appst === '10' ? SelectionMode.MultiToggle : SelectionMode.None,
+            list: aResults,
           });
         } catch (oError) {
           throw oError;
@@ -720,18 +724,15 @@ sap.ui.define(
 
       validRequiredInputData() {
         const oViewModel = this.getViewModel();
-        const mInputData = oViewModel.getProperty('/dialog/grid');
+        const mFieldValue = oViewModel.getProperty('/dialog/grid');
+        const aFieldProperties = [
+          { field: 'Tmdat', label: 'LABEL_07002', type: Validator.INPUT1 }, // 근무일
+          { field: 'Atrsn', label: 'LABEL_07008', type: Validator.INPUT2 }, // 특근사유
+        ];
+
+        if (!Validator.check({ mFieldValue, aFieldProperties })) return true;
+
         const aTargets = oViewModel.getProperty('/dialog/list');
-
-        if (!mInputData.Tmdat) {
-          MessageBox.alert(this.getBundleText('MSG_00002', 'LABEL_07002')); // {근무일}을 입력하세요.
-          return true;
-        }
-
-        if (_.isEmpty(mInputData.Atrsn)) {
-          MessageBox.alert(this.getBundleText('MSG_00003', 'LABEL_07008')); // {특근사유}를 입력하세요.
-          return true;
-        }
 
         if (
           _.chain(aTargets)
@@ -764,10 +765,7 @@ sap.ui.define(
             Orgeh: sAuth === 'E' ? null : mFormData.Orgeh,
           });
 
-          oViewModel.setProperty(
-            '/entry/Employees',
-            _.map(aResults, (o) => _.omit(o, '__metadata'))
-          );
+          oViewModel.setProperty('/entry/Employees', aResults);
         } catch (oError) {
           throw oError;
         }

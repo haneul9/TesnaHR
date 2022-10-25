@@ -79,7 +79,7 @@ sap.ui.define(
 
           if (!bIsLoaded) {
             oViewModel.setSizeLimit(20000);
-            oViewModel.setProperty('/auth', this.isMss() ? 'M' : this.isHass() ? 'H' : 'E');
+            oViewModel.setProperty('/auth', this.currentAuth());
 
             this.setContentsBusy(true);
 
@@ -270,7 +270,7 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         try {
-          if (this.isHass() || this.isMss()) {
+          if (!_.isEqual(this.currentAuth(), 'E')) {
             oViewModel.setProperty('/entry/Persa', []);
             oViewModel.setProperty('/entry/Orgeh', []);
             oViewModel.setProperty('/entry/Kostl', []);
@@ -286,7 +286,7 @@ sap.ui.define(
             oViewModel.setProperty('/searchConditions/Werks', _.get(aEntries, [0, 'Persa']));
             oViewModel.setProperty(
               '/entry/Persa',
-              _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+              _.map(aEntries, (o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
             );
           } else {
             const mAppointeeData = this.getAppointeeData();
@@ -328,7 +328,7 @@ sap.ui.define(
             '/entry/Orgeh',
             _.chain(aEntries)
               .filter((o) => o.Orgeh !== '00000000')
-              .map((o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+              .map((o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
               .value()
           );
         } catch (oError) {
@@ -361,7 +361,7 @@ sap.ui.define(
           oViewModel.setProperty('/searchConditions/Kostl', _.get(aEntries, [0, 'Kostl']));
           oViewModel.setProperty(
             '/entry/Kostl',
-            _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+            _.map(aEntries, (o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
           );
         } catch (oError) {
           throw oError;
@@ -374,10 +374,7 @@ sap.ui.define(
         try {
           const aTypeLegend = await Client.getEntitySet(this.getModel(ServiceNames.PERSONALTIME), 'TimeTypeLegend', { Werks: this.getAppointeeProperty('Persa') });
 
-          oViewModel.setProperty(
-            '/typeLegends',
-            _.map(aTypeLegend, (o) => _.omit(o, '__metadata'))
-          );
+          oViewModel.setProperty('/typeLegends', aTypeLegend);
         } catch (oError) {
           throw oError;
         }
@@ -626,7 +623,7 @@ sap.ui.define(
       onPressExcelDownload() {
         const oViewModel = this.getViewModel();
         const sTyymm = oViewModel.getProperty('/searchConditions/Tyymm');
-        const sFileName = `${this.getBundleText('LABEL_03002')}-${sTyymm}`;
+        const sFileName = `${this.getBundleText('LABEL_03002')}-${sTyymm}`; // 팀캘린더
         const aTableData = oViewModel.getProperty('/calendar/excel');
         const aCustomColumns = [
           { type: 'String', label: this.getBundleText('LABEL_00210'), property: 'Ename' },

@@ -57,7 +57,7 @@ sap.ui.define(
           oViewModel.setSizeLimit(500);
           this.setContentsBusy(true);
 
-          oViewModel.setProperty('/auth', this.isHass() ? 'H' : this.isMss() ? 'M' : 'E');
+          oViewModel.setProperty('/auth', this.currentAuth());
 
           await this.setPersaEntry();
           await this.setOrgehEntry();
@@ -97,7 +97,7 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         try {
-          if (this.isHass() || this.isMss()) {
+          if (!_.isEqual(this.currentAuth(), 'E')) {
             oViewModel.setProperty('/entry/Persa', []);
             oViewModel.setProperty('/entry/Orgeh', []);
 
@@ -106,13 +106,8 @@ sap.ui.define(
               Wave: '1',
             });
 
-            oViewModel.setProperty(
-              '/entry/Persa',
-              _.chain(aEntries)
-                .map((o) => _.omit(o, '__metadata'))
-                .value()
-            );
             oViewModel.setProperty('/searchConditions/Werks', _.get(aEntries, [0, 'Persa']));
+            oViewModel.setProperty('/entry/Persa', aEntries);
           } else {
             const mAppointeeData = this.getAppointeeData();
 
@@ -140,11 +135,8 @@ sap.ui.define(
             Austy: oViewModel.getProperty('/auth'),
           });
 
-          oViewModel.setProperty(
-            '/entry/Orgeh',
-            _.map(aEntries, (o) => _.omit(o, '__metadata'))
-          );
           oViewModel.setProperty('/searchConditions/Orgeh', _.get(aEntries, [0, 'Orgeh']));
+          oViewModel.setProperty('/entry/Orgeh', aEntries);
         } catch (oError) {
           throw oError;
         }
@@ -177,7 +169,7 @@ sap.ui.define(
           oViewModel.setProperty('/searchConditions/Kostl', _.get(aEntries, [sAuth === 'E' ? 1 : 0, 'Kostl']));
           oViewModel.setProperty(
             '/entry/Kostl',
-            _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+            _.map(aEntries, (o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
           );
         } catch (oError) {
           throw oError;
@@ -227,10 +219,7 @@ sap.ui.define(
             Kostl2: !mSearchConditions.Kostl || mSearchConditions.Kostl === '00000000' ? '' : mSearchConditions.Kostl,
           });
 
-          oViewModel.setProperty(
-            '/entry/Employees',
-            _.map(aResults, (o) => _.omit(o, '__metadata'))
-          );
+          oViewModel.setProperty('/entry/Employees', aResults);
         } catch (oError) {
           throw oError;
         }
@@ -256,10 +245,7 @@ sap.ui.define(
             ...oViewModel.getProperty('/listInfo'),
             ...this.TableUtils.count({ oTable, aRowData, sStatCode: 'Tstat' }),
           });
-          oViewModel.setProperty(
-            '/list',
-            _.map(aRowData, (o) => _.omit(o, '__metadata'))
-          );
+          oViewModel.setProperty('/list', aRowData);
 
           this.TableUtils.clearTable(oTable);
         } catch (oError) {

@@ -1,22 +1,28 @@
 sap.ui.define(
   [
     //
+    'sap/m/MessageToast',
+    'sap/ui/table/SelectionMode',
     'sap/ui/tesna/control/MessageBox',
     'sap/ui/tesna/common/AppUtils',
     'sap/ui/tesna/common/ApprovalStatusHandler',
     'sap/ui/tesna/common/FileAttachmentBoxHandler',
     'sap/ui/tesna/common/odata/Client',
     'sap/ui/tesna/common/odata/ServiceNames',
+    'sap/ui/tesna/common/Validator',
     'sap/ui/tesna/mvc/controller/BaseController',
   ],
   (
     //
+    MessageToast,
+    SelectionMode,
     MessageBox,
     AppUtils,
     ApprovalStatusHandler,
     FileAttachmentBoxHandler,
     Client,
     ServiceNames,
+    Validator,
     BaseController
   ) => {
     'use strict';
@@ -96,7 +102,7 @@ sap.ui.define(
         // 신청,조회 - B, Work to do - WE, Not Work to do - WD
         this.DISPLAY_MODE = oParameter.flag || 'B';
         oViewModel.setProperty('/displayMode', this.DISPLAY_MODE);
-        oViewModel.setProperty('/auth', this.isMss() ? 'M' : this.isHass() ? 'H' : 'E');
+        oViewModel.setProperty('/auth', this.currentAuth());
         oViewModel.setProperty('/form/Appno', oParameter.appno === 'N' ? '' : oParameter.appno);
         oViewModel.setProperty('/form/Werks', oParameter.werks);
         oViewModel.setProperty('/form/Orgeh', oParameter.orgeh);
@@ -143,14 +149,11 @@ sap.ui.define(
               .set('Orgtx', _.get(aDetailRow, [0, 'Orgtx']))
               .commit();
             oViewModel.setProperty('/form/rowCount', aDetailRow.length);
-            oViewModel.setProperty(
-              '/form/list',
-              _.map(aDetailRow, (o) => _.omit(o, '__metadata'))
-            );
+            oViewModel.setProperty('/form/list', aDetailRow);
             oViewModel.refresh(true);
           } else {
             oViewModel.setProperty('/fieldLimit', this.getEntityLimit(ServiceNames.WORKTIME, 'ShiftChangeApply'));
-            oViewModel.setProperty('/form/listMode', 'MultiToggle');
+            oViewModel.setProperty('/form/listMode', SelectionMode.MultiToggle);
 
             await this.retrieveTmdat();
           }
@@ -221,7 +224,7 @@ sap.ui.define(
           const mFormData = oViewModel.getProperty('/form');
           const aEntries = await Client.getEntitySet(this.getModel(ServiceNames.NIGHTWORK), 'TimeOrgehList', {
             Werks: mFormData.Werks,
-            Austy: this.isHass() ? 'H' : this.isMss() ? 'M' : 'E',
+            Austy: this.currentAuth(),
           });
 
           oViewModel.setProperty('/form/Orgtx', _.chain(aEntries).find({ Orgeh: mFormData.Orgeh }).get('Fulln').value());
@@ -320,33 +323,16 @@ sap.ui.define(
 
       onPressApproval() {
         const oViewModel = this.getViewModel();
-        const sPrcty = 'S';
         const aList = oViewModel.getProperty('/form/list');
+        const aFieldProperties = [
+          { field: 'Begda', label: 'LABEL_00148', type: Validator.INPUT1 }, // 시작일
+          { field: 'Endda', label: 'LABEL_00149', type: Validator.INPUT1 }, // 종료일
+          { field: 'Pernr', label: 'LABEL_00174', type: Validator.SELECT2 }, // 대상자
+          { field: 'Schkz', label: 'LABEL_01003', type: Validator.SELECT1 }, // 근무일정
+          { field: 'Kostl', label: 'LABEL_01004', type: Validator.SELECT2 }, // 공정코드
+        ];
 
-        if (_.some(aList, (o) => !o.Begda)) {
-          MessageBox.alert(this.getBundleText('MSG_00002', 'LABEL_00148')); // {시작일}을 입력하세요.
-          return;
-        }
-
-        if (_.some(aList, (o) => !o.Endda)) {
-          MessageBox.alert(this.getBundleText('MSG_00002', 'LABEL_00149')); // {종료일}을 입력하세요.
-          return;
-        }
-
-        if (_.some(aList, (o) => !o.Pernr)) {
-          MessageBox.alert(this.getBundleText('MSG_00005', 'LABEL_00174')); // {대상자}를 선택하세요.
-          return;
-        }
-
-        if (_.some(aList, (o) => !o.Schkz)) {
-          MessageBox.alert(this.getBundleText('MSG_00004', 'LABEL_01003')); // {근무일정}을 선택하세요.
-          return;
-        }
-
-        if (_.some(aList, (o) => !o.Kostl)) {
-          MessageBox.alert(this.getBundleText('MSG_00005', 'LABEL_01004')); // {공정코드}를 선택하세요.
-          return;
-        }
+        if (_.some(aList, (mFieldValue) => !Validator.check({ mFieldValue, aFieldProperties }))) return;
 
         this.setContentsBusy(true, 'all');
 
@@ -359,7 +345,7 @@ sap.ui.define(
               return;
             }
 
-            this.createProcess({ sPrcty });
+            this.createProcess({ sPrcty: 'S' });
           },
         });
       },
@@ -504,6 +490,102 @@ sap.ui.define(
             oTable.clearSelection();
           }.bind(this),
         });
+      },
+
+      onPressDialogExcelDownload() {
+        window.open('/sap/public/bc/ui2/zui5_tesnahr/documents/shift_upload_template.xlsx', '_blank');
+      },
+
+      onPressDialogExcelUpload(oEvent) {
+        this.setContentsBusy(true, 'table');
+
+        try {
+          if (oEvent.getParameter('files') && oEvent.getParameter('files')[0]) {
+            const oFileReader = new FileReader();
+
+            oFileReader.onload = (e) => {
+              const workbook = XLSX.read(e.target.result, { type: 'binary' });
+
+              workbook.SheetNames.forEach((sheet) => {
+                const aRowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+
+                if (_.isEmpty(aRowObject)) {
+                  this.setContentsBusy(false, 'table');
+                } else {
+                  AppUtils.debug(`Shift upload excel data.`, aRowObject);
+                  this.assignTableWithExcel(aRowObject);
+                }
+              });
+            };
+
+            oFileReader.readAsBinaryString(oEvent.getParameter('files')[0]);
+          }
+        } catch (oError) {
+          this.setContentsBusy(false, 'table');
+          this.debug('Controller > shift Detail > onPressDialogExcelUpload Error', oError);
+
+          AppUtils.handleError(oError);
+        }
+      },
+
+      async assignTableWithExcel(aRowObject) {
+        const oViewModel = this.getViewModel();
+
+        try {
+          const oModel = this.getModel(ServiceNames.WORKTIME);
+          const aTableData = oViewModel.getProperty('/form/list');
+          const mPayload = {
+            Prcty: 'U',
+            Orgeh: oViewModel.getProperty('/form/Orgeh'),
+          };
+
+          for (const mRowData of aRowObject) {
+            const mReturnData = await Client.create(oModel, 'ShfitChangeApply', {
+              ...mPayload,
+              Pernr: this._getExcelPropertyValue(mRowData, 'Pernr'),
+              Ename: this._getExcelPropertyValue(mRowData, 'Ename'),
+              Begda: this.DateUtils.parse(this._getExcelPropertyValue(mRowData, 'Begda')),
+              Endda: this.DateUtils.parse(this._getExcelPropertyValue(mRowData, 'Endda')),
+              Rtext: this._getExcelPropertyValue(mRowData, 'Rtext'),
+              Ltext: this._getExcelPropertyValue(mRowData, 'Ltext'),
+            });
+
+            AppUtils.debug(`Shift upload return data.`, mReturnData);
+            aTableData.push(mReturnData);
+          }
+
+          oViewModel.setProperty('/form/rowCount', aTableData.length);
+          oViewModel.setProperty('/form/list', aTableData);
+
+          MessageToast.show('Complete!', {
+            my: 'center center',
+            at: 'center center',
+          });
+        } catch (oError) {
+          this.debug('Controller > shift Detail > assignTableWithExcel Error', oError);
+
+          AppUtils.handleError(oError);
+        } finally {
+          this.setContentsBusy(false, 'table');
+        }
+      },
+
+      _getExcelPropertyValue(mExcelData, sPropName) {
+        const mMappingProps = {
+          Pernr: '사번',
+          Ename: '성명',
+          Begda: '시작',
+          Endda: '종료',
+          Rtext: '근무',
+          Ltext: '공정',
+        };
+
+        return _.chain(mExcelData)
+          .pickBy((v, p) => _.startsWith(p, mMappingProps[sPropName]))
+          .values()
+          .get(0)
+          .toString()
+          .value();
       },
 
       async onChangeBeginDate(oEvent) {

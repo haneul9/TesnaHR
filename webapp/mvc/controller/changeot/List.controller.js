@@ -72,9 +72,9 @@ sap.ui.define(
           oViewModel.setSizeLimit(1000);
           oViewModel.setProperty('/busy', true);
           oViewModel.setProperty('/routeName', sRouteName);
-          oViewModel.setProperty('/auth', this.isHass() ? 'H' : this.isMss() ? 'M' : 'E');
+          oViewModel.setProperty('/auth', this.currentAuth());
 
-          if (!oViewModel.getProperty('/entry/Persa')) {
+          if (!this.isNavBackDetail()) {
             await this.setPersaEntry();
             await this.setOrgehEntry();
             await this.setKostlEntry();
@@ -103,13 +103,7 @@ sap.ui.define(
             Datum: moment().hours(9).toDate(),
           });
 
-          oViewModel.setProperty(
-            '/summary',
-            _.chain(mSummary)
-              .omit('__metadata')
-              .set('Text', _.startsWith(mSummary.Wkrul, '선택') ? 'this month' : 'this week')
-              .value()
-          );
+          oViewModel.setProperty('/summary', _.set(mSummary, 'Text', _.startsWith(mSummary.Wkrul, '선택') ? 'this month' : 'this week'));
 
           this.buildChart();
         } catch (oError) {
@@ -143,7 +137,7 @@ sap.ui.define(
           oViewModel.setProperty(
             '/list',
             _.map(aRowData, (o) => ({
-              ..._.omit(o, '__metadata'),
+              ...o,
               TmdatFormatted: this.DateUtils.format(o.Tmdat),
               AppdaFormatted: this.DateUtils.format(o.Appda),
               SgndaFormatted: this.DateUtils.format(o.Sgnda),
@@ -262,7 +256,7 @@ sap.ui.define(
         const oViewModel = this.getViewModel();
 
         try {
-          if (this.isHass() || this.isMss()) {
+          if (!_.isEqual(this.currentAuth(), 'E')) {
             oViewModel.setProperty('/entry/Persa', []);
             oViewModel.setProperty('/entry/Orgeh', []);
             oViewModel.setProperty('/entry/Kostl', []);
@@ -278,7 +272,7 @@ sap.ui.define(
             oViewModel.setProperty('/searchConditions/Werks', _.get(aEntries, [0, 'Persa']));
             oViewModel.setProperty(
               '/entry/Persa',
-              _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+              _.map(aEntries, (o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
             );
           } else {
             const mAppointeeData = this.getAppointeeData();
@@ -322,7 +316,7 @@ sap.ui.define(
           );
           oViewModel.setProperty(
             '/entry/Orgeh',
-            _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+            _.map(aEntries, (o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
           );
         } catch (oError) {
           throw oError;
@@ -356,7 +350,7 @@ sap.ui.define(
           oViewModel.setProperty('/searchConditions/Kostl', _.get(aEntries, [sAuth === 'E' ? 1 : 0, 'Kostl']));
           oViewModel.setProperty(
             '/entry/Kostl',
-            _.map(aEntries, (o) => _.chain(o).omit('__metadata').omitBy(_.isNil).omitBy(_.isEmpty).value())
+            _.map(aEntries, (o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
           );
         } catch (oError) {
           throw oError;
@@ -380,9 +374,7 @@ sap.ui.define(
         try {
           oViewModel.setProperty('/busy', true);
 
-          const sAuth = oViewModel.getProperty('/auth');
-
-          if (sAuth !== 'H') {
+          if (!this.isHass()) {
             const mSearchConditions = oViewModel.getProperty('/searchConditions');
 
             if (_.isEmpty(mSearchConditions.Werks)) {

@@ -14,7 +14,7 @@
                             </m:HBox>
                             <m:HBox>
                                 <m:Button class="sapUiTinyMarginEnd" icon="sap-icon://download" text="Download" press=".onPressDialogExcelDownload" />
-                                <u:FileUploader icon="sap-icon://upload" buttonText="Upload" buttonOnly="true" change=".onPressDialogExcelUpload" />
+                                <u:FileUploader id="excelUpload" icon="sap-icon://upload" buttonText="Upload" buttonOnly="true" change=".onPressDialogExcelUpload" />
                             </m:HBox>
                         </m:HBox>
                     </extension>

@@ -497,8 +497,6 @@ sap.ui.define(
       },
 
       onPressDialogExcelUpload(oEvent) {
-        this.setContentsBusy(true, 'table');
-
         try {
           if (oEvent.getParameter('files') && oEvent.getParameter('files')[0]) {
             const oFileReader = new FileReader();
@@ -509,9 +507,7 @@ sap.ui.define(
               workbook.SheetNames.forEach((sheet) => {
                 const aRowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
 
-                if (_.isEmpty(aRowObject)) {
-                  this.setContentsBusy(false, 'table');
-                } else {
+                if (!_.isEmpty(aRowObject)) {
                   AppUtils.debug(`Shift upload excel data.`, aRowObject);
                   this.assignTableWithExcel(aRowObject);
                 }
@@ -521,7 +517,6 @@ sap.ui.define(
             oFileReader.readAsBinaryString(oEvent.getParameter('files')[0]);
           }
         } catch (oError) {
-          this.setContentsBusy(false, 'table');
           this.debug('Controller > shift Detail > onPressDialogExcelUpload Error', oError);
 
           AppUtils.handleError(oError);
@@ -531,27 +526,47 @@ sap.ui.define(
       async assignTableWithExcel(aRowObject) {
         const oViewModel = this.getViewModel();
 
+        this.setContentsBusy(true, 'table');
+
         try {
           const oModel = this.getModel(ServiceNames.WORKTIME);
-          const aTableData = oViewModel.getProperty('/form/list');
+          const aTableData = _.cloneDeep(oViewModel.getProperty('/form/list'));
           const mPayload = {
             Prcty: 'U',
             Orgeh: oViewModel.getProperty('/form/Orgeh'),
           };
 
           for (const mRowData of aRowObject) {
-            const mReturnData = await Client.create(oModel, 'ShfitChangeApply', {
+            const dBegda = this.DateUtils.parse(this._getExcelPropertyValue(mRowData, 'Begda'));
+            const mReturnData = await Client.create(oModel, 'ShiftChangeApply', {
               ...mPayload,
               Pernr: this._getExcelPropertyValue(mRowData, 'Pernr'),
               Ename: this._getExcelPropertyValue(mRowData, 'Ename'),
-              Begda: this.DateUtils.parse(this._getExcelPropertyValue(mRowData, 'Begda')),
+              Begda: dBegda,
               Endda: this.DateUtils.parse(this._getExcelPropertyValue(mRowData, 'Endda')),
               Rtext: this._getExcelPropertyValue(mRowData, 'Rtext'),
               Ltext: this._getExcelPropertyValue(mRowData, 'Ltext'),
             });
 
             AppUtils.debug(`Shift upload return data.`, mReturnData);
-            aTableData.push(mReturnData);
+
+            const iExistRowIndex = _.findIndex(aTableData, (o) => _.isEqual(o.Pernr, mReturnData.Pernr) && moment(o.Begda).isSame(moment(mReturnData.Begda), 'day'));
+
+            if (iExistRowIndex === -1) {
+              const [aEmployees, aSchkzs, aKostls] = await this.retrieveRowEntries(dBegda);
+
+              aTableData.push({
+                ...mReturnData,
+                employees: aEmployees,
+                schkzs: aSchkzs,
+                kostls: aKostls,
+              });
+            } else {
+              _.set(aTableData, iExistRowIndex, {
+                ..._.get(aTableData, iExistRowIndex),
+                ...mReturnData,
+              });
+            }
           }
 
           oViewModel.setProperty('/form/rowCount', aTableData.length);
@@ -566,6 +581,7 @@ sap.ui.define(
 
           AppUtils.handleError(oError);
         } finally {
+          this.byId('excelUpload').setValue('');
           this.setContentsBusy(false, 'table');
         }
       },

@@ -30,7 +30,7 @@
                     </HBox>
                     <HBox class="table-actions">
                         <Button icon="sap-icon://download" text="Download" press=".onPressDialogExcelDownload" />
-                        <u:FileUploader icon="sap-icon://upload" buttonText="Upload" buttonOnly="true" change=".onPressDialogExcelUpload">
+                        <u:FileUploader id="excelUpload" icon="sap-icon://upload" buttonText="Upload" buttonOnly="true" change=".onPressDialogExcelUpload">
                             <u:layoutData>
                                 <FlexItemData maxHeight="40px" />
                             </u:layoutData>

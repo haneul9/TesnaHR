@@ -580,6 +580,8 @@ sap.ui.define(
           });
         } catch (oError) {
           throw oError;
+        } finally {
+          this.byId('excelUpload').setValue('');
         }
       },
 

@@ -250,6 +250,7 @@ sap.ui.define(
           })
           .value();
         const mSelectedOriginal = _.get(oViewModel.getProperty('/original'), [mRowObject.Pernr, mRowObject.Tmdat]);
+        let sChangeCorty = null;
 
         if (mRowObject.Begdaf && mRowObject.Beguzf && mRowObject.Enddaf && mRowObject.Enduzf) {
           if (
@@ -258,29 +259,31 @@ sap.ui.define(
             _.isEqual(mSelectedOriginal.Enddaf, mRowObject.Enddaf) &&
             _.isEqual(mSelectedOriginal.Enduzf, mRowObject.Enduzf)
           ) {
-            oViewModel.setProperty(`${sRowPath}/Corty`, null);
+            sChangeCorty = null;
           } else if (_.isEqual(mSelectedOriginal.Enddaf, mRowObject.Enddaf) && _.isEqual(mSelectedOriginal.Enduzf, mRowObject.Enduzf)) {
-            oViewModel.setProperty(`${sRowPath}/Corty`, '10'); // 출근시간 변경완료
+            sChangeCorty = '10'; // 출근시간 변경완료
           } else if (_.isEqual(mSelectedOriginal.Begdaf, mRowObject.Begdaf) && _.isEqual(mSelectedOriginal.Beguzf, mRowObject.Beguzf)) {
-            oViewModel.setProperty(`${sRowPath}/Corty`, '20'); // 퇴근시간 변경완료
+            sChangeCorty = '20'; // 퇴근시간 변경완료
           } else {
-            oViewModel.setProperty(`${sRowPath}/Corty`, '30'); // 출퇴근시간 변경완료
+            sChangeCorty = '30'; // 출퇴근시간 변경완료
           }
         } else if (mRowObject.Begdaf && mRowObject.Beguzf && (!mRowObject.Enddaf || !mRowObject.Enduzf)) {
           if (_.isEqual(mSelectedOriginal.Begdaf, mRowObject.Begdaf) && _.isEqual(mSelectedOriginal.Beguzf, mRowObject.Beguzf)) {
-            oViewModel.setProperty(`${sRowPath}/Corty`, null);
+            sChangeCorty = null;
           } else {
-            oViewModel.setProperty(`${sRowPath}/Corty`, '10'); // 출근시간 변경완료
+            sChangeCorty = '10'; // 출근시간 변경완료
           }
         } else if (mRowObject.Enddaf && mRowObject.Enduzf && (!mRowObject.Begdaf || !mRowObject.Beguzf)) {
           if (_.isEqual(mSelectedOriginal.Enddaf, mRowObject.Enddaf) && _.isEqual(mSelectedOriginal.Enduzf, mRowObject.Enduzf)) {
-            oViewModel.setProperty(`${sRowPath}/Corty`, null);
+            sChangeCorty = null;
           } else {
-            oViewModel.setProperty(`${sRowPath}/Corty`, '20'); // 퇴근시간 변경완료
+            sChangeCorty = '20'; // 퇴근시간 변경완료
           }
         } else {
-          oViewModel.setProperty(`${sRowPath}/Corty`, null);
+          sChangeCorty = null;
         }
+
+        oViewModel.setProperty(`${sRowPath}/Corty`, sChangeCorty);
       },
 
       async onChangeWerks() {

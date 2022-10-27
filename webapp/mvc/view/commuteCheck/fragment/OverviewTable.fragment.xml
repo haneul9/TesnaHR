@@ -56,25 +56,25 @@
             <table:Column width="160px">
                 <Label text="{i18n>LABEL_06004}" />
                 <table:template>
-                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= !${Appno} || ${Appno} === '0000000000' }" change=".onCortyCheck" />
+                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= !${Appst} || ${Appst} === '40' }" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
             <table:Column width="120px">
                 <Label text="{i18n>LABEL_06005}" />
                 <table:template>
-                    <TimePicker dateValue="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initBeguz}" enabled="{= !${Appno} || ${Appno} === '0000000000' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onCortyCheck" />
+                    <TimePicker dateValue="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initBeguz}" enabled="{= !${Appst} || ${Appst} === '40' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
             <table:Column width="160px">
                 <Label text="{i18n>LABEL_06006}" />
                 <table:template>
-                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= !${Appno} || ${Appno} === '0000000000' }" change=".onCortyCheck" />
+                    <custom:DatePicker class="sapIcon_Date" dateValue="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" enabled="{= !${Appst} || ${Appst} === '40' }" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
             <table:Column width="120px">
                 <Label text="{i18n>LABEL_06007}" />
                 <table:template>
-                    <TimePicker dateValue="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initEnduz}" enabled="{= !${Appno} || ${Appno} === '0000000000' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onCortyCheck" />
+                    <TimePicker dateValue="{ path: 'Enduzf', type: 'sap.ui.tesna.mvc.model.type.InputTime' }" initialFocusedDateValue="{/initEnduz}" enabled="{= !${Appst} || ${Appst} === '40' }" placeholder="HH:mm" valueFormat="HH:mm" displayFormat="HH:mm" class="sapIcon_Time" change=".onCortyCheck" />
                 </table:template>
             </table:Column>
             <table:Column width="180px" filterProperty="Tagerrtx" sortProperty="Tagerrtx">
@@ -92,7 +92,7 @@
             <table:Column width="200px">
                 <Label text="{i18n>LABEL_06011}" />
                 <table:template>
-                    <ComboBox selectedKey="{Corty}" items="{ path: '/entry/Corty', templateShareable: false }" enabled="{= !${Appno} || ${Appno} === '0000000000' }">
+                    <ComboBox selectedKey="{Corty}" items="{ path: '/entry/Corty', templateShareable: false }" enabled="{= !${Appst} || ${Appst} === '40' }">
                         <core:Item key="{Corty}" text="{Cortytx}" />
                     </ComboBox>
                 </table:template>

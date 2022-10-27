@@ -1,10 +1,52 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
-    <HBox class="vCardBox appointee-bar" alignItems="Center">
-        <Image src="{/appointee/Photo}" class="member-photo" mode="Background" width="63px" height="63px" error=".loadErrorAvatarImage" />
-        <Text text="{/appointee/Pernm}" class="name" />
-        <Text text="{/appointee/Zzcaltltx}" />
-        <Text text="{/appointee/Pbtxt}" />
-        <Text text="{/appointee/Stext}" />
+    <HBox class="vCardBox appointee-bar" justifyContent="SpaceBetween" alignItems="Center" busyIndicatorDelay="0" busy="{/busy/appointee}">
+        <HBox alignItems="Center">
+            <Image src="{/appointee/Photo}" class="member-photo" mode="Background" width="63px" height="63px" error=".loadErrorAvatarImage" />
+            <Text text="{/appointee/Pernm}" class="name" />
+            <Text text="{/appointee/Zzcaltltx}" />
+            <Text text="{/appointee/Pbtxt}" />
+            <Text text="{/appointee/Stext}" />
+        </HBox>
+        <HBox alignItems="Center">
+            <Input value="{/ename}" placeholder="{i18n>LABEL_02019}" width="200px" maxSuggestionWidth="500px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/Employees', templateShareable: false }" visible="{= ${/auth} !== 'E' }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
+                <suggestionColumns>
+                    <Column width="6%" popinDisplay="Inline">
+                        <Label text="" />
+                    </Column>
+                    <Column width="16%" popinDisplay="Inline" demandPopin="true">
+                        <Label text="{i18n>LABEL_00210}" />
+                    </Column>
+                    <Column width="18%" popinDisplay="Inline" demandPopin="true">
+                        <Label text="{i18n>LABEL_00209}" />
+                    </Column>
+                    <Column width="12%" popinDisplay="Inline">
+                        <Label text="{i18n>LABEL_00214}" />
+                    </Column>
+                    <Column popinDisplay="Inline" minScreenWidth="Tablet">
+                        <Label text="{i18n>LABEL_00218}" />
+                    </Column>
+                    <Column width="20%" popinDisplay="Inline" minScreenWidth="Tablet">
+                        <Label text="{i18n>LABEL_00221}" />
+                    </Column>
+                </suggestionColumns>
+                <suggestionRows>
+                    <ColumnListItem>
+                        <cells>
+                            <Image src="{Picurl}" mode="Background" class="members-photo sapUiTinyMarginEnd" error=".loadErrorAvatarImage">
+                                <layoutData>
+                                    <FlexItemData minHeight="30px" maxHeight="30px" />
+                                </layoutData>
+                            </Image>
+                            <Label text="{Ename}" />
+                            <Label text="{Pernr}" />
+                            <Label text="{Zzcaltltx}" />
+                            <Label text="{Orgtx}" />
+                            <Label text="{ path: 'Gbdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" />
+                        </cells>
+                    </ColumnListItem>
+                </suggestionRows>
+            </Input>
+        </HBox>
     </HBox>
 </core:FragmentDefinition>

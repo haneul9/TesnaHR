@@ -23,6 +23,11 @@ sap.ui.define(
         this.getYearPlan(sYear);
       },
 
+      changeAppointee(sPernr) {
+        this.sPernr = sPernr;
+        this.getYearPlan();
+      },
+
       makeCalendarControl() {
         const oViewModel = this.oController.getViewModel();
         const mBody = _.times(12, this.getWeekBody.bind(this));

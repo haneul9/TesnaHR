@@ -88,7 +88,7 @@ sap.ui.define(
 
           await Client.deep(oModel, 'ApproverHeader2', {
             Appno: sAppno,
-            ApproverList2Nav: [..._.map(aRowData, (o) => ({ ...o, Appno: sAppno }))],
+            ApproverList2Nav: [..._.chain(aRowData).filter(o => !_.isEmpty(o.Pernr)).map((o) => ({ ...o, Appno: sAppno })).value()],
           });
 
           await this.sendMail(sAppno, this.APPROVAL_STATUS.APPROVAL, sAppty);
@@ -106,7 +106,7 @@ sap.ui.define(
 
           await Client.deep(oModel, 'ApproverHeader2', {
             Appno: sAppno,
-            ApproverList2Nav: [..._.map(aRowData, (o) => ({ ...o, Appno: sAppno }))],
+            ApproverList2Nav: [..._.chain(aRowData).filter(o => !_.isEmpty(o.Pernr)).map((o) => ({ ...o, Appno: sAppno })).value()],
           });
 
           await this.sendMail(sAppno, this.APPROVAL_STATUS.APPROVAL, sAppty);
@@ -237,11 +237,10 @@ sap.ui.define(
           const oModel = this.oController.getModel(ServiceNames.WORKTIME);
           const mAppointeeData = this.oController.getAppointeeData();
           const aResults = await Client.getEntitySet(oModel, 'TimePernrList', {
-            Austy: mSettings.Austy,
+            Austy: 'H',
             Begda: moment().hours(9).toDate(),
             Werks: mAppointeeData.Werks,
-            Pernr: mSettings.Austy === 'E' ? mAppointeeData.Pernr : null,
-            Orgeh: mSettings.Austy === 'E' ? null : mAppointeeData.Orgeh,
+            Orgeh: mAppointeeData.Orgeh,
           });
 
           oBoxModel.setProperty(

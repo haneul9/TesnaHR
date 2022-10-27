@@ -46,7 +46,9 @@ sap.ui.define(
 
       initializeModel() {
         return {
+          auth: '',
           FullYear: '',
+          ename: '',
           pernr: '',
           previousHash: '',
           year: moment().get('year'),
@@ -55,6 +57,7 @@ sap.ui.define(
           Hass: this.isHass(),
           WeekWorkDate: new Date(),
           busy: {
+            appointee: false,
             calendar: false,
             plan: false,
             quarter: false,
@@ -64,6 +67,7 @@ sap.ui.define(
             byDay: false,
           },
           appointee: {},
+          Employees: [],
           MonthStrList: [],
           YearPlan: [
             {
@@ -121,10 +125,12 @@ sap.ui.define(
 
           if (!_.isEmpty(sPreviousHash)) oViewModel.setProperty('/previousHash', sPreviousHash);
 
+          const sAuth = this.currentAuth();
           const sPernr = oParameter.pernr ?? this.getAppointeeProperty('Pernr');
           const sYear = oParameter.year ?? moment().get('year');
           const sMonth = oParameter.month ?? moment().get('month');
 
+          oViewModel.setProperty('/auth', sAuth);
           oViewModel.setProperty('/pernr', sPernr);
           oViewModel.setProperty('/year', _.toNumber(sYear));
           oViewModel.setProperty('/month', _.toNumber(sMonth));
@@ -134,9 +140,11 @@ sap.ui.define(
             _.times(12, (d) => ({ label: `${++d}${this.getBundleText('LABEL_00192')}` })) // 월
           );
 
+          if (!_.isEqual(sAuth, 'E')) await this.retrieveTimePernrList();
+
           this.setAppointee(sPernr);
           this.setMonth(sMonth);
-          this.formYear(sYear);
+          this.setYear(sYear);
 
           this.YearPlanBoxHandler = new YearPlanBoxHandler({ oController: this, sPernr, sYear });
 
@@ -436,6 +444,9 @@ sap.ui.define(
             Photo: mAppointee.Photo || this.getUnknownAvatarImageURL(),
           });
         }
+
+        oViewModel.refresh(true);
+        this.setContentsBusy(false, 'appointee');
       },
 
       // Combination Rerendering
@@ -546,7 +557,7 @@ sap.ui.define(
       },
 
       // 년도 선택시 화면전체 년도
-      formYear(sYear = moment().year()) {
+      setYear(sYear = moment().year()) {
         return this.getViewModel().setProperty('/FullYear', `${sYear}${this.getBundleText('LABEL_00193')}`); // 년
       },
 
@@ -722,6 +733,36 @@ sap.ui.define(
         }
       },
 
+      async retrieveTimePernrList() {
+        try {
+          const oViewModel = this.getViewModel();
+          const sAuth = oViewModel.getProperty('/auth');
+
+          if (sAuth === 'E') return;
+
+          const mAppointeeData = this.getAppointeeData();
+          const aResults = await Client.getEntitySet(this.getModel(ServiceNames.WORKTIME), 'TimePernrList', {
+            Austy: sAuth,
+            Begda: moment().hours(9).toDate(),
+            Werks: mAppointeeData.Persa,
+            Orgeh: mAppointeeData.Orgeh,
+          });
+
+          oViewModel.setProperty('/Employees', aResults);
+        } catch (oError) {
+          throw oError;
+        }
+      },
+
+      changeAppointee(sPernr) {
+        this.setContentsBusy(true);
+
+        this.setAppointee(sPernr);
+        this.setYear();
+        this.YearPlanBoxHandler.changeAppointee(sPernr);
+        this.retrieveBoxes();
+      },
+
       // 년도 선택시 화면전체조회
       retrieveBoxes(sYear) {
         const oViewModel = this.getViewModel();
@@ -767,7 +808,7 @@ sap.ui.define(
         this.setContentsBusy(true);
 
         this.YearPlanBoxHandler.onPressPrevYear();
-        this.formYear(this.getViewModel().getProperty('/year'));
+        this.setYear(this.getViewModel().getProperty('/year'));
 
         this.retrieveBoxes();
       },
@@ -776,7 +817,7 @@ sap.ui.define(
         this.setContentsBusy(true);
 
         this.YearPlanBoxHandler.onPressNextYear();
-        this.formYear(this.getViewModel().getProperty('/year'));
+        this.setYear(this.getViewModel().getProperty('/year'));
 
         this.retrieveBoxes();
       },
@@ -787,6 +828,48 @@ sap.ui.define(
 
       onPressExcelDownload() {
         this.YearPlanBoxHandler.downloadExcel();
+      },
+
+      onSelectSuggest(oEvent) {
+        const oInput = oEvent.getSource();
+        const oSelectedSuggestionRow = oEvent.getParameter('selectedRow');
+
+        if (oSelectedSuggestionRow) {
+          const oContext = oSelectedSuggestionRow.getBindingContext();
+          const sPernr = oContext.getProperty('Pernr');
+
+          const oViewModel = this.getViewModel();
+
+          oViewModel.setProperty('/pernr', sPernr);
+          oViewModel.setProperty('/ename', '');
+
+          this.changeAppointee(sPernr);
+        }
+
+        oInput.setValue('');
+        oInput.getBinding('suggestionRows').filter([]);
+      },
+
+      onSubmitSuggest(oEvent) {
+        const oViewModel = this.getViewModel();
+        const sInputValue = oEvent.getParameter('value');
+
+        if (!sInputValue) {
+          oViewModel.setProperty('/ename', '');
+          return;
+        }
+
+        const aEmployees = oViewModel.getProperty('/Employees');
+        const [mEmployee] = _.filter(aEmployees, (o) => _.startsWith(o.Ename, sInputValue));
+
+        if (!_.isEmpty(mEmployee)) {
+          oViewModel.setProperty('/pernr', mEmployee.Pernr);
+          oViewModel.setProperty('/ename', '');
+
+          this.changeAppointee(mEmployee.Pernr);
+        } else {
+          oViewModel.setProperty('/ename', '');
+        }
       },
     });
   }

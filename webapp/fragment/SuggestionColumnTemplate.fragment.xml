@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Column width="6%" popinDisplay="Inline">
+        <Label text="" />
+    </Column>
+    <Column width="16%" popinDisplay="Inline" demandPopin="true">
+        <Label text="{i18n>LABEL_00210}" />
+    </Column>
+    <Column width="18%" popinDisplay="Inline" demandPopin="true">
+        <Label text="{i18n>LABEL_00209}" />
+    </Column>
+    <Column width="12%" popinDisplay="Inline">
+        <Label text="{i18n>LABEL_00214}" />
+    </Column>
+    <Column popinDisplay="Inline" minScreenWidth="Tablet">
+        <Label text="{i18n>LABEL_00218}" />
+    </Column>
+    <Column width="20%" popinDisplay="Inline" minScreenWidth="Tablet">
+        <Label text="{i18n>LABEL_00221}" />
+    </Column>
+</core:FragmentDefinition>

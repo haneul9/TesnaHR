@@ -84,9 +84,7 @@ sap.ui.define(
       },
 
       getEmployeeSearchDialogOnLoadSearch() {
-        const bIsEss = _.isEqual(this.currentAuth(), 'E');
-
-        return bIsEss;
+        return _.isEqual(this.currentAuth(), 'E');
       },
 
       async onObjectMatched(oParameter, sRouteName) {

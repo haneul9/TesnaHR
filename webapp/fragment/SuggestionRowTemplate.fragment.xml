@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ColumnListItem>
+        <cells>
+            <Image src="{Picurl}" mode="Background" class="members-photo sapUiTinyMarginEnd" error=".loadErrorAvatarImage">
+                <layoutData>
+                    <FlexItemData minHeight="30px" maxHeight="30px" />
+                </layoutData>
+            </Image>
+            <Label text="{Ename}" />
+            <Label text="{Pernr}" />
+            <Label text="{Zzcaltltx}" />
+            <Label text="{Orgtx}" />
+            <Label text="{ path: 'Gbdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" />
+        </cells>
+    </ColumnListItem>
+</core:FragmentDefinition>

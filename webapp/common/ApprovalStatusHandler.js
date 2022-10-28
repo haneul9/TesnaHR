@@ -88,7 +88,12 @@ sap.ui.define(
 
           await Client.deep(oModel, 'ApproverHeader2', {
             Appno: sAppno,
-            ApproverList2Nav: [..._.chain(aRowData).filter(o => !_.isEmpty(o.Pernr)).map((o) => ({ ...o, Appno: sAppno })).value()],
+            ApproverList2Nav: [
+              ..._.chain(aRowData)
+                .filter((o) => !_.isEmpty(o.Pernr))
+                .map((o) => ({ ...o, Appno: sAppno }))
+                .value(),
+            ],
           });
 
           await this.sendMail(sAppno, this.APPROVAL_STATUS.APPROVAL, sAppty);
@@ -106,7 +111,12 @@ sap.ui.define(
 
           await Client.deep(oModel, 'ApproverHeader2', {
             Appno: sAppno,
-            ApproverList2Nav: [..._.chain(aRowData).filter(o => !_.isEmpty(o.Pernr)).map((o) => ({ ...o, Appno: sAppno })).value()],
+            ApproverList2Nav: [
+              ..._.chain(aRowData)
+                .filter((o) => !_.isEmpty(o.Pernr))
+                .map((o) => ({ ...o, Appno: sAppno }))
+                .value(),
+            ],
           });
 
           await this.sendMail(sAppno, this.APPROVAL_STATUS.APPROVAL, sAppty);
@@ -237,7 +247,7 @@ sap.ui.define(
           const oModel = this.oController.getModel(ServiceNames.WORKTIME);
           const mAppointeeData = this.oController.getAppointeeData();
           const aResults = await Client.getEntitySet(oModel, 'TimePernrList', {
-            Austy: 'H',
+            Austy: 'A',
             Begda: moment().hours(9).toDate(),
             Werks: mAppointeeData.Werks,
             Orgeh: mAppointeeData.Orgeh,

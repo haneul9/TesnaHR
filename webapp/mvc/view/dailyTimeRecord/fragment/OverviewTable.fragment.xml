@@ -130,10 +130,28 @@
                     <Text text="{ path: 'NoCheckSu', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="80px" filterProperty="LateSu" sortProperty="LateSu">
+            <table:Column width="80px" filterProperty="Earlyoff" sortProperty="Earlyoff">
                 <Label text="{i18n>LABEL_08012}" />
                 <table:template>
+                    <Text text="{ path: 'Earlyoff', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="LateSu" sortProperty="LateSu">
+                <Label text="{i18n>LABEL_08021}" />
+                <table:template>
                     <Text text="{ path: 'LateSu', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="Realwork" sortProperty="Realwork">
+                <Label text="{i18n>LABEL_08022}" />
+                <table:template>
+                    <Text text="{ path: 'Realwork', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="80px" filterProperty="UnpaidSunday" sortProperty="UnpaidSunday">
+                <Label text="{i18n>LABEL_08023}" />
+                <table:template>
+                    <Text text="{ path: 'UnpaidSunday', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
             <table:Column width="80px" filterProperty="DutyDays" sortProperty="DutyDays">

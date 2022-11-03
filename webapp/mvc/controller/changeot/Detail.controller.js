@@ -17,16 +17,16 @@ sap.ui.define(
   (
     // prettier 방지용 주석
     Fragment,
-	SelectionMode,
-	MessageBox,
-	UI5Error,
-	AppUtils,
-	ApprovalStatusHandler,
-	FileAttachmentBoxHandler,
-	Client,
-	ServiceNames,
-	Validator,
-	BaseController
+    SelectionMode,
+    MessageBox,
+    UI5Error,
+    AppUtils,
+    ApprovalStatusHandler,
+    FileAttachmentBoxHandler,
+    Client,
+    ServiceNames,
+    Validator,
+    BaseController
   ) => {
     'use strict';
 

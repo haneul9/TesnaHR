@@ -743,7 +743,16 @@ sap.ui.define(
               });
 
               oViewModel.setProperty('/dialog/rowCount', Math.min(aResults.length, 12));
-              oViewModel.setProperty('/dialog/list', aResults);
+              oViewModel.setProperty(
+                '/dialog/list',
+                _.map(aResults, (o) => ({
+                  ...o,
+                  ..._.chain(o)
+                    .pickBy((v, p) => _.startsWith(p, 'Dayngt'))
+                    .mapKeys((v, p) => `enable${p}`)
+                    .value(),
+                }))
+              );
 
               this.setContentsBusy(false, ['table', 'dialog']);
             })

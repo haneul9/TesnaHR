@@ -21,7 +21,7 @@
                     <Text text="{Ltext}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="6%">
+            <table:Column width="7%">
                 <Label text="{i18n>LABEL_06016}" />
                 <table:template>
                     <Text text="{ path: 'Tmdat', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
@@ -39,7 +39,7 @@
                     <Text text="{Dayngttx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="6%">
+            <table:Column width="7%">
                 <Label text="{i18n>LABEL_06004}" />
                 <table:template>
                     <Text text="{ path: 'Begdaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />
@@ -51,7 +51,7 @@
                     <Text text="{ path: 'Beguzf', type: 'sap.ui.tesna.mvc.model.type.Time', formatOptions: { pattern: 'HH:mm' } }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="6%">
+            <table:Column width="7%">
                 <Label text="{i18n>LABEL_06006}" />
                 <table:template>
                     <Text text="{ path: 'Enddaf', type: 'sap.ui.tesna.mvc.model.type.Date' }" width="100%" textAlign="Center" wrapping="false" />

@@ -81,7 +81,7 @@ sap.ui.define(
 
         this.TableUtils.adjustRowSpan({
           oTable: this.byId(this.LIST_TABLE1_ID),
-          aColIndices: [0, 1, 2, 10],
+          aColIndices: [0, 1, 9],
           sTheadOrTbody: 'thead',
         });
       },
@@ -163,13 +163,13 @@ sap.ui.define(
           this.TableUtils.setColorColumn({
             oTable,
             mColorMap: {
-              3: 'bgType13',
+              2: 'bgType13',
+              3: 'bgType11',
               4: 'bgType11',
               5: 'bgType11',
               6: 'bgType11',
               7: 'bgType11',
               8: 'bgType11',
-              9: 'bgType11',
             },
           });
         }, 100);

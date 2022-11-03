@@ -19,7 +19,7 @@
                     </Text>
                 </table:template>
             </table:Column>
-            <table:Column width="18%" filterProperty="Orgtx" sortProperty="Orgtx">
+            <table:Column width="20%" filterProperty="Orgtx" sortProperty="Orgtx">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00219}" />
                     <Label text="{i18n>LABEL_00219}" />
@@ -28,7 +28,7 @@
                     <Text text="{Orgtx}" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="6%" filterProperty="Empcnt" sortProperty="Empcnt">
+            <!-- <table:Column width="6%" filterProperty="Empcnt" sortProperty="Empcnt">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_09003}" />
                     <Label text="{i18n>LABEL_09003}" />
@@ -36,7 +36,7 @@
                 <table:template>
                     <Text text="{ path: 'Empcnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
-            </table:Column>
+            </table:Column> -->
             <table:Column width="6%" filterProperty="Noapp1" sortProperty="Noapp1">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_00102}" />
@@ -109,7 +109,7 @@
                     <Text text="{ path: 'Retrocnt', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="8%" headerSpan="2" filterProperty="Clsnm1" sortProperty="Clsnm1">
+            <table:Column width="10%" headerSpan="2" filterProperty="Clsnm1" sortProperty="Clsnm1">
                 <table:multiLabels>
                     <Label text="{i18n>LABEL_09010}" />
                     <Label text="{i18n>LABEL_09011}" />

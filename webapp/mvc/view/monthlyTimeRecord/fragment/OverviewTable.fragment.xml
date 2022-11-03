@@ -123,6 +123,12 @@
                     <Text text="{ path: 'UnpaidSunday', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
                 </table:template>
             </table:Column>
+            <table:Column width="80px" filterProperty="GeuntaeRate" sortProperty="GeuntaeRate">
+                <Label text="{i18n>LABEL_08024}" />
+                <table:template>
+                    <Text text="{ path: 'GeuntaeRate', type: 'sap.ui.tesna.mvc.model.type.Decimal' }" width="100%" textAlign="Center" wrapping="false" />
+                </table:template>
+            </table:Column>
             <table:Column width="80px" filterProperty="DutyDays" sortProperty="DutyDays">
                 <Label text="{i18n>LABEL_08013}" />
                 <table:template>

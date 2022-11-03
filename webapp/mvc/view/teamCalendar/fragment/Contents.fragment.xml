@@ -46,6 +46,16 @@
           <Title level="H2" text="{/calendar/yearMonth}" />
           <Button icon="sap-icon://navigation-right-arrow" press=".onPressNextYear" class="icon-button" enabled="{= !${/busy/Calendar} }" />
         </HBox>
+        <HBox class="table-search-extension">
+          <Input value="{/filter/ename}" placeholder="{i18n>LABEL_02019}" width="200px" maxSuggestionWidth="500px" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{ path:'/filter/employees', templateShareable: false }" suggestionItemSelected=".onSelectSuggest" submit=".onSubmitSuggest">
+            <suggestionColumns>
+              <core:Fragment fragmentName="sap.ui.tesna.fragment.SuggestionColumnTemplate" type="XML" />
+            </suggestionColumns>
+            <suggestionRows>
+              <core:Fragment fragmentName="sap.ui.tesna.fragment.SuggestionRowTemplate" type="XML" />
+            </suggestionRows>
+          </Input>
+        </HBox>
         <grid:CSSGrid class="year-plan-grid fixed-grid-header" gridTemplateColumns="{/calendar/columnTemplate}" gridGap="1px" items="{path: '/calendar/plans'}" busyIndicatorDelay="0" busy="{/busy/Calendar}">
           <custom:DayBox width="100%" press=".onPressDayBox">
             <custom:customData>

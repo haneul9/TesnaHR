@@ -66,6 +66,10 @@ sap.ui.define(
               data: {},
             },
           },
+          filter: {
+            ename: '',
+            employees: [],
+          },
         };
       },
 
@@ -97,6 +101,7 @@ sap.ui.define(
             this.buildCalendar();
 
             this.initializeTeamPlanPopover();
+            this.initializeBusyDialog();
           }
         } catch (oError) {
           this.debug('Controller > teamCalendar > onObjectMatched Error', oError);
@@ -124,7 +129,7 @@ sap.ui.define(
       fireScroll() {
         if (this.isReadMore && this.isScrollBottom()) {
           this.isReadMore = false;
-          this.openBusyDialog();
+          this._oBusyDialog.open();
 
           setTimeout(() => this.readMore(), 0);
         }
@@ -166,7 +171,7 @@ sap.ui.define(
         }, 500);
       },
 
-      async openBusyDialog() {
+      async initializeBusyDialog() {
         const oView = this.getView();
 
         if (!this._oBusyDialog) {
@@ -178,8 +183,6 @@ sap.ui.define(
 
           oView.addDependent(this._oBusyDialog);
         }
-
-        this._oBusyDialog.open();
       },
 
       async initializeTeamPlanPopover() {
@@ -326,10 +329,7 @@ sap.ui.define(
           );
           oViewModel.setProperty(
             '/entry/Orgeh',
-            _.chain(aEntries)
-              .filter((o) => o.Orgeh !== '00000000')
-              .map((o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
-              .value()
+            _.map(aEntries, (o) => _.chain(o).omitBy(_.isNil).omitBy(_.isEmpty).value())
           );
         } catch (oError) {
           throw oError;
@@ -380,11 +380,11 @@ sap.ui.define(
         }
       },
 
-      buildCalendar() {
+      buildCalendar(bCloseLoading = false, sPernr) {
         const oViewModel = this.getViewModel();
 
         try {
-          const aPlanData = oViewModel.getProperty('/calendar/raw');
+          const aPlanData = _.filter(oViewModel.getProperty('/calendar/raw'), (o) => !sPernr || o.Pernr === sPernr);
           const sYearMonth = oViewModel.getProperty('/searchConditions/Tyymm');
           const iCurrentDayInMonth = moment(sYearMonth).daysInMonth();
 
@@ -392,9 +392,11 @@ sap.ui.define(
             ...this.getGridHeader(aPlanData, iCurrentDayInMonth, sYearMonth), //
             ...this.getGridBody(aPlanData),
           ]);
-          oViewModel.setProperty('/calendar/raw', []);
+          // oViewModel.setProperty('/calendar/raw', []);
         } catch (oError) {
           throw oError;
+        } finally {
+          if (bCloseLoading) this._oBusyDialog.close();
         }
       },
 
@@ -518,6 +520,7 @@ sap.ui.define(
         try {
           const mSearchConditions = oViewModel.getProperty('/searchConditions');
           const aResults = await Client.getEntitySet(this.getModel(ServiceNames.WORKTIME), 'TeamCalendar', {
+            Austy: oViewModel.getProperty('/auth'),
             Pernr: this.getAppointeeProperty('Pernr'),
             ..._.pick(mSearchConditions, ['Tyymm', 'Werks', 'Orgeh', 'Downinc']),
             Kostl: mSearchConditions.Kostl === '00000000' ? null : mSearchConditions.Kostl,
@@ -534,6 +537,7 @@ sap.ui.define(
             N: this.getBundleText('LABEL_00183'), // 야간
           };
 
+          oViewModel.setProperty('/filter/employees', _.chain(aResults).cloneDeep().uniqBy('Pernr').value());
           oViewModel.setProperty(
             '/calendar/excel',
             _.chain(aResults)
@@ -588,6 +592,58 @@ sap.ui.define(
         oViewModel.setProperty('/searchConditions/Tyymm', moment(sCurrentYearMonth).add(1, 'months').format('YYYYMM'));
 
         this.onPressSearch();
+      },
+
+      filteredCalendar(sPernr) {
+        this._oBusyDialog.open();
+
+        setTimeout(() => this.buildCalendar(true, sPernr), 0);
+      },
+
+      onSelectSuggest(oEvent) {
+        const oInput = oEvent.getSource();
+        const oSelectedSuggestionRow = oEvent.getParameter('selectedRow');
+
+        if (oSelectedSuggestionRow) {
+          const oContext = oSelectedSuggestionRow.getBindingContext();
+          const sPernr = oContext.getProperty('Pernr');
+
+          const oViewModel = this.getViewModel();
+
+          oViewModel.setProperty('/filter/pernr', sPernr);
+
+          this.filteredCalendar(sPernr);
+        }
+
+        oInput.getBinding('suggestionRows').filter([]);
+      },
+
+      onSubmitSuggest(oEvent) {
+        const oViewModel = this.getViewModel();
+        const sInputValue = oEvent.getParameter('value');
+
+        if (!sInputValue) {
+          oViewModel.setProperty('/filter/pernr', '');
+          oViewModel.setProperty('/filter/ename', '');
+
+          this.filteredCalendar();
+
+          return;
+        }
+
+        const aEmployees = oViewModel.getProperty('/filter/employees');
+        const [mEmployee] = _.filter(aEmployees, (o) => _.startsWith(o.Ename, sInputValue));
+
+        if (!_.isEmpty(mEmployee)) {
+          oViewModel.setProperty('/filter/pernr', mEmployee.Pernr);
+
+          this.filteredCalendar(mEmployee.Pernr);
+        } else {
+          oViewModel.setProperty('/filter/pernr', '');
+          oViewModel.setProperty('/filter/ename', '');
+
+          this.filteredCalendar();
+        }
       },
 
       async onPressDayBox(oEvent) {

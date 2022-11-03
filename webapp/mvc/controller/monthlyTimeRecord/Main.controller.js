@@ -198,6 +198,7 @@ sap.ui.define(
               18: 'bgType11',
               19: 'bgType11',
               20: 'bgType11',
+              21: 'bgType11',
             },
           });
         }, 100);

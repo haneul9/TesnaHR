@@ -126,7 +126,7 @@ sap.ui.define(
           const aQuotaResultData = await Client.getEntitySet(this.getViewModel(ServiceNames.WORKTIME), 'AbsQuotaList', {
             Pernr: this.getAppointeeProperty('Pernr'),
             Tmyea: moment().format('YYYY'),
-            Prcty: 'A'
+            Prcty: 'A' // 2022-11-07 현재일 기준
           });
 
           const mQuotaResult = _.reduce(

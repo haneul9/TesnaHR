@@ -5,7 +5,7 @@
         <HBox class="table-toolbar">
             <HBox class="title">
                 <Title level="H2" text="{i18n>LABEL_02005}" />
-                <Text text="{/FullYear}" class="desc-txt" />
+                <Text text="{/FullYear} {i18n>LABEL_02021}" class="desc-txt" />
             </HBox>
         </HBox>
         <HBox height="176px">

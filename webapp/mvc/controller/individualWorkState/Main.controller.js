@@ -589,7 +589,7 @@ sap.ui.define(
           const aQuarters = await Client.getEntitySet(oModel, 'AbsQuotaList', {
             Pernr: oViewModel.getProperty('/pernr'),
             Tmyea: sYear,
-            Prcty: 'A' // 2022-11-07 현재일 기준
+            Prcty: 'B'
           });
 
           oViewModel.setProperty(

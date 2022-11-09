@@ -776,6 +776,8 @@ sap.ui.define(
         setTimeout(() => this.retrieveWeek(), 0);
         setTimeout(() => this.retrieveWorkByYear(sYear), 0);
         setTimeout(() => this.retrieveWorkByDay(sYear), 0);
+
+        this.setContentsBusy(false, 'appointee');
       },
 
       // 근무현황 월 선택

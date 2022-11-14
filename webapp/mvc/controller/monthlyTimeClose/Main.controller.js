@@ -94,7 +94,7 @@ sap.ui.define(
           this.setContentsBusy(true);
 
           oViewModel.setProperty('/auth', this.currentAuth());
-          oViewModel.setProperty('/searchConditions/Tyymm', moment().date() < 16 ? moment().subtract(1, 'month').format('YYYYMM') : moment().format('YYYYMM'));
+          oViewModel.setProperty('/searchConditions/Tyymm', moment().date() < 16 ? moment().format('YYYYMM') : moment().add(1, 'month').format('YYYYMM'));
 
           await this.setPersaEntry();
 
@@ -223,6 +223,7 @@ sap.ui.define(
             Werks: mSearchConditions.Werks,
             Apbeg: dSearchDate.startOf('month').hours(9).toDate(),
             Apend: dSearchDate.endOf('month').hours(9).toDate(),
+            Clsin: 'X'
           });
 
           oViewModel.setProperty('/table2', {

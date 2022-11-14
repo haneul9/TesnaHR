@@ -16,7 +16,7 @@
     "abap_bsp": "ZHRXX_TMAPP_T",
     "abap_bsp_text": "근태 프로그램 - 테스나",
     "abap_package": "ZHR_RNXX",
-    "abap_transport": "GHDK949766",
+    "abap_transport": "GHDK949817",
     "calcappindex": true,
     "preserve_unselected": false
 }

@@ -746,7 +746,7 @@ sap.ui.define(
             Austy: sAuth,
             Begda: moment().hours(9).toDate(),
             Werks: mAppointeeData.Persa,
-            Orgeh: mAppointeeData.Orgeh,
+            Orgeh: sAuth === 'M' ? mAppointeeData.Orgeh : null,
           });
 
           oViewModel.setProperty('/Employees', aResults);
